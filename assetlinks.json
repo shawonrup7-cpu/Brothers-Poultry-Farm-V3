@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.shawonrup7_cpu.twa",
+        "sha256_cert_fingerprints": ["79:0B:B0:6E:C7:48:92:3A:B9:03:B1:19:1E:2D:7F:D3:2A:E2:80:F2:AB:4D:6F:5F:41:12:D8:AD:1C:A9:1A:4D"]
+      }
+    }]
