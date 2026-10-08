@@ -1,13 +1,16 @@
-const CACHE_NAME = "brothers-poultry-v2";
+// Brothers Poultry Farm V3 - offline service worker
+// App update dile CACHE_NAME-er number bariye dao (v3-1 -> v3-2)
+const CACHE_NAME = "brothers-poultry-v3-1";
 const FILES_TO_CACHE = [
+  "./",
   "./index.html",
   "./manifest.json",
   "./icon-192.png",
-  "./icon-512.png"
+  "./icon-512.png",
+  "./icon-maskable-512.png"
 ];
 
 self.addEventListener("install", (e) => {
-  // একটি ফাইল (যেমন আইকন) না পেলেও যেন পুরো ইনস্টল ব্যর্থ না হয়
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) =>
       Promise.all(FILES_TO_CACHE.map((f) => cache.add(f).catch(() => {})))
@@ -25,19 +28,43 @@ self.addEventListener("activate", (e) => {
   self.clients.claim();
 });
 
-// নেটওয়ার্ক আগে (নতুন আপডেট পেতে), না থাকলে অফলাইনে ক্যাশ থেকে
 self.addEventListener("fetch", (e) => {
-  if (e.request.method !== "GET") return;
+  const req = e.request;
+  if (req.method !== "GET") return;
+  const url = new URL(req.url);
+
+  // Google Fonts: cache first, offline-e-o font thakbe
+  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
+    e.respondWith(
+      caches.match(req).then((cached) => {
+        if (cached) return cached;
+        return fetch(req).then((res) => {
+          if (res && (res.ok || res.type === "opaque")) {
+            const copy = res.clone();
+            caches.open(CACHE_NAME).then((c) => c.put(req, copy));
+          }
+          return res;
+        }).catch(() => cached);
+      })
+    );
+    return;
+  }
+
+  if (url.origin !== location.origin) return;
+
+  // Nijer file: network first (notun update pete), offline-e cache theke
   e.respondWith(
-    fetch(e.request)
+    fetch(req)
       .then((res) => {
-        if (res && res.ok && new URL(e.request.url).origin === location.origin) {
+        if (res && res.ok) {
           const copy = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(e.request, copy));
+          caches.open(CACHE_NAME).then((c) => c.put(req, copy));
         }
         return res;
       })
-      .catch(() => caches.match(e.request).then((c) => c || caches.match("./index.html")))
+      .catch(() =>
+        caches.match(req).then((c) => c || caches.match("./index.html") || caches.match("./"))
+      )
   );
 });
 

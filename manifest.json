@@ -1,9 +1,11 @@
 {
-  "name": "নাজমুল পোল্ট্রি ফার্ম",
-  "short_name": "নাজমুল পোল্ট্রি",
-  "description": "নাজমুল পোল্ট্রি ফার্মের সম্পূর্ণ হিসাব-নিকাশ অ্যাপ",
-  "start_url": "/",
-  "scope": "/",
+  "id": "./",
+  "name": "Brothers Poultry Farm V3",
+  "short_name": "Poultry Farm V3",
+  "description": "ব্রাদার্স পোল্ট্রি ফার্ম - সম্পূর্ণ হিসাব-নিকাশ অ্যাপ",
+  "lang": "bn",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "display_override": ["standalone", "fullscreen"],
   "orientation": "portrait",
@@ -11,8 +13,7 @@
   "theme_color": "#0a4a2f",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
