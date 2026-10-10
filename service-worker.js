@@ -1,6 +1,6 @@
 // Brothers Poultry Farm V3 - offline service worker
-// App update dile CACHE_NAME-er number bariye dao (v3-2 -> v3-3)
-const CACHE_NAME = "brothers-poultry-v3-2";
+// App update dile CACHE_NAME-er number bariye dao (v3-4 -> v3-5)
+const CACHE_NAME = "brothers-poultry-v3-4";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",

@@ -253,6 +253,42 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 .fcr-verdict{border-radius:12px;padding:11px 14px;font-size:13.5px;font-weight:700;line-height:1.6;margin-top:10px}
 .fcr-verdict.good{background:#0d2b1e;border:1px solid #1aad6e60;color:#6ee8aa}
 .fcr-verdict.bad{background:#2b1e0d;border:1px solid #ffb83d60;color:#ffd070}
+
+/* ── রিপোর্ট ── */
+.rp-head{text-align:center;padding:14px 10px 12px;border-bottom:3px solid #1aad6e;margin-bottom:12px}
+.rp-head h2{margin:0;font-size:28px;font-weight:900;color:#3ddc84;letter-spacing:.3px}
+.rp-sub{font-size:14px;color:#c8d8e4;margin-top:6px;font-weight:600}
+.rp-info{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 12px;margin-bottom:12px}
+.rp-info>div{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;background:#0d1923;border:1px solid #ffffff12;border-radius:10px;font-size:13px}
+.rp-info span{color:#7a9aaa}.rp-info b{color:#e8edf2;text-align:right}
+.rp-table{min-width:0}
+.rp-sec td{background:#0d2b1e;color:#6ee8aa;font-weight:800}
+.rp-tot td{background:#162430;font-weight:800;color:#e8edf2}
+.rp-profit td{background:#0a2216;font-weight:900;color:#3ddc84;font-size:15px}
+.rp-loss td{background:#220a0a;font-weight:900;color:#ff7070;font-size:15px}
+.rp-note{font-size:12px;color:#ffd070;margin-top:8px}
+.rp-foot{font-size:11px;color:#7a9aaa;margin-top:10px;text-align:center}
+@media(max-width:480px){.rp-info{grid-template-columns:1fr}.rp-head h2{font-size:22px}}
+@page{size:A4;margin:14mm}
+@media print{
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .noprint{display:none!important}
+ #report .rp-head{border-bottom:3px solid #0a4a2f}
+ #report .rp-head h2{color:#0a4a2f;font-size:30px}
+ #report .rp-sub{color:#000}
+ #report .rp-info>div{background:#f5f8f6;border:1px solid #bbb}
+ #report .rp-info span{color:#444}#report .rp-info b{color:#000}
+ #report .wrap{background:#fff;border:1px solid #888;border-radius:0;box-shadow:none;overflow:visible}
+ #report table{min-width:0;width:100%}
+ #report th{background:#0a4a2f!important;color:#fff!important}
+ #report td{border-bottom:1px solid #ccc;color:#000!important;background:#fff}
+ #report .rp-sec td{background:#e6f2ec!important;color:#0a4a2f!important}
+ #report .rp-tot td{background:#eee!important;color:#000!important}
+ #report .rp-profit td{background:#d9f2e3!important;color:#0a7a4f!important}
+ #report .rp-loss td{background:#fbe0e0!important;color:#b91c1c!important}
+ #report tr{page-break-inside:avoid}
+ #report .rp-note{color:#444}#report .rp-foot{color:#444}
+}
 </style>
 </head>
 <body>
@@ -607,9 +643,22 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 <div id="notesList"></div>
 </section>
 
-<section id="report" class="page"><div class="section">📑 পূর্ণাঙ্গ রিপোর্ট</div><button class="printbtn" onclick="window.print()">🖨️ প্রিন্ট / PDF সেভ করুন</button><div class="wrap"><table><thead><tr><th>খাত</th><th>পরিমাণ</th><th>মোট টাকা</th></tr></thead><tbody id="reportTable"></tbody></table></div></section>
+<section id="report" class="page">
+<div class="section noprint">📑 পূর্ণাঙ্গ রিপোর্ট</div>
+<div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px">
+<label style="flex:1;min-width:170px">📆 রিপোর্টের মাস<select id="reportMonth" onchange="renderReport()"></select></label>
+<button class="printbtn" style="margin:0" onclick="printReport()">🖨️ PDF / প্রিন্ট</button>
+<button class="printbtn" style="margin:0;background:linear-gradient(135deg,#0ea5e9,#0369a1)" onclick="exportReportExcel()">📊 Excel ডাউনলোড</button>
+</div>
+<div id="reportSheet">
+<div class="rp-head"><h2>ব্রাদার্স পোল্ট্রি ফার্ম</h2><div class="rp-sub" id="rpSub"></div></div>
+<div class="rp-info" id="rpInfo"></div>
+<div class="wrap rp-wrap"><table class="rp-table"><thead><tr><th>খাত</th><th>পরিমাণ</th><th style="text-align:right">টাকা (৳)</th></tr></thead><tbody id="reportTable"></tbody></table></div>
+<div class="rp-note" id="rpNote"></div>
+<div class="rp-foot" id="rpFoot"></div>
+</div>
+</section>
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
-<section id="sheets" class="page"><div class="section">📚 মূল Excel-এর সব শিট</div><div class="hint">আপনার Excel ফাইলে থাকা কোনো শিট বাদ দেওয়া হয়নি। নিচে মূল শিটগুলোর তালিকা আছে।</div><div class="wrap"><table><thead><tr><th>ক্রম</th><th>শিটের নাম</th><th>সারি</th><th>কলাম</th></tr></thead><tbody id="sheetTable"></tbody></table></div></section>
 
 </main>
 <script>
@@ -645,14 +694,14 @@ const money=n=>"৳"+Number(n||0).toLocaleString("en-BD",{maximumFractionDigits:
 function save(){localStorage.setItem("poultryBatchesV2",JSON.stringify(store))}
 function switchBatch(id){let b=store.batches.find(x=>x.id===id);if(!b)return;store.activeId=id;state=b;save();render()}
 function newBatch(){openNameModal("newBatch",null,"➕ নতুন ব্যাচ শুরু করুন","ব্যাচ "+(store.batches.length+1))}
-function toggleBatchStatus(){
+async function toggleBatchStatus(){
  if(state.status==="closed"){state.status="active";state.closedAt=null;showToast("🔓 ব্যাচ পুনরায় চালু হয়েছে");}
- else{if(closeStats().live>0){showToast("❌ এখনও "+livePcs()+" টি মুরগি অবশিষ্ট — ক্লোজ করা যাবে না");return;}if(!confirm("এই ব্যাচটি সম্পন্ন হিসেবে চিহ্নিত করবেন? পরে চাইলে আবার চালু করা যাবে।"))return;state.status="closed";state.closedAt=new Date().toISOString().slice(0,10);showToast("✅ ব্যাচ সম্পন্ন হিসেবে চিহ্নিত হয়েছে");}
+ else{if(closeStats().live>0){showToast("❌ এখনও "+livePcs()+" টি মুরগি অবশিষ্ট — ক্লোজ করা যাবে না");return;}if(!await askConfirm("এই ব্যাচটি সম্পন্ন হিসেবে চিহ্নিত করবেন? পরে চাইলে আবার চালু করা যাবে।"))return;state.status="closed";state.closedAt=new Date().toISOString().slice(0,10);showToast("✅ ব্যাচ সম্পন্ন হিসেবে চিহ্নিত হয়েছে");}
  save();render();
 }
-function deleteBatch(id){
+async function deleteBatch(id){
  if(store.batches.length<=1){alert("শেষ ব্যাচটি মুছে ফেলা যাবে না।");return;}
- if(!confirm("⚠️ এই ব্যাচের সব তথ্য স্থায়ীভাবে মুছে যাবে। আপনি কি নিশ্চিত?"))return;
+ if(!await askConfirm("⚠️ এই ব্যাচের সব তথ্য স্থায়ীভাবে মুছে যাবে। আপনি কি নিশ্চিত?"))return;
  store.batches=store.batches.filter(b=>b.id!==id);
  if(store.activeId===id){store.activeId=store.batches[0].id;state=store.batches[0];}
  save();render();showToast("🗑️ ব্যাচ মুছে ফেলা হয়েছে");
@@ -673,6 +722,19 @@ function batchSummary(b){
  return {cost,sales,profit:sales-cost,dead,chicks:+b.chicks||0};
 }
 function showToast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>t.classList.remove("show"),2200)}
+
+// ── নিজস্ব নিশ্চিতকরণ বক্স (ফোনে confirm()/alert() ব্লক হলেও কাজ করবে) ──
+function askConfirm(msg){
+ return new Promise(res=>{
+  let ov=document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px";
+  ov.innerHTML='<div style="background:#162430;border:1px solid #1aad6e50;border-radius:16px;padding:20px;max-width:360px;width:100%;color:#e8edf2;font-family:inherit"><div style="font-size:15px;font-weight:700;line-height:1.6;margin-bottom:16px;white-space:pre-line"></div><div style="display:flex;gap:10px"><button type="button" data-v="0" style="flex:1;padding:12px;border-radius:10px;border:1px solid #ffffff25;background:#0d1923;color:#e8edf2;font:inherit;font-weight:700;cursor:pointer">❌ না</button><button type="button" data-v="1" style="flex:1;padding:12px;border-radius:10px;border:0;background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;font:inherit;font-weight:700;cursor:pointer">✅ হ্যাঁ</button></div></div>';
+  ov.firstChild.firstChild.textContent=msg;
+  ov.addEventListener("click",e=>{let b=e.target.closest("button");if(b){ov.remove();res(b.dataset.v==="1")}else if(e.target===ov){ov.remove();res(false)}});
+  document.body.appendChild(ov);
+ });
+}
+window.alert=function(m){showToast("⚠️ "+m)};
 function backupData(){
  let blob=new Blob([JSON.stringify(store,null,2)],{type:"application/json"});
  let a=document.createElement("a");a.href=URL.createObjectURL(blob);
@@ -683,10 +745,10 @@ function backupData(){
 function restoreData(file){
  if(!file)return;
  let reader=new FileReader();
- reader.onload=e=>{
+ reader.onload=async e=>{
   try{
    let data=JSON.parse(e.target.result);
-   if(!confirm("⚠️ বর্তমান সব তথ্য মুছে ব্যাকআপ ফাইলের তথ্য বসানো হবে। আপনি কি নিশ্চিত?"))return;
+   if(!await askConfirm("⚠️ বর্তমান সব তথ্য মুছে ব্যাকআপ ফাইলের তথ্য বসানো হবে। আপনি কি নিশ্চিত?"))return;
    if(data&&Array.isArray(data.batches)&&data.activeId){
     store=data;store.batches.forEach(migrateWorkers);
     state=store.batches.find(b=>b.id===store.activeId)||store.batches[0];
@@ -741,7 +803,7 @@ function addDeath(){
  let q=+deathQty.value||0;if(q<=0)return;
  state.deaths=state.deaths||[];
  state.deaths.push({date:deathDate.value,qty:q,reason:deathReason.value,note:deathNote.value});
- state.dead=deathTotal();save();render();
+ state.dead=deathTotal();deathQty.value="";deathReason.value="";deathNote.value="";save();render();
 }
 function renderDeaths(){
  let a=state.deaths||[];
@@ -778,7 +840,7 @@ host.insertAdjacentHTML("beforeend",`<section id="sales" class="page"><div class
 <section id="customers" class="page"><div class="section">👥 ক্রেতাভিত্তিক হিসাব</div><div id="customersList"></div></section>`);
 host.insertAdjacentHTML("beforeend",`<section id="rent" class="page"><div class="section">🚚 পরিবহন ভাড়া হিসাব</div><div class="form"><div class="fields"><label>তারিখ<input id="rentDate" type="date"></label><label>বিবরণ<input id="rentDesc" placeholder="বাচ্চা আনা"></label><label>ভাড়া কত<input id="rentAmt" type="number" min="0" step=".01"></label><label>দিলাম কত<input id="rentPaid" type="number" min="0" step=".01"></label></div><button class="add" onclick="addRent()">➕ যোগ করুন</button></div><div class="section">পরিবহন ভাড়ার টেবিল</div><div class="wrap"><table><thead><tr><th>তারিখ</th><th>বিবরণ</th><th>ভাড়া</th><th>দিলাম</th><th>অবশিষ্ট</th><th>অ্যাকশন</th></tr></thead><tbody id="rentTable"></tbody></table></div></section>`);
 }
-function addRow(k){let n=document.getElementById(k+"Name").value;if(!n)return;state[k].push({date:document.getElementById(k+"Date").value,name:n,qty:+document.getElementById(k+"Qty").value||0,rate:+document.getElementById(k+"Rate").value||0});save();render()}
+function addRow(k){let n=document.getElementById(k+"Name").value;if(!n)return;state[k].push({date:document.getElementById(k+"Date").value,name:n,qty:+document.getElementById(k+"Qty").value||0,rate:+document.getElementById(k+"Rate").value||0});["Name","Qty","Rate"].forEach(x=>{let e=document.getElementById(k+x);if(e)e.value=""});syncChips(k+"Name");save();render()}
 let tempPallas=[];
 function addPalla(){
  let q=+pallaQty.value||0,w=+pallaWeight.value||0;
@@ -795,12 +857,12 @@ function renderTempPallas(){
  pallaTotals.innerHTML=tempPallas.length?`মোট পাল্লা: ${tempPallas.length} • মোট মুরগি: ${totQty} টি • মোট ওজন: ${totWeight.toFixed(2)} কেজি • গড় ওজন/মুরগি: ${(totWeight/totQty||0).toFixed(2)} কেজি${rate?`<br><b style="color:#0a7a4f">💰 মোট টাকা: ${money(totMoney)}</b>`:""}`:"";
 }
 function toggleDetails(i){let el=document.getElementById("pallaDetail"+i);if(el)el.style.display=el.style.display==="none"?"table-row":"none"}
-function addSale(){
+async function addSale(){
  if(!tempPallas.length){alert("অন্তত একটি পাল্লা যোগ করুন");return;}
  if(!(+salesRate.value>0)){alert("দর/কেজি লিখুন");return;}
  let qty=tempPallas.reduce((s,p)=>s+p.qty,0),weight=tempPallas.reduce((s,p)=>s+p.weight,0);
  state.sales=state.sales||[];
- {let avail=livePcs();if(qty>avail&&!confirm("⚠️ বিক্রির মুরগি ("+qty+" টি) বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;}
+ {let avail=livePcs();if(qty>avail&&!await askConfirm("⚠️ বিক্রির মুরগি ("+qty+" টি) বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;}
  state.sales.push({date:salesDate.value||new Date().toISOString().slice(0,10),customer:salesCustomer.value.trim(),qty,weight,rate:+salesRate.value||0,paid:+salesPaid.value||0,pallas:tempPallas.slice()});
  tempPallas=[];salesCustomer.value="";salesPaid.value="";salesRate.value="";
  save();render();renderTempPallas();showToast("✅ বিক্রি সংরক্ষণ হয়েছে");
@@ -812,11 +874,11 @@ function addLitterSale(){
   save();render();
   lsaleQty.value='';lsaleRate.value='';lsaleBuyer.value='';
 }
-function delLitter(i){if(!confirm('মুছে ফেলতে চান?'))return;state.litterSales.splice(i,1);save();render();
+async function delLitter(i){if(!await askConfirm('মুছে ফেলতে চান?'))return;state.litterSales.splice(i,1);save();render();
  save();render();
 }
-function addRent(){let amt=+rentAmt.value||0;if(amt<=0)return;state.rent=state.rent||[];state.rent.push({date:rentDate.value,desc:rentDesc.value,amt:amt,paid:+rentPaid.value||0});save();render()}
-function del(k,i){if(!confirm("এই তথ্যটি মুছে ফেলতে চান?"))return;state[k].splice(i,1);if(k==="deaths")state.dead=deathTotal();save();render();showToast("🗑️ মুছে ফেলা হয়েছে")}
+function addRent(){let amt=+rentAmt.value||0;if(amt<=0)return;state.rent=state.rent||[];state.rent.push({date:rentDate.value,desc:rentDesc.value,amt:amt,paid:+rentPaid.value||0});rentDesc.value="";rentAmt.value="";rentPaid.value="";save();render()}
+async function del(k,i){if(!await askConfirm("এই তথ্যটি মুছে ফেলতে চান?"))return;state[k].splice(i,1);if(k==="deaths")state.dead=deathTotal();save();render();showToast("🗑️ মুছে ফেলা হয়েছে")}
 function renderTable(k){
 let a=state[k]||[];let el=document.getElementById(k+"Table");
 el.innerHTML=a.length?a.map((r,i)=>`<tr><td>${r.date||""}</td><td>${r.name||""}</td><td>${r.qty||0}</td><td>${money(r.rate)}</td><td>${money((r.qty||0)*(r.rate||0))}</td><td style="white-space:nowrap"><button class="edt" onclick="openEdit('${k}',${i})">✏️</button><button class="del" onclick="del('${k}',${i})">মুছুন</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">এখনও কোনো হিসাব যোগ করা হয়নি</td></tr>`;
@@ -836,8 +898,112 @@ function renderLitterSales(){
   let ltTbl=document.getElementById("lsaleTable");
   if(ltTbl)ltTbl.innerHTML=ls.length?ls.map((r,i)=>`<tr><td>${r.date||""}</td><td>${r.qty} কেজি</td><td>${money(r.rate)}</td><td>${money((+r.qty||0)*(+r.rate||0))}</td><td>${r.buyer||"—"}</td><td><button class="del" onclick="delLitter(${i})">মুছুন</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">এখনও কোনো লিটার বিক্রি যোগ করা হয়নি</td></tr>`;
 }
-function renderReport(){let c={feed:total("feed"),medicine:total("medicine"),workers:workersTotal(),other:total("other"),litter:total("litter"),rent:rentTotal(),chicks:state.chicks*state.chickPrice,sales:salesTotal()};let cost=c.feed+c.medicine+c.workers+c.other+c.litter+c.rent+c.chicks;reportTable.innerHTML=[["বাচ্চা",state.chicks+" টি",c.chicks],["মৃত বাচ্চা",state.dead+" টি",0],["ফিড","",c.feed],["Medicine","",c.medicine],["কর্মচারী","",c.workers],["বিভিন্ন খরচ","",c.other],["কাঠের গুড়া","",c.litter],["পরিবহন ভাড়া","",c.rent],["মোট খরচ","",cost],["মুরগি বিক্রি",state.sales.reduce((s,r)=>s+(+r.qty||0),0)+" টি",c.sales],["গিফট / নিজের খাওয়া",giftPcs()+" টি ("+fmt(sumOf(state.gifts,r=>r.weight))+" কেজি)",0],["অন্যান্য বিক্রি","",otherSalesGrand()],["মোট আয়","",c.sales+otherSalesGrand()],["নিট লাভ/ক্ষতি","",c.sales+otherSalesGrand()-cost]].map(x=>`<tr class="report-total"><td>${x[0]}</td><td>${x[1]}</td><td>${money(x[2])}</td></tr>`).join("")}
-function renderSheets(){sheetTable.innerHTML=SEED.sheetMeta.map((x,i)=>`<tr><td>${i+1}</td><td>${x.name}</td><td>${x.rows}</td><td>${x.cols}</td></tr>`).join("")}
+// ══════ রিপোর্ট (মাস ফিল্টার, PDF, Excel) ══════
+const bnMonth=ym=>{let a=String(ym).split("-");return new Date(+a[0],+a[1]-1,1).toLocaleDateString("bn-BD",{month:"long",year:"numeric"})};
+function reportMonths(){
+ let set=new Set(),add=a=>(a||[]).forEach(r=>{let d=String(r&&r.date||"").slice(0,7);if(/^\d{4}-\d{2}$/.test(d))set.add(d)});
+ ["feed","medicine","workers","other","litter","rent","sales","litterSales","deaths","gifts","dailyFeed"].forEach(k=>add(state[k]));
+ let os=state.otherSales||{};Object.keys(os).forEach(k=>add(os[k]));
+ let sd=String(state.startDate||"").slice(0,7);if(/^\d{4}-\d{2}$/.test(sd))set.add(sd);
+ return [...set].sort();
+}
+function fcrRows(){
+ let f=fcrStats();
+ if(!(f.feed>0))return [{l:"দৈনিক ফিডের হিসাব নেই",v:"—"}];
+ let pn=f.birds?f.need/f.birds:0,pw=f.birds&&f.tw?f.tw/f.birds:0;
+ return [
+  {l:"মোট খাওয়ানো ফিড",v:fmt(f.feed)+" কেজি"},
+  {l:"মোট ওজন (বিক্রি + খামারে আনুমানিক)",v:fmt(f.tw)+" কেজি"},
+  {l:"টার্গেট FCR",v:f.tg.toFixed(2)},
+  {l:"মোট জীবিত মুরগি",v:fmt(f.birds,0)+" টি"},
+  {l:"প্রতি মুরগি দরকারি গড় ওজন (ফিড ÷ মুরগি ÷ "+f.tg.toFixed(2)+")",v:f.birds?pn.toFixed(2)+" কেজি":"—"},
+  {l:"বর্তমান প্রতি মুরগি গড় ওজন",v:pw?pw.toFixed(2)+" কেজি":"—"},
+  {t:f.fcr?(f.fcr<=f.tg?"profit":"loss"):"tot",l:"বাস্তব FCR (ফিড ÷ মোট ওজন)",v:f.fcr?f.fcr.toFixed(2):"—"}
+ ];
+}
+function reportData(){
+ let sel=document.getElementById("reportMonth"),m=sel?sel.value:"";
+ let inM=d=>!m||String(d||"").slice(0,7)===m,F=a=>(a||[]).filter(r=>inM(r.date));
+ let qr=a=>sumOf(F(a),r=>(+r.qty||0)*(+r.rate||0));
+ let os=state.otherSales||{},months=reportMonths();
+ let chicksN=(!m||String(state.startDate||"").slice(0,7)===m)?(+state.chicks||0):0;
+ let c={chicks:chicksN*(+state.chickPrice||0),feed:qr(state.feed),medicine:qr(state.medicine),workers:sumOf(F(state.workers),r=>r.amount),other:qr(state.other),litter:qr(state.litter),rent:sumOf(F(state.rent),r=>r.amt)};
+ let cost=c.chicks+c.feed+c.medicine+c.workers+c.other+c.litter+c.rent;
+ let wh=F(state.sales),whQ=sumOf(wh,r=>r.qty),whW=sumOf(wh,r=>r.weight),whA=sumOf(wh,r=>(+r.weight||0)*(+r.rate||0));
+ let rt=F(os.chicken),rtQ=sumOf(rt,r=>r.pcs),rtA=qr(os.chicken);
+ let lit=qr(os.litter)+qr(state.litterSales),bag=qr(os.bag),fsl=qr(os.feed);
+ let income=whA+rtA+lit+bag+fsl,net=income-cost;
+ let gf=F(state.gifts),gQ=sumOf(gf,r=>r.qty),gW=sumOf(gf,r=>r.weight);
+ let dead=m?sumOf(F(state.deaths),r=>r.qty):(deathTotal()||(+state.dead||0));
+ let monthLabel=m?bnMonth(m):(months.length>1?"পুরো ব্যাচ ("+bnMonth(months[0])+" – "+bnMonth(months[months.length-1])+")":(months.length?"পুরো ব্যাচ ("+bnMonth(months[0])+")":"পুরো ব্যাচ"));
+ let info=[["ব্যাচ",state.name+(state.status==="closed"?" (সম্পন্ন)":" (চলমান)")],["রিপোর্টের সময়",monthLabel],["বাচ্চা আসার তারিখ",state.startDate||"—"],["ব্যাচের বয়স",days()+" দিন"],["মোট বাচ্চা",fmt(+state.chicks||0,0)+" টি"],["মৃত"+(m?" (এ মাসে)":""),fmt(dead,0)+" টি"],["বর্তমান মুরগি (খামারে)",fmt(livePcs(),0)+" টি"]];
+ let rows=[
+  {t:"sec",l:"💸 খরচ"},
+  {l:"বাচ্চা ক্রয়",q:chicksN?fmt(chicksN,0)+" টি":"",a:c.chicks},
+  {l:"ফিড",a:c.feed},{l:"Medicine",a:c.medicine},{l:"কর্মচারী",a:c.workers},{l:"বিভিন্ন খরচ",a:c.other},{l:"কাঠের গুড়া",a:c.litter},{l:"পরিবহন ভাড়া",a:c.rent},
+  {t:"tot",l:"মোট খরচ",a:cost},
+  {t:"sec",l:"💰 আয়"},
+  {l:"মুরগি বিক্রি (পাইকারি)",q:whQ?fmt(whQ,0)+" টি • "+fmt(whW)+" কেজি":"",a:whA},
+  {l:"খুচরা মুরগি বিক্রি",q:rtQ?fmt(rtQ,0)+" টি":"",a:rtA},
+  {l:"লিটার বিক্রি",a:lit},{l:"বস্তা বিক্রি",a:bag},{l:"ফিড বিক্রি",a:fsl},
+  {t:"tot",l:"মোট আয়",a:income},
+  {t:"sec",l:"🎯 FCR (ব্যাচ শুরু থেকে এখন পর্যন্ত)"},
+  ...fcrRows(),
+  {t:"sec",l:"📊 ফলাফল"},
+  {l:"গিফট / নিজের খাওয়া",q:gQ?fmt(gQ,0)+" টি • "+fmt(gW)+" কেজি":"",a:null},
+  {t:net>=0?"profit":"loss",l:net>=0?"নিট লাভ":"নিট ক্ষতি",a:Math.abs(net)}
+ ];
+ let note=m?"ℹ️ মাসিক রিপোর্টে শুধু "+bnMonth(m)+" মাসের তারিখের এন্ট্রি ধরা হয়েছে। বাচ্চা ক্রয়ের খরচ বাচ্চা আসার মাসে ধরা হয়।":"";
+ let sub="ব্যাচ: "+state.name+"  •  রিপোর্টের সময়: "+monthLabel;
+ return{m:m,months:months,info:info,rows:rows,note:note,sub:sub,monthLabel:monthLabel,net:net};
+}
+function renderReport(){
+ let sel=document.getElementById("reportMonth");if(!sel)return;
+ let months=reportMonths(),cur=sel.value;
+ sel.innerHTML='<option value="">পুরো ব্যাচ (সব মাস)</option>'+months.map(x=>`<option value="${x}">${bnMonth(x)}</option>`).join("");
+ sel.value=months.includes(cur)?cur:"";
+ let d=reportData();
+ document.getElementById("rpSub").textContent=d.sub;
+ document.getElementById("rpInfo").innerHTML=d.info.map(x=>`<div><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join("");
+ reportTable.innerHTML=d.rows.map(r=>{
+  if(r.t==="sec")return `<tr class="rp-sec"><td colspan="3">${r.l}</td></tr>`;
+  let cls=r.t==="tot"?"rp-tot":r.t==="profit"?"rp-profit":r.t==="loss"?"rp-loss":"";
+  return `<tr class="${cls}"><td>${r.l}</td><td>${r.q||""}</td><td style="text-align:right">${r.v!==undefined?esc(r.v):(r.a==null?"—":money(r.a))}</td></tr>`;
+ }).join("");
+ document.getElementById("rpNote").textContent=d.note;
+ document.getElementById("rpFoot").textContent="রিপোর্ট তৈরির তারিখ: "+new Date().toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric"})+"  •  ব্রাদার্স পোল্ট্রি ফার্ম";
+}
+function reportFileBase(){
+ let d=reportData();
+ return ("ব্রাদার্স পোল্ট্রি ফার্ম - রিপোর্ট - "+state.name+" - "+(d.m?bnMonth(d.m):"পুরো ব্যাচ")).replace(/[\\/:*?"<>|]/g,"_");
+}
+let _oldTitle=null;
+function printReport(){
+ _oldTitle=document.title;document.title=reportFileBase();
+ window.print();
+ setTimeout(()=>{if(_oldTitle!==null){document.title=_oldTitle;_oldTitle=null}},800);
+}
+window.addEventListener("afterprint",()=>{if(_oldTitle!==null){document.title=_oldTitle;_oldTitle=null}});
+function exportReportExcel(){
+ let d=reportData(),h=t=>String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ let bd="border:1px solid #999;padding:4px 8px;";
+ let html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Report</x:Name></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table style="border-collapse:collapse;font-family:Calibri,Arial,sans-serif;font-size:12pt">';
+ html+='<tr><td colspan="3" style="font-size:20pt;font-weight:bold;text-align:center;color:#0a4a2f">ব্রাদার্স পোল্ট্রি ফার্ম</td></tr>';
+ html+='<tr><td colspan="3" style="font-size:12pt;text-align:center;font-weight:bold">'+h(d.sub)+'</td></tr><tr><td colspan="3"></td></tr>';
+ d.info.forEach(x=>{html+='<tr><td style="'+bd+'background:#e6f2ec;font-weight:bold">'+h(x[0])+'</td><td colspan="2" style="'+bd+'">'+h(x[1])+'</td></tr>'});
+ html+='<tr><td colspan="3"></td></tr><tr><th style="'+bd+'background:#0a4a2f;color:#fff;text-align:left">খাত</th><th style="'+bd+'background:#0a4a2f;color:#fff;text-align:left">পরিমাণ</th><th style="'+bd+'background:#0a4a2f;color:#fff;text-align:right">টাকা (৳)</th></tr>';
+ d.rows.forEach(r=>{
+  if(r.t==="sec"){html+='<tr><td colspan="3" style="'+bd+'background:#e6f2ec;font-weight:bold;color:#0a4a2f">'+h(r.l.replace(/^[^\wঀ-৿]+\s*/,""))+'</td></tr>';return}
+  let st=bd+(r.t==="tot"?"font-weight:bold;background:#f0f0f0;":r.t==="profit"?"font-weight:bold;background:#d9f2e3;color:#0a7a4f;":r.t==="loss"?"font-weight:bold;background:#fbe0e0;color:#b91c1c;":"");
+  html+='<tr><td style="'+st+'">'+h(r.l)+'</td><td style="'+st+'">'+h(r.q||"")+'</td><td style="'+st+'text-align:right;mso-number-format:\'#,##0.00\'">'+(r.v!==undefined?h(r.v):(r.a==null?"":(+r.a).toFixed(2)))+'</td></tr>';
+ });
+ if(d.note)html+='<tr><td colspan="3" style="font-size:10pt;color:#555">'+h(d.note)+'</td></tr>';
+ html+='<tr><td colspan="3" style="font-size:10pt;color:#555">রিপোর্ট তৈরির তারিখ: '+h(new Date().toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric"}))+'</td></tr></table></body></html>';
+ let blob=new Blob(["﻿"+html],{type:"application/vnd.ms-excel;charset=utf-8"});
+ let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=reportFileBase()+".xls";
+ document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+ showToast("✅ Excel ফাইল ডাউনলোড হয়েছে");
+}
 function workersTotal(){return (state.workers||[]).reduce((s,r)=>s+(+r.amount||0),0)}
 function saveWorkerSalary(){state.workerSalary=+workerSalaryInput.value||0;save();render();showToast("✅ বেতন সংরক্ষণ করা হয়েছে")}
 function addWorkerPayment(){
@@ -932,8 +1098,8 @@ function addMedSchedule(){
   ["msMorningName","msMorningDose","msMorningNote","msNoonName","msNoonDose","msNoonNote","msNightName","msNightDose","msNightNote"].forEach(id=>document.getElementById(id).value="");
   showToast("✅ মেডিসিন শিডিউল সংরক্ষণ হয়েছে");
 }
-function delMedSchedule(i){
-  if(!confirm("এই রেকর্ড মুছবেন?"))return;
+async function delMedSchedule(i){
+  if(!await askConfirm("এই রেকর্ড মুছবেন?"))return;
   state.medSchedule=state.medSchedule||[];
   state.medSchedule.splice(i,1);
   save();renderMedSchedule();
@@ -981,7 +1147,7 @@ function addNote(){
   document.getElementById("noteTitle").value="";document.getElementById("noteText").value="";
   showToast("✅ নোট সংরক্ষণ হয়েছে");
 }
-function delNote(i){if(!confirm("এই নোট মুছে ফেলবেন?"))return;state.notes=state.notes||[];state.notes.splice(i,1);save();renderNotes();showToast("🗑️ নোট মুছে ফেলা হয়েছে")}
+async function delNote(i){if(!await askConfirm("এই নোট মুছে ফেলবেন?"))return;state.notes=state.notes||[];state.notes.splice(i,1);save();renderNotes();showToast("🗑️ নোট মুছে ফেলা হয়েছে")}
 function renderNotes(){
   let el=document.getElementById("noteDate");
   if(el&&!el.value)el.value=new Date().toISOString().slice(0,10);
@@ -1020,7 +1186,7 @@ function osLive(type){
   el.innerHTML=money(t)+extra;
 }
 function osLiveAll(){Object.keys(osCfg).forEach(osLive)}
-function addOtherSale(type){
+async function addOtherSale(type){
   let c=osCfg[type],v=id=>document.getElementById(id);
   let rate=+v(c.rate).value||0;
   let rec={date:v(c.date).value,rate:rate,buyer:v(c.buyer).value||""};
@@ -1038,7 +1204,7 @@ function addOtherSale(type){
       let pcs=Math.round(+v("os_cPcs").value||0);
       if(pcs<=0){showToast("❌ মুরগির পিস দিন");return;}
       let avail=livePcs();
-      if(pcs>avail&&!confirm("⚠️ খুচরা বিক্রির মুরগি ("+pcs+" টি) খামারের বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;
+      if(pcs>avail&&!await askConfirm("⚠️ খুচরা বিক্রির মুরগি ("+pcs+" টি) খামারের বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;
       rec.pcs=pcs;
     }
   }
@@ -1051,8 +1217,8 @@ function addOtherSale(type){
   save();render();
   showToast("✅ "+c.label+" যোগ হয়েছে");
 }
-function delOtherSale(type,i){
-  if(!confirm("মুছে ফেলবেন?"))return;
+async function delOtherSale(type,i){
+  if(!await askConfirm("মুছে ফেলবেন?"))return;
   state.otherSales[type].splice(i,1);
   save();render();
   showToast("🗑️ মুছে ফেলা হয়েছে");
@@ -1062,21 +1228,21 @@ function giftLive(){
   let q=+document.getElementById("os_gPcs").value||0,w=+document.getElementById("os_gWeight").value||0;
   document.getElementById("os_gLive").innerHTML="⚖️ গড় ওজন: <b>"+(q&&w?(w/q).toFixed(2)+" কেজি/মুরগি":"—")+"</b>";
 }
-function addGift(){
+async function addGift(){
   let v=id=>document.getElementById(id);
   let name=v("os_gName").value.trim(),pcs=Math.round(+v("os_gPcs").value||0),w=+v("os_gWeight").value||0;
   if(!name){showToast("❌ নাম দিন");return;}
   if(pcs<=0){showToast("❌ মুরগির পিস দিন");return;}
   if(w<=0){showToast("❌ মোট ওজন দিন");return;}
   let avail=livePcs();
-  if(pcs>avail&&!confirm("⚠️ মুরগি ("+pcs+" টি) খামারের বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;
+  if(pcs>avail&&!await askConfirm("⚠️ মুরগি ("+pcs+" টি) খামারের বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;
   state.gifts=state.gifts||[];
   state.gifts.push({date:v("os_gDate").value||new Date().toISOString().slice(0,10),kind:v("os_gKind").value,name:name,qty:pcs,weight:w});
-  v("os_gName").value="";v("os_gPcs").value="";v("os_gWeight").value="";
+  v("os_gName").value="";v("os_gPcs").value="";v("os_gWeight").value="";giftLive();
   save();render();showToast("✅ যোগ হয়েছে — অবশিষ্ট মুরগি থেকে বাদ গেছে");
 }
-function delGift(i){
-  if(!confirm("মুছে ফেলবেন?"))return;
+async function delGift(i){
+  if(!await askConfirm("মুছে ফেলবেন?"))return;
   state.gifts.splice(i,1);save();render();showToast("🗑️ মুছে ফেলা হয়েছে");
 }
 function renderGifts(){
@@ -1434,8 +1600,8 @@ function markVac(k){
  state.vaccines[k]={date:(d&&d.value)||todayISO(),note:(n&&n.value.trim())||""};
  save();render();showToast("✅ ভ্যাকসিন দেওয়া হয়েছে — সবুজ টিক পড়েছে");
 }
-function unmarkVac(k){
- if(!confirm("এই ভ্যাকসিনের 'দেওয়া হয়েছে' চিহ্ন বাতিল করবেন?"))return;
+async function unmarkVac(k){
+ if(!await askConfirm("এই ভ্যাকসিনের 'দেওয়া হয়েছে' চিহ্ন বাতিল করবেন?"))return;
  if(state.vaccines)delete state.vaccines[k];
  save();render();
 }
@@ -1501,7 +1667,7 @@ function addDailyFeed(){
  if(bags*bagKg+loose<=0){showToast("❌ খাবারের পরিমাণ দিন");return}
  state.dailyFeed=state.dailyFeed||[];
  state.dailyFeed.push({date:v("dfDate").value||todayISO(),name:name,bags:bags,loose:loose,bagKg:bagKg,note:v("dfNote").value.trim()});
- v("dfBags").value="";v("dfLoose").value="";v("dfNote").value="";
+ v("dfName").value="";syncChips("dfName");v("dfBags").value="";v("dfLoose").value="";v("dfNote").value="";dfLive();
  save();render();showToast("✅ দৈনিক খাবারের হিসাব সংরক্ষণ হয়েছে");
 }
 function renderDailyFeed(){
@@ -1586,10 +1752,10 @@ function fitTitle(){
  if(w>0&&avail>0)h.style.fontSize=Math.max(16,Math.min(64,Math.floor(100*avail/w*0.98)))+"px";
 }
 
-function render(){renderDashboard();renderFarm();renderDeaths();renderWorkers();Object.keys(configs).forEach(renderTable);renderSales();renderLitterSales();renderLitterSalesPage();renderOtherSales();renderGifts();renderCustomers();renderRent();renderReport();renderSheets();renderBatchBar();renderBatchesPage();renderMedSchedule();renderNotes();renderVaccine();renderDailyFeed();renderSummaries();renderCloseBar()}
+function render(){renderDashboard();renderFarm();renderDeaths();renderWorkers();Object.keys(configs).forEach(renderTable);renderSales();renderLitterSales();renderLitterSalesPage();renderOtherSales();renderGifts();renderCustomers();renderRent();renderReport();renderBatchBar();renderBatchesPage();renderMedSchedule();renderNotes();renderVaccine();renderDailyFeed();renderSummaries();renderCloseBar()}
 makePages();
-const navItems=[["dashboard","🏠 ড্যাশবোর্ড"],["medschedule","💊 মেডিসিন শিডিউল"],["dailyfeed","🍽️ দৈনিক খাবার"],["notes","📝 নোট"],["vaccine","💉 ভ্যাকসিন"],["farm","🐣 বাচ্চা"],["deaths","☠️ মৃত বাচ্চা"],["feed","🌾 ফিড"],["medicine","💊 Medicine"],["workers","👷 কর্মচারী"],["other","🧾 বিভিন্ন খরচ"],["litter","🪵 কাঠের গুড়া"],["rent","🚚 পরিবহন ভাড়া"],["sales","💰 বিক্রি"],["othersales","🛒 অন্যান্য বিক্রি"],["customers","👥 ক্রেতা"],["report","📑 রিপোর্ট"],["batches","🗂️ সব ব্যাচ"],["sheets","📚 সব শিট"]];
-const navColors={dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)",sheets:"linear-gradient(135deg,#10b981,#047857)"};
+const navItems=[["dashboard","🏠 ড্যাশবোর্ড"],["medschedule","💊 মেডিসিন শিডিউল"],["dailyfeed","🍽️ দৈনিক খাবার"],["notes","📝 নোট"],["vaccine","💉 ভ্যাকসিন"],["farm","🐣 বাচ্চা"],["deaths","☠️ মৃত বাচ্চা"],["feed","🌾 ফিড"],["medicine","💊 Medicine"],["workers","👷 কর্মচারী"],["other","🧾 বিভিন্ন খরচ"],["litter","🪵 কাঠের গুড়া"],["rent","🚚 পরিবহন ভাড়া"],["sales","💰 বিক্রি"],["othersales","🛒 অন্যান্য বিক্রি"],["customers","👥 ক্রেতা"],["report","📑 রিপোর্ট"],["batches","🗂️ সব ব্যাচ"]];
+const navColors={dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)"};
 const navBtn=(x,i)=>{
   const grad=navColors[x[0]]||"linear-gradient(135deg,#1aad6e,#0d8050)";
   const isActive=i===0?"active":"";
