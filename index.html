@@ -133,6 +133,7 @@ tr:hover td{background:#ffffff04}
 .db-hero-label{font-size:11px;color:#6ee8aa88;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .db-hero-value{font-size:15px;font-weight:700;color:#e8edf2;margin-top:2px}
 .db-hero-value b{color:#3ddc84}
+.db-hero-value #age{color:#ff4d4d;font-size:26px;font-weight:800;line-height:1.1}
 .db-status{display:inline-flex;align-items:center;gap:6px;background:#1aad6e20;border:1px solid #1aad6e40;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;color:#3ddc84}
 .db-status::before{content:'';width:7px;height:7px;border-radius:50%;background:#3ddc84;animation:pulse 1.6s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
@@ -189,6 +190,7 @@ tr:hover td{background:#ffffff04}
  .hint{font-size:11px;padding:9px 11px}
  .db-hero{padding:14px}
  .db-hero-value{font-size:13px}
+ .db-hero-value #age{font-size:24px}
  h1{font-size:17px}
 }
 @media print{
@@ -290,7 +292,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
  #report .rp-note{color:#444}#report .rp-foot{color:#444}
 }
 /* ── রোগ ঝুঁকি পেজ ── */
-#disease,#analysis,#checklist,#dzCharts{--dz0:#1b2b27;--dz1:#1f5a48;--dz2:#2f9e82;--dz3:#86e3cc;--dzv:#8ea2e0;--dzt:#ff8a5c;--dzm:#93a8a2;--dzl:#ffffff14}
+#disease,#analysis,#checklist,#dzCharts,#batchcmp,#envlog{--dz0:#1b2b27;--dz1:#1f5a48;--dz2:#2f9e82;--dz3:#86e3cc;--dzv:#8ea2e0;--dzt:#ff8a5c;--dzm:#93a8a2;--dzl:#ffffff14}
 .dz-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .dz-chip{border:1.5px solid #1aad6e50;background:#1aad6e14;color:#6ee8aa;border-radius:20px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
 .dz-chip[aria-pressed=true]{background:#1aad6e;color:#07130d;border-color:#1aad6e}
@@ -407,7 +409,10 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 .dzc-grp:first-of-type{margin-top:4px}
 .dzc-t{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:700;margin-bottom:2px}
 .dzc-t span{font-size:11.5px;color:var(--dzm);font-weight:500}
-.dzc-svg{width:100%;height:auto;display:block}
+.dzc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.dzc-svg{display:block;max-width:none}
+.dzc-sub{font-size:11px;color:var(--dzm);font-weight:500}
+.dzc-svg .dzc-val{fill:#e8f3ef;font-size:10.5px;font-weight:700}
 .dzc-svg text{fill:#93a8a2;font-size:9px;font-family:inherit}
 .cust-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
 .cust-tools input{flex:1;min-width:140px;padding:8px 10px;border:1px solid #ffffff20;border-radius:10px;background:#0f1923;color:#e8edf2;font:inherit}
@@ -415,6 +420,35 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 .cust-call{background:#0ea5e9}.cust-wa{background:#22c55e}
 @media(max-width:480px){.an-std{grid-template-columns:repeat(2,1fr)}}
 @media print{#analysis,#checklist,#dzCharts{display:none!important}}
+/* ── ব্যাচ তুলনা / ঘরের অবস্থা / ব্যাকআপ ── */
+.bc-wrap{overflow-x:auto}
+.bc-tbl{border-collapse:separate;border-spacing:0;min-width:100%;font-size:13px}
+.bc-tbl th,.bc-tbl td{padding:9px 10px;border-bottom:1px solid #ffffff12;text-align:right;white-space:nowrap}
+.bc-tbl th:first-child,.bc-tbl td:first-child{text-align:left;position:sticky;left:0;background:#15222c;z-index:1;color:#cfd9de;font-weight:500}
+.bc-tbl thead th{vertical-align:bottom}
+.bc-tbl .bn{font-weight:700;color:#e8edf2;display:block}
+.bc-tbl .bs{font-size:11px;color:var(--dzm);font-weight:400;display:block}
+.bc-tbl td.best{background:#17321f;color:#8fe0ac;font-weight:700}
+.bc-tbl td.worst{color:#ff9d80}
+.bc-bars{display:flex;flex-direction:column;gap:8px;margin:6px 0 4px}
+.bc-bar{display:grid;grid-template-columns:minmax(70px,28%) 1fr auto;gap:8px;align-items:center;font-size:12.5px}
+.bc-bar i{display:block;height:14px;border-radius:3px}
+.bc-track{position:relative;height:14px;background:#ffffff0a;border-radius:3px;overflow:hidden}
+.bc-track i{position:absolute;top:0}
+.bk-card{background:linear-gradient(145deg,#1f2a1a,#243020);border:1px solid #84cc1650;border-radius:16px;padding:12px 14px;margin:4px 0 12px}
+.bk-card b{display:block;margin-bottom:2px}
+.bk-card p{margin:0 0 8px;font-size:12.5px;color:#cfd9de}
+.bk-btns{display:flex;flex-wrap:wrap;gap:8px}
+.bk-btns button{border:0;border-radius:10px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.bk-go{background:#84cc16;color:#14230a}
+.bk-sh{background:#22c55e;color:#06210f}
+.bk-later{background:transparent;border:1.5px solid #ffffff25!important;color:#cfd9de}
+.env-st{border-radius:14px;padding:11px 14px;margin-bottom:12px;font-size:13.5px;line-height:1.55}
+.env-st.good{background:#17321f;border:1px solid #1a5c3a;color:#8fe0ac}
+.env-st.bad{background:#ff8a5c18;border:1px solid #ff8a5c80;color:#ffb59b}
+.env-st.info{background:#ffffff0a;border:1px solid #ffffff14;color:#cfd9de}
+.env-st b{display:block}
+@media print{#batchcmp,#envlog,#dzBackup{display:none!important}}
 </style>
 </head>
 <body>
@@ -501,9 +535,9 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 </div>
 
 <div id="vacBanner"></div>
-<div id="closeBar"></div>
 <div class="hint">👆 যেকোনো কার্ডে চাপ দিন — তার সামারি দেখা যাবে</div>
 <!-- Flock -->
+<div id="dzBackup"></div>
 <div id="dzTodayCard"></div>
 <div id="dzCharts"></div>
 <div class="section">🐔 মুরগির অবস্থা</div>
@@ -520,7 +554,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 <div class="section">💸 খরচের হিসাব</div>
 <div class="grid">
   <div onclick="showSummary('feed')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#d97706,#b45309)"><div class="ico">🌾</div></div><div class="lab">ফিড খরচ</div><div class="val" style="color:#fbbf24" id="kFeed">৳০</div></div>
-  <div onclick="showSummary('medicine')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)"><div class="ico">💊</div></div><div class="lab">Medicine</div><div class="val" style="color:#c4b5fd" id="kMed">৳০</div></div>
+  <div onclick="showSummary('medicine')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)"><div class="ico">💊</div></div><div class="lab">মেডিসিন</div><div class="val" style="color:#c4b5fd" id="kMed">৳০</div></div>
   <div onclick="showSummary('workers')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#0284c7,#0369a1)"><div class="ico">👷</div></div><div class="lab">কর্মচারী</div><div class="val" style="color:#7dd3fc" id="kWorker">৳০</div></div>
   <div onclick="showSummary('other')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#ea580c,#c2410c)"><div class="ico">🧾</div></div><div class="lab">বিভিন্ন খরচ</div><div class="val" style="color:#fdba74" id="kOther">৳০</div></div>
   <div onclick="showSummary('litter')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#65a30d,#4d7c0f)"><div class="ico">🪵</div></div><div class="lab">কাঠের গুড়া</div><div class="val" style="color:#bef264" id="kLitter">৳০</div></div>
@@ -552,6 +586,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 </div>
 <div class="fin-box fin-net profit" id="finNetBox"><div class="fin-l" id="finNetL">📈 লাভ / ক্ষতি (সর্বমোট)</div><div class="fin-v" id="finNet">৳০</div></div>
 
+<div id="closeBar" style="margin-top:18px"></div>
 </section>
 
 <section id="farm" class="page">
@@ -645,15 +680,15 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 <div class="form">
   <div class="fields">
     <label>তারিখ<input id="os_bDate" type="date"></label>
-    <label>পরিমাণ (কেজি)<input id="os_bQty" type="number" min="0" step=".01" placeholder="কত কেজি" oninput="osLive('bag')"></label>
-    <label>দর/কেজি (৳)<input id="os_bRate" type="number" min="0" step=".01" placeholder="প্রতি কেজির দাম" oninput="osLive('bag')"></label>
+    <label>পরিমাণ (পিস)<input id="os_bQty" type="number" min="0" step="1" placeholder="কত পিস বস্তা" oninput="osLive('bag')"></label>
+    <label>প্রতি পিসের দাম (৳)<input id="os_bRate" type="number" min="0" step=".01" placeholder="একটা বস্তার দাম" oninput="osLive('bag')"></label>
     <label>ক্রেতার নাম<input id="os_bBuyer" type="text" placeholder="ঐচ্ছিক"></label>
   </div>
   <div class="oslive">🧮 এই এন্ট্রির মোট দাম: <b id="os_bLive">৳০</b></div>
   <div style="margin-top:8px;padding:10px 14px;background:#0d2b1e;border-radius:10px;font-size:14px;color:#3ddc84;font-weight:700">💰 মোট বস্তা বিক্রি (এ পর্যন্ত): <span id="os_bTotal">৳০</span></div>
   <button class="add" onclick="addOtherSale('bag')">➕ বস্তা বিক্রি যোগ করুন</button>
 </div>
-<div class="wrap"><table><thead><tr><th>তারিখ</th><th>পরিমাণ (কেজি)</th><th>দর/কেজি</th><th>মোট</th><th>ক্রেতা</th><th>অ্যাকশন</th></tr></thead><tbody id="os_bTable"></tbody></table></div>
+<div class="wrap"><table><thead><tr><th>তারিখ</th><th>পরিমাণ (পিস)</th><th>প্রতি পিসের দাম</th><th>মোট</th><th>ক্রেতা</th><th>অ্যাকশন</th></tr></thead><tbody id="os_bTable"></tbody></table></div>
 
 <div class="section">🌾 বেচে যাওয়া ফিড বিক্রি</div>
 <div class="form">
@@ -720,9 +755,9 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 <div class="section">মেডিসিন শিডিউলের রেকর্ড</div>
 <div class="wrap"><table><thead><tr>
   <th>তারিখ</th><th>বয়স</th>
-  <th>সকাল (Medicine)</th><th>সকাল (ডোজ)</th>
-  <th>দুপুর (Medicine)</th><th>দুপুর (ডোজ)</th>
-  <th>রাত (Medicine)</th><th>রাত (ডোজ)</th>
+  <th>সকাল (মেডিসিন)</th><th>সকাল (ডোজ)</th>
+  <th>দুপুর (মেডিসিন)</th><th>দুপুর (ডোজ)</th>
+  <th>রাত (মেডিসিন)</th><th>রাত (ডোজ)</th>
   <th>অ্যাকশন</th>
 </tr></thead><tbody id="medScheduleTable"></tbody></table></div>
 </section>
@@ -749,104 +784,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 <div class="wrap"><table><thead><tr><th>তারিখ</th><th>বয়স</th><th>ফিড</th><th>বস্তা</th><th>আলাদা</th><th>মোট খাবার</th><th>প্রতি মুরগি</th><th>নোট</th><th>অ্যাকশন</th></tr></thead><tbody id="dfTable"></tbody></table></div>
 </section>
 
-<section id="disease" class="page">
-<div class="section">⚠️ রোগ ঝুঁকি ও পোস্টমর্টেম</div>
-<div class="dz-tabs">
- <button type="button" id="dzBtn1" class="dz-chip" aria-pressed="true" onclick="dzTab(1)">📊 ঝুঁকি চার্ট</button>
- <button type="button" id="dzBtn2" class="dz-chip" aria-pressed="false" onclick="dzTab(2)">💊 কী দেওয়া হয়</button>
- <button type="button" id="dzBtn3" class="dz-chip" aria-pressed="false" onclick="dzTab(3)">🔬 পোস্টমর্টেম</button>
-</div>
 
-<div id="dzTab1">
- <div class="form dz-box">
-  <label class="dz-age" for="dzAge">ব্যাচের বয়স <output id="dzAgeOut">—</output></label>
-  <input id="dzAge" type="range" min="1" max="35" value="21" oninput="dzUpdate()">
-  <div class="dz-bnote" id="dzBatchNote"></div>
-  <button type="button" class="dz-chip" onclick="dzToday()">🐣 এই ব্যাচের আজকের বয়স</button>
-  <div class="dz-now" id="dzNow"></div>
- </div>
- <div class="form dz-box">
-  <div class="dz-legend">
-   <span><i style="background:var(--dz0)"></i>কম</span><span><i style="background:var(--dz1)"></i>সাধারণ</span><span><i style="background:var(--dz2)"></i>মাঝারি</span><span><i style="background:var(--dz3)"></i>বেশি</span><span><i style="background:var(--dzv)"></i>টিকার সময় (অ্যাপের শিডিউল)</span><span><i style="background:transparent;outline:2px solid var(--dzt);outline-offset:-2px"></i>আজ</span>
-  </div>
-  <div class="dz-sec">রোগ ও বয়স (দিন)</div>
-  <div class="dz-axis" id="dzAxis" aria-hidden="true"></div>
-  <div id="dzRows"></div>
-  <div class="dz-sec">টিকা</div>
-  <div id="dzVacs"></div>
- </div>
- <p class="dz-note">এটা সাধারণ নির্দেশিকা। টিকার সময় ও ওষুধ আপনার এলাকার পশুচিকিৎসকের পরামর্শ অনুযায়ী ঠিক করুন। ভেজা লিটার, অ্যামোনিয়া, হঠাৎ ঠান্ডা-গরম ও টিকা মিস হলে ঝুঁকি বাড়ে।</p>
-</div>
-
-<div id="dzTab2" hidden>
- <div class="dz-warn">ওষুধ ও মাত্রা ডাক্তারের পরামর্শ ছাড়া ঠিক করবেন না। এখানে মাত্রা দেওয়া নেই, কারণ প্রতিটি ওষুধের মাত্রা লেবেল ও মুরগির ওজন অনুযায়ী আলাদা।</div>
- <div class="form dz-box"><div class="dz-med" id="dzMed"></div></div>
- <div class="form dz-box">
-  <div class="dz-sec" style="margin-top:0">কোন রোগে কোন অ্যান্টিবায়োটিক গ্রুপ কাজ করে</div>
-  <div class="dz-note" style="margin-top:0">কোন ওষুধে আসলে কাজ হবে তা কালচার-সেনসিটিভিটি পরীক্ষায় জানা যায়। এখানে মাত্রা নেই।</div>
-  <div class="dz-tbl"><table>
-   <thead><tr><th>রোগ</th><th>ওষুধের গ্রুপ (উদাহরণ)</th><th>জেনে রাখুন</th></tr></thead>
-   <tbody>
-    <tr><td><b>সিআরডি</b><br><span class="dz-peak">মাইকোপ্লাজমা + ই-কোলাই</span></td><td>ম্যাক্রোলাইড (টাইলোসিন, টিলমিকোসিন), টেট্রাসাইক্লিন (ডক্সিসাইক্লিন), টিয়ামুলিন</td><td>মাইকোপ্লাজমায় ম্যাক্রোলাইড বা টিয়ামুলিন বেশি কাজ করে। ই-কোলাই থাকলে ওষুধ আলাদা লাগতে পারে।</td></tr>
-    <tr><td><b>ই-কোলাই</b><br><span class="dz-peak">ব্যাকটেরিয়া</span></td><td>অ্যামোক্সিসিলিন (সঙ্গে ক্লাভুল্যানিক অ্যাসিড), অ্যামিনোগ্লাইকোসাইড (জেন্টামাইসিন, নিওমাইসিন), ফসফোমাইসিন, ফ্লোরফেনিকল</td><td>প্রতিরোধ ক্ষমতা সবচেয়ে বেশি, এলাকাভেদে ফল আলাদা। পরীক্ষা ছাড়া ওষুধ বদলাতে থাকলে ক্ষতি বাড়ে।</td></tr>
-    <tr><td><b>নেক্রোটিক এন্টারাইটিস</b><br><span class="dz-peak">ক্লস্ট্রিডিয়াম</span></td><td>পেনিসিলিন জাতীয় (অ্যামোক্সিসিলিন), লিনকোমাইসিন, ব্যাসিট্রাসিন, টাইলোসিন</td><td>সঙ্গে প্রোবায়োটিক দিন, আর কক্সিডিওসিস ঠেকান।</td></tr>
-    <tr><td><b>নাভি পচা, কুসুমথলির সংক্রমণ</b><br><span class="dz-peak">মিশ্র ব্যাকটেরিয়া</span></td><td>বিস্তৃত পরিসরের অ্যান্টিবায়োটিক (অ্যামোক্সিসিলিন, জেন্টামাইসিন)</td><td>ডাক্তারের দেওয়া ওষুধই দিন। প্রতিরোধ: পরিষ্কার ব্রুডার ও ভালো বাচ্চা।</td></tr>
-    <tr><td><b>সালমোনেলা / পুলোরাম</b><br><span class="dz-peak">ব্যাকটেরিয়া</span></td><td>সালফা ওষুধ, অ্যামোক্সিসিলিন, ডাক্তারের নির্ধারিত অন্য গ্রুপ</td><td>মৃত্যু কমে, কিন্তু জীবাণু পুরো দূর হয় না। সুস্থ মুরগি জীবাণু বহন করতে পারে।</td></tr>
-   </tbody>
-  </table></div>
-  <div class="dz-sec">যেগুলোতে অ্যান্টিবায়োটিক কাজ করে না</div>
-  <div class="dz-tbl"><table>
-   <thead><tr><th>রোগ</th><th>কারণ</th><th>কী কাজ করে</th></tr></thead>
-   <tbody>
-    <tr><td><b>কক্সিডিওসিস</b></td><td>পরজীবী</td><td>কক্সিডিয়ারোধী ওষুধ: অ্যামপ্রোলিয়াম, সালফাকুইনোক্সালিন, টলট্রাজুরিল (এগুলো অ্যান্টিবায়োটিক নয়)</td></tr>
-    <tr><td><b>রানীক্ষেত, গামবোরো, ব্রংকাইটিস</b></td><td>ভাইরাস</td><td>ওষুধ নেই, শুধু টিকা ও সহায়ক সেবা। অ্যান্টিবায়োটিক শুধু দ্বিতীয় সংক্রমণে।</td></tr>
-    <tr><td><b>অ্যাসপারজিলোসিস</b></td><td>ছত্রাক</td><td>লিটার ও খাবার সরানো, বাতাস চলাচল বাড়ানো</td></tr>
-    <tr><td><b>অ্যাসাইটিস, হিটস্ট্রোক</b></td><td>পরিবেশ</td><td>ঠান্ডা পানি, বাতাস চলাচল, ভিড় কমানো</td></tr>
-   </tbody>
-  </table></div>
-  <ul class="dz-rules" style="margin-top:12px">
-   <li>ল্যাবে কালচার-সেনসিটিভিটি করাতে ২–৩টা তাজা মরা মুরগি ডাক্তারকে দেখান।</li>
-   <li>কিছু ওষুধ (যেমন কোলিস্টিন, কিছু ফ্লুরোকুইনোলোন) অনেক দেশে পশুর জন্য নিষিদ্ধ বা কড়া নিয়ন্ত্রিত। ডাক্তারের কাছ থেকে জেনে নিন।</li>
-   <li>একসাথে অনেক ওষুধ মেশাবেন না। কোনটা কার সাথে মেশে, তা ডাক্তার বলবেন।</li>
-  </ul>
- </div>
- <div class="form dz-box">
-  <div class="dz-sec" style="margin-top:0">ওষুধ দেওয়ার আগে মনে রাখুন</div>
-  <ul class="dz-rules">
-   <li>রোগ নিশ্চিত না হয়ে অ্যান্টিবায়োটিক দেবেন না। ভুল ওষুধে মুরগি সারে না, ওষুধের প্রতিরোধ ক্ষমতা তৈরি হয়।</li>
-   <li>মুরগি বিক্রির আগে ওষুধের "উইথড্রয়াল পিরিয়ড" (ওষুধ বন্ধ রাখার দিন) লেবেলে দেখে মানুন। ৩৫ দিনের ব্যাচে শেষ সপ্তাহে অ্যান্টিবায়োটিক এড়িয়ে চলুন।</li>
-   <li>একসাথে অনেক মুরগি মরলে ২–৩টি তাজা মরা বা অসুস্থ মুরগি ডাক্তারকে দেখান। কারণ জানলে ওষুধ ঠিক হয়।</li>
-   <li>অসুস্থ মুরগি আলাদা করুন। মরা মুরগি মাটিতে পুঁতে বা পুড়িয়ে ফেলুন।</li>
-   <li>শুকনো লিটার, বাতাস চলাচল ও পরিষ্কার পানি অনেক রোগ ঠেকায়।</li>
-  </ul>
- </div>
-</div>
-
-<div id="dzTab3" hidden>
- <div class="dz-warn">এটা সাধারণ নির্দেশিকা, রোগ নিশ্চিত করার উপায় নয়। একটা লক্ষণ দেখে ওষুধ ঠিক করবেন না। ২–৩টা একই লক্ষণের মুরগি ডাক্তারের কাছে নিয়ে নিশ্চিত হয়ে নিন।</div>
- <div class="form dz-box">
-  <div class="dz-sec" style="margin-top:0">কাটার আগে ও কাটার সময়</div>
-  <ol class="dz-rules">
-   <li>তাজা মরা মুরগি নিন, মরার ২–৩ ঘণ্টার মধ্যে ভালো।</li>
-   <li>গ্লাভস ও মাস্ক পরুন। আগে বাইরের অবস্থা দেখুন: ঝুঁটির রঙ, পায়ুর আশপাশে মল, চোখ-নাক।</li>
-   <li>পেটের মাঝ বরাবর কেটে চামড়া সরান, বুকের হাড় কেটে ভেতর খুলুন।</li>
-   <li>নিচের ক্রমে অঙ্গ দেখুন, প্রতিটি আগে সুস্থ অবস্থার সাথে মিলিয়ে নিন। ছবি তুলে রাখুন।</li>
-   <li>শেষে মরা মুরগি মাটিতে পুঁতে বা পুড়িয়ে ফেলুন। যন্ত্র ও জায়গা জীবাণুনাশক দিয়ে ধুয়ে ফেলুন।</li>
-  </ol>
- </div>
- <div class="form dz-box">
-  <div class="dz-sec" style="margin-top:0">অঙ্গ ধরে ধরে দেখুন</div>
-  <input id="dzQ" class="dz-search" type="search" placeholder="রোগ বা লক্ষণ লিখে খুঁজুন (যেমন: রক্ত, পানি)" oninput="dzOrgans()">
-  <div class="dz-chips" id="dzChips"></div>
-  <div id="dzOrgans"></div>
-  <p class="dz-note">"ছবি দেখুন" চাপলে ইন্টারনেটে আসল পোস্টমর্টেম ছবি খুলবে (নেট লাগবে)। একটা ছবির সাথে মিল দেখে রোগ ধরে নেবেন না।</p>
- </div>
- <div class="form dz-box">
-  <div class="dz-sec" style="margin-top:0">রোগ ধরে এক নজরে</div>
-  <div class="dz-tbl"><table><thead><tr><th>রোগ</th><th>সাধারণ বয়স</th><th>প্রধান ক্ষত</th></tr></thead><tbody id="dzTbody"></tbody></table></div>
- </div>
-</div>
-</section>
 <section id="analysis" class="page">
 <div class="section">📈 বিশ্লেষণ</div>
 
@@ -857,7 +795,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 </div>
 
 <div class="form an-box">
- <div class="an-title">⚖️ ওজন নমুনা (সপ্তাহে একবার ১০টা মুরগি মাপুন)</div>
+ <div class="an-title">⚖️ ওজন নমুনা — Cobb 500 (সপ্তাহে একবার ১০টা মুরগি মাপুন)</div>
  <div class="fields">
   <label>তারিখ<input id="anWDate" type="date"></label>
   <label>কয়টা মুরগি মাপলেন<input id="anWN" type="number" min="1" step="1" inputmode="numeric" placeholder="যেমন ১০"></label>
@@ -867,7 +805,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
  <div id="anGrowth" style="margin-top:12px"></div>
  <div class="wrap" style="margin-top:10px"><table><thead><tr><th>তারিখ</th><th>বয়স</th><th>মুরগি</th><th>গড় ওজন</th><th>স্ট্যান্ডার্ডের তুলনায়</th><th></th></tr></thead><tbody id="anWTable"></tbody></table></div>
  <details class="an-det"><summary>স্ট্যান্ডার্ড ওজন বদলান (গ্রামে)</summary>
-  <div class="an-note">এই ওজনগুলো সাধারণ ব্রয়লারের আনুমানিক মান। আপনার জাতের কোম্পানির চার্ট থাকলে সেই ওজন বসান।</div>
+  <div class="an-note">এই ওজনগুলো Cobb 500-এর (মিশ্র লিঙ্গ, as-hatched) লক্ষ্যমাত্রা, Cobb-এর ২০১৫ Performance &amp; Nutrition Supplement অনুযায়ী। নতুন চার্ট থাকলে বদলে নিন।</div>
   <div class="an-std" id="anStd"></div>
   <button class="an-btn" type="button" onclick="anResetStd()">↩️ আগের মানে ফিরুন</button>
  </details>
@@ -883,10 +821,14 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 </div>
 </section>
 
-<section id="checklist" class="page">
-<div class="section">✅ চেকলিস্ট</div>
-<div id="clHost"></div>
+
+<section id="batchcmp" class="page">
+<div class="section">📊 ব্যাচ তুলনা</div>
+<div id="bcHost"></div>
 </section>
+
+
+
 <section id="vaccine" class="page">
 <div class="section">💉 ভ্যাকসিন শিডিউল</div>
 <div class="hint" id="vacInfo"></div>
@@ -1077,13 +1019,13 @@ function renderDeaths(){
 }
 function renderFarm(){fDate.value=state.startDate;fChicks.value=state.chicks;fPrice.value=state.chickPrice;fDead.value=state.dead;farmTable.innerHTML=`<tr><td>বয়স</td><td>${days()} দিন</td></tr><tr><td>মোট বাচ্চা</td><td>${state.chicks}</td></tr><tr><td>মৃত</td><td>${state.dead}</td></tr><tr><td>বিক্রিত (পাইকারি + খুচরা)</td><td>${soldPcs()}</td></tr><tr><td>গিফট / নিজের জন্য</td><td>${giftPcs()}</td></tr><tr><td>বর্তমান (খামারে)</td><td>${livePcs()}</td></tr><tr><td>মৃত্যুর হার</td><td>${state.chicks?(state.dead/state.chicks*100).toFixed(2):0}%</td></tr>`}
 const configs={
-feed:["🌾 ফিড","ফিড","বস্তা"],medicine:["💊 Medicine","Medicine","পরিমাণ"],other:["🧾 বিভিন্ন খরচ","বিবরণ","পরিমাণ"],litter:["🪵 কাঠের গুড়া","বিবরণ","পরিমাণ"]
+feed:["🌾 ফিড","ফিড","বস্তা"],medicine:["💊 মেডিসিন","মেডিসিনের নাম","পরিমাণ"],other:["🧾 বিভিন্ন খরচ","বিবরণ","পরিমাণ"],litter:["🪵 কাঠের গুড়া","বিবরণ","পরিমাণ"]
 };
 function makePages(){
 let host=document.getElementById("generatedPages");
 for(const [key,v] of Object.entries(configs)){
 host.insertAdjacentHTML("beforeend",`<section id="${key}" class="page"><div class="section">${v[0]} হিসাব</div>
-<div class="form"><div class="fields"><label>তারিখ<input id="${key}Date" type="date"></label><label>${v[1]}<input id="${key}Name"${key==="feed"?` list="feedNames" placeholder="নাম লিখুন বা নিচে চাপ দিন" oninput="syncChips('feedName')"`:""}></label><label>${v[2]}<input id="${key}Qty" type="number" min="0" step=".01"></label><label>দর<input id="${key}Rate" type="number" min="0" step=".01"></label></div>${key==="feed"?feedChips("feedName"):""}<button class="add" onclick="addRow('${key}')">➕ যোগ করুন</button></div>
+<div class="form"><div class="fields"><label>তারিখ<input id="${key}Date" type="date"></label><label>${v[1]}<input id="${key}Name"${key==="feed"?` list="feedNames" placeholder="নাম লিখুন বা নিচে চাপ দিন" oninput="syncChips('feedName')"`:key==="medicine"?``:""}></label><label>${v[2]}<input id="${key}Qty" type="number" min="0" step=".01"></label><label>দর<input id="${key}Rate" type="number" min="0" step=".01"></label></div>${key==="feed"?feedChips("feedName"):""}<button class="add" onclick="addRow('${key}')">➕ যোগ করুন</button></div>
 <div class="section">${v[0]} টেবিল</div><div class="wrap"><table><thead><tr><th>তারিখ</th><th>${v[1]}</th><th>${v[2]}</th><th>দর</th><th>মোট</th><th>অ্যাকশন</th></tr></thead><tbody id="${key}Table"></tbody></table></div></section>`);
 }
 host.insertAdjacentHTML("beforeend",`<section id="sales" class="page"><div class="section">💰 বিক্রি হিসাব</div>
@@ -1206,7 +1148,7 @@ function reportData(){
  let rows=[
   {t:"sec",l:"💸 খরচ"},
   {l:"বাচ্চা ক্রয়",q:chicksN?fmt(chicksN,0)+" টি":"",a:c.chicks},
-  {l:"ফিড",a:c.feed},{l:"Medicine",a:c.medicine},{l:"কর্মচারী",a:c.workers},{l:"বিভিন্ন খরচ",a:c.other},{l:"কাঠের গুড়া",a:c.litter},{l:"পরিবহন ভাড়া",a:c.rent},
+  {l:"ফিড",a:c.feed},{l:"মেডিসিন",a:c.medicine},{l:"কর্মচারী",a:c.workers},{l:"বিভিন্ন খরচ",a:c.other},{l:"কাঠের গুড়া",a:c.litter},{l:"পরিবহন ভাড়া",a:c.rent},
   {t:"tot",l:"মোট খরচ",a:cost},
   {t:"sec",l:"💰 আয়"},
   {l:"মুরগি বিক্রি (পাইকারি)",q:whQ?fmt(whQ,0)+" টি • "+fmt(whW)+" কেজি":"",a:whA},
@@ -1464,7 +1406,7 @@ async function addOtherSale(type){
     Object.assign(rec,{bags:bags,loose:loose,bagKg:bagKg,qty:kg});
   }else{
     let qty=+v(c.qty).value||0;
-    if(!qty||!rate){showToast("❌ পরিমাণ ও দর দিন");return;}
+    if(!qty||!rate){showToast(type==="bag"?"❌ পিস ও প্রতি পিসের দাম দিন":"❌ পরিমাণ ও দর দিন");return;}
     rec.qty=qty;
     if(type==="chicken"){
       let pcs=Math.round(+v("os_cPcs").value||0);
@@ -1550,6 +1492,7 @@ function renderOtherSales(){
     tbl.innerHTML=rows.length?rows.map((r,i)=>{
       if(type==="feed"){let hb=r.bags!==undefined;return `<tr><td>${r.date||"—"}</td><td>${hb?fmt(r.bags,0)+" বস্তা":"—"}</td><td>${(hb?fmt(r.loose):fmt(r.qty))+" কেজি"}</td><td>${fmt(r.qty)} কেজি</td><td>${money(r.rate)}</td>${tot(r)}${buyer(r)}${acts(i)}</tr>`}
       if(type==="chicken")return `<tr><td>${r.date||"—"}</td><td>${r.pcs?fmt(r.pcs,0)+" টি":"—"}</td><td>${fmt(r.qty)} কেজি</td><td>${money(r.rate)}</td>${tot(r)}${buyer(r)}${acts(i)}</tr>`;
+      if(type==="bag")return `<tr><td>${r.date||"—"}</td><td>${fmt(r.qty,0)} পিস</td><td>${money(r.rate)}</td>${tot(r)}${buyer(r)}${acts(i)}</tr>`;
       return `<tr><td>${r.date||"—"}</td><td>${fmt(r.qty)} কেজি</td><td>${money(r.rate)}</td>${tot(r)}${buyer(r)}${acts(i)}</tr>`;
     }).join(""):`<tr><td colspan="${ncol}" class="empty">এখনও কোনো ${c.label} যোগ করা হয়নি</td></tr>`;
   });
@@ -1605,7 +1548,7 @@ function renderSummaries(){
  sumCards("notes",[["📝","মোট নোট",nt.length],["📅","সর্বশেষ নোট",lastDate(nt)]]);
  // রিপোর্ট
  let inc=bs.sales;
- sumCards("breakdown",[["🐣","বাচ্চা ক্রয়",money(chicks*(+state.chickPrice||0))],["🌾","ফিড",money(total("feed"))],["💊","Medicine",money(total("medicine"))],["👷","কর্মচারী",money(workersTotal())],["🧾","বিভিন্ন খরচ",money(total("other"))],["🪵","কাঠের গুড়া",money(total("litter"))],["🚚","পরিবহন ভাড়া",money(rentTotal())]]);
+ sumCards("breakdown",[["🐣","বাচ্চা ক্রয়",money(chicks*(+state.chickPrice||0))],["🌾","ফিড",money(total("feed"))],["💊","মেডিসিন",money(total("medicine"))],["👷","কর্মচারী",money(workersTotal())],["🧾","বিভিন্ন খরচ",money(total("other"))],["🪵","কাঠের গুড়া",money(total("litter"))],["🚚","পরিবহন ভাড়া",money(rentTotal())]]);
  sumCards("report",[["💵","মোট খরচ",money(bs.cost),"#fbbf24"],["💰","মোট আয়",money(inc),"#3ddc84"],[bs.profit>=0?"📈":"📉",bs.profit>=0?"নিট লাভ":"নিট ক্ষতি",money(bs.profit),bs.profit>=0?"#3ddc84":"#ff7070"],["🐔","প্রতি জীবিত মুরগি খরচ",alive?money(bs.cost/alive):"৳০"]]);
  // সব ব্যাচ
  let all=store.batches.map(batchSummary),tp=all.reduce((s,x)=>s+x.profit,0);
@@ -1615,7 +1558,7 @@ function renderSummaries(){
 
 // ── ড্যাশবোর্ড কার্ডে চাপলে সামারি ──
 const sumMeta={
- sales:{t:"🐔 বিক্রিত মুরগি",p:"sales"},feed:{t:"🌾 ফিড খরচ",p:"feed"},medicine:{t:"💊 Medicine",p:"medicine"},other:{t:"🧾 বিভিন্ন খরচ",p:"other"},litter:{t:"🪵 কাঠের গুড়া",p:"litter"},
+ sales:{t:"🐔 বিক্রিত মুরগি",p:"sales"},feed:{t:"🌾 ফিড খরচ",p:"feed"},medicine:{t:"💊 মেডিসিন",p:"medicine"},other:{t:"🧾 বিভিন্ন খরচ",p:"other"},litter:{t:"🪵 কাঠের গুড়া",p:"litter"},
  workers:{t:"👷 কর্মচারী",p:"workers"},rent:{t:"🚚 পরিবহন ভাড়া",p:"rent"},farm:{t:"🐣 বাচ্চার সামারি",p:"farm"},deaths:{t:"☠️ মৃত বাচ্চা",p:"deaths"},
  income:{t:"💰 মোট আয়",p:"sales",groups:["sales","othersales"],gh:["🐔 মুরগি বিক্রি","🛒 অন্যান্য বিক্রি"]},
  report:{t:"📊 লাভ-ক্ষতি",p:"report",groups:["report","breakdown"],gh:["📊 আয়-ব্যয়","💸 খরচের ভাগ"]}
@@ -1700,8 +1643,8 @@ function editSchema(kind,type,i){
  if(kind==="os"){
   let f=[T];
   if(type==="feed")f.push(["bags","বস্তা (সংখ্যা)","number"],["loose","আলাদা কেজি","number"],["bagKg","প্রতি বস্তায় কত কেজি","number"]);
-  else{if(type==="chicken")f.push(["pcs","মুরগির পিস","number"]);f.push(["qty",type==="chicken"?"মোট ওজন (কেজি)":"পরিমাণ (কেজি)","number"]);}
-  f.push(["rate","দর/কেজি (৳)","number"],["buyer","ক্রেতার নাম","text"]);
+  else{if(type==="chicken")f.push(["pcs","মুরগির পিস","number"]);f.push(["qty",type==="chicken"?"মোট ওজন (কেজি)":type==="bag"?"পরিমাণ (পিস)":"পরিমাণ (কেজি)","number"]);}
+  f.push(["rate",type==="bag"?"প্রতি পিসের দাম (৳)":"দর/কেজি (৳)","number"],["buyer","ক্রেতার নাম","text"]);
   return{title:osCfg[type].label,arr:state.otherSales[type],fields:f};
  }
  if(kind==="gift")return{title:"গিফট / নিজের খাওয়া",arr:state.gifts,fields:[T,["kind","ধরন","select"],["name","নাম","text"],["qty","মুরগির পিস","number"],["weight","মোট ওজন (কেজি)","number"]]};
@@ -2020,8 +1963,8 @@ function fitTitle(){
 
 function render(){renderDashboard();renderFarm();renderDeaths();renderWorkers();Object.keys(configs).forEach(renderTable);renderSales();renderLitterSales();renderLitterSalesPage();renderOtherSales();renderGifts();renderCustomers();renderRent();renderReport();renderBatchBar();renderBatchesPage();renderMedSchedule();renderNotes();renderVaccine();renderDailyFeed();renderSummaries();renderCloseBar()}
 makePages();
-const navItems=[["dashboard","🏠 ড্যাশবোর্ড"],["medschedule","💊 মেডিসিন শিডিউল"],["dailyfeed","🍽️ দৈনিক খাবার"],["notes","📝 নোট"],["vaccine","💉 ভ্যাকসিন"],["disease","⚠️ রোগ ঝুঁকি"],["analysis","📈 বিশ্লেষণ"],["checklist","✅ চেকলিস্ট"],["farm","🐣 বাচ্চা"],["deaths","☠️ মৃত বাচ্চা"],["feed","🌾 ফিড"],["medicine","💊 Medicine"],["workers","👷 কর্মচারী"],["other","🧾 বিভিন্ন খরচ"],["litter","🪵 কাঠের গুড়া"],["rent","🚚 পরিবহন ভাড়া"],["sales","💰 বিক্রি"],["othersales","🛒 অন্যান্য বিক্রি"],["customers","👥 ক্রেতা"],["report","📑 রিপোর্ট"],["batches","🗂️ সব ব্যাচ"]];
-const navColors={analysis:"linear-gradient(135deg,#0ea5e9,#0369a1)",checklist:"linear-gradient(135deg,#22c55e,#15803d)",disease:"linear-gradient(135deg,#f97316,#c2410c)",dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)"};
+const navItems=[["dashboard","🏠 ড্যাশবোর্ড"],["medschedule","💊 মেডিসিন শিডিউল"],["dailyfeed","🍽️ দৈনিক খাবার"],["notes","📝 নোট"],["vaccine","💉 ভ্যাকসিন"],["analysis","📈 বিশ্লেষণ"],["farm","🐣 বাচ্চা"],["deaths","☠️ মৃত বাচ্চা"],["feed","🌾 ফিড"],["medicine","💊 মেডিসিন"],["workers","👷 কর্মচারী"],["other","🧾 বিভিন্ন খরচ"],["litter","🪵 কাঠের গুড়া"],["rent","🚚 পরিবহন ভাড়া"],["sales","💰 বিক্রি"],["othersales","🛒 অন্যান্য বিক্রি"],["customers","👥 ক্রেতা"],["report","📑 রিপোর্ট"],["batchcmp","📊 ব্যাচ তুলনা"],["batches","🗂️ সব ব্যাচ"]];
+const navColors={envlog:"linear-gradient(135deg,#ef4444,#b45309)",batchcmp:"linear-gradient(135deg,#8b5cf6,#6d28d9)",analysis:"linear-gradient(135deg,#0ea5e9,#0369a1)",checklist:"linear-gradient(135deg,#22c55e,#15803d)",disease:"linear-gradient(135deg,#f97316,#c2410c)",dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)"};
 const navBtn=(x,i)=>{
   const grad=navColors[x[0]]||"linear-gradient(135deg,#1aad6e,#0d8050)";
   const isActive=i===0?"active":"";
@@ -2163,7 +2106,7 @@ function dzInit(){
  $z("dzTbody").innerHTML=DZ_PM.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("");
  dzChips();dzOrgans();dzToday();
 }
-window.dzRefresh=function(){dzInit();if(!$z("disease").classList.contains("active"))dzToday()};
+window.dzRefresh=function(){};
 dzInit();
 })();
 
@@ -2196,9 +2139,6 @@ window.dzTodayCard=function(){
  let dd=sumOf((state.deaths||[]).filter(r=>r.date===t),r=>r.qty),dt=deathTotal()||(+state.dead||0),ch=+state.chicks||0,rate=ch?dt/ch*100:0;
  if(dd>0)row("☠️","bad","আজ মৃত "+bn(dd)+" টি","মোট মৃত "+bn(dt)+" টি ("+fb(rate,1)+"%)"+(rate>5?" — হার বেশি, কারণ খুঁজুন":""),"deaths");
  else row("🐔","","আজ কোনো মৃত্যু যোগ করা হয়নি","মোট মৃত "+bn(dt)+" টি"+(ch?" ("+fb(rate,1)+"%)":"")+(rate>5?" — হার বেশি, কারণ খুঁজুন":""),"deaths");
- // রোগ ঝুঁকি
- let d35=Math.min(35,Math.max(1,age)),rk=window.dzRisk?dzRisk(d35):{hi:[],mid:[]};
- row("⚠️","","আজ ("+bn(age)+" দিন) বেশি ঝুঁকির রোগ:",`<span class="dzt-tags">${rk.hi.length?rk.hi.map(x=>"<i>"+x+"</i>").join(""):"বিশেষ বেশি ঝুঁকি নেই"}</span>`,"disease");
  // FCR
  let f=fcrStats();
  if(f.fcr)row("🎯",f.fcr<=f.tg?"good":"bad","FCR এখন "+fb(f.fcr,2)+" (টার্গেট "+fb(f.tg,2)+")",f.fcr<=f.tg?"টার্গেটের মধ্যে আছে":"টার্গেটের চেয়ে বেশি, ফিড বা ওজন দেখুন","dashboard");
@@ -2217,8 +2157,14 @@ window.dzTodayCard=function(){
 const bn=n=>Number(n).toLocaleString("bn-BD");
 const fb=(n,d)=>Number(n).toLocaleString("bn-BD",{maximumFractionDigits:d===undefined?2:d});
 const $a=id=>document.getElementById(id);
-const DEF_STD={0:42,7:185,14:480,21:940,28:1550,35:2250,42:2950};
 const STD_DAYS=[0,7,14,21,28,35,42];
+const DEF_STD={0:42,7:185,14:465,21:943,28:1524,35:2191,42:2857};
+const DEF_INT={0:13,7:39,14:75,21:117,28:158,35:193,42:220};
+function intakeAt(day){
+ let d=Math.max(0,Math.min(42,day));
+ for(let i=0;i<STD_DAYS.length-1;i++){let a=STD_DAYS[i],b=STD_DAYS[i+1];if(d>=a&&d<=b)return DEF_INT[a]+(DEF_INT[b]-DEF_INT[a])*(d-a)/(b-a)}
+ return DEF_INT[42];
+}
 const stdW=()=>Object.assign({},DEF_STD,state.stdWeights||{});
 function stdAt(day){
  let o=stdW(),d=Math.max(0,Math.min(42,day));
@@ -2240,7 +2186,7 @@ function feedInfo(){
  if(avg>0&&stock>0){
   flat=stock/avg;
   let rem=stock,d=0;left=60;
-  while(d<60){let u=avg*Math.pow(1.05,d+1);if(rem>=u){rem-=u;d++}else{left=d+rem/u;break}}
+  let a0=days(),ref=intakeAt(Math.max(1,a0-1));while(d<60){let u=avg*intakeAt(a0+d+1)/ref;if(rem>=u){rem-=u;d++}else{left=d+rem/u;break}}
  }else if(avg>0){left=0;flat=0}
  let lr=(state.feed||[]).filter(r=>+r.rate>0).slice(-1)[0];
  return{bought:bought,used:used,sold:sold,stock:stock,avg:avg,left:left,flat:flat,ratePerKg:lr?(+lr.rate)/bagKg():0};
@@ -2261,7 +2207,7 @@ function renderStock(){
  else if(f.left!==null&&f.left<=4)al='<div class="an-alert info">🔔 ফিড আর কয়েক দিনের। কেনার তারিখ ঠিক করুন।</div>';
  else if(f.left!==null)al='<div class="an-alert good">✅ ফিড আপাতত যথেষ্ট আছে।</div>';
  el.innerHTML='<div class="an-cards">'+cards.map(c=>'<div class="an-card"><span>'+c[0]+'</span><b>'+c[1]+'</b></div>').join("")+'</div>'+al+
-  '<div class="an-note">দিন দিন খাবার বাড়ে, তাই হিসাবে প্রতিদিন ৫% বেশি খাওয়া ধরা হয়েছে'+(f.flat!==null?" (একই পরিমাণ ধরলে "+fb(f.flat,1)+" দিন)":"")+'।</div>';
+  '<div class="an-note">দিন দিন খাবার বাড়ে, তাই হিসাবে Cobb 500-এর হারে প্রতিদিনের খাবার বাড়ছে ধরা হয়েছে'+(f.flat!==null?" (একই পরিমাণ ধরলে "+fb(f.flat,1)+" দিন)":"")+'।</div>';
 }
 
 // ── ২. ওজন নমুনা ও গ্রোথ চার্ট ──
@@ -2300,7 +2246,7 @@ function growthSvg(pts){
 function renderWeights(){
  let g=$a("anGrowth"),tb=$a("anWTable");if(!g||!tb)return;
  let pts=wPoints();
- let leg='<div class="an-leg"><span><i style="background:#86e3cc"></i>স্ট্যান্ডার্ড (আনুমানিক)</span><span><i style="background:#ff8a5c"></i>আপনার মুরগি</span></div>';
+ let leg='<div class="an-leg"><span><i style="background:#86e3cc"></i>Cobb 500 স্ট্যান্ডার্ড</span><span><i style="background:#ff8a5c"></i>আপনার মুরগি</span></div>';
  let verdict="";
  if(pts.length){
   let l=pts[pts.length-1],sg=stdAt(l.age),df=(l.g/sg-1)*100;
@@ -2339,7 +2285,7 @@ function renderProj(){
  let net=salesTotal()+otherSalesGrand()-costSoFar();
  let rows=[],extra=0,maxN=Math.min(7,Math.max(0,42-age));
  for(let n=0;n<=maxN;n++){
-  if(n>0)extra+=fi.avg*Math.pow(1.05,n)*frate;
+  if(n>0)extra+=fi.avg*intakeAt(age+n)/intakeAt(Math.max(1,age-1))*frate;
   let w=w0+(stdAt(age+n)-stdAt(age))/1000;
   let rev=live*w*rate;
   rows.push({n:n,age:age+n,w:w,rev:rev,extra:extra,profit:net+rev-extra});
@@ -2367,33 +2313,39 @@ function renderAnalysis(){
 
 // ── ৪. ড্যাশবোর্ডের ১৫ দিনের গ্রাফ ──
 function dayList(n){let a=[];for(let i=n-1;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);a.push(d.toLocaleDateString("en-CA"))}return a}
-function barSvg(vals,days,fmtv,color){
- const W=320,H=84,B=18,T=14,n=vals.length,gap=3,bw=(W-gap*(n-1))/n;
+function barSvg(vals,days,fmtv,color,unit){
+ const BW=22,gap=4,H=96,B=16,T=4,n=vals.length,W=Math.max(300,n*(BW+gap));
  let max=Math.max.apply(null,vals);
- if(!(max>0))return '<div class="an-note">গত ১৫ দিনে কোনো এন্ট্রি নেই।</div>';
- let o='<svg class="dzc-svg" viewBox="0 0 '+W+' '+H+'" role="img">';
+ if(!(max>0))return '<div class="an-note">এই ব্যাচে এখনও কোনো এন্ট্রি নেই।</div>';
+ let o='<div class="dzc-scroll"><svg class="dzc-svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img">';
  o+='<line x1="0" x2="'+W+'" y1="'+(H-B)+'" y2="'+(H-B)+'" stroke="#ffffff22"/>';
- vals.forEach((v,i)=>{let h=(H-B-T)*v/max,x=i*(bw+gap);if(v>0)o+='<rect x="'+x+'" y="'+(H-B-h)+'" width="'+bw+'" height="'+h+'" rx="2" style="fill:'+(i===n-1?"var(--dz3)":color)+'"><title>'+days[i]+': '+fmtv(v)+'</title></rect>'});
- o+='<text x="0" y="9">সর্বোচ্চ '+fmtv(max)+'</text>';
- let dd=d=>{let a=d.split("-");return bn(+a[2])+"/"+bn(+a[1])};
- o+='<text x="0" y="'+(H-4)+'">'+dd(days[0])+'</text><text x="'+W+'" y="'+(H-4)+'" text-anchor="end">আজ</text>';
- let lv=vals[n-1];if(lv>0)o+='<text x="'+W+'" y="9" text-anchor="end" style="fill:#86e3cc;font-weight:700">আজ '+fmtv(lv)+'</text>';
- return o+'</svg>';
+ let mo="";
+ vals.forEach((v,i)=>{
+  let h=Math.max(0,(H-B-T)*v/max),x=i*(BW+gap),a=days[i].split("-"),last=i===n-1;
+  if(v>0){
+   o+='<rect x="'+x+'" y="'+(H-B-h)+'" width="'+BW+'" height="'+h+'" rx="3" style="fill:'+(last?"var(--dz3)":color)+';fill-opacity:.28;stroke:'+(last?"var(--dz3)":color)+';stroke-width:1"><title>'+a[2]+'/'+a[1]+': '+fmtv(v)+'</title></rect>';
+   o+='<text class="dzc-val" transform="translate('+(x+BW/2+3.2)+','+(H-B-3)+') rotate(-90)">'+unit(v)+'</text>';
+  }
+  o+='<text x="'+(x+BW/2)+'" y="'+(H-4)+'" text-anchor="middle"'+(last?' style="fill:#86e3cc;font-weight:700"':'')+'>'+bn(+a[2])+'</text>';
+ });
+ return o+'</svg></div>';
 }
 function renderCharts(){
  let el=$a("dzCharts");if(!el)return;
  if(!state.startDate){el.innerHTML="";return}
- let ds=dayList(15),idx={};ds.forEach((d,i)=>idx[d]=i);
+ let all=dayList(70),si=all.indexOf(state.startDate),ds=si>=0?all.slice(si):all.slice(-60),idx={};ds.forEach((d,i)=>idx[d]=i);
  let feed=ds.map(()=>0),dead=ds.map(()=>0),cost=ds.map(()=>0);
  (state.dailyFeed||[]).forEach(r=>{if(r.date in idx)feed[idx[r.date]]+=dfKg(r)});
  (state.deaths||[]).forEach(r=>{if(r.date in idx)dead[idx[r.date]]+=+r.qty||0});
  ["feed","medicine","other","litter"].forEach(k=>(state[k]||[]).forEach(r=>{if(r.date in idx)cost[idx[r.date]]+=(+r.qty||0)*(+r.rate||0)}));
  (state.workers||[]).forEach(r=>{if(r.date in idx)cost[idx[r.date]]+=+r.amount||0});
  (state.rent||[]).forEach(r=>{if(r.date in idx)cost[idx[r.date]]+=+r.amt||0});
- el.innerHTML='<div class="form dzc-box"><div class="an-title" style="margin-bottom:2px">📉 গত ১৫ দিন</div>'+
-  '<div class="dzc-grp"><div class="dzc-t">🍽️ দৈনিক খাবার <span>কেজি</span></div>'+barSvg(feed,ds,v=>fb(v,1)+" কেজি","var(--dz2)")+'</div>'+
-  '<div class="dzc-grp"><div class="dzc-t">☠️ দৈনিক মৃত্যু <span>টি</span></div>'+barSvg(dead,ds,v=>bn(v)+" টি","#e0775a")+'</div>'+
-  '<div class="dzc-grp"><div class="dzc-t">🧾 দৈনিক খরচ <span>বাচ্চা কেনা বাদে</span></div>'+barSvg(cost,ds,v=>"৳"+fb(v,0),"var(--dz2)")+'</div></div>';
+ const f1=v=>{let r=Math.round(v*10)/10;return bn(r)};
+ el.innerHTML='<div class="form dzc-box"><div class="an-title" style="margin-bottom:2px">📉 পুরো ব্যাচের হিসাব <span class="dzc-sub">(নিচের সংখ্যা = তারিখ)</span></div>'+
+  '<div class="dzc-grp"><div class="dzc-t">🍽️ দৈনিক খাবার <span>কেজি • মোট '+fb(sumOf(feed,x=>x),1)+'</span></div>'+barSvg(feed,ds,v=>fb(v,1)+" কেজি","var(--dz2)",f1)+'</div>'+
+  '<div class="dzc-grp"><div class="dzc-t">☠️ দৈনিক মৃত্যু <span>টি • মোট '+bn(sumOf(dead,x=>x))+'</span></div>'+barSvg(dead,ds,v=>bn(v)+" টি","#e0775a",v=>bn(v))+'</div>'+
+  '<div class="dzc-grp"><div class="dzc-t">🧾 দৈনিক খরচ <span>যেদিন যত, বাচ্চা কেনা বাদে</span></div>'+barSvg(cost,ds,v=>"৳"+fb(v,0),"var(--dzt)",v=>"৳"+fb(v,0))+'</div></div>';
+ el.querySelectorAll(".dzc-scroll").forEach(d=>d.scrollLeft=d.scrollWidth);
 }
 
 // ── ৫. চেকলিস্ট ──
@@ -2428,7 +2380,149 @@ window.custTools=function(n,due){
   (p?'<a class="cust-call" href="tel:+'+p+'">📞 কল</a><a class="cust-wa" target="_blank" rel="noopener" href="https://wa.me/'+p+'?text='+encodeURIComponent(msg)+'">💬 WhatsApp</a>':"")+'</div>';
 };
 
-{const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderAnalysis();renderCharts();renderChecklist()}catch(e){console.error(e)}return r}}
+{const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderAnalysis();renderCharts()}catch(e){console.error(e)}return r}}
+})();
+
+// ══════ ব্যাচ তুলনা, ব্যাকআপ রিমাইন্ডার, ঘরের অবস্থা ══════
+(function(){
+const bn=n=>Number(n).toLocaleString("bn-BD");
+const fb=(n,d)=>Number(n).toLocaleString("bn-BD",{maximumFractionDigits:d===undefined?2:d});
+const tk=n=>(n<0?"−":"")+"৳"+fb(Math.abs(n),0);
+const $b=id=>document.getElementById(id);
+const S=(a,f)=>(a||[]).reduce((s,r)=>s+(+f(r)||0),0);
+
+// ── ব্যাচ তুলনা ──
+function bc(b){
+ let os=b.otherSales||{},sm=batchSummary(b);
+ let chicks=sm.chicks,dead=sm.dead;
+ let outQ=S(b.sales,r=>r.qty)+S(os.chicken,r=>r.pcs)+S(b.gifts,r=>r.qty);
+ let harv=S(b.sales,r=>r.weight)+S(os.chicken,r=>r.qty)+S(b.gifts,r=>r.weight);
+ let live=Math.max(0,chicks-dead-outQ),closed=b.status==="closed";
+ let feedKg=S(b.dailyFeed,dfKg),tw=harv+(closed?0:live*(+b.liveAvgWt||0));
+ let end=closed&&b.closedAt?b.closedAt:todayISO(),dur=null;
+ if(b.startDate){dur=Math.max(0,Math.round((new Date(end+"T00:00:00")-new Date(b.startDate+"T00:00:00"))/86400000))}
+ let alive=chicks-dead;
+ return{b:b,closed:closed,chicks:chicks,dead:dead,dur:dur,
+  mort:chicks?dead/chicks*100:null,
+  fcr:(feedKg>0&&tw>0)?feedKg/tw:null,
+  avgW:outQ>0?harv/outQ:null,
+  feedKg:feedKg,cost:sm.cost,sales:sm.sales,profit:sm.profit,
+  ppb:alive>0?sm.profit/alive:null,
+  cpk:harv>0?sm.cost/harv:null};
+}
+const BC_ROWS=[
+ ["🐣 বাচ্চা",m=>m.chicks?bn(m.chicks)+" টি":"—",null,null],
+ ["⏱️ সময়কাল",m=>m.dur===null?"—":bn(m.dur)+" দিন","dur",null],
+ ["☠️ মৃত্যুর হার",m=>m.mort===null?"—":fb(m.mort,1)+"%","mort","low"],
+ ["🎯 FCR",m=>m.fcr===null?"—":fb(m.fcr,2),"fcr","low"],
+ ["📏 গড় ওজন (বিক্রি)",m=>m.avgW===null?"—":fb(m.avgW,2)+" কেজি","avgW","high"],
+ ["🌾 মোট ফিড",m=>m.feedKg?fb(m.feedKg,0)+" কেজি":"—",null,null],
+ ["💸 মোট খরচ",m=>tk(m.cost),null,null],
+ ["💰 মোট আয়",m=>tk(m.sales),null,null],
+ ["📊 নিট লাভ",m=>tk(m.profit),"profit","high"],
+ ["🐔 প্রতি মুরগি লাভ",m=>m.ppb===null?"—":tk(m.ppb),"ppb","high"],
+ ["⚖️ কেজি প্রতি খরচ",m=>m.cpk===null?"—":tk(m.cpk),"cpk","low"]
+];
+function renderBatchCmp(){
+ let h=$b("bcHost");if(!h)return;
+ let bs=(store.batches||[]).slice(-8).map(bc);
+ if(!bs.length){h.innerHTML='<div class="hint">কোনো ব্যাচ নেই।</div>';return}
+ let maxAbs=Math.max.apply(null,bs.map(m=>Math.abs(m.profit)).concat([1]));
+ let bars=bs.map(m=>{let w=Math.abs(m.profit)/maxAbs*50;return '<div class="bc-bar"><span>'+esc(m.b.name)+'</span><div class="bc-track"><i style="left:'+(m.profit>=0?50:50-w)+'%;width:'+w+'%;background:'+(m.profit>=0?"#2f9e82":"#e0775a")+'"></i><i style="left:50%;width:1px;background:#ffffff40;height:100%"></i></div><b>'+tk(m.profit)+'</b></div>'}).join("");
+ let head='<tr><th></th>'+bs.map(m=>'<th><span class="bn">'+esc(m.b.name)+'</span><span class="bs">'+(m.closed?"সম্পন্ন":"চলমান")+'</span></th>').join("")+'</tr>';
+ let body=BC_ROWS.map(r=>{
+  let vals=bs.map(m=>r[2]?m[r[2]]:null);
+  let ok=vals.filter(v=>v!==null&&isFinite(v));
+  let best=null,worst=null;
+  if(r[3]&&ok.length>=2){best=r[3]==="low"?Math.min.apply(null,ok):Math.max.apply(null,ok);worst=r[3]==="low"?Math.max.apply(null,ok):Math.min.apply(null,ok);if(best===worst){best=null;worst=null}}
+  return '<tr><td>'+r[0]+'</td>'+bs.map((m,i)=>{let v=vals[i],c="";if(v!==null&&isFinite(v)){if(v===best)c="best";else if(v===worst)c="worst"}return '<td class="'+c+'">'+r[1](m)+'</td>'}).join("")+'</tr>';
+ }).join("");
+ let ms=bs.filter(m=>m.ppb!==null),top=ms.length>=2?ms.reduce((a,b)=>b.ppb>a.ppb?b:a):null;
+ let msg=bs.length<2?"তুলনার জন্য কমপক্ষে ২টি ব্যাচ লাগবে। এখন শুধু এই ব্যাচের সারাংশ দেখাচ্ছে। নতুন ব্যাচ শুরু করলে পাশাপাশি তুলনা আসবে।":(top?"প্রতি মুরগি সবচেয়ে বেশি লাভ: "+esc(top.b.name)+" ("+tk(top.ppb)+")।":"");
+ h.innerHTML='<div class="form an-box"><div class="an-title">📊 নিট লাভ (ব্যাচ অনুযায়ী)</div><div class="bc-bars">'+bars+'</div>'+(msg?'<div class="an-alert info" style="margin-top:8px">'+msg+'</div>':"")+'</div>'+
+  '<div class="form an-box"><div class="an-title">বিস্তারিত তুলনা</div><div class="bc-wrap"><table class="bc-tbl"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div>'+
+  '<div class="an-note">সবুজ ঘর সেরা, লালচে লেখা সবচেয়ে খারাপ। চলমান ব্যাচের লাভ, FCR ও গড় ওজন এখনো শেষ হয়নি, তাই সম্পন্ন ব্যাচের সাথে সরাসরি মেলানো যায় না। FCR-এর জন্য দৈনিক খাবারের হিসাব থাকতে হবে।</div></div>';
+}
+
+// ── ব্যাকআপ রিমাইন্ডার ──
+function hasData(){return (store.batches||[]).some(b=>(b.feed||[]).length||(b.sales||[]).length||(b.dailyFeed||[]).length||(b.deaths||[]).length||(b.medicine||[]).length||(b.workers||[]).length)}
+function renderBackup(){
+ let el=$b("dzBackup");if(!el)return;
+ let last=+store.lastBackup||0,now=Date.now(),snooze=+store.backupSnooze||0;
+ let ds=last?Math.floor((now-last)/86400000):null;
+ if(!hasData()||now<snooze||(last&&ds<7)){el.innerHTML="";return}
+ el.innerHTML='<div class="bk-card"><b>💾 ব্যাকআপ নেওয়ার সময়</b><p>'+(last?"শেষ ব্যাকআপ "+bn(ds)+" দিন আগে।":"এখনও ব্যাকআপ নেওয়া হয়নি।")+' ফোন হারালে বা অ্যাপ মুছলে সব হিসাব চলে যাবে। ব্যাকআপ ফাইলটা WhatsApp বা Drive-এ রেখে দিন।</p><div class="bk-btns"><button class="bk-go" type="button" onclick="backupData()">💾 ব্যাকআপ নিন</button><button class="bk-sh" type="button" onclick="backupShare()">📤 শেয়ার করুন</button><button class="bk-later" type="button" onclick="backupLater()">পরে</button></div></div>';
+}
+{const _b=window.backupData;window.backupData=function(){let r=_b.apply(this,arguments);store.lastBackup=Date.now();delete store.backupSnooze;save();renderBackup();return r}}
+window.backupLater=function(){store.backupSnooze=Date.now()+86400000;save();renderBackup()};
+window.backupShare=async function(){
+ try{
+  let d=new Date().toISOString().slice(0,10),f=new File([JSON.stringify(store,null,2)],"poultry-backup-"+d+".json",{type:"application/json"});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"ব্রাদার্স পোল্ট্রি ফার্ম ব্যাকআপ"});store.lastBackup=Date.now();delete store.backupSnooze;save();renderBackup();showToast("✅ ব্যাকআপ শেয়ার হয়েছে");return}
+ }catch(e){if(e&&e.name==="AbortError")return}
+ backupData();
+};
+
+// ── ঘরের অবস্থা ──
+const TGT=[[3,32,35],[7,30,33],[14,28,31],[21,26,29],[28,24,27],[99,21,26]];
+const tgtAt=a=>{for(const r of TGT){if(a<=r[0])return[r[1],r[2]]}return[21,26]};
+window.envAdd=function(){
+ let t=parseFloat($b("envTemp").value);
+ if(isNaN(t)){showToast("❌ তাপমাত্রা লিখুন");return}
+ state.env=state.env||[];
+ state.env.push({date:$b("envDate").value||todayISO(),slot:$b("envSlot").value,temp:t,hum:$b("envHum").value,litter:$b("envLitter").value,amm:$b("envAmm").value,note:$b("envNote").value.trim()});
+ state.env.sort((a,b)=>(a.date+a.slot).localeCompare(b.date+b.slot));
+ $b("envTemp").value="";$b("envHum").value="";$b("envNote").value="";$b("envLitter").selectedIndex=0;$b("envAmm").selectedIndex=0;
+ save();render();showToast("✅ ঘরের অবস্থা যোগ হয়েছে");
+};
+function judge(r){
+ let a=ageOn(r.date),msgs=[],bad=false;
+ if(a!==null){let[lo,hi]=tgtAt(a);
+  if(r.temp<lo){bad=true;msgs.push("তাপমাত্রা কম (লক্ষ্য "+bn(lo)+"–"+bn(hi)+"°C): হিটার বা পর্দা বাড়ান, ঠান্ডা বাতাস আটকান।")}
+  else if(r.temp>hi){bad=true;msgs.push("তাপমাত্রা বেশি (লক্ষ্য "+bn(lo)+"–"+bn(hi)+"°C): ফ্যান ও বাতাস চলাচল বাড়ান, ঠান্ডা পানি দিন"+(a>=14?"। গরমে হিটস্ট্রোক ও অ্যাসাইটিসের ঝুঁকি বাড়ে":"")+"।")}}
+ if(r.litter==="খুব ভেজা"){bad=true;msgs.push("লিটার খুব ভেজা: কক্সিডিওসিস ও অ্যামোনিয়ার ঝুঁকি। ভেজা অংশ সরিয়ে শুকনো লিটার দিন, পানির পাত্র ঠিক করুন।")}
+ else if(r.litter==="হালকা ভেজা")msgs.push("লিটার হালকা ভেজা: উল্টে দিয়ে শুকাতে দিন।");
+ if(r.amm==="বেশি"){bad=true;msgs.push("অ্যামোনিয়ার গন্ধ বেশি: সিআরডি ও চোখের সমস্যার ঝুঁকি। বাতাস চলাচল বাড়ান, লিটার বদলান।")}
+ return{bad:bad,msgs:msgs};
+}
+window.envToday=function(){
+ if(!state.startDate||state.status==="closed")return null;
+ let t=todayISO(),a=(state.env||[]).filter(r=>r.date===t);
+ if(!a.length)return{txt:"আজ ঘরের তাপমাত্রা লেখেননি",sub:"চাপলে তাপমাত্রা, লিটার ও গন্ধ যোগ করুন",cls:"bad"};
+ let l=a[a.length-1],j=judge(l);
+ return{txt:"ঘর: "+fb(l.temp,1)+"°C • লিটার "+esc(l.litter)+" • গন্ধ "+esc(l.amm),sub:j.bad?j.msgs[0]:"ঠিক আছে",cls:j.bad?"bad":"good"};
+};
+function envChart(a){
+ if(!a.length)return '<div class="an-note">এখনও কোনো রিডিং নেই।</div>';
+ let r=a.slice(-14),W=360,H=190,L=34,R=10,T=14,B=26,n=r.length;
+ let lo=[],hi=[];r.forEach(x=>{let a=ageOn(x.date),g=a===null?[21,26]:tgtAt(a);lo.push(g[0]);hi.push(g[1])});
+ let mn=Math.floor(Math.min.apply(null,r.map(x=>x.temp).concat(lo))-2),mx=Math.ceil(Math.max.apply(null,r.map(x=>x.temp).concat(hi))+2);
+ const X=i=>L+(n>1?(W-L-R)*i/(n-1):(W-L-R)/2),Y=v=>T+(H-T-B)*(1-(v-mn)/(mx-mn));
+ let o='<svg class="an-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="তাপমাত্রা রিডিং ও লক্ষ্য সীমা">';
+ let step=Math.max(1,Math.ceil((mx-mn)/5));for(let v=mn;v<=mx;v+=step)o+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#ffffff12"/><text x="'+(L-4)+'" y="'+(Y(v)+3)+'" text-anchor="end">'+bn(v)+'</text>';
+ if(n>1){let up=r.map((x,i)=>X(i)+","+Y(hi[i])).join(" "),dn=r.map((x,i)=>X(n-1-i)+","+Y(lo[n-1-i])).join(" ");o+='<polygon points="'+up+" "+dn+'" fill="#86e3cc" fill-opacity=".16"/>'}
+ else o+='<rect x="'+(X(0)-18)+'" y="'+Y(hi[0])+'" width="36" height="'+(Y(lo[0])-Y(hi[0]))+'" fill="#86e3cc" fill-opacity=".16"/>';
+ o+='<polyline points="'+r.map((x,i)=>X(i)+","+Y(x.temp)).join(" ")+'" fill="none" stroke="#ff8a5c" stroke-width="2"/>';
+ r.forEach((x,i)=>{let out=x.temp<lo[i]||x.temp>hi[i];o+='<circle cx="'+X(i)+'" cy="'+Y(x.temp)+'" r="'+(out?5:3.5)+'" fill="'+(out?"#ff8a5c":"#86e3cc")+'" stroke="#15222c" stroke-width="2"><title>'+esc(x.date)+' '+esc(x.slot)+': '+fb(x.temp,1)+'°C</title></circle>'});
+ let dl=i=>{let p=r[i].date.split("-");return bn(+p[2])+"/"+bn(+p[1])};
+ o+='<text x="'+X(0)+'" y="'+(H-8)+'" text-anchor="start">'+dl(0)+'</text>'+(n>1?'<text x="'+X(n-1)+'" y="'+(H-8)+'" text-anchor="end">'+dl(n-1)+'</text>':"")+'<text x="'+L+'" y="9">°C</text></svg>';
+ return '<div class="an-leg"><span><i style="background:#ff8a5c"></i>আপনার রিডিং</span><span><i style="background:#86e3cc;opacity:.5;height:9px;vertical-align:-1px"></i>লক্ষ্য সীমা</span></div>'+o;
+}
+function renderEnv(){
+ let t=$b("envTable");if(!t)return;
+ let d=$b("envDate");if(d&&!d.value)d.value=todayISO();
+ let a=state.env||[];
+ t.innerHTML=a.length?a.map((r,i)=>({r:r,i:i})).reverse().map(x=>{
+  let r=x.r,ag=ageOn(r.date),g=ag!==null?tgtAt(ag):null,out=g&&(r.temp<g[0]||r.temp>g[1]);
+  return '<tr><td>'+esc(r.date)+'</td><td>'+esc(r.slot)+'</td><td>'+(ag!==null?bn(ag)+" দিন":"—")+'</td><td style="'+(out?"color:#ff9d80;font-weight:700":"")+'">'+fb(r.temp,1)+'°C</td><td>'+(g?bn(g[0])+"–"+bn(g[1])+"°C":"—")+'</td><td>'+esc(r.litter||"")+'</td><td>'+esc(r.amm||"")+'</td><td><button class="del" onclick="del(\'env\','+x.i+')">মুছুন</button></td></tr>'}).join(""):'<tr><td colspan="8" class="empty">এখনও কোনো রিডিং নেই</td></tr>';
+ $b("envChart").innerHTML=envChart(a);
+ let st=$b("envStatus"),l=a.length?a[a.length-1]:null;
+ if(!l){st.innerHTML='<div class="env-st info"><b>এখনও কোনো রিডিং নেই</b>দিনে ২–৩ বার ঘরের তাপমাত্রা, লিটার ও গন্ধ লিখে রাখুন। রোগের আগেই সমস্যা ধরা পড়ে।</div>';return}
+ let j=judge(l),ag=ageOn(l.date);
+ st.innerHTML='<div class="env-st '+(j.bad?"bad":"good")+'"><b>শেষ রিডিং: '+esc(l.date)+' '+esc(l.slot)+' — '+fb(l.temp,1)+'°C'+(ag!==null?' (বয়স '+bn(ag)+' দিন, লক্ষ্য '+bn(tgtAt(ag)[0])+'–'+bn(tgtAt(ag)[1])+'°C)':'')+'</b>'+(j.msgs.length?j.msgs.map(m=>'• '+m).join("<br>"):"সব ঠিক আছে।")+'</div>';
+}
+
+{const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderBatchCmp();renderBackup()}catch(e){console.error(e)}return r}}
 })();
 ["renderMedSchedule","renderNotes","renderOtherSales"].forEach(n=>{const f=window[n];window[n]=function(){f.apply(this,arguments);renderSummaries()}});
 render();
