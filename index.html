@@ -460,7 +460,7 @@ header{background:linear-gradient(160deg,#03160e 0%,#06301f 45%,#0b5a38 100%)}
 header::before{content:'';position:absolute;inset:0;pointer-events:none;
  background:radial-gradient(420px 160px at 85% -20%,#fbbf2433,transparent 70%),radial-gradient(360px 160px at 0% 120%,#3ddc8433,transparent 70%)}
 header::after{content:'🌾';position:absolute;right:8px;bottom:-14px;font-size:70px;opacity:.07;transform:rotate(-12deg);pointer-events:none}
-.logo{background:linear-gradient(135deg,#34d399,#0d8050);animation:logoBob 3.2s ease-in-out infinite;box-shadow:0 6px 18px #0009,0 0 0 2px #ffffff22,0 0 22px #3ddc8455}
+.logo{background:linear-gradient(135deg,#34d399,#0d8050);box-shadow:0 6px 18px #0009,0 0 0 2px #ffffff22,0 0 22px #3ddc8455}
 @keyframes logoBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-3px) rotate(3deg)}}
 h1{background:linear-gradient(90deg,#fff,#b9f6d8 50%,#ffe9a8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 2px 6px #0008)}
 nav{background:linear-gradient(160deg,#03160eee,#0a4a2fee);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
@@ -484,22 +484,22 @@ nav{background:linear-gradient(160deg,#03160eee,#0a4a2fee);backdrop-filter:blur(
 .pg-banner::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:22px;pointer-events:none;opacity:.35;
  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 22' preserveAspectRatio='none'%3E%3Cpath d='M0 12 Q50 0 100 12 T200 12 T300 12 T400 12 V22 H0Z' fill='%23fff'/%3E%3C/svg%3E") center/100% 100% no-repeat}
 .pg-ico{position:relative;width:58px;height:58px;flex-shrink:0;border-radius:18px;display:grid;place-items:center;font-size:32px;
- background:#ffffff26;backdrop-filter:blur(6px);box-shadow:0 6px 16px #0004,0 0 0 1.5px #ffffff40 inset;animation:icoFloat 3.4s ease-in-out infinite}
+ background:#ffffff26;backdrop-filter:blur(6px);box-shadow:0 6px 16px #0004,0 0 0 1.5px #ffffff40 inset}
 @keyframes icoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .pg-tx{position:relative;min-width:0}
 .pg-tx b{display:block;font-size:20px;font-weight:800;line-height:1.2;text-shadow:0 2px 8px #0005}
 .pg-tx span{display:block;font-size:12px;opacity:.88;margin-top:3px}
 .pg-dots{position:absolute;right:12px;top:10px;display:flex;gap:4px;opacity:.55}
-.pg-dots i{width:6px;height:6px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
+.pg-dots i{width:6px;height:6px;border-radius:50%;background:#fff}
 .pg-dots i:nth-child(2){animation-delay:.3s}.pg-dots i:nth-child(3){animation-delay:.6s}
 
 /* ড্যাশবোর্ড হিরো */
-.db-hero{background:linear-gradient(135deg,#04271a 0%,#0a4a2f 45%,#12714a 100%);border:1px solid #2fbf7f66;border-radius:24px;padding:20px 18px 74px;
+.db-hero{background:linear-gradient(135deg,#04271a 0%,#0a4a2f 45%,#12714a 100%);border:1px solid #2fbf7f66;border-radius:24px;padding:20px 18px;
  box-shadow:0 14px 36px #0007,0 0 0 1px #ffffff12 inset,0 0 40px #1aad6e22}
 .db-hero::before{content:'';font-size:0;position:absolute;inset:0;opacity:1;background:
  radial-gradient(260px 160px at 100% 0%,#fbbf2430,transparent 70%),radial-gradient(240px 140px at 0% 100%,#3ddc8433,transparent 70%)}
 .db-hero-row{position:relative;z-index:2}
-.hero-scene{position:absolute;left:0;right:0;bottom:0;height:78px;pointer-events:none;z-index:1}
+.hero-scene{display:none!important;position:absolute;left:0;right:0;bottom:0;height:78px;pointer-events:none;z-index:1}
 .hero-scene svg{width:100%;height:100%;display:block;overflow:visible}
 .hero-scene{overflow:hidden;border-radius:0 0 24px 24px}
 .hs-sun{animation:sunPulse 4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
@@ -534,7 +534,6 @@ nav{background:linear-gradient(160deg,#03160eee,#0a4a2fee);backdrop-filter:blur(
 input,select,textarea{background:#0a131b;border:1px solid #ffffff1a;box-shadow:0 1px 0 #ffffff08 inset}
 input:focus,select:focus,textarea:focus{border-color:#34d399;box-shadow:0 0 0 3px #34d39922,0 0 18px #34d39922}
 .add{background:linear-gradient(135deg,#22c98a,#0d8050);box-shadow:0 8px 20px #0d805066,0 1px 0 #ffffff40 inset;position:relative;overflow:hidden;transition:transform .15s,box-shadow .2s}
-.add::after{content:'';position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,#ffffff44,transparent);transform:skewX(-20deg);animation:shine 4.2s ease-in-out infinite}
 @keyframes shine{0%,60%{left:-70%}100%{left:140%}}
 .add:hover{transform:translateY(-1px);box-shadow:0 12px 26px #0d805088}
 .add:active{transform:scale(.97)}
@@ -571,6 +570,15 @@ td:first-child{font-weight:600}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{.pg-banner,.hero-scene{display:none!important}.page.active,.card,.form,.wrap{animation:none!important}}
 @media(max-width:520px){.pg-tx b{font-size:18px}.pg-ico{width:50px;height:50px;font-size:28px}}
+
+.note-row{display:flex;align-items:center;gap:12px;background:linear-gradient(150deg,#1a2e3c,#13222d);border:1px solid #ffffff14;border-radius:16px;padding:12px 14px;margin-bottom:9px;cursor:pointer;box-shadow:0 6px 18px #0004;transition:transform .15s,border-color .15s}
+.note-row:hover{border-color:#34d39966}.note-row:active{transform:scale(.985)}
+.note-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:linear-gradient(135deg,#f59e0b44,#f59e0b18);flex-shrink:0}
+.note-mid{flex:1;min-width:0}
+.note-t{font-size:15px;font-weight:800;color:#e8f3ef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.note-pv{font-size:12px;color:#8fa6b0;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.note-d{font-size:11px;color:#7a9aaa;text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.note-d span{font-size:15px}
 </style>
 </head>
 <body>
@@ -661,7 +669,6 @@ td:first-child{font-weight:600}
 <!-- Flock -->
 <div id="dzBackup"></div>
 <div id="dzTodayCard"></div>
-<div id="dzCharts"></div>
 <div class="section">🐔 মুরগির অবস্থা</div>
 <div class="grid grid5">
   <div onclick="showSummary('farm')" class="card metric m-blue" style="--accent:#3d8bff20"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">📅</div></div><div class="lab">বয়স</div><div class="val" id="kAge">০ দিন</div></div>
@@ -977,7 +984,8 @@ td:first-child{font-weight:600}
 <label style="display:block;margin-top:9px">নোট বিস্তারিত<textarea id="noteText" rows="4" style="width:100%;padding:10px;border:1px solid #d6dfe5;border-radius:10px;margin-top:5px;font-size:14px;font-family:inherit;resize:vertical" placeholder="এখানে যেকোনো তথ্য, পর্যবেক্ষণ বা নির্দেশনা লিখুন..."></textarea></label>
 <button class="add" onclick="addNote()">➕ নোট সংরক্ষণ করুন</button>
 </div>
-<div class="section">নোটের তালিকা</div>
+<div class="section">নোটের তালিকা <span style="font-size:12px;color:#7a9aaa;font-weight:500">(শিরোনামে চাপলে পুরো নোট খুলবে)</span></div>
+<input id="noteSearch" type="search" placeholder="🔍 নোট খুঁজুন" oninput="renderNotes()" style="margin:0 0 10px">
 <div id="notesList"></div>
 </section>
 
@@ -1558,21 +1566,23 @@ function renderNotes(){
   if(el&&!el.value)el.value=new Date().toISOString().slice(0,10);
   let host=document.getElementById("notesList");
   if(!host)return;
-  let a=(state.notes||[]).slice().reverse();
-  if(!a.length){host.innerHTML=`<div class="hint">এখনও কোনো নোট যোগ করা হয়নি</div>`;return;}
-  host.innerHTML=a.map((r,ri)=>{
-    let i=(state.notes||[]).length-1-ri;
-    return `<div class="card" style="margin-bottom:10px;padding:14px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px">
-        <div>
-          <div style="font-size:11px;color:#687586;margin-bottom:4px">📅 ${r.date||"তারিখ নেই"}</div>
-          ${r.title?`<div style="font-size:15px;font-weight:900;color:#075d3d;margin-bottom:6px">📌 ${r.title}</div>`:""}
-          ${r.text?`<div style="font-size:13px;line-height:1.6;white-space:pre-wrap;color:#182230">${r.text}</div>`:""}
-        </div>
-        <div style="display:flex;gap:6px;flex-shrink:0"><button class="edt" onclick="openEdit('notes',${i})">✏️ এডিট</button><button class="del" onclick="delNote(${i})">মুছুন</button></div>
-      </div>
-    </div>`;
+  let all=state.notes||[];
+  let q=((document.getElementById("noteSearch")||{}).value||"").trim().toLowerCase();
+  let rows=all.map((r,i)=>({r:r,i:i})).reverse().filter(x=>!q||((x.r.title||"")+" "+(x.r.text||"")).toLowerCase().includes(q));
+  if(!all.length){host.innerHTML=`<div class="hint">এখনও কোনো নোট যোগ করা হয়নি</div>`;return;}
+  if(!rows.length){host.innerHTML=`<div class="hint">কিছু পাওয়া যায়নি</div>`;return;}
+  host.innerHTML=rows.map(x=>{
+    let r=x.r,t=(r.title||"").trim()||String(r.text||"").trim().split("\n")[0].slice(0,40)||"(শিরোনাম নেই)";
+    let pv=String(r.text||"").replace(/\s+/g," ").trim().slice(0,70);
+    return `<div class="note-row" onclick="openNote(${x.i})" role="button" tabindex="0"><div class="note-ic">📌</div><div class="note-mid"><div class="note-t">${esc(t)}</div>${pv?`<div class="note-pv">${esc(pv)}${String(r.text||"").length>70?"…":""}</div>`:""}</div><div class="note-d">${esc(r.date||"")}<span>👉</span></div></div>`;
   }).join("");
+}
+function openNote(i){
+  let r=(state.notes||[])[i];if(!r)return;
+  let t=(r.title||"").trim()||"📝 নোট";
+  document.getElementById("infoTitle").textContent="📌 "+t;
+  document.getElementById("infoBody").innerHTML=`<div style="font-size:12px;color:#7a9aaa;margin-bottom:10px">📅 ${esc(r.date||"তারিখ নেই")}</div><div style="font-size:15px;line-height:1.75;white-space:pre-wrap;word-break:break-word;color:#e8edf2;background:#0d1923;border:1px solid #ffffff14;border-radius:12px;padding:12px;max-height:55vh;overflow:auto">${r.text?esc(r.text):"<span style='color:#7a9aaa'>কোনো বিস্তারিত লেখা নেই</span>"}</div><div style="display:flex;gap:8px;margin-top:12px"><button class="edt" style="flex:1;padding:10px" onclick="closeInfo();openEdit('notes',${i})">✏️ এডিট</button><button class="del" style="flex:1;padding:10px" onclick="closeInfo();delNote(${i})">🗑️ মুছুন</button></div>`;
+  document.getElementById("infoModal").classList.add("show");
 }
 
 // ── অন্যান্য বিক্রি ──
@@ -2758,7 +2768,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
    wheat(30)+wheat(44)+wheat(360)+wheat(374)+hen(110,"a",.95)+hen(200,"b",1.05)+hen(285,"c",.9)+'</svg>';
   const d=document.createElement("div");d.className="hero-scene";d.innerHTML=svg;h.appendChild(d);
  }
- function run(){try{banners();scene()}catch(e){console.error(e)}}
+ function run(){try{banners()}catch(e){console.error(e)}}
  run();
  const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);run();return r};
 })();
