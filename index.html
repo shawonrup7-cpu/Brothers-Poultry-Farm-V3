@@ -579,6 +579,14 @@ td:first-child{font-weight:600}
 .note-pv{font-size:12px;color:#8fa6b0;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .note-d{font-size:11px;color:#7a9aaa;text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
 .note-d span{font-size:15px}
+
+.exp-jump{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.exp-jump button{border:1px solid #ffffff22;background:#ffffff0e;color:#d3f5e0;border-radius:20px;padding:7px 13px;font-size:12.5px;font-weight:700;font-family:inherit;cursor:pointer}
+.exp-jump button:active{transform:scale(.96)}
+.exp-sep{display:flex;align-items:center;gap:10px;margin:30px 0 4px}
+.exp-sep::before,.exp-sep::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,#34d39988,transparent)}
+.exp-sep span{font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,#1aad6e,#0d8050);border-radius:20px;padding:6px 16px;box-shadow:0 6px 16px #0d805055}
+#fcr{--dz0:#1b2b27}
 </style>
 </head>
 <body>
@@ -704,7 +712,7 @@ td:first-child{font-weight:600}
 <!-- Summary -->
 <div class="section">🎯 FCR ও গড় ওজন</div>
 <div class="grid" style="grid-template-columns:repeat(2,1fr)">
-  <div onclick="openFCR()" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">🎯</div></div><div class="lab">FCR (ফিড অনুযায়ী ওজন)</div><div class="val" id="kFcr">—</div></div>
+  <div onclick="openPage('fcr')" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">🎯</div></div><div class="lab">FCR (ফিড অনুযায়ী ওজন)</div><div class="val" id="kFcr">—</div></div>
   <div onclick="openAvgWeight()" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">⚖️</div></div><div class="lab">পুরো মুরগীর গড় ওজন</div><div class="val" id="kAvgW">—</div></div>
 </div>
 
@@ -958,6 +966,31 @@ td:first-child{font-weight:600}
 </div>
 </section>
 
+
+<section id="fcr" class="page">
+<div class="section">🤖 অ্যাপের তথ্য থেকে স্বয়ংক্রিয় FCR</div>
+<div class="form">
+<div class="an-note" style="margin:0 0 8px">FCR = মোট খাওয়ানো ফিড (কেজি) ÷ মোট মুরগির ওজন (কেজি)। যত কম, তত ভালো।</div>
+<div class="fields">
+<label>টার্গেট FCR<input id="fcTarget" type="number" min="0" step=".01" inputmode="decimal" oninput="fcAutoIn()"></label>
+<label>খামারে থাকা মুরগির আনুমানিক গড় ওজন (কেজি)<input id="fcLive" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 1.2" oninput="fcAutoIn()"></label>
+</div>
+<div id="fcAutoOut" style="margin-top:12px"></div>
+</div>
+<div class="section">✍️ নিজের মতো করে হিসাব (আপনি বসান)</div>
+<div class="form">
+<div class="an-note" style="margin:0 0 8px">নিচের ঘরে নিজের সংখ্যা বসান, সাথে সাথে FCR দেখাবে। এই হিসাব অ্যাপের ডেটায় জমা হয় না।</div>
+<div class="fields">
+<label>মোট ফিড (কেজি)<input id="fmFeed" type="number" min="0" step=".01" inputmode="decimal" oninput="fcManual()"></label>
+<label>মোট মুরগির ওজন (কেজি)<input id="fmWeight" type="number" min="0" step=".01" inputmode="decimal" placeholder="জানা থাকলে" oninput="fcManual()"></label>
+<label>অথবা: মুরগির সংখ্যা<input id="fmBirds" type="number" min="0" inputmode="numeric" oninput="fcManual()"></label>
+<label>প্রতি মুরগির গড় ওজন (কেজি)<input id="fmAvg" type="number" min="0" step=".001" inputmode="decimal" oninput="fcManual()"></label>
+<label>টার্গেট FCR<input id="fmTarget" type="number" min="0" step=".01" inputmode="decimal" value="1.6" oninput="fcManual()"></label>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="add" type="button" onclick="fcFill()">📥 অ্যাপের তথ্য বসান</button><button class="add" type="button" style="background:linear-gradient(135deg,#475569,#334155);box-shadow:none" onclick="fcClear()">🧹 ঘর মুছুন</button></div>
+<div id="fmOut" style="margin-top:12px"></div>
+</div>
+</section>
 
 <section id="batchcmp" class="page">
 <div class="section">📊 ব্যাচ তুলনা</div>
@@ -1772,8 +1805,9 @@ const sumMeta={
  report:{t:"📊 লাভ-ক্ষতি",p:"report",groups:["report","breakdown"],gh:["📊 আয়-ব্যয়","💸 খরচের ভাগ"]}
 };
 function openPage(id){
+ let _anc=null;if(id==="litter"){id="other";_anc="expLitter"}else if(id==="rent"){id="other";_anc="expRent"}
  let b=[...document.querySelectorAll(".nav")].find(x=>(x.getAttribute("onclick")||"").includes("go('"+id+"'"));
- if(b){go(id,b);window.scrollTo(0,0);b.scrollIntoView({inline:"center",block:"nearest"})}
+ if(b){go(id,b);window.scrollTo(0,0);b.scrollIntoView({inline:"center",block:"nearest"});if(_anc)setTimeout(()=>{let e=document.getElementById(_anc);if(e)e.scrollIntoView({block:"start"})},60)}
 }
 function showSummary(k){
  let m=sumMeta[k];if(!m)return;
@@ -2171,8 +2205,23 @@ function fitTitle(){
 
 function render(){renderDashboard();renderFarm();renderDeaths();renderWorkers();Object.keys(configs).forEach(renderTable);renderSales();renderLitterSales();renderLitterSalesPage();renderOtherSales();renderGifts();renderCustomers();renderRent();renderReport();renderBatchBar();renderBatchesPage();renderMedSchedule();renderNotes();renderVaccine();renderDailyFeed();renderSummaries();renderCloseBar()}
 makePages();
-const navItems=[["dashboard","🏠 ড্যাশবোর্ড"],["medschedule","💊 মেডিসিন শিডিউল"],["dailyfeed","🍽️ দৈনিক খাবার"],["notes","📝 নোট"],["vaccine","💉 ভ্যাকসিন"],["analysis","📈 বিশ্লেষণ"],["farm","🐣 বাচ্চা ও মৃত"],["feed","🌾 ফিড"],["medicine","💊 মেডিসিন"],["workers","👷 কর্মচারী"],["other","🧾 বিভিন্ন খরচ"],["litter","🪵 কাঠের গুড়া"],["rent","🚚 পরিবহন ভাড়া"],["sales","💰 বিক্রি"],["othersales","🛒 অন্যান্য বিক্রি"],["customers","👥 ক্রেতা"],["report","📑 রিপোর্ট"],["batchcmp","📊 ব্যাচ তুলনা"],["batches","🗂️ সব ব্যাচ"]];
-const navColors={envlog:"linear-gradient(135deg,#ef4444,#b45309)",batchcmp:"linear-gradient(135deg,#8b5cf6,#6d28d9)",analysis:"linear-gradient(135deg,#0ea5e9,#0369a1)",checklist:"linear-gradient(135deg,#22c55e,#15803d)",disease:"linear-gradient(135deg,#f97316,#c2410c)",dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)"};
+(function(){ // কাঠের গুড়া ও পরিবহন ভাড়া → বিভিন্ন খরচ পেজে
+ const host=document.getElementById("other");if(!host)return;
+ const bar=document.createElement("div");bar.className="exp-jump";
+ bar.innerHTML='<button type="button" onclick="expJump(\'expOther\')">🧾 বিভিন্ন খরচ</button><button type="button" onclick="expJump(\'expLitter\')">🪵 কাঠের গুড়া</button><button type="button" onclick="expJump(\'expRent\')">🚚 পরিবহন ভাড়া</button>';
+ host.insertBefore(bar,host.firstChild);
+ const first=document.createElement("div");first.id="expOther";host.insertBefore(first,bar.nextSibling);
+ [["litter","expLitter","🪵 কাঠের গুড়া"],["rent","expRent","🚚 পরিবহন ভাড়া"]].forEach(x=>{
+  const sec=document.getElementById(x[0]);if(!sec)return;
+  const w=document.createElement("div");w.id=x[1];w.className="exp-block";
+  w.innerHTML='<div class="exp-sep"><span>'+x[2]+'</span></div>';
+  while(sec.firstChild)w.appendChild(sec.firstChild);
+  host.appendChild(w);sec.remove();
+ });
+})();
+window.expJump=function(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:"smooth",block:"start"})};
+const navItems=[["dashboard","🏠 ড্যাশবোর্ড"],["medschedule","💊 মেডিসিন শিডিউল"],["dailyfeed","🍽️ দৈনিক খাবার"],["notes","📝 নোট"],["vaccine","💉 ভ্যাকসিন"],["analysis","📈 বিশ্লেষণ"],["fcr","🎯 FCR"],["farm","🐣 বাচ্চা ও মৃত"],["feed","🌾 ফিড"],["medicine","💊 মেডিসিন"],["workers","👷 কর্মচারী"],["other","🧾 বিভিন্ন খরচ"],["sales","💰 বিক্রি"],["othersales","🛒 অন্যান্য বিক্রি"],["customers","👥 ক্রেতা"],["report","📑 রিপোর্ট"],["batchcmp","📊 ব্যাচ তুলনা"],["batches","🗂️ সব ব্যাচ"]];
+const navColors={fcr:"linear-gradient(135deg,#3d8bff,#1a5fff)",envlog:"linear-gradient(135deg,#ef4444,#b45309)",batchcmp:"linear-gradient(135deg,#8b5cf6,#6d28d9)",analysis:"linear-gradient(135deg,#0ea5e9,#0369a1)",checklist:"linear-gradient(135deg,#22c55e,#15803d)",disease:"linear-gradient(135deg,#f97316,#c2410c)",dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)"};
 const navBtn=(x,i)=>{
   const grad=navColors[x[0]]||"linear-gradient(135deg,#1aad6e,#0d8050)";
   const isActive=i===0?"active":"";
@@ -2741,7 +2790,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
 
 // ══════ ✨ গ্রাফিক্স: পেজ ব্যানার ও ড্যাশবোর্ডের দৃশ্য ══════
 (function(){
- const SUB={farm:"বাচ্চা আসা, দাম আর মৃত্যুর হিসাব",feed:"ফিড কেনা ও খরচ",medicine:"মেডিসিনের খরচ",workers:"দৈনিক হাজিরা, প্রাপ্য ও নেওয়া টাকা",other:"বিভিন্ন খরচ",litter:"কাঠের গুড়ার খরচ",rent:"পরিবহন ভাড়া",sales:"মুরগি বিক্রি ও বাকি",othersales:"লিটার, খুচরা, বস্তা ও ফিড বিক্রি",customers:"ক্রেতাভিত্তিক হিসাব",medschedule:"রোজকার ওষুধের সময়সূচি",dailyfeed:"প্রতিদিন কত খাবার",notes:"দরকারি নোট",vaccine:"টিকার সময়সূচি",analysis:"ওজন, ফিড মজুত ও লাভের হিসাব",batchcmp:"পুরনো ব্যাচের সাথে তুলনা",report:"PDF ও Excel রিপোর্ট",batches:"সব ব্যাচ একনজরে"};
+ const SUB={farm:"বাচ্চা আসা, দাম আর মৃত্যুর হিসাব",feed:"ফিড কেনা ও খরচ",medicine:"মেডিসিনের খরচ",workers:"দৈনিক হাজিরা, প্রাপ্য ও নেওয়া টাকা",other:"বিভিন্ন খরচ, কাঠের গুড়া ও পরিবহন ভাড়া",litter:"কাঠের গুড়ার খরচ",rent:"পরিবহন ভাড়া",sales:"মুরগি বিক্রি ও বাকি",othersales:"লিটার, খুচরা, বস্তা ও ফিড বিক্রি",customers:"ক্রেতাভিত্তিক হিসাব",medschedule:"রোজকার ওষুধের সময়সূচি",dailyfeed:"প্রতিদিন কত খাবার",notes:"দরকারি নোট",vaccine:"টিকার সময়সূচি",analysis:"ওজন, ফিড মজুত ও লাভের হিসাব",batchcmp:"পুরনো ব্যাচের সাথে তুলনা",fcr:"স্বয়ংক্রিয় হিসাব + নিজের মতো করে হিসাব",report:"PDF ও Excel রিপোর্ট",batches:"সব ব্যাচ একনজরে"};
  const FALL=["#1aad6e","#0d8050"];
  function grad(id){const g=(typeof navColors!=="undefined"&&navColors[id])||"";const m=g.match(/#[0-9a-fA-F]{3,8}/g);return m&&m.length>=2?m:FALL}
  function banners(){
@@ -2771,6 +2820,60 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
  function run(){try{banners()}catch(e){console.error(e)}}
  run();
  const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);run();return r};
+})();
+
+// ══════ 🎯 FCR পেজ ══════
+(function(){
+ const bnx=n=>Number(n).toLocaleString("bn-BD");
+ const f1=(n,d)=>Number(n).toLocaleString("bn-BD",{minimumFractionDigits:d===undefined?0:d,maximumFractionDigits:d===undefined?2:d});
+ const card=(i,l,v,c)=>'<div class="sc"><div class="sci">'+i+'</div><div><div class="scl">'+l+'</div><div class="scv"'+(c?' style="color:'+c+'"':'')+'>'+v+'</div></div></div>';
+ const el=id=>document.getElementById(id);
+ function verdict(fcr,tg){return fcr<=tg?'<div class="fcr-verdict good">✅ FCR টার্গেটের মধ্যে আছে ('+f1(fcr,2)+' ≤ '+f1(tg,2)+')</div>':'<div class="fcr-verdict bad">⚠️ FCR টার্গেটের চেয়ে বেশি ('+f1(fcr,2)+' > '+f1(tg,2)+') — ফিড বেশি লাগছে বা ওজন কম</div>'}
+ window.fcAutoIn=function(){
+  state.targetFCR=+el("fcTarget").value||0;state.liveAvgWt=+el("fcLive").value||0;save();fcAuto();
+ };
+ function fcAuto(){
+  const out=el("fcAutoOut");if(!out)return;
+  const f=fcrStats();
+  if(!(f.feed>0)){out.innerHTML='<div class="warnbox">⚠️ এখনও দৈনিক খাবারের কোনো হিসাব নেই। "🍽️ দৈনিক খাবার" পেজে প্রতিদিনের খাবার যোগ করুন।</div>';return}
+  const pn=f.birds?f.need/f.birds:0,pw=f.birds&&f.tw?f.tw/f.birds:0;
+  let h='<div class="pgsum">'+card("🍽️","মোট খাওয়ানো ফিড",f1(f.feed)+" কেজি","#fbbf24")+card("📦","মোট ওজন",f1(f.tw)+" কেজি")+card("🎯","টার্গেট FCR",f1(f.tg,2))+card("📊","বাস্তব FCR",f.fcr?f1(f.fcr,2):"—",f.fcr?(f.fcr<=f.tg?"#3ddc84":"#ff7070"):"")+card("⚖️","ফিড অনুযায়ী দরকারি ওজন",f1(f.need)+" কেজি","#70b8ff")+card("🐔","দরকারি গড় ওজন/মুরগি",f.birds?f1(pn,2)+" কেজি":"—","#70b8ff")+card("📏","এখন গড় ওজন/মুরগি",pw?f1(pw,2)+" কেজি":"—")+card("🐣","জীবিত মুরগি (মোট)",bnx(f.birds)+" টি")+'</div>';
+  h+='<div style="font-size:11.5px;color:#7a9aaa;margin-top:8px;line-height:1.7">📦 মোট ওজন = বিক্রি/খুচরা/গিফট/বাসায় খাওয়া '+f1(f.harv)+' কেজি + খামারের '+bnx(f.live)+' টি মুরগি (আনুমানিক '+f1(f.liveW)+' কেজি)</div>';
+  if(f.live>0&&!f.la)h+='<div class="warnbox">ℹ️ খামারে '+bnx(f.live)+' টি মুরগি আছে কিন্তু তাদের গড় ওজন দেওয়া নেই, তাই FCR বেশি দেখাচ্ছে। উপরের ঘরে আনুমানিক গড় ওজন দিন।</div>';
+  if(f.fcr)h+=verdict(f.fcr,f.tg);
+  out.innerHTML=h;
+ }
+ window.fcManual=function(){
+  const out=el("fmOut");if(!out)return;
+  const g=id=>+el(id).value||0;
+  const feed=g("fmFeed"),birds=Math.round(g("fmBirds")),avg=g("fmAvg"),tg=g("fmTarget");
+  let tw=g("fmWeight"),src="";
+  if(tw>0)src="আপনার দেওয়া মোট ওজন";else if(birds>0&&avg>0){tw=birds*avg;src=bnx(birds)+" টি × "+f1(avg,3)+" কেজি"}
+  if(!(feed>0)||!(tw>0)){out.innerHTML='<div class="an-note">মোট ফিড আর (মোট ওজন, অথবা মুরগির সংখ্যা ও গড় ওজন) বসান।</div>';return}
+  const fcr=feed/tw;
+  let h='<div class="pgsum">'+card("🍽️","মোট ফিড",f1(feed)+" কেজি","#fbbf24")+card("📦","মোট ওজন",f1(tw)+" কেজি")+card("📊","FCR",f1(fcr,2),tg>0?(fcr<=tg?"#3ddc84":"#ff7070"):"");
+  if(tg>0){const need=feed/tg;h+=card("🎯","টার্গেট FCR",f1(tg,2))+card("⚖️","ফিড অনুযায়ী দরকারি ওজন",f1(need)+" কেজি","#70b8ff")+card("🧮","এই ওজনে ফিড লাগত",f1(tw*tg)+" কেজি");if(birds>0)h+=card("🐔","দরকারি গড়/মুরগি",f1(need/birds,2)+" কেজি","#70b8ff")}
+  h+='</div><div style="font-size:11.5px;color:#7a9aaa;margin-top:8px;line-height:1.7">হিসাব: '+f1(feed)+' ÷ '+f1(tw)+(src?' ('+src+')':'')+' = <b style="color:#e8edf2">'+f1(fcr,2)+'</b></div>';
+  if(tg>0)h+=verdict(fcr,tg);
+  out.innerHTML=h;
+ };
+ window.fcFill=function(){
+  const f=fcrStats();
+  el("fmFeed").value=f.feed?Math.round(f.feed*100)/100:"";
+  el("fmWeight").value=f.tw?Math.round(f.tw*100)/100:"";
+  el("fmBirds").value=f.birds||"";el("fmAvg").value="";
+  el("fmTarget").value=f.tg||1.6;fcManual();
+ };
+ window.fcClear=function(){["fmFeed","fmWeight","fmBirds","fmAvg"].forEach(i=>el(i).value="");el("fmTarget").value=1.6;fcManual()};
+ function renderFcrPage(){
+  if(!el("fcTarget"))return;
+  const a=document.activeElement;
+  if(a!==el("fcTarget"))el("fcTarget").value=+state.targetFCR||1.6;
+  if(a!==el("fcLive"))el("fcLive").value=+state.liveAvgWt||"";
+  fcAuto();fcManual();
+ }
+ renderFcrPage();
+ const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderFcrPage()}catch(e){console.error(e)}return r};
 })();
 </script>
 </body></html>
