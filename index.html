@@ -1182,10 +1182,13 @@ function saveFarm(){state.startDate=fDate.value;state.chicks=+fChicks.value||0;s
 function addDeath(){
  let q=+deathQty.value||0;if(q<=0)return;
  state.deaths=state.deaths||[];
- state.deaths.push({date:deathDate.value||todayISO(),qty:q,reason:deathReason.value,action:deathAction.value,note:""});
+ let drec={date:deathDate.value||todayISO(),qty:q,reason:deathReason.value.trim(),action:deathAction.value.trim(),note:""};
+ let dex=state.deaths.find(r=>r.date===drec.date);
+ if(dex)deathMergeInto(dex,drec);else state.deaths.push(drec);
  state.dead=deathTotal();deathQty.value="";deathReason.value="";deathAction.value="";save();render();
 }
 function renderDeaths(){
+ deathDedupe();
  let a=state.deaths||[];
  deathTable.innerHTML=a.length?a.map((r,i)=>`<tr><td>${r.date||""}</td><td>${r.qty}</td><td>${r.reason||""}</td><td>${r.action||""}</td><td style="white-space:nowrap"><button class="edt" onclick="openEdit('deaths',${i})">✏️</button><button class="del" onclick="del('deaths',${i})">মুছুন</button></td></tr>`).join(""):`<tr><td colspan="5" class="empty">এখনও মৃত বাচ্চার কোনো তথ্য যোগ করা হয়নি</td></tr>`;
 }
@@ -2110,6 +2113,29 @@ function dfLive(){
  let d=v("dfDate").value||todayISO(),al=aliveOn(d),ag=ageOn(d);
  el.innerHTML="🍽️ মোট খাবার: <b>"+fmt(kg)+" কেজি</b>"+(ag!==null?" • ⏱️ বয়স: <b>"+ag+" দিন</b>":"")+(kg&&al?" • 🐔 প্রতি মুরগি: <b>"+fmt(kg*1000/al,1)+" গ্রাম</b>":"");
 }
+
+// ── একই তারিখের এন্ট্রি যোগ করে এক সারি ──
+function _joinTxt(a,b){a=(a||"").trim();b=(b||"").trim();if(!b)return a;if(!a)return b;return a.toLowerCase().split(/\s*[,|]\s*/).includes(b.toLowerCase())?a:a+", "+b}
+function dfMergeInto(t,n){
+ let kg=dfKg(t)+dfKg(n);
+ if((+t.bags||0)===0||(+n.bags||0)===0||(+t.bagKg||0)===(+n.bagKg||0)){
+  t.bagKg=(+t.bags>0?+t.bagKg:(+n.bags>0?+n.bagKg:(+t.bagKg||+n.bagKg||0)));
+  t.bags=(+t.bags||0)+(+n.bags||0);t.loose=(+t.loose||0)+(+n.loose||0);
+ }else{t.bags=0;t.loose=kg}
+ t.note=_joinTxt(t.note,n.note);
+}
+function dfKey(r){return (r.date||"")+"|"+String(r.name||"").trim().toLowerCase()}
+function dfDedupe(){
+ let a=state.dailyFeed||[],out=[],by={},ch=false;
+ a.forEach(r=>{let k=dfKey(r);if(r.date&&by[k]){dfMergeInto(by[k],r);ch=true}else{out.push(r);if(r.date)by[k]=r}});
+ if(ch){state.dailyFeed=out;save()}
+}
+function deathMergeInto(t,n){t.qty=(+t.qty||0)+(+n.qty||0);t.reason=_joinTxt(t.reason,n.reason);t.action=_joinTxt(t.action,n.action);t.note=_joinTxt(t.note,n.note)}
+function deathDedupe(){
+ let a=state.deaths||[],out=[],by={},ch=false;
+ a.forEach(r=>{if(r.date&&by[r.date]){deathMergeInto(by[r.date],r);ch=true}else{out.push(r);if(r.date)by[r.date]=r}});
+ if(ch){state.deaths=out;state.dead=deathTotal();save()}
+}
 function addDailyFeed(){
  let v=id=>document.getElementById(id);
  let name=v("dfName").value.trim(),bags=+v("dfBags").value||0,loose=+v("dfLoose").value||0,bagKg=+v("dfBagKg").value||0;
@@ -2117,12 +2143,15 @@ function addDailyFeed(){
  if(bags>0&&!(bagKg>0)){showToast("❌ প্রতি বস্তায় কত কেজি তা দিন");return}
  if(bags*bagKg+loose<=0){showToast("❌ খাবারের পরিমাণ দিন");return}
  state.dailyFeed=state.dailyFeed||[];
- state.dailyFeed.push({date:v("dfDate").value||todayISO(),name:name,bags:bags,loose:loose,bagKg:bagKg,note:v("dfNote").value.trim()});
+ let rec={date:v("dfDate").value||todayISO(),name:name,bags:bags,loose:loose,bagKg:bagKg,note:v("dfNote").value.trim()};
+ let ex=state.dailyFeed.find(r=>dfKey(r)===dfKey(rec)),merged=false;
+ if(ex){dfMergeInto(ex,rec);merged=true}else state.dailyFeed.push(rec);
  v("dfName").value="";syncChips("dfName");v("dfBags").value="";v("dfLoose").value="";v("dfNote").value="";dfLive();
- save();render();showToast("✅ দৈনিক খাবারের হিসাব সংরক্ষণ হয়েছে");
+ save();render();showToast(merged?"✅ এই তারিখের আগের এন্ট্রির সাথে যোগ হয়েছে — মোট "+fmt(dfKg(ex))+" কেজি":"✅ দৈনিক খাবারের হিসাব সংরক্ষণ হয়েছে");
 }
 function renderDailyFeed(){
  let tb=document.getElementById("dfTable");if(!tb)return;
+ dfDedupe();
  let d=document.getElementById("dfDate");if(d&&!d.value)d.value=todayISO();
  let ch=document.getElementById("dfChips");if(ch)ch.innerHTML=chipBtns("dfName",document.getElementById("dfName").value.trim());
  let a=state.dailyFeed||[],tot=sumOf(a,dfKg),t=todayISO();
