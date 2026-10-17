@@ -1,13 +1,14 @@
 // Brothers Poultry Farm V3 - offline service worker
 // App update dile CACHE_NAME-er number bariye dao (v3-8 -> v3-9)
-const CACHE_NAME = "brothers-poultry-v3-25";
+const CACHE_NAME = "brothers-poultry-v3-26";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
-  "./icon-maskable-512.png"
+  "./icon-maskable-512.png",
+  "./logo.png"
 ];
 
 self.addEventListener("install", (e) => {
