@@ -3287,7 +3287,9 @@ window.reportOut=async function(kind,mode){
  function loadLogo(){return new Promise(res=>{let im=new Image();let el=document.querySelector(".logo-img");if(!el){res(null);return}im.onload=()=>res(im);im.onerror=()=>res(null);im.src=el.src})}
  async function draw(r,idx){
   try{await document.fonts.ready}catch(e){}
-  const W=760,H=1040,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  const W=760,PL0=r.pallas||[],PLS=Math.min(PL0.length,20),PLR=Math.min(10,PLS);
+  const yDue=345+58*4+(PL0.length?10+14+PLR*34+(PL0.length>20?34:0)+40:0)+30+70+62;
+  const H=Math.max(1040,yDue+240),c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
   const F="'Hind Siliguri','Noto Sans Bengali',sans-serif";
   x.fillStyle="#fff";x.fillRect(0,0,W,H);
   // হেডার
@@ -3305,11 +3307,13 @@ window.reportOut=async function(kind,mode){
   rows.forEach((rw,i)=>{if(i%2===0){x.fillStyle="#f3faf6";x.fillRect(40,y-38,W-80,58)}x.fillStyle="#445";x.font="500 26px "+F;x.textAlign="left";x.fillText(rw[0],56,y);x.fillStyle="#111";x.font="700 26px "+F;x.textAlign="right";x.fillText(rw[1],W-56,y);y+=58});
   x.textAlign="left";
   // পাল্লা
-  let pl=r.pallas||[];
+  let pl=PL0;
   if(pl.length){y+=10;x.fillStyle="#0a4a2f";x.font="700 22px "+F;x.fillText("পাল্লা অনুযায়ী",56,y);y+=14;
-   pl.slice(0,8).forEach((p,i)=>{y+=34;x.fillStyle="#556";x.font="500 21px "+F;x.fillText("পাল্লা "+bn(i+1)+": "+bn(p.qty)+" টি, "+fb(p.weight)+" কেজি",72,y)});
-   if(pl.length>8){y+=34;x.fillText("... আরও "+bn(pl.length-8)+" টি পাল্লা",72,y)}
-   y+=14}
+   x.fillStyle="#556";x.font="500 21px "+F;
+   pl.slice(0,20).forEach((p,i)=>{let col=i<10?0:1,row=i%10;x.fillText("পাল্লা "+bn(i+1)+": "+bn(p.qty)+" টি, "+fb(p.weight)+" কেজি",col?(W/2+10):56,y+(row+1)*34)});
+   y+=PLR*34;
+   if(pl.length>20){y+=34;x.fillText("... আরও "+bn(pl.length-20)+" টি পাল্লা (মোট "+bn(pl.length)+" টি)",56,y)}
+   y+=40}
   y+=30;
   // মোট
   x.fillStyle="#0a4a2f";x.fillRect(40,y-40,W-80,70);x.fillStyle="#fff";x.font="700 30px "+F;x.fillText("মোট টাকা",60,y+6);x.textAlign="right";x.fillText("৳"+fb(tot,0),W-60,y+6);x.textAlign="left";y+=70;
