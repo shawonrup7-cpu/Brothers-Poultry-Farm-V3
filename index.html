@@ -611,6 +611,34 @@ td:first-child{font-weight:600}
 .sp-line{margin-top:10px}
 .logo-img{width:62px;height:62px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 3px 8px #0009)}
 .rp-logo{display:block;width:96px;height:96px;object-fit:contain;margin:0 auto 6px}
+
+.pa-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 10px}
+.pa-card{background:#ffffff0d;border:1px solid #ffffff1a;border-radius:12px;padding:10px 12px;min-width:0}
+.pa-t{font-size:12px;color:#8fb1a0}.pa-v{font-size:20px;font-weight:800;margin-top:2px}.pa-s{font-size:11px;color:#7a9aaa;margin-top:2px}
+.pa-bar{display:flex;height:14px;border-radius:8px;overflow:hidden;margin:10px 0 8px;background:#ffffff14}.pa-bar i{display:block;height:100%}
+.pa-row{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:5px 0;border-bottom:1px dashed #ffffff14}.pa-row em{color:#ffd070;font-style:normal;margin-left:4px}
+.pa-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.pa-sub{font-weight:700;margin:14px 0 4px}
+
+.gl-row{margin:8px 0}.gl-h{display:flex;justify-content:space-between;gap:8px;font-size:13.5px}.gl-h em{font-style:normal;font-size:12.5px;color:#8fb1a0}
+.gl-bar{flex:1;height:9px;border-radius:6px;background:#ffffff14;overflow:hidden;margin-top:5px}.gl-bar i{display:block;height:100%;border-radius:6px}
+.gl-s{font-size:11.5px;color:#7a9aaa;margin-top:3px}
+.mt-row{display:grid;grid-template-columns:130px 1fr 90px;gap:8px;align-items:center;font-size:12.5px;margin:6px 0}.mt-row .gl-bar{margin:0}.mt-row b{text-align:right}.mt-row small{color:#ffd070;font-weight:400}
+
+.ms-hero{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin:0 0 10px;padding:10px 14px;border-radius:16px;background:linear-gradient(135deg,#0d7a4a,#0a4a8f 60%,#4f46e5);box-shadow:0 8px 22px #0006,inset 0 0 0 1px #ffffff22}
+.ms-hero-t{display:flex;gap:10px;align-items:center}.ms-hero-t b{font-size:17px;display:block}.ms-hero-t small{font-size:11.5px;color:#cfe6ff;display:block;margin-top:2px}
+.ms-pill-ico{font-size:26px;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#ffffff22}
+.ms-hero-r{text-align:right;font-size:12.5px}.ms-age b{color:#ffd0d0;font-size:15px}.ms-prog{margin-top:4px;color:#cfe}.ms-pb{height:6px;border-radius:5px;background:#ffffff30;margin-top:4px;overflow:hidden;min-width:110px}.ms-pb i{display:block;height:100%;background:linear-gradient(90deg,#3ddc84,#fbbf24);border-radius:5px}
+.ms-form{padding:12px}.ms-top{display:flex;gap:8px;align-items:flex-end;margin-bottom:8px}.ms-top label{flex:1;margin:0}.ms-copy{border:1px solid #ffffff2a;background:#ffffff12;color:#cfe;border-radius:10px;padding:10px 12px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.ms-slot{border-left:4px solid var(--c);background:#ffffff08;border-radius:12px;padding:8px 10px;margin-bottom:8px}.ms-sh{font-weight:700;font-size:13px;color:var(--c);margin-bottom:6px}
+.ms-g{display:grid;grid-template-columns:1.2fr 1fr;gap:6px}.ms-slot input{padding:8px 10px;font-size:13.5px;min-width:0;width:100%}.ms-note{margin-top:6px;font-size:12px!important;opacity:.85}
+.ms-day{border-radius:14px;padding:10px;margin-bottom:10px;background:linear-gradient(160deg,#ffffff0d,#ffffff05);border:1px solid #ffffff14}.ms-day.today{border-color:#3ddc8499;box-shadow:0 0 0 1px #3ddc8444,0 6px 18px #0005}
+.ms-dh{display:flex;align-items:center;gap:8px;margin-bottom:8px}.ms-dd{font-weight:700;font-size:13.5px}.ms-da{font-size:11.5px;background:#ff5b5b26;color:#ffb0b0;border-radius:20px;padding:2px 9px;font-weight:700}.ms-ac{margin-left:auto;display:flex;gap:4px}
+.ms-pls{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.ms-pl{display:flex;gap:8px;align-items:center;border-radius:12px;padding:8px 10px;cursor:pointer;background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);transition:transform .15s}
+.ms-pl:active{transform:scale(.97)}.ms-pl.done{opacity:.72;background:#3ddc8420;border-color:#3ddc8488}.ms-pl.done .ms-pt b{text-decoration:line-through}
+.ms-pi{font-size:20px}.ms-pt{min-width:0}.ms-pt b{display:block;font-size:13.5px;word-break:break-word}.ms-pt small{display:block;font-size:11.5px;color:#9fb;opacity:.85;word-break:break-word}
+.ms-none,.ms-empty{color:#7a9aaa;font-size:12.5px;text-align:center;padding:8px}.ms-empty{padding:28px;font-size:14px;line-height:2;border:1px dashed #ffffff22;border-radius:14px}
 </style>
 </head>
 <body>
@@ -643,6 +671,7 @@ td:first-child{font-weight:600}
 <button class="tbtn" onclick="newBatch()">➕ নতুন ব্যাচ</button>
 <button class="tbtn" title="ব্যাকআপ ডাউনলোড" onclick="backupData()">💾</button>
 <button class="tbtn" title="ব্যাকআপ থেকে ফেরত আনুন" onclick="document.getElementById('restoreFile').click()">📥</button>
+<button class="tbtn" title="Google Drive ব্যাকআপ" onclick="gdOpen()">☁️</button>
 <input type="file" id="restoreFile" accept="application/json" style="display:none" onchange="restoreData(this.files[0])">
 </div>
 </div>
@@ -878,45 +907,20 @@ td:first-child{font-weight:600}
 </div>
 </section>
 <section id="medschedule" class="page">
-<div class="hint">💊 প্রতিদিনের মেডিসিন শিডিউল — সকাল, দুপুর ও রাতের ডোজ আলাদাভাবে লিখুন</div>
-<div class="section">💊 মেডিসিন শিডিউল যোগ করুন</div>
-<div class="form">
-  <div class="fields">
-    <label>তারিখ<input id="msDate" type="date" onchange="updateMsAge()"></label>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
-    <div style="background:#0d1923;border:1px solid #1a5c3a;border-radius:12px;padding:12px">
-      <div style="color:#fbbf24;font-weight:700;font-size:13px;margin-bottom:8px">🌅 সকাল</div>
-      <label>মেডিসিনের নাম<input id="msMorningName" placeholder="যেমন: Tylosin"></label>
-      <label style="margin-top:6px;display:block">ডোজ<input id="msMorningDose" placeholder="যেমন: ১ গ্রাম/লিটার"></label>
-      <label style="margin-top:6px;display:block">নোট<input id="msMorningNote" placeholder="ঐচ্ছিক"></label>
-    </div>
-    <div style="background:#0d1923;border:1px solid #1a5c3a;border-radius:12px;padding:12px">
-      <div style="color:#34d399;font-weight:700;font-size:13px;margin-bottom:8px">☀️ দুপুর</div>
-      <label>মেডিসিনের নাম<input id="msNoonName" placeholder="যেমন: Vitamin C"></label>
-      <label style="margin-top:6px;display:block">ডোজ<input id="msNoonDose" placeholder="যেমন: ২ মিলি/লিটার"></label>
-      <label style="margin-top:6px;display:block">নোট<input id="msNoonNote" placeholder="ঐচ্ছিক"></label>
-    </div>
-    <div style="background:#0d1923;border:1px solid #1a5c3a;border-radius:12px;padding:12px">
-      <div style="color:#818cf8;font-weight:700;font-size:13px;margin-bottom:8px">🌙 রাত</div>
-      <label>মেডিসিনের নাম<input id="msNightName" placeholder="যেমন: Enrofloxacin"></label>
-      <label style="margin-top:6px;display:block">ডোজ<input id="msNightDose" placeholder="যেমন: ০.৫ গ্রাম/লিটার"></label>
-      <label style="margin-top:6px;display:block">নোট<input id="msNightNote" placeholder="ঐচ্ছিক"></label>
-    </div>
-  </div>
-  <div style="margin-top:10px;padding:10px 14px;background:#0d2b1e;border-radius:10px;font-size:13px;color:#6ee8aa">
-    ⏱️ বর্তমান বয়স: <b id="msAge">— দিন</b>
-  </div>
-  <button class="add" onclick="addMedSchedule()">➕ শিডিউল সংরক্ষণ করুন</button>
+<div class="ms-hero">
+  <div class="ms-hero-t"><small style="font-size:12.5px">💡 নামে চাপ দিলে "দেওয়া হয়েছে" টিক পড়ে</small></div>
+  <div class="ms-hero-r"><div class="ms-age">⏱️ <b id="msAge">— দিন</b></div><div class="ms-prog" id="msProg"></div></div>
 </div>
-<div class="section">মেডিসিন শিডিউলের রেকর্ড</div>
-<div class="wrap"><table><thead><tr>
-  <th>তারিখ</th><th>বয়স</th>
-  <th>সকাল (মেডিসিন)</th><th>সকাল (ডোজ)</th>
-  <th>দুপুর (মেডিসিন)</th><th>দুপুর (ডোজ)</th>
-  <th>রাত (মেডিসিন)</th><th>রাত (ডোজ)</th>
-  <th>অ্যাকশন</th>
-</tr></thead><tbody id="medScheduleTable"></tbody></table></div>
+<div class="form ms-form">
+  <div class="ms-top"><label>📅 তারিখ<input id="msDate" type="date" onchange="updateMsAge()"></label><button type="button" class="ms-copy" onclick="msCopyLast()">↩️ শেষ বারের মতো</button></div>
+  <div class="ms-slot" style="--c:#fbbf24"><div class="ms-sh">🌅 সকাল</div><div class="ms-g"><input id="msMorningName" placeholder="মেডিসিনের নাম"><input id="msMorningDose" placeholder="ডোজ (১ গ্রাম/লিটার)"></div><input class="ms-note" id="msMorningNote" placeholder="নোট (ঐচ্ছিক)"></div>
+  <div class="ms-slot" style="--c:#34d399"><div class="ms-sh">☀️ দুপুর</div><div class="ms-g"><input id="msNoonName" placeholder="মেডিসিনের নাম"><input id="msNoonDose" placeholder="ডোজ (২ মিলি/লিটার)"></div><input class="ms-note" id="msNoonNote" placeholder="নোট (ঐচ্ছিক)"></div>
+  <div class="ms-slot" style="--c:#818cf8"><div class="ms-sh">🌙 রাত</div><div class="ms-g"><input id="msNightName" placeholder="মেডিসিনের নাম"><input id="msNightDose" placeholder="ডোজ (০.৫ গ্রাম/লিটার)"></div><input class="ms-note" id="msNightNote" placeholder="নোট (ঐচ্ছিক)"></div>
+  <button class="add" onclick="addMedSchedule()">➕ সংরক্ষণ করুন</button>
+</div>
+<div class="section">📋 দিনের তালিকা</div>
+<div id="msDays"></div>
+<table style="display:none"><tbody id="medScheduleTable"></tbody></table>
 </section>
 
 <section id="dailyfeed" class="page">
@@ -945,6 +949,25 @@ td:first-child{font-weight:600}
 <section id="analysis" class="page">
 <div class="section">📈 বিশ্লেষণ</div>
 
+<div class="form an-box"><div class="an-title">💰 লাভ-লোকসান বিশ্লেষণ</div><div id="anProfit"></div></div>
+
+<div class="form an-box">
+ <div class="an-title">🏁 ব্যাচের লক্ষ্য</div>
+ <div class="fields">
+  <label>লক্ষ্য FCR<input id="gFcr" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন ১.৬" oninput="anGoalSave()"></label>
+  <label>সর্বোচ্চ মৃত্যুহার (%)<input id="gMort" type="number" min="0" step=".1" inputmode="decimal" placeholder="যেমন ৪" oninput="anGoalSave()"></label>
+  <label>বিক্রির সময় গড় ওজন (গ্রাম)<input id="gWt" type="number" min="0" step="10" inputmode="decimal" placeholder="যেমন ২০০০" oninput="anGoalSave()"></label>
+  <label>নিট লাভ লক্ষ্য (টাকা)<input id="gProfit" type="number" min="0" step="1000" inputmode="decimal" placeholder="যেমন ৫০০০০০" oninput="anGoalSave()"></label>
+ </div>
+ <div id="anGoals" style="margin-top:10px"></div>
+</div>
+
+<div class="form an-box"><div class="an-title">🍽️ দৈনিক ফিড বনাম স্ট্যান্ডার্ড</div><div id="anFeedCmp"></div></div>
+
+<div class="form an-box"><div class="an-title">☠️ মৃত্যুর বিশ্লেষণ</div><div id="anMort"></div></div>
+
+<div class="form an-box"><div class="an-title">🎯 FCR পূর্বাভাস (আরও কয়দিন রাখলে)</div><div id="anFcrProj"></div></div>
+
 <div class="form an-box">
  <div class="an-title">🌾 ফিড মজুত ও কত দিন চলবে</div>
  <label class="an-inl">প্রতি বস্তায় কত কেজি (ফিড কেনার হিসাবের জন্য)<input id="anBagKg" type="number" min="1" step=".5" oninput="anSaveSet()"></label>
@@ -952,17 +975,17 @@ td:first-child{font-weight:600}
 </div>
 
 <div class="form an-box">
- <div class="an-title">⚖️ ওজন নমুনা — Cobb 500 (সপ্তাহে একবার ১০টা মুরগি মাপুন)</div>
+ <div class="an-title">⚖️ ওজন নমুনা — Rose (সপ্তাহে একবার ১০টা মুরগি মাপুন)</div>
  <div class="fields">
   <label>তারিখ<input id="anWDate" type="date"></label>
   <label>কয়টা মুরগি মাপলেন<input id="anWN" type="number" min="1" step="1" inputmode="numeric" placeholder="যেমন ১০"></label>
-  <label>মোট ওজন (কেজি)<input id="anWTotal" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন ৭.৫"></label>
+  <label>মোট ওজন (গ্রাম)<input id="anWTotal" type="number" min="0" step="1" inputmode="decimal" placeholder="যেমন ৭৫০০"></label>
  </div>
  <button class="add" type="button" onclick="anAddWeight()">➕ ওজন নমুনা যোগ করুন</button>
  <div id="anGrowth" style="margin-top:12px"></div>
  <div class="wrap" style="margin-top:10px"><table><thead><tr><th>তারিখ</th><th>বয়স</th><th>মুরগি</th><th>গড় ওজন</th><th>স্ট্যান্ডার্ডের তুলনায়</th><th></th></tr></thead><tbody id="anWTable"></tbody></table></div>
  <details class="an-det"><summary>স্ট্যান্ডার্ড ওজন বদলান (গ্রামে)</summary>
-  <div class="an-note">এই ওজনগুলো Cobb 500-এর (মিশ্র লিঙ্গ, as-hatched) লক্ষ্যমাত্রা, Cobb-এর ২০১৫ Performance &amp; Nutrition Supplement অনুযায়ী। নতুন চার্ট থাকলে বদলে নিন।</div>
+  <div class="an-note">এগুলো Rose মুরগির স্ট্যান্ডার্ড ওজন (গ্রামে)। আপনার Rose-এর নিজস্ব চার্ট থাকলে নিচের ঘরগুলোতে সেই মান বসিয়ে নিন।</div>
   <div class="an-std" id="anStd"></div>
   <button class="an-btn" type="button" onclick="anResetStd()">↩️ আগের মানে ফিরুন</button>
  </details>
@@ -1057,7 +1080,7 @@ const SEED={"sheetNames": ["Summary ", "ঔষধ শিডিউল ", "বি�
 function freshBatch(name){
  return {id:"b"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:name,status:"active",createdAt:new Date().toISOString().slice(0,10),closedAt:null,
  startDate:SEED.startDate||"",chicks:Number(SEED.chicks||0),dead:0,chickPrice:0,deaths:[],
- feed:[],medicine:[],workers:[],workerSalary:0,other:[],litter:[],rent:[],sales:[],litterSales:[],otherSales:{litter:[],chicken:[],bag:[],feed:[]},medSchedule:[],notes:[],gifts:[],dailyFeed:[]};
+ feed:[],medicine:[],workers:[],workerSalary:0,other:[],litter:[],power:[],rent:[],sales:[],litterSales:[],otherSales:{litter:[],chicken:[],bag:[],feed:[]},medSchedule:[],notes:[],gifts:[],dailyFeed:[]};
 }
 function migrateWorkers(b){
  if(Array.isArray(b.workers)){
@@ -1101,7 +1124,7 @@ function batchSummary(b){
  let feed=(b.feed||[]).reduce((s,r)=>s+(+r.qty||0)*(+r.rate||0),0);
  let medicine=(b.medicine||[]).reduce((s,r)=>s+(+r.qty||0)*(+r.rate||0),0);
  let other=(b.other||[]).reduce((s,r)=>s+(+r.qty||0)*(+r.rate||0),0);
- let litter=(b.litter||[]).reduce((s,r)=>s+(+r.qty||0)*(+r.rate||0),0);
+ let litter=(b.litter||[]).reduce((s,r)=>s+(+r.qty||0)*(+r.rate||0),0)+(b.power||[]).reduce((s,r)=>s+(+r.qty||0)*(+r.rate||0),0);
  let workers=wageCost(b);
  let rent=(b.rent||[]).reduce((s,r)=>s+(+r.amt||0),0);
  let chicksCost=(+b.chicks||0)*(+b.chickPrice||0);
@@ -1165,8 +1188,8 @@ function soldPcs(){return sumOf(state.sales,r=>r.qty)+retailPcs()}
 function livePcs(){let d=deathTotal()||(+state.dead||0);return Math.max(0,(+state.chicks||0)-d-soldPcs()-giftPcs())}
 function allWeightStats(){let q=0,w=0;(state.sales||[]).forEach(r=>{q+=+r.qty||0;w+=+r.weight||0});((state.otherSales&&state.otherSales.chicken)||[]).forEach(r=>{if(+r.pcs>0){q+=+r.pcs;w+=+r.qty||0}});(state.gifts||[]).forEach(r=>{if(+r.qty>0){q+=+r.qty;w+=+r.weight||0}});return{q:q,w:w,avg:q?w/q:0}}
 function renderDashboard(){
-let c={feed:total("feed"),medicine:total("medicine"),workers:workersTotal(),other:total("other"),litter:total("litter"),rent:rentTotal(),sales:salesTotal(),chicks:(+state.chicks||0)*(+state.chickPrice||0)};
-c.cost=c.feed+c.medicine+c.workers+c.other+c.litter+c.rent+c.chicks;c.otherSalesTotal=otherSalesGrand();c.totalIncome=c.sales+c.otherSalesTotal;c.profit=c.totalIncome-c.cost;
+let c={feed:total("feed"),medicine:total("medicine"),workers:workersTotal(),other:total("other"),litter:total("litter"),power:total("power"),rent:rentTotal(),sales:salesTotal(),chicks:(+state.chicks||0)*(+state.chickPrice||0)};
+c.cost=c.feed+c.medicine+c.workers+c.other+c.litter+c.power+c.rent+c.chicks;c.otherSalesTotal=otherSalesGrand();c.totalIncome=c.sales+c.otherSalesTotal;c.profit=c.totalIncome-c.cost;
 state.dead=deathTotal()||(+state.dead||0); let soldQ=soldPcs();let live=livePcs();
 document.getElementById("today").textContent=new Date().toLocaleDateString("bn-BD");document.getElementById("batchNameText").textContent=state.name+(state.status==="closed"?" (সম্পন্ন)":"");
 document.getElementById("age").textContent=days()+" দিন";document.getElementById("startText").textContent=state.startDate||"নেই";
@@ -1206,7 +1229,7 @@ function renderDeaths(){
 }
 function renderFarm(){fDate.value=state.startDate;fChicks.value=state.chicks;fPrice.value=state.chickPrice;fTotalShow()}
 const configs={
-feed:["🌾 ফিড","ফিড","বস্তা"],medicine:["💊 মেডিসিন","মেডিসিনের নাম","পরিমাণ"],other:["🧾 বিভিন্ন খরচ","বিবরণ","পরিমাণ"],litter:["🪵 কাঠের গুড়া","বিবরণ","পরিমাণ"]
+feed:["🌾 ফিড","ফিড","বস্তা"],medicine:["💊 মেডিসিন","মেডিসিনের নাম","পরিমাণ"],other:["🧾 বিভিন্ন খরচ","বিবরণ","পরিমাণ"],litter:["🪵 কাঠের গুড়া","বিবরণ","পরিমাণ"],power:["⚡ বিদ্যুৎ ও জ্বালানি","বিবরণ (বিদ্যুৎ বিল / গ্যাস / ডিজেল)","পরিমাণ"]
 };
 function makePages(){
 let host=document.getElementById("generatedPages");
@@ -1278,7 +1301,7 @@ function renderTable(k){
 let a=state[k]||[];let el=document.getElementById(k+"Table");
 el.innerHTML=a.length?a.map((r,i)=>`<tr><td>${r.date||""}</td><td>${r.name||""}</td><td>${r.qty||0}</td><td>${money(r.rate)}</td><td>${money((r.qty||0)*(r.rate||0))}</td><td style="white-space:nowrap"><button class="edt" onclick="openEdit('${k}',${i})">✏️</button><button class="del" onclick="del('${k}',${i})">মুছুন</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">এখনও কোনো হিসাব যোগ করা হয়নি</td></tr>`;
 }
-function renderSales(){if(!salesDate.value)salesDate.value=new Date().toISOString().slice(0,10);salesTable.innerHTML=state.sales.length?state.sales.map((r,i)=>{let tot=r.weight*r.rate;let paid=+r.paid||0;let due=tot-paid;let pallas=r.pallas||[];let pc=pallas.length;let detail=pallas.map((p,pi)=>`<tr><td style="padding:4px 8px">পাল্লা ${pi+1}</td><td style="padding:4px 8px">${p.qty} টি</td><td style="padding:4px 8px">${p.weight} কেজি</td><td style="padding:4px 8px">গড়: ${(p.weight/p.qty||0).toFixed(2)} কেজি/মুরগি</td></tr>`).join("");let mainRow=`<tr><td>${r.date||""}</td><td>${r.customer||"—"}</td><td>${r.qty}${pc?` <span style="opacity:.6;font-size:11px">(${pc} পাল্লা)</span>`:""}</td><td>${r.weight}</td><td>${money(r.rate)}</td><td>${money(tot)}</td><td>${money(paid)}</td><td>${due>0?money(due):"—"}</td><td>${(r.weight/r.qty||0).toFixed(2)} কেজি</td><td>${pc?`<button class="tbtn-light" style="padding:5px 8px;font-size:11px;margin-right:4px" onclick="toggleDetails(${i})">বিস্তারিত</button>`:""}<button class="edt" onclick="openEdit('sales',${i})">✏️</button><button class="del" onclick="del('sales',${i})">মুছুন</button></td></tr>`;let detailRow=pc?`<tr id="pallaDetail${i}" style="display:none"><td colspan="10" style="padding:0;background:#f7f9fa"><table style="width:100%;font-size:12px">${detail}</table></td></tr>`:"";return mainRow+detailRow}).join(""):`<tr><td colspan="10" class="empty">এখনও কোনো বিক্রি যোগ করা হয়নি</td></tr>`;
+function renderSales(){if(!salesDate.value)salesDate.value=new Date().toISOString().slice(0,10);salesTable.innerHTML=state.sales.length?state.sales.map((r,i)=>{let tot=r.weight*r.rate;let paid=+r.paid||0;let due=tot-paid;let pallas=r.pallas||[];let pc=pallas.length;let detail=pallas.map((p,pi)=>`<tr><td style="padding:4px 8px">পাল্লা ${pi+1}</td><td style="padding:4px 8px">${p.qty} টি</td><td style="padding:4px 8px">${p.weight} কেজি</td><td style="padding:4px 8px">গড়: ${(p.weight/p.qty||0).toFixed(2)} কেজি/মুরগি</td></tr>`).join("");let mainRow=`<tr><td>${r.date||""}</td><td>${r.customer||"—"}</td><td>${r.qty}${pc?` <span style="opacity:.6;font-size:11px">(${pc} পাল্লা)</span>`:""}</td><td>${r.weight}</td><td>${money(r.rate)}</td><td>${money(tot)}</td><td>${money(paid)}</td><td>${due>0?money(due):"—"}</td><td>${(r.weight/r.qty||0).toFixed(2)} কেজি</td><td>${pc?`<button class="tbtn-light" style="padding:5px 8px;font-size:11px;margin-right:4px" onclick="toggleDetails(${i})">বিস্তারিত</button>`:""}<button class="tbtn-light" style="padding:5px 8px;font-size:11px;margin-right:4px" onclick="memoOpen(${i})">🧾 মেমো</button><button class="edt" onclick="openEdit('sales',${i})">✏️</button><button class="del" onclick="del('sales',${i})">মুছুন</button></td></tr>`;let detailRow=pc?`<tr id="pallaDetail${i}" style="display:none"><td colspan="10" style="padding:0;background:#f7f9fa"><table style="width:100%;font-size:12px">${detail}</table></td></tr>`:"";return mainRow+detailRow}).join(""):`<tr><td colspan="10" class="empty">এখনও কোনো বিক্রি যোগ করা হয়নি</td></tr>`;
 let names=[...new Set(state.sales.map(r=>r.customer).filter(Boolean))];
 customerList.innerHTML=names.map(n=>`<option value="${n}">`).join("");
 {let a=allWeightStats(),h=document.getElementById("avgAllHint");if(h)h.innerHTML=a.q?`⚖️ <b>মোট গড় ওজন (পাইকারি + খুচরা + গিফট/নিজের): ${a.avg.toFixed(2)} কেজি/মুরগি</b><br>মোট ${fmt(a.q,0)} টি • মোট ওজন ${fmt(a.w)} কেজি`:""}
@@ -1297,7 +1320,7 @@ function renderLitterSales(){
 const bnMonth=ym=>{let a=String(ym).split("-");return new Date(+a[0],+a[1]-1,1).toLocaleDateString("bn-BD",{month:"long",year:"numeric"})};
 function reportMonths(){
  let set=new Set(),add=a=>(a||[]).forEach(r=>{let d=String(r&&r.date||"").slice(0,7);if(/^\d{4}-\d{2}$/.test(d))set.add(d)});
- ["feed","medicine","workers","other","litter","rent","sales","litterSales","deaths","gifts","dailyFeed"].forEach(k=>add(state[k]));
+ ["feed","medicine","workers","other","litter","power","rent","sales","litterSales","deaths","gifts","dailyFeed"].forEach(k=>add(state[k]));
  let os=state.otherSales||{};Object.keys(os).forEach(k=>add(os[k]));
  let sd=String(state.startDate||"").slice(0,7);if(/^\d{4}-\d{2}$/.test(sd))set.add(sd);
  return [...set].sort();
@@ -1322,8 +1345,8 @@ function reportData(){
  let qr=a=>sumOf(F(a),r=>(+r.qty||0)*(+r.rate||0));
  let os=state.otherSales||{},months=reportMonths();
  let chicksN=(!m||String(state.startDate||"").slice(0,7)===m)?(+state.chicks||0):0;
- let c={chicks:chicksN*(+state.chickPrice||0),feed:qr(state.feed),medicine:qr(state.medicine),workers:wageOn(state)?wageStats(state,m?m+'-01':null,m?m+'-31':null).earned:sumOf(F(state.workers),r=>r.amount),other:qr(state.other),litter:qr(state.litter),rent:sumOf(F(state.rent),r=>r.amt)};
- let cost=c.chicks+c.feed+c.medicine+c.workers+c.other+c.litter+c.rent;
+ let c={chicks:chicksN*(+state.chickPrice||0),feed:qr(state.feed),medicine:qr(state.medicine),workers:wageOn(state)?wageStats(state,m?m+'-01':null,m?m+'-31':null).earned:sumOf(F(state.workers),r=>r.amount),other:qr(state.other),litter:qr(state.litter),power:qr(state.power),rent:sumOf(F(state.rent),r=>r.amt)};
+ let cost=c.chicks+c.feed+c.medicine+c.workers+c.other+c.litter+c.power+c.rent;
  let wh=F(state.sales),whQ=sumOf(wh,r=>r.qty),whW=sumOf(wh,r=>r.weight),whA=sumOf(wh,r=>(+r.weight||0)*(+r.rate||0));
  let rt=F(os.chicken),rtQ=sumOf(rt,r=>r.pcs),rtA=qr(os.chicken);
  let lit=qr(os.litter)+qr(state.litterSales),bag=qr(os.bag),fsl=qr(os.feed);
@@ -1335,7 +1358,7 @@ function reportData(){
  let rows=[
   {t:"sec",l:"💸 খরচ"},
   {l:"বাচ্চা ক্রয়",q:chicksN?fmt(chicksN,0)+" টি":"",a:c.chicks},
-  {l:"ফিড",a:c.feed},{l:"মেডিসিন",a:c.medicine},{l:"কর্মচারী",a:c.workers},{l:"বিভিন্ন খরচ",a:c.other},{l:"কাঠের গুড়া",a:c.litter},{l:"পরিবহন ভাড়া",a:c.rent},
+  {l:"ফিড",a:c.feed},{l:"মেডিসিন",a:c.medicine},{l:"কর্মচারী",a:c.workers},{l:"বিভিন্ন খরচ",a:c.other},{l:"কাঠের গুড়া",a:c.litter},{l:"বিদ্যুৎ ও জ্বালানি",a:c.power},{l:"পরিবহন ভাড়া",a:c.rent},
   {t:"tot",l:"মোট খরচ",a:cost},
   {t:"sec",l:"💰 আয়"},
   {l:"মুরগি বিক্রি (পাইকারি)",q:whQ?fmt(whQ,0)+" টি • "+fmt(whW)+" কেজি":"",a:whA},
@@ -1577,26 +1600,41 @@ function updateMsAge(){
   let diff=Math.max(0,Math.floor((sel-start)/86400000));
   msAgeEl.textContent=diff+" দিন";
 }
+let _msAll=false;
+const MS_SL=[["morning","🌅","সকাল","#fbbf24"],["noon","☀️","দুপুর","#34d399"],["night","🌙","রাত","#818cf8"]];
+window.msToggleDone=function(i,k){let r=state.medSchedule[i];if(!r)return;r.done=r.done||{};if(r.done[k])delete r.done[k];else r.done[k]=1;save();renderMedSchedule()};
+window.msShowAll=function(){_msAll=!_msAll;renderMedSchedule()};
+window.msCopyLast=function(){
+  let a=(state.medSchedule||[]).slice().sort((x,y)=>String(y.date).localeCompare(String(x.date)))[0];
+  if(!a){showToast("❌ আগের কোনো রেকর্ড নেই");return}
+  [["morning","Morning"],["noon","Noon"],["night","Night"]].forEach(x=>{let o=a[x[0]]||{};["Name","Dose","Note"].forEach(f=>{document.getElementById("ms"+x[1]+f).value=o[f.toLowerCase()]||""})});
+  showToast("✅ "+a.date+" এর মেডিসিন বসানো হয়েছে");
+};
 function renderMedSchedule(){
   msDedupe();
   let msDateEl=document.getElementById("msDate");
   if(msDateEl&&!msDateEl.value)msDateEl.value=new Date().toISOString().slice(0,10);
   updateMsAge();
-  let a=state.medSchedule||[];
-  let tbl=document.getElementById("medScheduleTable");
-  if(!tbl)return;
-  tbl.innerHTML=a.length?a.slice().reverse().map((r,ri)=>{
-    let i=a.length-1-ri;
-    let m=r.morning||{};let n=r.noon||{};let nt=r.night||{};
-    return `<tr>
-      <td>${r.date||""}</td>
-      <td>${r.age!==undefined?r.age+" দিন":""}</td>
-      <td>${m.name||"—"}${m.note?" ("+m.note+")":""}</td><td>${m.dose||"—"}</td>
-      <td>${n.name||"—"}${n.note?" ("+n.note+")":""}</td><td>${n.dose||"—"}</td>
-      <td>${nt.name||"—"}${nt.note?" ("+nt.note+")":""}</td><td>${nt.dose||"—"}</td>
-      <td style="white-space:nowrap"><button class="edt" onclick="openEdit('medSchedule',${i})">✏️</button><button class="del" onclick="delMedSchedule(${i})">মুছুন</button></td>
-    </tr>`;
-  }).join(""):`<tr><td colspan="9" class="empty">এখনও কোনো মেডিসিন শিডিউল যোগ করা হয়নি</td></tr>`;
+  let a=state.medSchedule||[],host=document.getElementById("msDays");
+  if(!host)return;
+  let today=new Date().toISOString().slice(0,10),tr=a.find(r=>r.date===today);
+  let pg=document.getElementById("msProg");
+  if(pg){
+    let planned=tr?MS_SL.filter(x=>(tr[x[0]]||{}).name):[],done=planned.filter(x=>tr.done&&tr.done[x[0]]).length;
+    pg.innerHTML=planned.length?'<span>আজ '+done+'/'+planned.length+' দেওয়া হয়েছে</span><div class="ms-pb"><i style="width:'+(done/planned.length*100)+'%"></i></div>':'<span>আজকের শিডিউল নেই</span>';
+  }
+  if(!a.length){host.innerHTML='<div class="ms-empty">💊<br>এখনও কোনো মেডিসিন শিডিউল যোগ করা হয়নি</div>';return}
+  let idx=a.map((r,i)=>i).sort((x,y)=>String(a[y].date).localeCompare(String(a[x].date)));
+  let shown=_msAll?idx:idx.slice(0,10);
+  host.innerHTML=shown.map(i=>{
+    let r=a[i],isT=r.date===today;
+    let pills=MS_SL.map(x=>{
+      let m=r[x[0]]||{};if(!m.name)return '';
+      let dn=r.done&&r.done[x[0]];
+      return '<div class="ms-pl'+(dn?' done':'')+'" style="--c:'+x[3]+'" onclick="msToggleDone('+i+',\''+x[0]+'\')"><span class="ms-pi">'+(dn?'✅':x[1])+'</span><div class="ms-pt"><b>'+esc(m.name)+'</b><small>'+(m.dose?esc(m.dose):'ডোজ নেই')+(m.note?' • '+esc(m.note):'')+'</small></div></div>';
+    }).join('');
+    return '<div class="ms-day'+(isT?' today':'')+'"><div class="ms-dh"><span class="ms-dd">'+(isT?'📍 আজ • ':'')+esc(r.date||"")+'</span>'+(r.age!==undefined?'<span class="ms-da">'+r.age+' দিন</span>':'')+'<span class="ms-ac"><button class="edt" onclick="openEdit(\'medSchedule\','+i+')">✏️</button><button class="del" onclick="delMedSchedule('+i+')">🗑️</button></span></div><div class="ms-pls">'+(pills||'<div class="ms-none">কোনো মেডিসিন নেই</div>')+'</div></div>';
+  }).join('')+(idx.length>10?'<button class="an-btn" type="button" style="margin:6px 0 12px" onclick="msShowAll()">'+(_msAll?'কম দেখান':'সব '+idx.length+' দিন দেখান')+'</button>':'');
 }
 function addNote(){
   let title=document.getElementById("noteTitle").value.trim();
@@ -1804,7 +1842,7 @@ function renderSummaries(){
  sumCards("notes",[["📝","মোট নোট",nt.length],["📅","সর্বশেষ নোট",lastDate(nt)]]);
  // রিপোর্ট
  let inc=bs.sales;
- sumCards("breakdown",[["🐣","বাচ্চা ক্রয়",money(chicks*(+state.chickPrice||0))],["🌾","ফিড",money(total("feed"))],["💊","মেডিসিন",money(total("medicine"))],["👷","কর্মচারী",money(workersTotal())],["🧾","বিভিন্ন খরচ",money(total("other"))],["🪵","কাঠের গুড়া",money(total("litter"))],["🚚","পরিবহন ভাড়া",money(rentTotal())]]);
+ sumCards("breakdown",[["🐣","বাচ্চা ক্রয়",money(chicks*(+state.chickPrice||0))],["🌾","ফিড",money(total("feed"))],["💊","মেডিসিন",money(total("medicine"))],["👷","কর্মচারী",money(workersTotal())],["🧾","বিভিন্ন খরচ",money(total("other"))],["🪵","কাঠের গুড়া",money(total("litter"))],["⚡","বিদ্যুৎ ও জ্বালানি",money(total("power"))],["🚚","পরিবহন ভাড়া",money(rentTotal())]]);
  sumCards("report",[["💵","মোট খরচ",money(bs.cost),"#fbbf24"],["💰","মোট আয়",money(inc),"#3ddc84"],[bs.profit>=0?"📈":"📉",bs.profit>=0?"নিট লাভ":"নিট ক্ষতি",money(bs.profit),bs.profit>=0?"#3ddc84":"#ff7070"],["🐔","প্রতি জীবিত মুরগি খরচ",alive?money(bs.cost/alive):"৳০"]]);
  // সব ব্যাচ
  let all=store.batches.map(batchSummary),tp=all.reduce((s,x)=>s+x.profit,0);
@@ -1814,13 +1852,13 @@ function renderSummaries(){
 
 // ── ড্যাশবোর্ড কার্ডে চাপলে সামারি ──
 const sumMeta={
- sales:{t:"🐔 বিক্রিত মুরগি",p:"sales"},feed:{t:"🌾 ফিড খরচ",p:"feed"},medicine:{t:"💊 মেডিসিন",p:"medicine"},other:{t:"🧾 বিভিন্ন খরচ",p:"other"},litter:{t:"🪵 কাঠের গুড়া",p:"litter"},
+ sales:{t:"🐔 বিক্রিত মুরগি",p:"sales"},feed:{t:"🌾 ফিড খরচ",p:"feed"},medicine:{t:"💊 মেডিসিন",p:"medicine"},other:{t:"🧾 বিভিন্ন খরচ",p:"other"},litter:{t:"🪵 কাঠের গুড়া",p:"litter"},power:{t:"⚡ বিদ্যুৎ ও জ্বালানি",p:"power"},
  workers:{t:"👷 কর্মচারী",p:"workers"},rent:{t:"🚚 পরিবহন ভাড়া",p:"rent"},farm:{t:"🐣 বাচ্চার সামারি",p:"farm"},deaths:{t:"☠️ মৃত বাচ্চা",p:"farm"},
  income:{t:"💰 মোট আয়",p:"sales",groups:["sales","othersales"],gh:["🐔 মুরগি বিক্রি","🛒 অন্যান্য বিক্রি"]},
  report:{t:"📊 লাভ-ক্ষতি",p:"report",groups:["report","breakdown"],gh:["📊 আয়-ব্যয়","💸 খরচের ভাগ"]}
 };
 function openPage(id){
- let _anc=null;if(id==="litter"){id="other";_anc="expLitter"}else if(id==="rent"){id="other";_anc="expRent"}
+ let _anc=null;if(id==="litter"){id="other";_anc="expLitter"}else if(id==="rent"){id="other";_anc="expRent"}else if(id==="power"){id="other";_anc="expPower"}
  let b=[...document.querySelectorAll(".nav")].find(x=>(x.getAttribute("onclick")||"").includes("go('"+id+"'"));
  if(b){go(id,b);window.scrollTo(0,0);b.scrollIntoView({inline:"center",block:"nearest"});if(_anc)setTimeout(()=>{let e=document.getElementById(_anc);if(e)e.scrollIntoView({block:"start"})},60)}
 }
@@ -2249,10 +2287,10 @@ makePages();
 (function(){ // কাঠের গুড়া ও পরিবহন ভাড়া → বিভিন্ন খরচ পেজে
  const host=document.getElementById("other");if(!host)return;
  const bar=document.createElement("div");bar.className="exp-jump";
- bar.innerHTML='<button type="button" onclick="expJump(\'expOther\')">🧾 বিভিন্ন খরচ</button><button type="button" onclick="expJump(\'expLitter\')">🪵 কাঠের গুড়া</button><button type="button" onclick="expJump(\'expRent\')">🚚 পরিবহন ভাড়া</button>';
+ bar.innerHTML='<button type="button" onclick="expJump(\'expOther\')">🧾 বিভিন্ন খরচ</button><button type="button" onclick="expJump(\'expLitter\')">🪵 কাঠের গুড়া</button><button type="button" onclick="expJump(\'expRent\')">🚚 পরিবহন ভাড়া</button><button type="button" onclick="expJump(\'expPower\')">⚡ বিদ্যুৎ/জ্বালানি</button>';
  host.insertBefore(bar,host.firstChild);
  const first=document.createElement("div");first.id="expOther";host.insertBefore(first,bar.nextSibling);
- [["litter","expLitter","🪵 কাঠের গুড়া"],["rent","expRent","🚚 পরিবহন ভাড়া"]].forEach(x=>{
+ [["litter","expLitter","🪵 কাঠের গুড়া"],["rent","expRent","🚚 পরিবহন ভাড়া"],["power","expPower","⚡ বিদ্যুৎ ও জ্বালানি"]].forEach(x=>{
   const sec=document.getElementById(x[0]);if(!sec)return;
   const w=document.createElement("div");w.id=x[1];w.className="exp-block";
   w.innerHTML='<div class="exp-sep"><span>'+x[2]+'</span></div>';
@@ -2505,12 +2543,12 @@ function renderStock(){
  else if(f.left!==null&&f.left<=4)al='<div class="an-alert info">🔔 ফিড আর কয়েক দিনের। কেনার তারিখ ঠিক করুন।</div>';
  else if(f.left!==null)al='<div class="an-alert good">✅ ফিড আপাতত যথেষ্ট আছে।</div>';
  el.innerHTML='<div class="an-cards">'+cards.map(c=>'<div class="an-card"><span>'+c[0]+'</span><b>'+c[1]+'</b></div>').join("")+'</div>'+al+
-  '<div class="an-note">দিন দিন খাবার বাড়ে, তাই হিসাবে Cobb 500-এর হারে প্রতিদিনের খাবার বাড়ছে ধরা হয়েছে'+(f.flat!==null?" (একই পরিমাণ ধরলে "+fb(f.flat,1)+" দিন)":"")+'।</div>';
+  '<div class="an-note">দিন দিন খাবার বাড়ে, তাই হিসাবে Rose-এর হারে প্রতিদিনের খাবার বাড়ছে ধরা হয়েছে'+(f.flat!==null?" (একই পরিমাণ ধরলে "+fb(f.flat,1)+" দিন)":"")+'।</div>';
 }
 
 // ── ২. ওজন নমুনা ও গ্রোথ চার্ট ──
 window.anAddWeight=function(){
- let n=+$a("anWN").value||0,t=+$a("anWTotal").value||0,d=$a("anWDate").value||todayISO();
+ let n=+$a("anWN").value||0,t=(+$a("anWTotal").value||0)/1000,d=$a("anWDate").value||todayISO();
  if(n<=0||t<=0){showToast("❌ মুরগির সংখ্যা ও মোট ওজন দিন");return}
  state.weights=state.weights||[];
  state.weights.push({date:d,n:Math.round(n),total:t});
@@ -2528,9 +2566,9 @@ function growthSvg(pts){
  let maxG=3000;pts.forEach(p=>{if(p.g>maxG)maxG=Math.ceil(p.g/500)*500});
  const X=d=>L+(W-L-R)*d/maxD,Y=g=>T+(H-T-B)*(1-g/maxG);
  let o='<svg class="an-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="গ্রোথ চার্ট: আপনার মুরগির গড় ওজন ও স্ট্যান্ডার্ড ওজন">';
- for(let g=0;g<=maxG;g+=500)o+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(g)+'" y2="'+Y(g)+'" stroke="#ffffff14"/><text x="'+(L-5)+'" y="'+(Y(g)+3)+'" text-anchor="end">'+(g?fb(g/1000,1):"০")+'</text>';
+ for(let g=0;g<=maxG;g+=500)o+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(g)+'" y2="'+Y(g)+'" stroke="#ffffff14"/><text x="'+(L-5)+'" y="'+(Y(g)+3)+'" text-anchor="end">'+(g?fb(g,0):"০")+'</text>';
  for(let d=0;d<=maxD;d+=7)o+='<text x="'+X(d)+'" y="'+(H-10)+'" text-anchor="middle">'+bn(d)+'</text>';
- o+='<text x="'+L+'" y="9">কেজি</text><text x="'+(W-R)+'" y="'+(H-1)+'" text-anchor="end">বয়স (দিন)</text>';
+ o+='<text x="'+L+'" y="9">গ্রাম</text><text x="'+(W-R)+'" y="'+(H-1)+'" text-anchor="end">বয়স (দিন)</text>';
  let std=STD_DAYS.map(d=>X(d)+","+Y(stdAt(d))).join(" ");
  o+='<polyline points="'+std+'" fill="none" stroke="#86e3cc" stroke-width="2" stroke-dasharray="5 4"/>';
  let age=days();if(age>=0&&age<=maxD)o+='<line x1="'+X(age)+'" x2="'+X(age)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="#ff8a5c" stroke-width="1" stroke-dasharray="2 3"/><text x="'+X(age)+'" y="'+(T-3)+'" text-anchor="middle" style="fill:#ff8a5c">আজ</text>';
@@ -2544,7 +2582,7 @@ function growthSvg(pts){
 function renderWeights(){
  let g=$a("anGrowth"),tb=$a("anWTable");if(!g||!tb)return;
  let pts=wPoints();
- let leg='<div class="an-leg"><span><i style="background:#86e3cc"></i>Cobb 500 স্ট্যান্ডার্ড</span><span><i style="background:#ff8a5c"></i>আপনার মুরগি</span></div>';
+ let leg='<div class="an-leg"><span><i style="background:#86e3cc"></i>Rose স্ট্যান্ডার্ড</span><span><i style="background:#ff8a5c"></i>আপনার মুরগি</span></div>';
  let verdict="";
  if(pts.length){
   let l=pts[pts.length-1],sg=stdAt(l.age),df=(l.g/sg-1)*100;
@@ -2563,7 +2601,7 @@ function renderWeights(){
 
 // ── ৩. কবে বিক্রি করলে বেশি লাভ ──
 function lastSaleRate(){let r=(state.sales||[]).filter(x=>+x.rate>0).slice(-1)[0];return r?+r.rate:0}
-function costSoFar(){return (+state.chicks||0)*(+state.chickPrice||0)+total("feed")+total("medicine")+workersTotal()+total("other")+total("litter")+rentTotal()}
+function costSoFar(){return (+state.chicks||0)*(+state.chickPrice||0)+total("feed")+total("medicine")+workersTotal()+total("other")+total("litter")+total("power")+rentTotal()}
 const tk=n=>"৳"+fb(n,0);
 function renderProj(){
  let el=$a("anProj");if(!el)return;
@@ -2602,8 +2640,149 @@ window.anSaveSet=function(){
  state.projRate=+$a("anRate").value||0;state.projFeedRate=+$a("anFeedRate").value||0;
  save();renderStock();renderProj();
 };
+
+// ── ০. লাভ-লোকসান বিশ্লেষণ ──
+function anW0(){
+ let age=days(),pts=wPoints(),lp=pts.length?pts[pts.length-1]:null;
+ if(lp&&age-lp.age<=14)return{w:(lp.g+stdAt(age)-stdAt(lp.age))/1000,src:"শেষ ওজন নমুনা থেকে"};
+ if(+state.liveAvgWt>0)return{w:+state.liveAvgWt,src:"আপনার দেওয়া আনুমানিক গড় ওজন"};
+ return{w:stdAt(age)/1000,src:"স্ট্যান্ডার্ড ওজন ধরে"};
+}
+function renderProfit(){
+ let el=$a("anProfit");if(!el)return;
+ if(!(+state.chicks>0)){el.innerHTML='<div class="an-alert info">আগে "🐣 বাচ্চা ও মৃত" পেজে বাচ্চার সংখ্যা দিন।</div>';return}
+ let chicks=+state.chicks||0,cp=chicks*(+state.chickPrice||0);
+ let parts=[["🐣 বাচ্চা",cp,"#7fd1ff"],["🌾 ফিড",total("feed"),"#fbbf24"],["💊 মেডিসিন",total("medicine"),"#e0775a"],["👷 কর্মচারী",workersTotal(),"#b69cff"],["🧾 বিভিন্ন (লিটার, ভাড়া, বিদ্যুৎসহ)",total("other")+total("litter")+total("power")+rentTotal(),"#3ddc84"]];
+ let cost=parts.reduce((a,b)=>a+b[1],0),inc=salesTotal()+otherSalesGrand(),net=inc-cost;
+ let live=livePcs(),dead=deathTotal()||(+state.dead||0),out=Math.max(0,chicks-dead-live);
+ let harv=(state.sales||[]).reduce((a,r)=>a+(+r.weight||0),0);
+ let w0=anW0(),estKg=live>0&&state.startDate?live*w0.w:0,allKg=harv+estKg;
+ let f=fcrStats(),ag=days();
+ let card=(t,v,c,sub)=>'<div class="pa-card"><div class="pa-t">'+t+'</div><div class="pa-v"'+(c?' style="color:'+c+'"':'')+'>'+v+'</div>'+(sub?'<div class="pa-s">'+sub+'</div>':'')+'</div>';
+ let h='<div class="pa-grid">'+
+  card("মোট খরচ",tk(cost),"#fbbf24")+card("মোট আয়",tk(inc),"#3ddc84")+
+  card(net>=0?"এখন পর্যন্ত নিট লাভ":"এখনও ক্ষতিতে",(net<0?"−":"")+tk(Math.abs(net)),net>=0?"#3ddc84":"#ff7070")+
+  card("প্রতি বাচ্চায় খরচ",tk(cost/chicks),"","বাচ্চা ধরে মোট খরচ ÷ "+bn(chicks))+'</div>';
+ // ব্রেক-ইভেন
+ if(live>0&&state.startDate){
+  let need=Math.max(0,-net);
+  if(need<=0)h+='<div class="an-alert good"><b>✅ খরচ উঠে গেছে।</b> বাকি '+bn(live)+' টি মুরগি যে দামেই বিক্রি হোক সেটা লাভ।</div>';
+  else{let be=need/estKg;h+='<div class="an-alert info"><b>⚖️ ব্রেক-ইভেন দর: কেজিতে ৳'+fb(be,1)+'</b><br>বাকি '+bn(live)+' টি মুরগির আনুমানিক ওজন প্রায় '+fb(estKg,0)+' কেজি ('+w0.src+')। খরচ তুলতে আরও ৳'+fb(need,0)+' লাগবে, তাই এর বেশি দরে বেচলে লাভ।'+(lastSaleRate()?'<br>শেষ বিক্রির দর ৳'+fb(lastSaleRate(),0)+(lastSaleRate()>=be?' — এই দরে বেচলে লাভ হবে।':' — এই দরে বেচলে এখনও ক্ষতি।'):'')+'</div>'}
+ }
+ // প্রতি কেজি খরচ
+ if(allKg>0){let pk=cost/allKg;h+='<div class="an-note" style="margin:8px 0">📦 <b>প্রতি কেজি মুরগির উৎপাদন খরচ: ৳'+fb(pk,1)+'</b> (মোট ওজন '+fb(allKg,0)+' কেজি'+(estKg?', এর মধ্যে '+fb(estKg,0)+' কেজি আনুমানিক':'')+'). বাজারদর এর চেয়ে বেশি হলে লাভ।</div>'}
+ // খরচের ভাগ
+ if(cost>0){
+  h+='<div class="pa-bar">'+parts.filter(x=>x[1]>0).map(x=>'<i style="width:'+(x[1]/cost*100)+'%;background:'+x[2]+'" title="'+x[0]+'"></i>').join("")+'</div>';
+  h+=parts.map(x=>'<div class="pa-row"><span><b class="pa-dot" style="background:'+x[2]+'"></b>'+x[0]+'</span><span>'+tk(x[1])+' <em>'+bn(Math.round(x[1]/cost*100))+'%</em></span></div>').join("");
+ }
+ // কার্যকারিতা
+ let md=chicks?dead/chicks*100:0,pb=ag>0&&f.birds>0?f.feed/f.birds/ag*1000:0;
+ h+='<div class="pa-sub">📊 খামারের কার্যকারিতা</div><div class="pa-grid">'+
+  card("মৃত্যুহার",fb(md,1)+"%",md>5?"#ff7070":"#3ddc84","স্বাভাবিক ৫% এর নিচে")+
+  card("FCR",f.fcr?f.fcr.toFixed(2):"—",f.fcr?(f.fcr<=f.tg?"#3ddc84":"#ff7070"):"","টার্গেট "+f.tg.toFixed(2))+
+  card("প্রতি মুরগি দৈনিক ফিড",pb?fb(pb,0)+" গ্রাম":"—","","গড়, বয়স "+bn(ag)+" দিন")+
+  card("ফিড খরচ প্রতি কেজি মাংসে",allKg>0&&total("feed")>0?"৳"+fb(total("feed")/allKg,1):"—","","ফিডের টাকা ÷ মোট ওজন")+'</div>';
+ el.innerHTML=h;
+}
+
+// ── নতুন বিশ্লেষণ: লক্ষ্য, ফিড তুলনা, মৃত্যু, FCR পূর্বাভাস ──
+function liveOn(d){
+ let c=+state.chicks||0;
+ let dead=(state.deaths||[]).filter(r=>String(r.date)<=d).reduce((a,r)=>a+(+r.qty||0),0);
+ let sold=(state.sales||[]).filter(r=>String(r.date)<=d).reduce((a,r)=>a+(+r.qty||0),0)
+  +(((state.otherSales||{}).chicken)||[]).filter(r=>String(r.date)<=d).reduce((a,r)=>a+(+r.pcs||0),0)
+  +(state.gifts||[]).filter(r=>String(r.date)<=d).reduce((a,r)=>a+(+r.qty||0),0);
+ return Math.max(0,c-dead-sold);
+}
+window.anGoalSave=function(){
+ state.goalFcr=+$a("gFcr").value||0;state.goalMort=+$a("gMort").value||0;state.goalWt=+$a("gWt").value||0;state.goalProfit=+$a("gProfit").value||0;
+ if(state.goalFcr>0)state.targetFCR=state.goalFcr;
+ save();renderGoals();
+};
+function goalRow(t,now,goal,fmtv,lowerBetter,sub){
+ if(!(goal>0))return '<div class="gl-row"><div class="gl-h"><span>'+t+'</span><em>লক্ষ্য দিন</em></div></div>';
+ if(now===null)return '<div class="gl-row"><div class="gl-h"><span>'+t+'</span><em>এখনও হিসাব করার মতো তথ্য নেই</em></div></div>';
+ let ok=lowerBetter?now<=goal:now>=goal;
+ let pc=lowerBetter?Math.max(0,Math.min(100,goal/Math.max(now,1e-9)*100)):Math.max(0,Math.min(100,now/goal*100));
+ return '<div class="gl-row"><div class="gl-h"><span>'+t+'</span><em style="color:'+(ok?"#3ddc84":"#ffb070")+'">'+(ok?"✅ ":"⚠️ ")+'এখন '+fmtv(now)+' / লক্ষ্য '+fmtv(goal)+'</em></div><div class="gl-bar"><i style="width:'+pc+'%;background:'+(ok?"#3ddc84":"#fbbf24")+'"></i></div>'+(sub?'<div class="gl-s">'+sub+'</div>':'')+'</div>';
+}
+function renderGoals(){
+ let el=$a("anGoals");if(!el)return;
+ [["gFcr","goalFcr"],["gMort","goalMort"],["gWt","goalWt"],["gProfit","goalProfit"]].forEach(x=>{let i=$a(x[0]);if(i&&document.activeElement!==i)i.value=state[x[1]]||""});
+ let f=fcrStats(),chicks=+state.chicks||0,dead=deathTotal()||(+state.dead||0);
+ let cost=(+state.chicks||0)*(+state.chickPrice||0)+total("feed")+total("medicine")+workersTotal()+total("other")+total("litter")+total("power")+rentTotal();
+ let net=salesTotal()+otherSalesGrand()-cost;
+ let w0=state.startDate&&livePcs()>0?anW0().w*1000:null;
+ let ab=(typeof avgBreak==="function")?avgBreak():null;
+ let curW=(ab&&ab.q>0&&livePcs()===0)?ab.avg*1000:w0;
+ el.innerHTML=
+  goalRow("🎯 FCR",f.fcr>0?f.fcr:null,+state.goalFcr,v=>v.toFixed(2),true,"FCR যত কম তত ভালো")+
+  goalRow("☠️ মৃত্যুহার",chicks?dead/chicks*100:null,+state.goalMort,v=>fb(v,1)+"%",true,"মৃত্যু "+bn(dead)+" টি")+
+  goalRow("⚖️ গড় ওজন",curW,+state.goalWt,v=>fb(v,0)+" গ্রাম",false,state.startDate?"বয়স "+bn(days())+" দিন":"")+
+  goalRow("💰 নিট লাভ",net,+state.goalProfit,v=>(v<0?"−":"")+"৳"+fb(Math.abs(v),0),false,net<(+state.goalProfit||0)&&+state.goalProfit>0?"আরও ৳"+fb((+state.goalProfit)-net,0)+" দরকার":"");
+}
+function renderFeedCmp(){
+ let el=$a("anFeedCmp");if(!el)return;
+ if(!state.startDate){el.innerHTML='<div class="an-alert info">আগে বাচ্চা আসার তারিখ দিন।</div>';return}
+ let by={};(state.dailyFeed||[]).forEach(r=>{by[r.date]=(by[r.date]||0)+dfKg(r)});
+ let pts=Object.keys(by).sort().map(d=>{let a=ageOn(d),b=liveOn(d);return a===null||b<=0?null:{age:a,g:by[d]*1000/b,std:intakeAt(a),d:d}}).filter(Boolean);
+ if(!pts.length){el.innerHTML='<div class="an-alert info">"দৈনিক খাবার" পেজে ফিড লিখলে এখানে তুলনা আসবে।</div>';return}
+ const W=360,H=210,L=38,R=12,T=14,B=28,maxD=42;
+ let maxG=250;pts.forEach(p=>{if(p.g>maxG)maxG=Math.ceil(p.g/50)*50});
+ const X=d=>L+(W-L-R)*Math.min(d,maxD)/maxD,Y=g=>T+(H-T-B)*(1-g/maxG);
+ let o='<div class="an-leg"><span><i style="background:#86e3cc"></i>স্ট্যান্ডার্ড</span><span><i style="background:#ff8a5c"></i>আপনার মুরগি</span></div><svg class="an-svg" viewBox="0 0 '+W+' '+H+'" role="img">';
+ for(let g=0;g<=maxG;g+=50)o+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(g)+'" y2="'+Y(g)+'" stroke="#ffffff14"/><text x="'+(L-5)+'" y="'+(Y(g)+3)+'" text-anchor="end">'+bn(g)+'</text>';
+ for(let d=0;d<=maxD;d+=7)o+='<text x="'+X(d)+'" y="'+(H-10)+'" text-anchor="middle">'+bn(d)+'</text>';
+ o+='<text x="'+L+'" y="9">গ্রাম/মুরগি/দিন</text><text x="'+(W-R)+'" y="'+(H-1)+'" text-anchor="end">বয়স (দিন)</text>';
+ o+='<polyline points="'+[0,7,14,21,28,35,42].map(d=>X(d)+","+Y(intakeAt(d))).join(" ")+'" fill="none" stroke="#86e3cc" stroke-width="2" stroke-dasharray="5 4"/>';
+ o+='<polyline points="'+pts.map(p=>X(p.age)+","+Y(p.g)).join(" ")+'" fill="none" stroke="#ff8a5c" stroke-width="2.2"/>';
+ pts.forEach(p=>{o+='<circle cx="'+X(p.age)+'" cy="'+Y(p.g)+'" r="3" fill="#ff8a5c"><title>'+bn(p.age)+' দিন: '+fb(p.g,0)+' গ্রাম (স্ট্যান্ডার্ড '+fb(p.std,0)+')</title></circle>'});
+ o+='</svg>';
+ let last=pts.slice(-3),ag=last.reduce((a,p)=>a+p.g,0)/last.length,as=last.reduce((a,p)=>a+p.std,0)/last.length,df=(ag/as-1)*100;
+ let cls=df>=-10&&df<=15?"good":df<-15?"bad":"info";
+ o+='<div class="an-alert '+cls+'" style="margin-top:8px">শেষ '+bn(last.length)+' দিনের গড়: <b>'+fb(ag,0)+' গ্রাম/মুরগি/দিন</b>, স্ট্যান্ডার্ড '+fb(as,0)+' গ্রাম ('+(df>=0?"+":"−")+fb(Math.abs(df),0)+'%)। '+(df<-15?"খাওয়া বেশ কম — পানি, ফিডের মান, রোগ বা গরম দেখুন।":df<-10?"খাওয়া একটু কম, নজর রাখুন।":df>15?"স্ট্যান্ডার্ডের চেয়ে বেশি খাচ্ছে — অপচয় বা হিসাবের ভুল আছে কিনা দেখুন।":"খাওয়া স্বাভাবিক।")+'</div>';
+ el.innerHTML=o;
+}
+function renderMort(){
+ let el=$a("anMort");if(!el)return;
+ let ds=(state.deaths||[]).filter(r=>+r.qty>0),chicks=+state.chicks||0;
+ if(!ds.length){el.innerHTML='<div class="an-alert good">এখনও কোনো মৃত্যু যোগ করা হয়নি।</div>';return}
+ let total=ds.reduce((a,r)=>a+(+r.qty||0),0),wk={},rs={};
+ ds.forEach(r=>{let a=ageOn(r.date);let w=a===null?-1:Math.min(5,a<=7?0:Math.ceil(a/7)-1);wk[w]=(wk[w]||0)+(+r.qty||0);let k=String(r.reason||"").trim()||"কারণ লেখা নেই";rs[k]=(rs[k]||0)+(+r.qty||0)});
+ const lab=["১ম সপ্তাহ (০–৭ দিন)","২য় সপ্তাহ (৮–১৪)","৩য় সপ্তাহ (১৫–২১)","৪র্থ সপ্তাহ (২২–২৮)","৫ম সপ্তাহ (২৯–৩৫)","৬ষ্ঠ+ সপ্তাহ (৩৬+)"];
+ let max=Math.max.apply(null,Object.values(wk));
+ let h='<div class="an-alert '+(chicks&&total/chicks*100>5?"bad":"info")+'"><b>মোট মৃত্যু '+bn(total)+' টি'+(chicks?' ('+fb(total/chicks*100,2)+'%)':'')+'</b></div><div class="pa-sub" style="margin-top:10px">বয়স অনুযায়ী</div>';
+ for(let i=0;i<6;i++){let v=wk[i]||0;if(!v&&i>Math.max(0,days()?Math.ceil(days()/7)-1:0))continue;h+='<div class="mt-row"><span>'+lab[i]+'</span><div class="gl-bar"><i style="width:'+(max?v/max*100:0)+'%;background:#e0775a"></i></div><b>'+bn(v)+(chicks?' <small>('+fb(v/chicks*100,1)+'%)</small>':'')+'</b></div>'}
+ if(wk[-1])h+='<div class="an-note">'+bn(wk[-1])+' টি মৃত্যুর বয়স বের করা যায়নি (বাচ্চা আসার তারিখ নেই)।</div>';
+ let w1=wk[0]||0;
+ if(chicks&&w1/chicks*100>1)h+='<div class="an-alert bad" style="margin-top:8px">⚠️ প্রথম সপ্তাহেই '+fb(w1/chicks*100,1)+'% মরেছে (সাধারণত ১% এর নিচে থাকে)। বাচ্চার মান, ব্রুডিং তাপমাত্রা ও প্রথম ২৪ ঘণ্টার পানি-খাবার দেখুন।</div>';
+ h+='<div class="pa-sub" style="margin-top:12px">কারণ অনুযায়ী</div>';
+ Object.keys(rs).sort((a,b)=>rs[b]-rs[a]).forEach(k=>{h+='<div class="pa-row"><span>'+esc(k)+'</span><span>'+bn(rs[k])+' টি <em>'+bn(Math.round(rs[k]/total*100))+'%</em></span></div>'});
+ el.innerHTML=h;
+}
+function renderFcrProj(){
+ let el=$a("anFcrProj");if(!el)return;
+ let f=fcrStats(),age=days(),live=livePcs(),fi=feedInfo();
+ if(!state.startDate){el.innerHTML='<div class="an-alert info">আগে বাচ্চা আসার তারিখ দিন।</div>';return}
+ if(live<=0){el.innerHTML='<div class="an-alert info">খামারে এখন মুরগি নেই, তাই পূর্বাভাস দেওয়া যাচ্ছে না।</div>';return}
+ if(!(f.feed>0)||!(fi.avg>0)){el.innerHTML='<div class="an-alert info">"দৈনিক খাবার" পেজে ফিড লিখুন, তাহলে পূর্বাভাস আসবে।</div>';return}
+ let w0=anW0(),harv=f.harv,tg=f.tg,maxN=Math.min(7,Math.max(0,42-age)),rows=[],extra=0;
+ for(let n=0;n<=maxN;n++){
+  if(n>0)extra+=fi.avg*intakeAt(age+n)/intakeAt(Math.max(1,age-1));
+  let w=w0.w+(stdAt(age+n)-stdAt(age))/1000,tw=harv+live*w,feed=f.feed+extra;
+  rows.push({n:n,age:age+n,fcr:tw>0?feed/tw:0,feed:feed,avg:w});
+ }
+ let best=rows.reduce((a,b)=>b.fcr<a.fcr-0.005&&b.fcr>0?b:a,rows[0]);
+ let h='<div class="an-alert info"><b>বর্তমান FCR '+rows[0].fcr.toFixed(2)+'</b> (টার্গেট '+tg.toFixed(2)+'). '+(best.n>0?'পূর্বাভাসে '+bn(best.n)+' দিন পরে FCR সবচেয়ে কম ('+best.fcr.toFixed(2)+').':'পূর্বাভাসে আজই FCR সবচেয়ে ভালো।')+' সাধারণত বয়স বাড়লে FCR বাড়ে, তাই বেশি দিন রাখলে ফিড খরচের তুলনায় লাভ কমতে পারে।</div>';
+ h+='<div class="an-proj" style="margin-top:8px"><table><thead><tr><th>কবে</th><th>বয়স</th><th>গড় ওজন</th><th>মোট ফিড</th><th>FCR</th></tr></thead><tbody>';
+ rows.forEach(r=>{h+='<tr class="'+(r.fcr>tg?"neg":"")+'"><td>'+(r.n?"+"+bn(r.n)+" দিন":"আজ")+'</td><td>'+bn(r.age)+'</td><td>'+fb(r.avg*1000,0)+' গ্রাম</td><td>'+fb(r.feed,0)+' কেজি</td><td><b>'+r.fcr.toFixed(2)+'</b></td></tr>'});
+ h+='</tbody></table></div><div class="an-note">ধরা হয়েছে: ফিড শেষ ৩ দিনের গড় থেকে স্ট্যান্ডার্ড হারে বাড়বে, ওজন '+w0.src+' স্ট্যান্ডার্ড হারে বাড়বে। লাল সারি = টার্গেটের চেয়ে বেশি FCR।</div>';
+ el.innerHTML=h;
+}
 function renderAnalysis(){
  if(!$a("anStock"))return;
+ try{renderProfit();renderGoals();renderFeedCmp();renderMort();renderFcrProj()}catch(e){console.error(e)}
  let b=$a("anBagKg");if(b&&document.activeElement!==b)b.value=bagKg();
  let d=$a("anWDate");if(d&&!d.value)d.value=todayISO();
  renderStock();renderWeights();renderProj();
@@ -2635,7 +2814,7 @@ function renderCharts(){
  let feed=ds.map(()=>0),dead=ds.map(()=>0),cost=ds.map(()=>0);
  (state.dailyFeed||[]).forEach(r=>{if(r.date in idx)feed[idx[r.date]]+=dfKg(r)});
  (state.deaths||[]).forEach(r=>{if(r.date in idx)dead[idx[r.date]]+=+r.qty||0});
- ["feed","medicine","other","litter"].forEach(k=>(state[k]||[]).forEach(r=>{if(r.date in idx)cost[idx[r.date]]+=(+r.qty||0)*(+r.rate||0)}));
+ ["feed","medicine","other","litter","power"].forEach(k=>(state[k]||[]).forEach(r=>{if(r.date in idx)cost[idx[r.date]]+=(+r.qty||0)*(+r.rate||0)}));
  if(wageOn(state))ds.forEach((d,i)=>{cost[i]+=wageOnDay(state,d)});else (state.workers||[]).forEach(r=>{if(r.date in idx)cost[idx[r.date]]+=+r.amount||0});
  (state.rent||[]).forEach(r=>{if(r.date in idx)cost[idx[r.date]]+=+r.amt||0});
  const f1=v=>{let r=Math.round(v*10)/10;return bn(r)};
@@ -2915,6 +3094,191 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
  }
  renderFcrPage();
  const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderFcrPage()}catch(e){console.error(e)}return r};
+})();
+
+// ══════ Google Drive ব্যাকআপ ══════
+(function(){
+ const FILE="poultry-backup-latest.json",SCOPE="https://www.googleapis.com/auth/drive.file";
+ const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
+ const cid=()=>(LS("gdClientId")||"").trim();
+ let tok=null,tokExp=0,tc=null,gisP=null;
+ function loadGis(){
+  if(window.google&&google.accounts&&google.accounts.oauth2)return Promise.resolve();
+  if(gisP)return gisP;
+  gisP=new Promise((res,rej)=>{let sc=document.createElement("script");sc.src="https://accounts.google.com/gsi/client";sc.onload=res;sc.onerror=()=>{gisP=null;rej(new Error("ইন্টারনেট নেই"))};document.head.appendChild(sc)});
+  return gisP;
+ }
+ function getToken(interactive){
+  if(tok&&Date.now()<tokExp-60000)return Promise.resolve(tok);
+  return loadGis().then(()=>new Promise((res,rej)=>{
+   tc=google.accounts.oauth2.initTokenClient({client_id:cid(),scope:SCOPE,
+    callback:r=>{if(r&&r.access_token){tok=r.access_token;tokExp=Date.now()+(+r.expires_in||3600)*1000;LS("gdLinked","1");res(tok)}else rej(new Error((r&&r.error)||"অনুমতি পাওয়া যায়নি"))},
+    error_callback:e=>rej(new Error((e&&e.type)||"popup_closed"))});
+   tc.requestAccessToken({prompt:interactive?(LS("gdLinked")?"":"consent"):""});
+  }));
+ }
+ async function api(url,opt){
+  let r=await fetch(url,Object.assign({headers:{Authorization:"Bearer "+tok}},opt));
+  if(r.status===401){tok=null;throw new Error("আবার সাইন-ইন দরকার")}
+  if(!r.ok)throw new Error("Drive ত্রুটি "+r.status);
+  return r;
+ }
+ async function findFile(){
+  let q=encodeURIComponent("name='"+FILE+"' and trashed=false");
+  let j=await (await api("https://www.googleapis.com/drive/v3/files?q="+q+"&fields=files(id,modifiedTime)&orderBy=modifiedTime desc&spaces=drive")).json();
+  return (j.files||[])[0]||null;
+ }
+ async function upload(){
+  let body=JSON.stringify(store),ex=await findFile(),b="bnd"+Date.now();
+  let meta=ex?{name:FILE}:{name:FILE,mimeType:"application/json"};
+  let mp="--"+b+"\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"+JSON.stringify(meta)+"\r\n--"+b+"\r\nContent-Type: application/json\r\n\r\n"+body+"\r\n--"+b+"--";
+  let url=ex?"https://www.googleapis.com/upload/drive/v3/files/"+ex.id+"?uploadType=multipart":"https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart";
+  await api(url,{method:ex?"PATCH":"POST",headers:{Authorization:"Bearer "+tok,"Content-Type":"multipart/related; boundary="+b},body:mp});
+ }
+ function stamp(){store.lastBackup=Date.now();store.lastDrive=new Date().toISOString().slice(0,10);delete store.backupSnooze;save();try{renderBackup()}catch(e){}}
+ function status(m,c){let e=document.getElementById("gdStatus");if(e){e.textContent=m;e.style.color=c||"#9fd8b8"}}
+ window.gdBackupNow=async function(){
+  if(!cid()){status("আগে Client ID বসান","#ffb070");return}
+  status("⏳ ব্যাকআপ হচ্ছে...");
+  try{await getToken(true);await upload();stamp();status("✅ Drive-এ ব্যাকআপ হয়েছে ("+new Date().toLocaleTimeString("bn-BD")+")");showToast("☁️ Drive-এ ব্যাকআপ হয়েছে")}
+  catch(e){status("❌ "+e.message,"#ff8a8a")}
+ };
+ window.gdRestoreNow=async function(){
+  if(!cid()){status("আগে Client ID বসান","#ffb070");return}
+  status("⏳ Drive থেকে খোঁজা হচ্ছে...");
+  try{
+   await getToken(true);let f=await findFile();
+   if(!f){status("Drive-এ কোনো ব্যাকআপ পাওয়া যায়নি","#ffb070");return}
+   let t=await (await api("https://www.googleapis.com/drive/v3/files/"+f.id+"?alt=media")).text();
+   status("ব্যাকআপ পাওয়া গেছে ("+new Date(f.modifiedTime).toLocaleString("bn-BD")+")");
+   closeInfo();restoreData(new File([t],FILE,{type:"application/json"}));
+  }catch(e){status("❌ "+e.message,"#ff8a8a")}
+ };
+ window.gdSaveId=function(){
+  let v=document.getElementById("gdCid").value.trim();
+  if(v&&!/\.apps\.googleusercontent\.com$/.test(v)){status("❌ Client ID ঠিক নয় (শেষে .apps.googleusercontent.com থাকবে)","#ff8a8a");return}
+  LS("gdClientId",v||null);tok=null;status(v?"✅ Client ID সেভ হয়েছে":"মুছে ফেলা হয়েছে");
+ };
+ window.gdAuto=function(on){LS("gdAuto",on?"1":"0")};
+ window.gdOpen=function(){
+  let lastD=store.lastDrive?("শেষ Drive ব্যাকআপ: "+store.lastDrive):"";
+  document.getElementById("infoTitle").textContent="☁️ ব্যাকআপ ও ফেরত আনা";
+  document.getElementById("infoBody").innerHTML=
+  '<div style="font-size:13px;color:#9fd8b8;margin-bottom:10px">'+lastD+'</div>'+
+  '<div style="font-weight:700;margin-bottom:6px">📧 Gmail-এ ব্যাকআপ</div>'+
+  '<div style="font-size:12.5px;color:#9ab;line-height:1.7;margin-bottom:8px">নিচের বাটন চাপুন → খোলা তালিকা থেকে <b>Gmail</b> বেছে নিন → নিজের ঠিকানায় পাঠান। ব্যাকআপ ফাইল সংযুক্ত হয়ে যাবে।</div>'+
+  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"><button class="tbtn" onclick="closeInfo();backupShare()">📧 Gmail-এ পাঠান</button><button class="tbtn" onclick="closeInfo();document.getElementById(\'restoreFile\').click()">📥 ফেরত আনুন</button></div>'+
+  '<div style="font-size:12px;color:#7a9aaa;line-height:1.6;margin-bottom:10px">ফেরত আনতে: Gmail থেকে ফাইলটা ফোনে ডাউনলোড করুন, তারপর "ফেরত আনুন" চেপে ওই ফাইল বেছে নিন।</div>'+
+  '<details style="margin-top:6px"><summary style="cursor:pointer;color:#ffd070;font-size:13px">☁️ Google Drive (পরে লাগলে)</summary><div style="margin-top:8px">'+
+  '<label style="font-size:12px;color:#9ab">Google Client ID (একবারই বসাতে হবে)</label>'+
+  '<input id="gdCid" type="text" placeholder="১২৩...apps.googleusercontent.com" value="'+esc(cid())+'" style="width:100%;margin:4px 0 6px">'+
+  '<button class="tbtn" onclick="gdSaveId()" style="margin-bottom:10px">💾 Client ID সেভ</button>'+
+  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"><button class="tbtn" onclick="gdBackupNow()">☁️ এখনই Drive-এ ব্যাকআপ</button><button class="tbtn" onclick="gdRestoreNow()">📥 Drive থেকে ফেরত আনুন</button></div>'+
+  '<label style="font-size:13px;display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" '+(LS("gdAuto")==="1"?"checked":"")+' onchange="gdAuto(this.checked)" style="width:auto"> অ্যাপ খুললে দিনে একবার অটো-ব্যাকআপ</label>'+
+  '<div id="gdStatus" style="font-size:13px;min-height:18px;margin:6px 0"></div>'+
+  '<details style="font-size:12.5px;color:#9ab;line-height:1.7"><summary style="cursor:pointer;color:#ffd070">❓ Client ID কীভাবে পাবেন?</summary>'+
+  '<ol style="padding-left:18px;margin:6px 0"><li>console.cloud.google.com এ গিয়ে Gmail দিয়ে ঢুকুন → নতুন Project বানান।</li>'+
+  '<li>APIs &amp; Services → Library → <b>Google Drive API</b> → Enable।</li>'+
+  '<li>OAuth consent screen → External → অ্যাপের নাম দিন, নিজের Gmail দিন → Save। এরপর Audience/Test users এ নিজের Gmail যোগ করুন।</li>'+
+  '<li>Credentials → Create Credentials → OAuth client ID → <b>Web application</b>।</li>'+
+  '<li>Authorized JavaScript origins এ আপনার অ্যাপের ঠিকানা দিন: <code>'+esc(location.origin)+'</code></li>'+
+  '<li>Create চাপলে যে Client ID আসবে তা কপি করে উপরের ঘরে বসান।</li></ol></details></div></details>';
+  document.getElementById("infoModal").classList.add("show");
+ };
+ // দিনে একবার অটো
+ setTimeout(function(){
+  try{
+   if(LS("gdAuto")!=="1"||!cid()||!LS("gdLinked")||!navigator.onLine||!hasData())return;
+   if(store.lastDrive===new Date().toISOString().slice(0,10))return;
+   getToken(false).then(upload).then(()=>{stamp();showToast("☁️ অটো ব্যাকআপ হয়েছে")}).catch(()=>{});
+  }catch(e){}
+ },4000);
+})();
+
+// ══════ বিক্রির মেমো / রসিদ ══════
+(function(){
+ const bn=n=>Number(n).toLocaleString("bn-BD");
+ const fb=(n,d)=>Number(n).toLocaleString("bn-BD",{maximumFractionDigits:d===undefined?2:d});
+ let cur=null;
+ function loadLogo(){return new Promise(res=>{let im=new Image();let el=document.querySelector(".logo-img");if(!el){res(null);return}im.onload=()=>res(im);im.onerror=()=>res(null);im.src=el.src})}
+ async function draw(r,idx){
+  try{await document.fonts.ready}catch(e){}
+  const W=760,H=1040,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  const F="'Hind Siliguri','Noto Sans Bengali',sans-serif";
+  x.fillStyle="#fff";x.fillRect(0,0,W,H);
+  // হেডার
+  let g=x.createLinearGradient(0,0,W,0);g.addColorStop(0,"#06301f");g.addColorStop(1,"#0d7a4a");x.fillStyle=g;x.fillRect(0,0,W,210);
+  let lg=await loadLogo();if(lg)x.drawImage(lg,30,18,174,174);
+  x.fillStyle="#fff";x.textBaseline="alphabetic";x.font="800 46px "+F;x.fillText("ব্রাদার্স পোল্ট্রি ফার্ম",224,98);
+  x.fillStyle="#ffe08a";x.font="600 26px "+F;x.fillText("বিক্রয় মেমো / রসিদ",224,146);
+  x.fillStyle="#bfe9d3";x.font="500 20px "+F;x.fillText("মেমো নং: "+bn(idx+1)+" • "+(r.date||""),224,184);
+  // গ্রাহক
+  x.fillStyle="#0a4a2f";x.font="700 28px "+F;x.fillText("ক্রেতা: "+(r.customer||"—"),40,272);
+  x.strokeStyle="#cfe3d8";x.lineWidth=2;x.beginPath();x.moveTo(40,292);x.lineTo(W-40,292);x.stroke();
+  let q=+r.qty||0,w=+r.weight||0,rate=+r.rate||0,tot=w*rate,paid=+r.paid||0,due=tot-paid;
+  let rows=[["মুরগির সংখ্যা",bn(q)+" টি"],["মোট ওজন",fb(w)+" কেজি"],["গড় ওজন",q?fb(w/q)+" কেজি/মুরগি":"—"],["দর",fb(rate,0)+" টাকা/কেজি"]];
+  let y=345;
+  rows.forEach((rw,i)=>{if(i%2===0){x.fillStyle="#f3faf6";x.fillRect(40,y-38,W-80,58)}x.fillStyle="#445";x.font="500 26px "+F;x.textAlign="left";x.fillText(rw[0],56,y);x.fillStyle="#111";x.font="700 26px "+F;x.textAlign="right";x.fillText(rw[1],W-56,y);y+=58});
+  x.textAlign="left";
+  // পাল্লা
+  let pl=r.pallas||[];
+  if(pl.length){y+=10;x.fillStyle="#0a4a2f";x.font="700 22px "+F;x.fillText("পাল্লা অনুযায়ী",56,y);y+=14;
+   pl.slice(0,8).forEach((p,i)=>{y+=34;x.fillStyle="#556";x.font="500 21px "+F;x.fillText("পাল্লা "+bn(i+1)+": "+bn(p.qty)+" টি, "+fb(p.weight)+" কেজি",72,y)});
+   if(pl.length>8){y+=34;x.fillText("... আরও "+bn(pl.length-8)+" টি পাল্লা",72,y)}
+   y+=14}
+  y+=30;
+  // মোট
+  x.fillStyle="#0a4a2f";x.fillRect(40,y-40,W-80,70);x.fillStyle="#fff";x.font="700 30px "+F;x.fillText("মোট টাকা",60,y+6);x.textAlign="right";x.fillText("৳"+fb(tot,0),W-60,y+6);x.textAlign="left";y+=70;
+  x.fillStyle="#445";x.font="600 26px "+F;x.fillText("জমা / পরিশোধ",60,y+10);x.textAlign="right";x.fillStyle="#0d7a4a";x.fillText("৳"+fb(paid,0),W-60,y+10);x.textAlign="left";y+=62;
+  x.fillStyle=due>0?"#fdecea":"#e8f7ee";x.fillRect(40,y-38,W-80,64);x.fillStyle=due>0?"#c62828":"#0d7a4a";x.font="800 30px "+F;x.fillText(due>0?"বাকি":"পরিশোধিত",60,y+4);x.textAlign="right";x.fillText(due>0?"৳"+fb(due,0):"✔ বাকি নেই",W-60,y+4);x.textAlign="left";
+  // ফুটার
+  x.strokeStyle="#999";x.lineWidth=1.5;x.beginPath();x.moveTo(W-300,H-130);x.lineTo(W-50,H-130);x.stroke();
+  x.fillStyle="#667";x.font="500 20px "+F;x.textAlign="center";x.fillText("কর্তৃপক্ষের স্বাক্ষর",W-175,H-100);
+  x.textAlign="left";x.fillStyle="#0a4a2f";x.font="700 26px "+F;x.fillText("ধন্যবাদ, আবার আসবেন 🙏",50,H-100);
+  x.fillStyle="#aab";x.font="500 16px "+F;x.fillText("ব্রাদার্স পোল্ট্রি ফার্ম",50,H-60);
+  return c;
+ }
+ window.memoOpen=async function(i){
+  let r=state.sales[i];if(!r)return;cur={r:r,i:i};
+  let c=await draw(r,i);cur.c=c;
+  document.getElementById("infoTitle").textContent="🧾 বিক্রির মেমো";
+  document.getElementById("infoBody").innerHTML='<img id="memoImg" src="'+c.toDataURL("image/png")+'" style="width:100%;border-radius:10px;background:#fff">'+
+   '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="tbtn" onclick="memoShare(\'jpg\')">🖼️ JPG সেভ/পাঠান</button><button class="tbtn" onclick="memoShare(\'pdf\')">📄 PDF সেভ/পাঠান</button><button class="tbtn" onclick="memoPrint()">🖨️ প্রিন্ট</button></div>';
+  document.getElementById("infoModal").classList.add("show");
+ };
+ function jpgBlob(){return new Promise(res=>cur.c.toBlob(res,"image/jpeg",0.93))}
+ function pdfBlob(jpg){
+  return jpg.arrayBuffer().then(buf=>{
+   const enc=new TextEncoder(),parts=[],offs=[];let len=0;
+   const add=d=>{let u=typeof d==="string"?enc.encode(d):d;parts.push(u);len+=u.length};
+   const w=cur.c.width,h=cur.c.height,PW=595,PH=842,sc=Math.min(PW/w,PH/h),iw=(w*sc).toFixed(2),ih=(h*sc).toFixed(2),ix=((PW-w*sc)/2).toFixed(2),iy=((PH-h*sc)/2).toFixed(2);
+   const content="q "+iw+" 0 0 "+ih+" "+ix+" "+iy+" cm /Im0 Do Q";
+   add("%PDF-1.4\n");
+   const obj=(n,body)=>{offs[n]=len;add(n+" 0 obj\n"+body+"\nendobj\n")};
+   obj(1,"<< /Type /Catalog /Pages 2 0 R >>");
+   obj(2,"<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
+   obj(3,"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 "+PW+" "+PH+"] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>");
+   offs[4]=len;add("4 0 obj\n<< /Type /XObject /Subtype /Image /Width "+w+" /Height "+h+" /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "+buf.byteLength+" >>\nstream\n");add(new Uint8Array(buf));add("\nendstream\nendobj\n");
+   obj(5,"<< /Length "+content.length+" >>\nstream\n"+content+"\nendstream");
+   const xr=len;let x="xref\n0 6\n0000000000 65535 f \n";
+   for(let n=1;n<=5;n++)x+=String(offs[n]).padStart(10,"0")+" 00000 n \n";
+   add(x+"trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n"+xr+"\n%%EOF");
+   return new Blob(parts,{type:"application/pdf"});
+  });
+ }
+ window.memoShare=async function(kind){
+  if(!cur)return;
+  let base="memo-"+(cur.r.customer||"customer").replace(/[^\wঀ-৿]+/g,"_")+"-"+(cur.r.date||"");
+  let jb=await jpgBlob(),b,name,type;
+  if(kind==="pdf"){b=await pdfBlob(jb);name=base+".pdf";type="application/pdf"}else{b=jb;name=base+".jpg";type="image/jpeg"}
+  try{let f=new File([b],name,{type:type});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"বিক্রয় মেমো"});return}}catch(e){if(e&&e.name==="AbortError")return}
+  let a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();showToast("✅ মেমো "+(kind==="pdf"?"PDF":"JPG")+" সেভ হয়েছে");
+ };
+ window.memoPrint=function(){
+  if(!cur)return;let u=cur.c.toDataURL("image/png"),f=document.createElement("iframe");f.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";document.body.appendChild(f);
+  let d=f.contentWindow.document;d.open();d.write('<html><head><style>@page{margin:10mm}body{margin:0}img{width:100%}</style></head><body><img src="'+u+'"></body></html>');d.close();
+  f.onload=function(){};setTimeout(()=>{f.contentWindow.focus();f.contentWindow.print();setTimeout(()=>f.remove(),2000)},300);
+ };
 })();
 </script>
 </body></html>
