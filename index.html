@@ -1061,7 +1061,7 @@ td:first-child{font-weight:600}
 <div class="section noprint">📑 পূর্ণাঙ্গ রিপোর্ট</div>
 <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px">
 <label style="flex:1;min-width:170px">📆 রিপোর্টের মাস<select id="reportMonth" onchange="renderReport()"></select></label>
-<button class="printbtn" style="margin:0" onclick="printReport()">🖨️ PDF / প্রিন্ট</button>
+<button class="printbtn" style="margin:0;background:linear-gradient(135deg,#f59e0b,#d97706)" onclick="reportOut('jpg','save')">🖼️ JPG সেভ</button><button class="printbtn" style="margin:0;background:linear-gradient(135deg,#ef4444,#b91c1c)" onclick="reportOut('pdf','save')">📄 PDF সেভ</button><button class="printbtn" style="margin:0;background:linear-gradient(135deg,#22c55e,#15803d)" onclick="reportOut('pdf','share')">📤 শেয়ার</button><button class="printbtn" style="margin:0;background:linear-gradient(135deg,#64748b,#334155)" onclick="printReport()">🖨️ প্রিন্ট</button>
 <button class="printbtn" style="margin:0;background:linear-gradient(135deg,#0ea5e9,#0369a1)" onclick="exportReportExcel()">📊 Excel ডাউনলোড</button>
 </div>
 <div id="reportSheet">
@@ -3195,10 +3195,94 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
  },4000);
 })();
 
+// ══════ ফাইল আউটপুট (JPG / PDF সেভ ও শেয়ার) ══════
+const toEn=t=>String(t==null?"":t).replace(/[০-৯]/g,d=>"০১২৩৪৫৬৭৮৯".indexOf(d));
+function deepEn(o){if(typeof o==="string")return toEn(o);if(Array.isArray(o))return o.map(deepEn);if(o&&typeof o==="object"){let r={};for(const k in o)r[k]=deepEn(o[k]);return r}return o}
+{const _rd=reportData;reportData=function(){return deepEn(_rd.apply(this,arguments))}}
+function _enNodes(root){let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n;while(n=w.nextNode()){if(/[০-৯]/.test(n.nodeValue))n.nodeValue=toEn(n.nodeValue)}}
+{const _rr=renderReport;renderReport=function(){let r=_rr.apply(this,arguments);let e=document.getElementById("reportSheet");if(e)_enNodes(e);return r}}
+window.outJpg=(c,q)=>new Promise(res=>c.toBlob(res,"image/jpeg",q||0.95));
+window.outPdf=async function(canvases){
+ const enc=new TextEncoder(),parts=[],offs=[];let len=0;
+ const add=d=>{let u=typeof d==="string"?enc.encode(d):d;parts.push(u);len+=u.length};
+ const PW=595,PH=842,n=canvases.length;
+ let jpgs=[];for(const c of canvases){jpgs.push(new Uint8Array(await (await outJpg(c,0.95)).arrayBuffer()))}
+ add("%PDF-1.4\n");
+ const obj=(k,body)=>{offs[k]=len;add(k+" 0 obj\n"+body+"\nendobj\n")};
+ obj(1,"<< /Type /Catalog /Pages 2 0 R >>");
+ obj(2,"<< /Type /Pages /Kids ["+canvases.map((c,i)=>(3+i*3)+" 0 R").join(" ")+"] /Count "+n+" >>");
+ canvases.forEach((c,i)=>{
+  let pg=3+i*3,im=pg+1,ct=pg+2,w=c.width,h=c.height,sc=Math.min(PW/w,PH/h),iw=(w*sc).toFixed(2),ih=(h*sc).toFixed(2),ix=((PW-w*sc)/2).toFixed(2),iy=((PH-h*sc)/2).toFixed(2);
+  let content="q "+iw+" 0 0 "+ih+" "+ix+" "+iy+" cm /Im0 Do Q";
+  obj(pg,"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 "+PW+" "+PH+"] /Resources << /XObject << /Im0 "+im+" 0 R >> >> /Contents "+ct+" 0 R >>");
+  offs[im]=len;add(im+" 0 obj\n<< /Type /XObject /Subtype /Image /Width "+w+" /Height "+h+" /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "+jpgs[i].length+" >>\nstream\n");add(jpgs[i]);add("\nendstream\nendobj\n");
+  obj(ct,"<< /Length "+content.length+" >>\nstream\n"+content+"\nendstream");
+ });
+ const total=3+n*3,xr=len;let x="xref\n0 "+total+"\n0000000000 65535 f \n";
+ for(let k=1;k<total;k++)x+=String(offs[k]).padStart(10,"0")+" 00000 n \n";
+ add(x+"trailer\n<< /Size "+total+" /Root 1 0 R >>\nstartxref\n"+xr+"\n%%EOF");
+ return new Blob(parts,{type:"application/pdf"});
+};
+window.outSave=function(files){ // সরাসরি ডাউনলোড (শেয়ার নয়)
+ files.forEach((f,i)=>setTimeout(()=>{let a=document.createElement("a");a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)},i*500));
+ showToast("✅ "+files.map(f=>f.name.split(".").pop().toUpperCase()).join(", ")+" সেভ হয়েছে (ডাউনলোডে দেখুন)");
+};
+window.outShare=async function(files){
+ try{if(navigator.canShare&&navigator.canShare({files:files})){await navigator.share({files:files,title:"ব্রাদার্স পোল্ট্রি ফার্ম"});return true}}catch(e){if(e&&e.name==="AbortError")return true}
+ outSave(files);return false;
+};
+window.outFont="'Hind Siliguri','Noto Sans Bengali','Noto Sans',sans-serif";
+function _wrapTxt(x,t,maxW){let words=String(t).split(" "),lines=[],cur="";words.forEach(w=>{let tr=cur?cur+" "+w:w;if(x.measureText(tr).width>maxW&&cur){lines.push(cur);cur=w}else cur=tr});if(cur)lines.push(cur);return lines}
+async function reportCanvases(){
+ try{await document.fonts.ready}catch(e){}
+ const d=reportData(),S=2,W=1000,PH=1414,M=48,F=outFont,pages=[];
+ let logo=await new Promise(res=>{let im=new Image(),el=document.querySelector(".logo-img");if(!el){res(null);return}im.onload=()=>res(im);im.onerror=()=>res(null);im.src=el.src});
+ let cv,x,y;
+ const np=()=>{cv=document.createElement("canvas");cv.width=W*S;cv.height=PH*S;x=cv.getContext("2d");x.scale(S,S);x.fillStyle="#fff";x.fillRect(0,0,W,PH);pages.push(cv);y=M};
+ const th=()=>{x.fillStyle="#0a4a2f";x.fillRect(M,y,W-2*M,50);x.fillStyle="#fff";x.font="800 24px "+F;x.textAlign="left";x.textBaseline="middle";x.fillText("খাত",M+14,y+26);x.fillText("পরিমাণ",560,y+26);x.textAlign="right";x.fillText("টাকা (৳)",W-M-14,y+26);y+=50};
+ np();
+ // হেডার
+ let g=x.createLinearGradient(0,0,W,0);g.addColorStop(0,"#06301f");g.addColorStop(1,"#0d7a4a");x.fillStyle=g;x.fillRect(0,0,W,170);
+ if(logo)x.drawImage(logo,30,15,140,140);
+ x.fillStyle="#fff";x.textAlign="left";x.textBaseline="alphabetic";x.font="800 46px "+F;x.fillText("ব্রাদার্স পোল্ট্রি ফার্ম",190,80);
+ x.fillStyle="#ffe08a";x.font="700 26px "+F;x.fillText("পূর্ণাঙ্গ রিপোর্ট",190,120);
+ x.fillStyle="#cdeedd";x.font="600 20px "+F;let sl=_wrapTxt(x,d.sub,W-190-30);sl.slice(0,2).forEach((t,i)=>x.fillText(t,190,150+i*0));
+ y=170+24;
+ // তথ্য
+ d.info.forEach(it=>{x.font="600 22px "+F;let vl=_wrapTxt(x,it[1],W-2*M-300),h=Math.max(44,vl.length*30+14);
+  x.fillStyle="#eef6f1";x.fillRect(M,y,W-2*M,h-4);x.fillStyle="#334";x.textBaseline="middle";x.textAlign="left";x.font="600 22px "+F;x.fillText(it[0],M+12,y+(h-4)/2);
+  x.fillStyle="#000";x.font="800 22px "+F;x.textAlign="right";vl.forEach((t,i)=>x.fillText(t,W-M-12,y+(h-4)/2+(i-(vl.length-1)/2)*30));y+=h});
+ y+=16;th();
+ d.rows.forEach(r=>{
+  let big=r.t==="profit"||r.t==="loss",fs=big?26:23,wt=(r.t==="sec"||r.t==="tot"||big)?"800":"600";
+  x.font=wt+" "+fs+"px "+F;
+  let ll=_wrapTxt(x,r.l,r.t==="sec"?W-2*M-28:480),amt=r.v!==undefined?r.v:(r.a==null?"—":money(r.a)),h=Math.max(r.t==="sec"?48:52,ll.length*32+16);
+  if(y+h>PH-90){np();th()}
+  let bg=r.t==="sec"?"#e1f1e8":r.t==="tot"?"#ececec":r.t==="profit"?"#d4f0df":r.t==="loss"?"#fbdcdc":"#fff",col=r.t==="sec"?"#0a4a2f":r.t==="profit"?"#066a3f":r.t==="loss"?"#b01212":"#000";
+  x.fillStyle=bg;x.fillRect(M,y,W-2*M,h);x.fillStyle="#ccc";x.fillRect(M,y+h-1,W-2*M,1);
+  x.fillStyle=col;x.textBaseline="middle";x.textAlign="left";x.font=wt+" "+fs+"px "+F;
+  ll.forEach((t,i)=>x.fillText(t,M+14,y+h/2+(i-(ll.length-1)/2)*32));
+  if(r.t!=="sec"){x.font="600 22px "+F;x.fillStyle="#222";if(r.q)x.fillText(r.q,560,y+h/2);x.fillStyle=col;x.font=(r.t==="tot"||big?"800 ":"700 ")+fs+"px "+F;x.textAlign="right";x.fillText(amt,W-M-14,y+h/2)}
+  y+=h;
+ });
+ if(d.note){x.font="600 20px "+F;let nl=_wrapTxt(x,d.note,W-2*M);if(y+nl.length*28+20>PH-90)np();y+=14;x.fillStyle="#8a5a00";x.textAlign="left";x.textBaseline="top";nl.forEach((t,i)=>x.fillText(t,M,y+i*28));y+=nl.length*28}
+ pages.forEach((c,i)=>{let k=c.getContext("2d");k.font="500 18px "+F;k.fillStyle="#666";k.textBaseline="alphabetic";k.textAlign="left";
+  k.fillText("রিপোর্ট তৈরির তারিখ: "+new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})+"  •  ব্রাদার্স পোল্ট্রি ফার্ম",M,PH-34);k.textAlign="right";k.fillText("Page "+(i+1)+" / "+pages.length,W-M,PH-34)});
+ return pages;
+}
+window.reportOut=async function(kind,mode){
+ try{
+  showToast("⏳ তৈরি হচ্ছে...");
+  let cs=await reportCanvases(),base=toEn(reportFileBase()).replace(/[^\w\u0980-\u09FF\-. ]+/g,"_").replace(/\s+/g,"_").replace(/_+/g,"_")||"report",files=[];
+  if(kind==="pdf")files.push(new File([await outPdf(cs)],base+".pdf",{type:"application/pdf"}));
+  else for(let i=0;i<cs.length;i++)files.push(new File([await outJpg(cs[i])],base+(cs.length>1?"-"+(i+1):"")+".jpg",{type:"image/jpeg"}));
+  if(mode==="share")await outShare(files);else outSave(files);
+ }catch(e){showToast("❌ ফাইল তৈরি হয়নি: "+e.message)}
+};
 // ══════ বিক্রির মেমো / রসিদ ══════
 (function(){
- const bn=n=>Number(n).toLocaleString("bn-BD");
- const fb=(n,d)=>Number(n).toLocaleString("bn-BD",{maximumFractionDigits:d===undefined?2:d});
+ const bn=n=>Number(n).toLocaleString("en-US");
+ const fb=(n,d)=>Number(n).toLocaleString("en-US",{maximumFractionDigits:d===undefined?2:d});
  let cur=null;
  function loadLogo(){return new Promise(res=>{let im=new Image();let el=document.querySelector(".logo-img");if(!el){res(null);return}im.onload=()=>res(im);im.onerror=()=>res(null);im.src=el.src})}
  async function draw(r,idx){
@@ -3243,36 +3327,15 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
   let c=await draw(r,i);cur.c=c;
   document.getElementById("infoTitle").textContent="🧾 বিক্রির মেমো";
   document.getElementById("infoBody").innerHTML='<img id="memoImg" src="'+c.toDataURL("image/png")+'" style="width:100%;border-radius:10px;background:#fff">'+
-   '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="tbtn" onclick="memoShare(\'jpg\')">🖼️ JPG সেভ/পাঠান</button><button class="tbtn" onclick="memoShare(\'pdf\')">📄 PDF সেভ/পাঠান</button><button class="tbtn" onclick="memoPrint()">🖨️ প্রিন্ট</button></div>';
+   '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="tbtn" onclick="memoOut(\'jpg\',\'save\')">🖼️ JPG সেভ</button><button class="tbtn" onclick="memoOut(\'pdf\',\'save\')">📄 PDF সেভ</button><button class="tbtn" onclick="memoOut(\'jpg\',\'share\')">📤 শেয়ার</button><button class="tbtn" onclick="memoPrint()">🖨️ প্রিন্ট</button></div>';
   document.getElementById("infoModal").classList.add("show");
  };
- function jpgBlob(){return new Promise(res=>cur.c.toBlob(res,"image/jpeg",0.93))}
- function pdfBlob(jpg){
-  return jpg.arrayBuffer().then(buf=>{
-   const enc=new TextEncoder(),parts=[],offs=[];let len=0;
-   const add=d=>{let u=typeof d==="string"?enc.encode(d):d;parts.push(u);len+=u.length};
-   const w=cur.c.width,h=cur.c.height,PW=595,PH=842,sc=Math.min(PW/w,PH/h),iw=(w*sc).toFixed(2),ih=(h*sc).toFixed(2),ix=((PW-w*sc)/2).toFixed(2),iy=((PH-h*sc)/2).toFixed(2);
-   const content="q "+iw+" 0 0 "+ih+" "+ix+" "+iy+" cm /Im0 Do Q";
-   add("%PDF-1.4\n");
-   const obj=(n,body)=>{offs[n]=len;add(n+" 0 obj\n"+body+"\nendobj\n")};
-   obj(1,"<< /Type /Catalog /Pages 2 0 R >>");
-   obj(2,"<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
-   obj(3,"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 "+PW+" "+PH+"] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>");
-   offs[4]=len;add("4 0 obj\n<< /Type /XObject /Subtype /Image /Width "+w+" /Height "+h+" /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "+buf.byteLength+" >>\nstream\n");add(new Uint8Array(buf));add("\nendstream\nendobj\n");
-   obj(5,"<< /Length "+content.length+" >>\nstream\n"+content+"\nendstream");
-   const xr=len;let x="xref\n0 6\n0000000000 65535 f \n";
-   for(let n=1;n<=5;n++)x+=String(offs[n]).padStart(10,"0")+" 00000 n \n";
-   add(x+"trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n"+xr+"\n%%EOF");
-   return new Blob(parts,{type:"application/pdf"});
-  });
- }
- window.memoShare=async function(kind){
+ window.memoOut=async function(kind,mode){
   if(!cur)return;
-  let base="memo-"+(cur.r.customer||"customer").replace(/[^\wঀ-৿]+/g,"_")+"-"+(cur.r.date||"");
-  let jb=await jpgBlob(),b,name,type;
-  if(kind==="pdf"){b=await pdfBlob(jb);name=base+".pdf";type="application/pdf"}else{b=jb;name=base+".jpg";type="image/jpeg"}
-  try{let f=new File([b],name,{type:type});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"বিক্রয় মেমো"});return}}catch(e){if(e&&e.name==="AbortError")return}
-  let a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();showToast("✅ মেমো "+(kind==="pdf"?"PDF":"JPG")+" সেভ হয়েছে");
+  let base="memo-"+toEn((cur.r.customer||"customer")).replace(/[^\wঀ-৿]+/g,"_")+"-"+(cur.r.date||""),files=[];
+  if(kind==="pdf")files.push(new File([await outPdf([cur.c])],base+".pdf",{type:"application/pdf"}));
+  else files.push(new File([await outJpg(cur.c)],base+".jpg",{type:"image/jpeg"}));
+  if(mode==="share")await outShare(files);else outSave(files);
  };
  window.memoPrint=function(){
   if(!cur)return;let u=cur.c.toDataURL("image/png"),f=document.createElement("iframe");f.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";document.body.appendChild(f);
