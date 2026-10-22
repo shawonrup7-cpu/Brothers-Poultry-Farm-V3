@@ -292,64 +292,16 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
  #report .rp-note{color:#444}#report .rp-foot{color:#444}
 }
 /* ── রোগ ঝুঁকি পেজ ── */
-#disease,#analysis,#checklist,#dzCharts,#batchcmp,#envlog{--dz0:#1b2b27;--dz1:#1f5a48;--dz2:#2f9e82;--dz3:#86e3cc;--dzv:#8ea2e0;--dzt:#ff8a5c;--dzm:#93a8a2;--dzl:#ffffff14}
-.dz-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.dz-chip{border:1.5px solid #1aad6e50;background:#1aad6e14;color:#6ee8aa;border-radius:20px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
-.dz-chip[aria-pressed=true]{background:#1aad6e;color:#07130d;border-color:#1aad6e}
-.dz-box{margin-bottom:12px;min-width:0}
-.dz-age{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
-.dz-age output{font-size:22px;color:var(--dzt)}
-#disease input[type=range]{width:100%;accent-color:var(--dzt);height:30px;margin:6px 0 2px}
-.dz-bnote{font-size:12.5px;color:var(--dzm);margin-bottom:8px}
-.dz-now{display:flex;flex-direction:column;gap:6px;font-size:13.5px;margin-top:10px}
-.dz-tags{display:flex;flex-wrap:wrap;gap:6px}
-.dz-tag{padding:2px 10px;border-radius:999px;font-size:12.5px;border:1px solid var(--dzl)}
-.dz-tag.h{background:var(--dz3);color:#07130d;font-weight:700;border-color:var(--dz3)}
-.dz-tag.m{background:var(--dz1);color:#e8edf2}
-.dz-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--dzm)}
-.dz-legend i{display:inline-block;width:15px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-.dz-sec{font-size:12px;letter-spacing:.04em;color:var(--dzm);margin:14px 0 4px;font-weight:700}
-.dz-axis,.dz-strip{display:grid;grid-template-columns:repeat(35,1fr);gap:2px}
-.dz-axis{margin-bottom:4px}
-.dz-axis span{grid-column:span 7;font-size:11px;color:var(--dzm);border-left:1px solid var(--dzl);padding-left:3px;white-space:nowrap;overflow:hidden}
-.dz-row{display:flex;flex-direction:column;gap:3px;padding-block:7px;border-top:1px solid var(--dzl)}
-.dz-row:first-child{border-top:0}
-.dz-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
-.dz-name{font-weight:700;font-size:13.5px}
-.dz-peak{font-size:11.5px;color:var(--dzm)}
-.dz-strip div{height:17px;border-radius:2px;background:var(--dz0)}
-.dz-strip .l1{background:var(--dz1)}.dz-strip .l2{background:var(--dz2)}.dz-strip .l3{background:var(--dz3)}.dz-strip .vac{background:var(--dzv)}
-.dz-strip div.cur{outline:2px solid var(--dzt);outline-offset:1px;position:relative;z-index:1}
-.dz-note{font-size:12px;color:var(--dzm);margin:8px 2px}
-.dz-warn{border:1px solid #ff8a5c80;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px;background:#ff8a5c12}
-.dz-med details{border-top:1px solid var(--dzl);padding-block:9px}
-.dz-med details:first-child{border-top:0}
-.dz-med summary{cursor:pointer;font-weight:700;font-size:13.5px;list-style:none;display:flex;justify-content:space-between;gap:8px}
-.dz-med summary::-webkit-details-marker{display:none}
-.dz-med summary::after{content:"＋";color:var(--dzm);flex:none}
-.dz-med details[open] summary::after{content:"－"}
-.dz-med dl{margin:8px 0 2px;display:grid;grid-template-columns:7rem 1fr;gap:6px 10px;font-size:13px}
-.dz-med dt{color:var(--dzm)}.dz-med dd{margin:0;min-width:0}
-.dz-rules{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px;font-size:13px}
-.dz-search{width:100%;padding:10px 12px;border:1px solid #ffffff20;border-radius:10px;background:#0f1923;color:#e8edf2;font:inherit;margin-bottom:10px}
-.dz-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.dz-organ{border-top:1px solid var(--dzl);padding-block:12px;display:flex;flex-direction:column;gap:7px}
-.dz-organ:first-child{border-top:0}
-.dz-organ h3{margin:0;font-size:14.5px}
-.dz-where{font-size:12px;color:var(--dzm);margin:0}
-.dz-ok{background:#17321f;color:#8fe0ac;border-radius:8px;padding:6px 10px;font-size:13px}
-.dz-find{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
-.dz-find li{background:#3a1f17;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;font-size:13px}
-.dz-find b{color:#ff9d80}
-.dz-find a{align-self:flex-start;font-size:12px;color:#6ee8aa;margin-top:2px}
-.dz-tbl{overflow-x:auto}
-.dz-tbl table{border-collapse:collapse;width:100%;min-width:480px;font-size:13px}
-.dz-tbl th,.dz-tbl td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--dzl);vertical-align:top}
-.dz-tbl th{color:var(--dzm);font-weight:500;font-size:12px}
-@media(max-width:480px){.dz-med dl{grid-template-columns:1fr}.dz-med dt{margin-top:4px}}
-@media print{#disease{display:none!important}}
+#analysis,#dzCharts,#batchcmp{--dz0:#1b2b27;--dz1:#1f5a48;--dz2:#2f9e82;--dz3:#86e3cc;--dzv:#8ea2e0;--dzt:#ff8a5c;--dzm:#93a8a2;--dzl:#ffffff14}
 
 /* ── আজকের করণীয় ── */
+.fdoc{border:1px solid;border-radius:18px;padding:14px 14px 10px;margin:4px 0 14px}
+.fdoc-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.fdoc-head b{font-size:16px}.fdoc-head span{font-size:13px;font-weight:700}
+.fdoc-row{display:flex;gap:10px;align-items:flex-start;padding:9px 2px;border-top:1px solid #ffffff12;font-size:13.5px;line-height:1.5}
+.fdoc-i{flex:none;width:22px;text-align:center}.fdoc-t{font-weight:700}
+.fdoc-d{color:#cfd9de;font-size:13px}.fdoc-a{color:#86e3cc;font-size:13px;margin-top:2px}
+.fdoc-n{font-size:11.5px;color:#93a8a2;margin-top:8px;padding-top:8px;border-top:1px solid #ffffff12}
 .dzt{background:linear-gradient(145deg,#162530,#1a2d3a);border:1px solid #ff8a5c50;border-radius:18px;padding:14px 14px 10px;margin:4px 0 14px;box-shadow:0 4px 20px #00000030}
 .dzt-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px}
 .dzt-head b{font-size:16px}
@@ -394,16 +346,6 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 .an-proj th{color:var(--dzm);font-weight:500;font-size:11.5px}
 .an-proj tr.best td{background:#17321f;color:#8fe0ac;font-weight:700}
 .an-proj tr.neg td:last-child{color:#ff9d80}
-.cl-list{margin-bottom:14px}
-.cl-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px}
-.cl-head b{font-size:15px}
-.cl-prog{font-size:12.5px;color:#ff8a5c;font-weight:700}
-.cl-bar{height:6px;border-radius:3px;background:#ffffff14;overflow:hidden;margin-bottom:8px}
-.cl-bar i{display:block;height:100%;background:var(--dz3);transition:width .2s}
-.cl-item{display:flex;gap:10px;align-items:flex-start;padding:9px 2px;border-top:1px solid #ffffff12;font-size:13.5px;line-height:1.5;cursor:pointer}
-.cl-item:first-of-type{border-top:0}
-.cl-item input{flex:none;width:20px;height:20px;margin-top:2px;accent-color:#22c55e}
-.cl-item.done span{color:#93a8a2;text-decoration:line-through}
 .dzc-box{margin:4px 0 14px}
 .dzc-grp{margin-top:10px}
 .dzc-grp:first-of-type{margin-top:4px}
@@ -419,7 +361,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 .cust-tools a,.cust-tools button{border:0;border-radius:10px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;color:#fff}
 .cust-call{background:#0ea5e9}.cust-wa{background:#22c55e}
 @media(max-width:480px){.an-std{grid-template-columns:repeat(2,1fr)}}
-@media print{#analysis,#checklist,#dzCharts{display:none!important}}
+@media print{#analysis,#dzCharts{display:none!important}}
 /* ── ব্যাচ তুলনা / ঘরের অবস্থা / ব্যাকআপ ── */
 .bc-wrap{overflow-x:auto}
 .bc-tbl{border-collapse:separate;border-spacing:0;min-width:100%;font-size:13px}
@@ -443,12 +385,7 @@ nav{flex-direction:column;overflow-x:visible;gap:7px;padding:8px 10px}
 .bk-go{background:#84cc16;color:#14230a}
 .bk-sh{background:#22c55e;color:#06210f}
 .bk-later{background:transparent;border:1.5px solid #ffffff25!important;color:#cfd9de}
-.env-st{border-radius:14px;padding:11px 14px;margin-bottom:12px;font-size:13.5px;line-height:1.55}
-.env-st.good{background:#17321f;border:1px solid #1a5c3a;color:#8fe0ac}
-.env-st.bad{background:#ff8a5c18;border:1px solid #ff8a5c80;color:#ffb59b}
-.env-st.info{background:#ffffff0a;border:1px solid #ffffff14;color:#cfd9de}
-.env-st b{display:block}
-@media print{#batchcmp,#envlog,#dzBackup{display:none!important}}
+@media print{#batchcmp,#dzBackup{display:none!important}}
 
 /* ══════ ✨ গ্রাফিক্স আপগ্রেড ══════ */
 body{background:#0b141c;background-image:
@@ -718,6 +655,7 @@ td:first-child{font-weight:600}
 <!-- Flock -->
 <div id="dzBackup"></div>
 <div id="dzTodayCard"></div>
+<div id="farmDoc"></div>
 <div class="section">🐔 মুরগির অবস্থা</div>
 <div class="grid grid5">
   <div onclick="showSummary('farm')" class="card metric m-blue" style="--accent:#3d8bff20"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">📅</div></div><div class="lab">বয়স</div><div class="val" id="kAge">০ দিন</div></div>
@@ -999,6 +937,7 @@ td:first-child{font-weight:600}
  </div>
  <div id="anProj"></div>
 </div>
+<div id="dzCharts"></div>
 </section>
 
 
@@ -1076,9 +1015,25 @@ td:first-child{font-weight:600}
 
 </main>
 <script>
+/* স্থানীয় (ঢাকা) তারিখ YYYY-MM-DD — toISOString() UTC দেয়, তাই রাত ১২টা–৬টায় আগের দিন দেখাত */
+function todayISO(){const d=new Date(),p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())}
+/* ডেটা সুরক্ষা: নিরাপদ লোড/সেভ, দৈনিক অটো-কপি, কোটা/ত্রুটির সতর্কতা */
+const LS_KEY="poultryBatchesV2",LS_BAK="poultryBatchesV2_bak",LS_BAKDAY="poultryBatchesV2_bakDay";
+function _validStore(o){return o&&Array.isArray(o.batches)&&o.batches.length>0&&o.batches.every(b=>b&&typeof b==="object")}
+function loadStoreSafe(){
+ let raw=null;try{raw=localStorage.getItem(LS_KEY)}catch(e){}
+ if(raw){try{let o=JSON.parse(raw);if(_validStore(o))return o}catch(e){}
+  /* মূল ডেটা নষ্ট — নষ্ট কপি আলাদা রেখে ব্যাকআপ থেকে ফেরত */
+  try{localStorage.setItem("poultryBatchesV2_corrupt_"+Date.now(),raw)}catch(e){}
+  try{let b=JSON.parse(localStorage.getItem(LS_BAK)||"null");if(_validStore(b)){window.__restoredFromBak=true;return b}}catch(e){}
+ }
+ return null;
+}
+</script>
+<script>
 const SEED={"sheetNames": ["Summary ", "ঔষধ শিডিউল ", "বিভিন্ন খরচ ", "কর্মচারী ", "কাঠের গুড়া", "ভাড়া", "Medicine", "ফিড ", "ফিড খাওয়ানো", "বাচ্চা", "বিক্রি"], "sheetMeta": [{"name": "Summary ", "rows": 106, "cols": 11}, {"name": "ঔষধ শিডিউল ", "rows": 41, "cols": 8}, {"name": "বিভিন্ন খরচ ", "rows": 100, "cols": 6}, {"name": "কর্মচারী ", "rows": 116, "cols": 6}, {"name": "কাঠের গুড়া", "rows": 100, "cols": 6}, {"name": "ভাড়া", "rows": 100, "cols": 11}, {"name": "Medicine", "rows": 100, "cols": 26}, {"name": "ফিড ", "rows": 98, "cols": 26}, {"name": "ফিড খাওয়ানো", "rows": 100, "cols": 11}, {"name": "বাচ্চা", "rows": 100, "cols": 6}, {"name": "বিক্রি", "rows": 100, "cols": 31}], "sheets": {"Summary ": [], "ঔষধ শিডিউল ": [], "বিভিন্ন খরচ ": [], "কর্মচারী ": [], "কাঠের গুড়া": [], "ভাড়া": [], "Medicine": [], "ফিড ": [], "ফিড খাওয়ানো": [], "বাচ্চা": [], "বিক্রি": []}, "startDate": "", "chicks": 0};
 function freshBatch(name){
- return {id:"b"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:name,status:"active",createdAt:new Date().toISOString().slice(0,10),closedAt:null,
+ return {id:"b"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:name,status:"active",createdAt:todayISO(),closedAt:null,
  startDate:SEED.startDate||"",chicks:Number(SEED.chicks||0),dead:0,chickPrice:0,deaths:[],
  feed:[],medicine:[],workers:[],workerSalary:0,other:[],litter:[],power:[],rent:[],sales:[],litterSales:[],otherSales:{litter:[],chicken:[],bag:[],feed:[]},medSchedule:[],notes:[],gifts:[],dailyFeed:[]};
 }
@@ -1094,9 +1049,9 @@ function migrateWorkers(b){
  if(typeof b.workerSalary==="undefined")b.workerSalary=0;
  return b;
 }
-let store=JSON.parse(localStorage.getItem("poultryBatchesV2")||"null");
+let store=loadStoreSafe();
 if(!store){
- let old=JSON.parse(localStorage.getItem("poultryCompleteV7_x")||localStorage.getItem("poultryCompleteV6_x")||localStorage.getItem("poultryCompleteV5_x")||"null");
+ let old=null;try{old=JSON.parse(localStorage.getItem("poultryCompleteV7_x")||localStorage.getItem("poultryCompleteV6_x")||localStorage.getItem("poultryCompleteV5_x")||"null")}catch(e){}
  let first=old?Object.assign(freshBatch("ব্যাচ ১"),old,{id:freshBatch("x").id,name:"ব্যাচ ১",status:"active"}):freshBatch("ব্যাচ ১");
  migrateWorkers(first);
  store={batches:[first],activeId:first.id};
@@ -1105,12 +1060,42 @@ if(!store){
 }
 let state=store.batches.find(b=>b.id===store.activeId)||store.batches[0];
 const money=n=>"৳"+Number(n||0).toLocaleString("en-BD",{maximumFractionDigits:2});
-function save(){localStorage.setItem("poultryBatchesV2",JSON.stringify(store))}
+let _saveWarned=false;
+function save(){
+ let json;
+ try{json=JSON.stringify(store)}catch(e){console.error(e);return false}
+ try{
+  /* দিনে একবার আগের ভালো কপি ব্যাকআপ কীতে রাখা */
+  let day=todayISO();
+  if(localStorage.getItem(LS_BAKDAY)!==day){
+   let prev=localStorage.getItem(LS_KEY);
+   if(prev){try{localStorage.setItem(LS_BAK,prev);localStorage.setItem(LS_BAKDAY,day)}catch(e){}}
+  }
+  localStorage.setItem(LS_KEY,json);
+  _saveWarned=false;return true;
+ }catch(e){
+  console.error("save failed",e);
+  if(!_saveWarned){_saveWarned=true;
+   try{showToast("⚠️ তথ্য সেভ হয়নি! ফোনের জায়গা শেষ। এখনই ব্যাকআপ ডাউনলোড করুন।")}catch(_){alert("⚠️ তথ্য সেভ হয়নি! এখনই ব্যাকআপ ডাউনলোড করুন।")}
+  }
+  return false;
+ }
+}
+/* ব্রাউজারকে বলা: এই সাইটের ডেটা নিজে থেকে মুছো না */
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+/* অন্য ট্যাবে ডেটা বদলালে এই ট্যাব পুরনো ডেটা দিয়ে ওভাররাইট করবে না */
+window.addEventListener("storage",ev=>{
+ if(ev.key!==LS_KEY||!ev.newValue)return;
+ try{let o=JSON.parse(ev.newValue);if(!_validStore(o))return;
+  store=o;store.batches.forEach(migrateWorkers);
+  state=store.batches.find(b=>b.id===store.activeId)||store.batches[0];render();
+ }catch(e){}
+});
 function switchBatch(id){let b=store.batches.find(x=>x.id===id);if(!b)return;store.activeId=id;state=b;save();render()}
 function newBatch(){openNameModal("newBatch",null,"➕ নতুন ব্যাচ শুরু করুন","ব্যাচ "+(store.batches.length+1))}
 async function toggleBatchStatus(){
  if(state.status==="closed"){state.status="active";state.closedAt=null;showToast("🔓 ব্যাচ পুনরায় চালু হয়েছে");}
- else{if(closeStats().live>0){showToast("❌ এখনও "+livePcs()+" টি মুরগি অবশিষ্ট — ক্লোজ করা যাবে না");return;}if(!await askConfirm("এই ব্যাচটি সম্পন্ন হিসেবে চিহ্নিত করবেন? পরে চাইলে আবার চালু করা যাবে।"))return;state.status="closed";state.closedAt=new Date().toISOString().slice(0,10);showToast("✅ ব্যাচ সম্পন্ন হিসেবে চিহ্নিত হয়েছে");}
+ else{if(closeStats().live>0){showToast("❌ এখনও "+livePcs()+" টি মুরগি অবশিষ্ট — ক্লোজ করা যাবে না");return;}if(!await askConfirm("এই ব্যাচটি সম্পন্ন হিসেবে চিহ্নিত করবেন? পরে চাইলে আবার চালু করা যাবে।"))return;state.status="closed";state.closedAt=todayISO();showToast("✅ ব্যাচ সম্পন্ন হিসেবে চিহ্নিত হয়েছে");}
  save();render();
 }
 async function deleteBatch(id){
@@ -1152,7 +1137,7 @@ window.alert=function(m){showToast("⚠️ "+m)};
 function backupData(){
  let blob=new Blob([JSON.stringify(store,null,2)],{type:"application/json"});
  let a=document.createElement("a");a.href=URL.createObjectURL(blob);
- let d=new Date().toISOString().slice(0,10);
+ let d=todayISO();
  a.download=`poultry-backup-${d}.json`;document.body.appendChild(a);a.click();a.remove();
  showToast("✅ ব্যাকআপ ডাউনলোড হয়েছে");
 }
@@ -1163,7 +1148,8 @@ function restoreData(file){
   try{
    let data=JSON.parse(e.target.result);
    if(!await askConfirm("⚠️ বর্তমান সব তথ্য মুছে ব্যাকআপ ফাইলের তথ্য বসানো হবে। আপনি কি নিশ্চিত?"))return;
-   if(data&&Array.isArray(data.batches)&&data.activeId){
+   try{let cur=localStorage.getItem(LS_KEY);if(cur)localStorage.setItem(LS_BAK,cur)}catch(_){}
+   if(data&&Array.isArray(data.batches)&&data.batches.length&&data.activeId){
     store=data;store.batches.forEach(migrateWorkers);
     state=store.batches.find(b=>b.id===store.activeId)||store.batches[0];
    }else{
@@ -1281,7 +1267,7 @@ async function addSale(){
  let qty=tempPallas.reduce((s,p)=>s+p.qty,0),weight=tempPallas.reduce((s,p)=>s+p.weight,0);
  state.sales=state.sales||[];
  {let avail=livePcs();if(qty>avail&&!await askConfirm("⚠️ বিক্রির মুরগি ("+qty+" টি) বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;}
- state.sales.push({date:salesDate.value||new Date().toISOString().slice(0,10),customer:salesCustomer.value.trim(),qty,weight,rate:+salesRate.value||0,paid:+salesPaid.value||0,pallas:tempPallas.slice()});
+ state.sales.push({date:salesDate.value||todayISO(),customer:salesCustomer.value.trim(),qty,weight,rate:+salesRate.value||0,paid:+salesPaid.value||0,pallas:tempPallas.slice()});
  tempPallas=[];salesCustomer.value="";salesPaid.value="";salesRate.value="";
  save();render();renderTempPallas();showToast("✅ বিক্রি সংরক্ষণ হয়েছে");
 }
@@ -1301,7 +1287,7 @@ function renderTable(k){
 let a=state[k]||[];let el=document.getElementById(k+"Table");
 el.innerHTML=a.length?a.map((r,i)=>`<tr><td>${r.date||""}</td><td>${r.name||""}</td><td>${r.qty||0}</td><td>${money(r.rate)}</td><td>${money((r.qty||0)*(r.rate||0))}</td><td style="white-space:nowrap"><button class="edt" onclick="openEdit('${k}',${i})">✏️</button><button class="del" onclick="del('${k}',${i})">মুছুন</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">এখনও কোনো হিসাব যোগ করা হয়নি</td></tr>`;
 }
-function renderSales(){if(!salesDate.value)salesDate.value=new Date().toISOString().slice(0,10);salesTable.innerHTML=state.sales.length?state.sales.map((r,i)=>{let tot=r.weight*r.rate;let paid=+r.paid||0;let due=tot-paid;let pallas=r.pallas||[];let pc=pallas.length;let detail=pallas.map((p,pi)=>`<tr><td style="padding:4px 8px">পাল্লা ${pi+1}</td><td style="padding:4px 8px">${p.qty} টি</td><td style="padding:4px 8px">${p.weight} কেজি</td><td style="padding:4px 8px">গড়: ${(p.weight/p.qty||0).toFixed(2)} কেজি/মুরগি</td></tr>`).join("");let mainRow=`<tr><td>${r.date||""}</td><td>${r.customer||"—"}</td><td>${r.qty}${pc?` <span style="opacity:.6;font-size:11px">(${pc} পাল্লা)</span>`:""}</td><td>${r.weight}</td><td>${money(r.rate)}</td><td>${money(tot)}</td><td>${money(paid)}</td><td>${due>0?money(due):"—"}</td><td>${(r.weight/r.qty||0).toFixed(2)} কেজি</td><td>${pc?`<button class="tbtn-light" style="padding:5px 8px;font-size:11px;margin-right:4px" onclick="toggleDetails(${i})">বিস্তারিত</button>`:""}<button class="tbtn-light" style="padding:5px 8px;font-size:11px;margin-right:4px" onclick="memoOpen(${i})">🧾 মেমো</button><button class="edt" onclick="openEdit('sales',${i})">✏️</button><button class="del" onclick="del('sales',${i})">মুছুন</button></td></tr>`;let detailRow=pc?`<tr id="pallaDetail${i}" style="display:none"><td colspan="10" style="padding:0;background:#f7f9fa"><table style="width:100%;font-size:12px">${detail}</table></td></tr>`:"";return mainRow+detailRow}).join(""):`<tr><td colspan="10" class="empty">এখনও কোনো বিক্রি যোগ করা হয়নি</td></tr>`;
+function renderSales(){if(!salesDate.value)salesDate.value=todayISO();salesTable.innerHTML=state.sales.length?state.sales.map((r,i)=>{let tot=r.weight*r.rate;let paid=+r.paid||0;let due=tot-paid;let pallas=r.pallas||[];let pc=pallas.length;let detail=pallas.map((p,pi)=>`<tr><td style="padding:4px 8px">পাল্লা ${pi+1}</td><td style="padding:4px 8px">${p.qty} টি</td><td style="padding:4px 8px">${p.weight} কেজি</td><td style="padding:4px 8px">গড়: ${(p.weight/p.qty||0).toFixed(2)} কেজি/মুরগি</td></tr>`).join("");let mainRow=`<tr><td>${r.date||""}</td><td>${r.customer||"—"}</td><td>${r.qty}${pc?` <span style="opacity:.6;font-size:11px">(${pc} পাল্লা)</span>`:""}</td><td>${r.weight}</td><td>${money(r.rate)}</td><td>${money(tot)}</td><td>${money(paid)}</td><td>${due>0?money(due):"—"}</td><td>${(r.weight/r.qty||0).toFixed(2)} কেজি</td><td>${pc?`<button class="tbtn-light" style="padding:5px 8px;font-size:11px;margin-right:4px" onclick="toggleDetails(${i})">বিস্তারিত</button>`:""}<button class="tbtn-light" style="padding:5px 8px;font-size:11px;margin-right:4px" onclick="memoOpen(${i})">🧾 মেমো</button><button class="edt" onclick="openEdit('sales',${i})">✏️</button><button class="del" onclick="del('sales',${i})">মুছুন</button></td></tr>`;let detailRow=pc?`<tr id="pallaDetail${i}" style="display:none"><td colspan="10" style="padding:0;background:#f7f9fa"><table style="width:100%;font-size:12px">${detail}</table></td></tr>`:"";return mainRow+detailRow}).join(""):`<tr><td colspan="10" class="empty">এখনও কোনো বিক্রি যোগ করা হয়নি</td></tr>`;
 let names=[...new Set(state.sales.map(r=>r.customer).filter(Boolean))];
 customerList.innerHTML=names.map(n=>`<option value="${n}">`).join("");
 {let a=allWeightStats(),h=document.getElementById("avgAllHint");if(h)h.innerHTML=a.q?`⚖️ <b>মোট গড় ওজন (পাইকারি + খুচরা + গিফট/নিজের): ${a.avg.toFixed(2)} কেজি/মুরগি</b><br>মোট ${fmt(a.q,0)} টি • মোট ওজন ${fmt(a.w)} কেজি`:""}
@@ -1613,11 +1599,11 @@ window.msCopyLast=function(){
 function renderMedSchedule(){
   msDedupe();
   let msDateEl=document.getElementById("msDate");
-  if(msDateEl&&!msDateEl.value)msDateEl.value=new Date().toISOString().slice(0,10);
+  if(msDateEl&&!msDateEl.value)msDateEl.value=todayISO();
   updateMsAge();
   let a=state.medSchedule||[],host=document.getElementById("msDays");
   if(!host)return;
-  let today=new Date().toISOString().slice(0,10),tr=a.find(r=>r.date===today);
+  let today=todayISO(),tr=a.find(r=>r.date===today);
   let pg=document.getElementById("msProg");
   if(pg){
     let planned=tr?MS_SL.filter(x=>(tr[x[0]]||{}).name):[],done=planned.filter(x=>tr.done&&tr.done[x[0]]).length;
@@ -1649,7 +1635,7 @@ function addNote(){
 async function delNote(i){if(!await askConfirm("এই নোট মুছে ফেলবেন?"))return;state.notes=state.notes||[];state.notes.splice(i,1);save();renderNotes();showToast("🗑️ নোট মুছে ফেলা হয়েছে")}
 function renderNotes(){
   let el=document.getElementById("noteDate");
-  if(el&&!el.value)el.value=new Date().toISOString().slice(0,10);
+  if(el&&!el.value)el.value=todayISO();
   let host=document.getElementById("notesList");
   if(!host)return;
   let all=state.notes||[];
@@ -1678,7 +1664,7 @@ const osCfg={
   bag:{date:"os_bDate",qty:"os_bQty",rate:"os_bRate",buyer:"os_bBuyer",total:"os_bTotal",table:"os_bTable",sum:"os_bSum",live:"os_bLive",label:"বস্তা বিক্রি"},
   feed:{date:"os_fDate",qty:"os_fQty",rate:"os_fRate",buyer:"os_fBuyer",total:"os_fTotal",table:"os_fTable",sum:"os_fSum",live:"os_fLive",label:"ফিড বিক্রি"}
 };
-function osInit(){Object.keys(osCfg).forEach(k=>{let el=document.getElementById(osCfg[k].date);if(el&&!el.value)el.value=new Date().toISOString().slice(0,10);})}
+function osInit(){Object.keys(osCfg).forEach(k=>{let el=document.getElementById(osCfg[k].date);if(el&&!el.value)el.value=todayISO();})}
 function osLive(type){
   let c=osCfg[type],g=id=>+document.getElementById(id).value||0,el=document.getElementById(c.live);if(!el)return;
   let rate=g(c.rate),t=0,extra="";
@@ -1738,7 +1724,7 @@ async function addGift(){
   let avail=livePcs();
   if(pcs>avail&&!await askConfirm("⚠️ মুরগি ("+pcs+" টি) খামারের বর্তমান মুরগির ("+avail+" টি) চেয়ে বেশি। তবুও সংরক্ষণ করবেন?"))return;
   state.gifts=state.gifts||[];
-  state.gifts.push({date:v("os_gDate").value||new Date().toISOString().slice(0,10),kind:v("os_gKind").value,name:name,qty:pcs,weight:w});
+  state.gifts.push({date:v("os_gDate").value||todayISO(),kind:v("os_gKind").value,name:name,qty:pcs,weight:w});
   v("os_gName").value="";v("os_gPcs").value="";v("os_gWeight").value="";giftLive();
   save();render();showToast("✅ যোগ হয়েছে — অবশিষ্ট মুরগি থেকে বাদ গেছে");
 }
@@ -1755,7 +1741,7 @@ function renderGifts(){
   set("os_gSum",fmt(q,0)+" টি");
   set("os_liveSum",fmt(livePcs(),0)+" টি");
   set("os_gAvail",fmt(livePcs(),0));
-  let d=document.getElementById("os_gDate");if(d&&!d.value)d.value=new Date().toISOString().slice(0,10);
+  let d=document.getElementById("os_gDate");if(d&&!d.value)d.value=todayISO();
   giftLive();
 }
 function otherSalesTotal(type){
@@ -1894,7 +1880,7 @@ function openClose(){
  closeBody.innerHTML=`<div style="font-size:12px;color:#7a9aaa;margin-bottom:8px">${esc(state.name)} — ক্লোজ করার আগে চূড়ান্ত হিসাব দেখে নিন</div>`
   +`<div class="pgsum">${cards.map(cardHtml).join("")}</div>`
   +(x.live>0?`<div class="warnbox" style="border-color:#ff7070;color:#ffb0b0">🚫 <b>ক্লোজ করা যাবে না!</b><br>খামারে এখনও ${fmt(x.live,0)} টি মুরগি অবশিষ্ট আছে। সব মুরগি বিক্রি / গিফট / নিজের খাওয়া হিসেবে এন্ট্রি না হওয়া পর্যন্ত ব্যাচ ক্লোজ হবে না।</div>`:"")+(x.live>0?"":warns.length?`<div class="warnbox">${warns.map(w=>"⚠️ "+w).join("<br>")}<div style="opacity:.8;margin-top:4px">চাইলে তবুও ক্লোজ করতে পারেন।</div></div>`:`<div class="okbox">✅ সব ঠিক আছে — সব মুরগির হিসাব ও টাকা মিলেছে</div>`)
-  +`<div class="mfields" style="margin-top:12px"><label>ক্লোজের তারিখ<input id="closeDate" type="date" value="${new Date().toISOString().slice(0,10)}"></label><label class="wide">নোট (ঐচ্ছিক)<input id="closeNote" placeholder="যেমন: সব মুরগি বিক্রি শেষ"></label></div>`
+  +`<div class="mfields" style="margin-top:12px"><label>ক্লোজের তারিখ<input id="closeDate" type="date" value="${todayISO()}"></label><label class="wide">নোট (ঐচ্ছিক)<input id="closeNote" placeholder="যেমন: সব মুরগি বিক্রি শেষ"></label></div>`
   +`<div style="font-size:11.5px;color:#7a9aaa;margin-top:10px;line-height:1.6">ℹ️ ক্লোজ করলে ব্যাচটি "সম্পন্ন" হবে। সব তথ্য ও রিপোর্ট সংরক্ষিত থাকবে, ডিলিট হবে না। পরে চাইলে "আবার চালু" করা যাবে। এরপর "➕ নতুন ব্যাচ" দিয়ে নতুন ব্যাচ শুরু করুন।</div>`;
  document.getElementById("closeConfirmBtn").style.display=x.live>0?"none":"";
  closeModal.classList.add("show");
@@ -1904,7 +1890,7 @@ function confirmClose(){
  if(state.status==="closed"){hideClose();return}
  if(closeStats().live>0){showToast("❌ সব মুরগি বিক্রি না হলে ব্যাচ ক্লোজ করা যাবে না");return}
  state.status="closed";
- state.closedAt=document.getElementById("closeDate").value||new Date().toISOString().slice(0,10);
+ state.closedAt=document.getElementById("closeDate").value||todayISO();
  state.closeNote=document.getElementById("closeNote").value.trim();
  save();hideClose();render();window.scrollTo(0,0);showToast("✅ ব্যাচ ক্লোজ হয়েছে");
 }
@@ -2039,7 +2025,7 @@ const VAC=[
 ];
 const bnN=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
 const vEsc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const todayISO=()=>new Date().toLocaleDateString("en-CA");
+
 function vacStatus(v){
  let rec=(state.vaccines||{})[v.k];
  if(rec&&rec.date)return{s:"done",rec:rec};
@@ -2300,7 +2286,7 @@ makePages();
 })();
 window.expJump=function(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:"smooth",block:"start"})};
 const navItems=[["dashboard","🏠 ড্যাশবোর্ড"],["medschedule","💊 মেডিসিন শিডিউল"],["dailyfeed","🍽️ দৈনিক খাবার"],["notes","📝 নোট"],["vaccine","💉 ভ্যাকসিন"],["analysis","📈 বিশ্লেষণ"],["fcr","🎯 FCR"],["farm","🐣 বাচ্চা ও মৃত"],["feed","🌾 ফিড"],["medicine","💊 মেডিসিন"],["workers","👷 কর্মচারী"],["other","🧾 বিভিন্ন খরচ"],["sales","💰 বিক্রি"],["othersales","🛒 অন্যান্য বিক্রি"],["customers","👥 ক্রেতা"],["report","📑 রিপোর্ট"],["batchcmp","📊 ব্যাচ তুলনা"],["batches","🗂️ সব ব্যাচ"]];
-const navColors={fcr:"linear-gradient(135deg,#3d8bff,#1a5fff)",envlog:"linear-gradient(135deg,#ef4444,#b45309)",batchcmp:"linear-gradient(135deg,#8b5cf6,#6d28d9)",analysis:"linear-gradient(135deg,#0ea5e9,#0369a1)",checklist:"linear-gradient(135deg,#22c55e,#15803d)",disease:"linear-gradient(135deg,#f97316,#c2410c)",dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)"};
+const navColors={fcr:"linear-gradient(135deg,#3d8bff,#1a5fff)",batchcmp:"linear-gradient(135deg,#8b5cf6,#6d28d9)",analysis:"linear-gradient(135deg,#0ea5e9,#0369a1)",dashboard:"linear-gradient(135deg,#6366f1,#4f46e5)",farm:"linear-gradient(135deg,#f59e0b,#d97706)",deaths:"linear-gradient(135deg,#ef4444,#b91c1c)",feed:"linear-gradient(135deg,#84cc16,#4d7c0f)",medicine:"linear-gradient(135deg,#a855f7,#7e22ce)",workers:"linear-gradient(135deg,#06b6d4,#0e7490)",other:"linear-gradient(135deg,#f97316,#c2410c)",litter:"linear-gradient(135deg,#a78bfa,#6d28d9)",rent:"linear-gradient(135deg,#14b8a6,#0f766e)",sales:"linear-gradient(135deg,#22c55e,#15803d)",othersales:"linear-gradient(135deg,#f43f5e,#be123c)",customers:"linear-gradient(135deg,#3b82f6,#1d4ed8)",medschedule:"linear-gradient(135deg,#ec4899,#9d174d)",dailyfeed:"linear-gradient(135deg,#f59e0b,#b45309)",vaccine:"linear-gradient(135deg,#22d3ee,#0891b2)",notes:"linear-gradient(135deg,#eab308,#a16207)",report:"linear-gradient(135deg,#0ea5e9,#0369a1)",batches:"linear-gradient(135deg,#8b5cf6,#6d28d9)"};
 const navBtn=(x,i)=>{
   const grad=navColors[x[0]]||"linear-gradient(135deg,#1aad6e,#0d8050)";
   const isActive=i===0?"active":"";
@@ -2322,131 +2308,6 @@ function go(id,b){
   b.style.background=grad;
   b.style.boxShadow="0 4px 14px #00000050";
 }
-
-// ══════ রোগ ঝুঁকি / ওষুধ / পোস্টমর্টেম ══════
-(function(){
-const dzBn=n=>Number(n).toLocaleString("bn-BD");
-const dzImg=q=>"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
-const DZ_DIS=[
- {n:'নাভি পচা, কুসুমথলির সংক্রমণ',r:[[1,5,3],[6,7,2],[8,10,1]]},
- {n:'সালমোনেলা / পুলোরাম',r:[[1,7,3],[8,10,2],[11,14,1]]},
- {n:'ব্রুডার নিউমোনিয়া (অ্যাসপারজিলোসিস)',r:[[1,2,2],[3,10,3],[11,14,2]]},
- {n:'ইনফেকশাস ব্রংকাইটিস',r:[[5,13,2],[14,28,3],[29,35,2]]},
- {n:'রানীক্ষেত (টিকা না থাকলে)',r:[[4,35,2]]},
- {n:'গামবোরো (আইবিডি)',r:[[10,13,2],[14,35,3]]},
- {n:'কক্সিডিওসিস (ভেজা লিটারে)',r:[[10,13,1],[14,20,2],[21,35,3]]},
- {n:'নেক্রোটিক এন্টারাইটিস',r:[[14,35,2]]},
- {n:'সিআরডি ও ই-কোলাই',r:[[10,13,1],[14,20,2],[21,35,3]]},
- {n:'অ্যাসাইটিস, হঠাৎ মৃত্যু, পায়ের সমস্যা',r:[[14,20,1],[21,35,3]]},
- {n:'হিটস্ট্রোক (গরমের সময়)',r:[[14,35,2]]}
-];
-const DZ_VAC=VAC.map(v=>({n:v.name,note:"বয়স "+dzBn(v.from)+"–"+dzBn(v.to)+" দিন (আপনার অ্যাপের শিডিউল)",r:[[Math.max(1,v.from),v.to]]}));
-const DZ_MED={
- 0:{t:'ডাক্তারের নির্ধারিত অ্যান্টিবায়োটিক। সঙ্গে গ্লুকোজ, ইলেক্ট্রোলাইট ও ভিটামিন।',p:'ভালো মানের বাচ্চা, ব্রুডারের সঠিক তাপমাত্রা, পরিষ্কার ঘর ও পানি।'},
- 1:{t:'ডাক্তারের নির্ধারিত অ্যান্টিবায়োটিক। আক্রান্ত ও মরা বাচ্চা আলাদা করা।',p:'রোগমুক্ত প্যারেন্ট স্টকের বাচ্চা, পরিষ্কার ব্রুডার।'},
- 2:{t:'কার্যকর নির্দিষ্ট ওষুধ নেই। ছত্রাকযুক্ত লিটার ও খাবার সরিয়ে ফেলুন, বাতাস চলাচল বাড়ান। প্রয়োজনে ডাক্তারের দেওয়া ছত্রাকনাশক।',p:'ভেজা বা ছত্রাক ধরা লিটার ও ফিড ব্যবহার না করা।'},
- 3:{t:'ভাইরাসের কার্যকর ওষুধ নেই। ইলেক্ট্রোলাইট, ভিটামিন, ভালো পরিবেশ। দ্বিতীয় সংক্রমণ হলে ডাক্তারের অ্যান্টিবায়োটিক।',p:'টিকা, ধুলা ও অ্যামোনিয়া কম রাখা, ঠান্ডা থেকে বাঁচানো।'},
- 4:{t:'ভাইরাসের নির্দিষ্ট ওষুধ নেই। সহায়ক সেবা (ইলেক্ট্রোলাইট, ভিটামিন), দ্বিতীয় সংক্রমণে ডাক্তারের অ্যান্টিবায়োটিক।',p:'সময়মতো টিকা ও বুস্টার, ফার্মে বাইরের লোক ও জিনিস নিয়ন্ত্রণ।'},
- 5:{t:'নির্দিষ্ট ওষুধ নেই। ইলেক্ট্রোলাইট ও ভিটামিন, পানি বেশি খাওয়ানো। দ্বিতীয় সংক্রমণে ডাক্তারের অ্যান্টিবায়োটিক।',p:'সময়মতো টিকা ও বুস্টার, জীবাণুনাশক ব্যবহার, ফার্ম পরিষ্কার রাখা।'},
- 6:{t:'ডাক্তারের দেওয়া কক্সিডিয়ারোধী ওষুধ (যেমন অ্যামপ্রোলিয়াম বা সালফা জাতীয়)। সঙ্গে ভিটামিন এ ও কে।',p:'লিটার শুকনো রাখা, পানির পাত্র থেকে পানি না পড়া, ভিড় কম রাখা। প্রয়োজনে ডাক্তারের পরামর্শে প্রতিরোধমূলক কক্সিডিয়ারোধী।'},
- 7:{t:'ডাক্তারের নির্ধারিত অ্যান্টিবায়োটিক (পেনিসিলিন জাতীয়)। সঙ্গে অন্ত্রের সুস্থতার জন্য প্রোবায়োটিক।',p:'কক্সিডিওসিস ঠেকানো, ফিড হঠাৎ না বদলানো।'},
- 8:{t:'ডাক্তারের নির্ধারিত অ্যান্টিবায়োটিক (যেমন টাইলোসিন, ডক্সিসাইক্লিন বা টিয়ামুলিন জাতীয়)। ই-কোলাই থাকলে সংবেদনশীলতা পরীক্ষা করে ওষুধ ঠিক করা ভালো।',p:'অ্যামোনিয়া ও ধুলা কমানো, বাতাস চলাচল, টিকা, হঠাৎ ঠান্ডা-গরম এড়ানো।'},
- 9:{t:'কোনো নির্দিষ্ট ওষুধ নেই। বাতাস ও অক্সিজেন বাড়ান, ডাক্তারের পরামর্শে ফিড নিয়ন্ত্রণ ও ভিটামিন সি/ই।',p:'ঘর গরম না রাখা, বেশি ঘনত্বে না রাখা, খুব দ্রুত ওজন বাড়ানো এড়ানো।'},
- 10:{t:'ঠান্ডা পানি, ইলেক্ট্রোলাইট ও ভিটামিন সি। ঘরে ফ্যান ও ছাউনি ঠান্ডা রাখা।',p:'গরমে ভিড় কমানো, দিনের গরম সময়ে খাবার কম, পানির পাত্র বেশি রাখা।'}
-};
-const DZ_LV=['','সাধারণ ঝুঁকি','মাঝারি ঝুঁকি','বেশি ঝুঁকি'];
-const DZ_ORG=[
- {n:'বুরসা',w:'পায়ুর ঠিক ওপরে ছোট থলি',ok:'ছোট, মসৃণ, হালকা রঙের।',f:[
-  {d:'গামবোরো',t:'ফোলা, হলদেটে পানি বা রক্তের দাগ, ভেতরে ক্ষত। ১৪–৩৫ দিনে বেশি।',q:'Gumboro IBD bursa of Fabricius postmortem chicken'},
-  {d:'পুরনো গামবোরো',t:'শুকিয়ে ছোট হয়ে গেছে।',q:'atrophied bursa of Fabricius chicken infectious bursal disease'}]},
- {n:'প্রোভেন্ট্রিকুলাস',w:'পাকস্থলীর ঠিক আগের অংশ',ok:'পরিষ্কার, মসৃণ, ভেতরের দিক গোলাপি।',f:[
-  {d:'রানীক্ষেত',t:'গ্রন্থির মুখের কাছে ছোট ছোট রক্তের ফোঁটা বা দাগ।',q:'Newcastle disease proventriculus hemorrhage chicken postmortem'}]},
- {n:'অন্ত্র',w:'পাকস্থলীর পর লম্বা নলের মতো অংশ',ok:'গোলাপি, ভেতরে হালকা খাবার, দেয়াল পাতলা।',f:[
-  {d:'কক্সিডিওসিস',t:'অন্ত্র ফোলা, ভেতরে রক্ত বা বাদামি তরল, গায়ে সাদা-লাল দাগ।',q:'coccidiosis chicken intestine postmortem lesions'},
-  {d:'নেক্রোটিক এন্টারাইটিস',t:'দেয়াল পুরু, ভেতরে ধূসর-হলদে স্তর (তোয়ালের মতো খসখসে), পচা গন্ধ।',q:'necrotic enteritis broiler intestine postmortem Turkish towel'}]},
- {n:'বায়ুথলি ও বুকের ভেতর',w:'বুকের ভেতরের পাতলা স্বচ্ছ পর্দা',ok:'স্বচ্ছ, পাতলা, কাচের মতো।',f:[
-  {d:'সিআরডি / ই-কোলাই',t:'ঘোলা, দুধের মতো বা পনিরের মতো হলদে জমাট।',q:'airsacculitis chicken CRD postmortem'}]},
- {n:'কলিজা ও হৃদপিণ্ডের গায়ে',w:'কলিজা ও হৃদপিণ্ডের ওপরের আবরণ',ok:'মসৃণ ও চকচকে।',f:[
-  {d:'ই-কোলাই',t:'সাদা বা হলদে স্তরে ঢাকা (পেরিহেপাটাইটিস, পেরিকার্ডাইটিস)। দুটো একসাথে থাকলে সন্দেহ জোরালো।',q:'colibacillosis perihepatitis pericarditis chicken postmortem'}]},
- {n:'ফুসফুস',w:'পিঠের দিকে, পাঁজরের ভেতর',ok:'গোলাপি ও নরম।',f:[
-  {d:'অ্যাসপারজিলোসিস',t:'হলদে-সাদা দাগ বা গুটি, ছত্রাকের মতো চুল। প্রথম ১০ দিনে বেশি।',q:'aspergillosis chicken lung postmortem brooder pneumonia'}]},
- {n:'পেটের ভেতর ও নাভি',w:'পেটের গহ্বর ও নাভির কাছের কুসুমথলি',ok:'শুকনো, কুসুম শুষে গেছে (৭ দিনের পর)।',f:[
-  {d:'অ্যাসাইটিস',t:'পেটে হলদে পানি, কলিজা ফোলা, হৃদপিণ্ড বড়। ২১–৩৫ দিনে বেশি।',q:'broiler ascites postmortem chicken fluid abdomen'},
-  {d:'নাভি পচা',t:'কুসুমথলি সবুজ-হলদে, ফোলা, দুর্গন্ধ। প্রথম সপ্তাহে।',q:'omphalitis yolk sac infection chick postmortem'}]},
- {n:'পেশি (রানের মাংস)',w:'রান ও বুকের মাংস',ok:'গোলাপি, রক্তের দাগ নেই।',f:[
-  {d:'গামবোরো',t:'রানে বা বুকে ছোট ছোট রক্তের দাগ।',q:'Gumboro disease thigh muscle hemorrhage chicken'}]}
-];
-const DZ_PM=[
- ['কক্সিডিওসিস','২১–৩৫ দিন (ভেজা লিটারে আগেও)','অন্ত্র ফোলা, রক্ত বা বাদামি তরল'],
- ['নেক্রোটিক এন্টারাইটিস','১৪–৩৫ দিন','অন্ত্রের দেয়াল পুরু, ধূসর-হলদে স্তর, গন্ধ'],
- ['গামবোরো','১৪–৩৫ দিন','বুরসা ফোলা বা রক্তের দাগ, রানে রক্তক্ষরণ'],
- ['রানীক্ষেত','যেকোনো বয়স (বিশেষ করে টিকা না থাকলে)','প্রোভেন্ট্রিকুলাসে রক্তের ফোঁটা'],
- ['সিআরডি / ই-কোলাই','২১–৩৫ দিন','বায়ুথলি ঘোলা, কলিজা ও হৃদপিণ্ডে সাদা স্তর'],
- ['অ্যাসপারজিলোসিস','১–১০ দিন','ফুসফুসে হলদে-সাদা গুটি'],
- ['অ্যাসাইটিস','২১–৩৫ দিন','পেটে হলদে পানি, কলিজা ফোলা'],
- ['নাভি পচা','১–৭ দিন','কুসুমথলি সবুজ-হলদে, দুর্গন্ধ']
-];
-
-const $z=id=>document.getElementById(id);
-const dzLevel=(d,day)=>{let l=0;d.r.forEach(([a,b,v])=>{if(day>=a&&day<=b)l=v});return l};
-const dzPeak=d=>{let m=0;d.r.forEach(r=>m=Math.max(m,r[2]));return d.r.filter(r=>r[2]===m).map(r=>dzBn(r[0])+"–"+dzBn(r[1])).join(", ")+" দিনে বেশি"};
-const dzCells=(f,cls)=>Array.from({length:35},(_,i)=>{let v=f(i+1);return `<div data-day="${i+1}" class="${cls(v)}"></div>`}).join("");
-let dzSel="সব",dzInited=false;
-window.dzTab=function(n){
- [1,2,3].forEach(i=>{$z("dzTab"+i).hidden=i!==n;$z("dzBtn"+i).setAttribute("aria-pressed",i===n)});
-};
-function dzBatchAge(){let d=(typeof days==="function")?days():0;return d}
-window.dzUpdate=function(){
- let day=+$z("dzAge").value;
- $z("dzAgeOut").textContent=dzBn(day)+" দিন";
- document.querySelectorAll("#dzTab1 .dz-strip div.cur").forEach(e=>e.classList.remove("cur"));
- document.querySelectorAll('#dzTab1 .dz-strip div[data-day="'+day+'"]').forEach(e=>e.classList.add("cur"));
- let hi=DZ_DIS.filter(d=>dzLevel(d,day)===3),mid=DZ_DIS.filter(d=>dzLevel(d,day)===2);
- let vac=DZ_VAC.filter(d=>d.r.some(([a,b])=>day>=a&&day<=b));
- $z("dzNow").innerHTML=
-  `<div><b>${dzBn(day)} দিনে বেশি ঝুঁকি:</b></div><div class="dz-tags">${hi.length?hi.map(d=>`<span class="dz-tag h">${d.n}</span>`).join(""):'<span class="dz-tag">বিশেষ বেশি ঝুঁকি নেই</span>'}</div>`+
-  (mid.length?`<div><b>মাঝারি ঝুঁকি:</b></div><div class="dz-tags">${mid.map(d=>`<span class="dz-tag m">${d.n}</span>`).join("")}</div>`:"")+
-  (vac.length?`<div><b>টিকার সময় (অ্যাপের শিডিউল):</b> ${vac.map(d=>d.n).join(", ")}</div>`:"");
-};
-window.dzRisk=function(day){return{hi:DZ_DIS.filter(d=>dzLevel(d,day)===3).map(d=>d.n),mid:DZ_DIS.filter(d=>dzLevel(d,day)===2).map(d=>d.n)}};
-window.dzToday=function(){
- let a=dzBatchAge(),c=Math.min(35,Math.max(1,a));
- $z("dzAge").value=c;
- $z("dzBatchNote").textContent=state.startDate?("এই ব্যাচের বর্তমান বয়স: "+dzBn(a)+" দিন"+(a>35?" (চার্ট ৩৫ দিন পর্যন্ত)":"")):"বাচ্চা আসার তারিখ দিলে ব্যাচের বয়স নিজে থেকে বসবে।";
- dzUpdate();
-};
-window.dzOrgans=function(){
- let q=$z("dzQ").value.trim();
- let html=DZ_ORG.map(o=>{
-  let fs=o.f.filter(x=>(dzSel==="সব"||x.d===dzSel)&&(!q||(x.d+x.t+o.n).includes(q)));
-  if(!fs.length)return "";
-  return `<div class="dz-organ"><h3>${o.n}</h3><p class="dz-where">${o.w}</p><div class="dz-ok">✅ সুস্থ: ${o.ok}</div><ul class="dz-find">${fs.map(x=>`<li><b>${x.d}</b><span>${x.t}</span><a href="${dzImg(x.q)}" target="_blank" rel="noopener">ছবি দেখুন ↗</a></li>`).join("")}</ul></div>`;
- }).join("");
- $z("dzOrgans").innerHTML=html||'<p class="dz-note">কিছু পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন।</p>';
-};
-window.dzPick=function(n){dzSel=n;dzChips();dzOrgans()};
-function dzChips(){
- let names=["সব"].concat([...new Set(DZ_ORG.flatMap(o=>o.f.map(x=>x.d)))]);
- $z("dzChips").innerHTML=names.map(n=>`<button type="button" class="dz-chip" aria-pressed="${n===dzSel}" onclick="dzPick('${n}')">${n}</button>`).join("");
-}
-function dzInit(){
- if(dzInited||!$z("dzAge"))return;dzInited=true;
- $z("dzAxis").innerHTML=[1,2,3,4,5].map(w=>`<span>${dzBn(w)}ম সপ্তাহ</span>`).join("");
- $z("dzRows").innerHTML=DZ_DIS.map(d=>`<div class="dz-row"><div class="dz-head"><span class="dz-name">${d.n}</span><span class="dz-peak">${dzPeak(d)}</span></div><div class="dz-strip">${dzCells(day=>dzLevel(d,day),v=>v?"l"+v:"")}</div></div>`).join("");
- $z("dzVacs").innerHTML=DZ_VAC.map(d=>`<div class="dz-row"><div class="dz-head"><span class="dz-name">${d.n}</span><span class="dz-peak">${d.note}</span></div><div class="dz-strip">${dzCells(day=>d.r.some(([a,b])=>day>=a&&day<=b),v=>v?"vac":"")}</div></div>`).join("");
- document.querySelectorAll("#dzRows .dz-strip div,#dzVacs .dz-strip div").forEach(c=>{
-  let row=c.closest(".dz-row"),i=[...row.parentNode.children].indexOf(row),day=+c.dataset.day,inV=row.parentNode.id==="dzVacs";
-  c.title=inV?(DZ_VAC[i].n+" • "+dzBn(day)+" দিন"):(DZ_DIS[i].n+" • "+dzBn(day)+" দিন: "+(dzLevel(DZ_DIS[i],day)?DZ_LV[dzLevel(DZ_DIS[i],day)]:"ঝুঁকি কম"));
- });
- $z("dzMed").innerHTML=DZ_DIS.map((d,k)=>`<details><summary><span>${d.n}</span></summary><dl><dt>কী দেওয়া হয়</dt><dd>${DZ_MED[k].t}</dd><dt>প্রতিরোধ</dt><dd>${DZ_MED[k].p}</dd></dl></details>`).join("");
- $z("dzTbody").innerHTML=DZ_PM.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("");
- dzChips();dzOrgans();dzToday();
-}
-window.dzRefresh=function(){};
-dzInit();
-})();
-
-{const _dzr=window.render;window.render=function(){let r=_dzr.apply(this,arguments);try{dzRefresh()}catch(e){}return r}}
 
 // ══════ আজকের করণীয় কার্ড ══════
 (function(){
@@ -2825,28 +2686,6 @@ function renderCharts(){
  el.querySelectorAll(".dzc-scroll").forEach(d=>d.scrollLeft=d.scrollWidth);
 }
 
-// ── ৫. চেকলিস্ট ──
-const CL=[
- {id:"s",t:"🐣 ব্যাচ শুরুর আগে",items:["আগের ব্যাচের লিটার ও আবর্জনা পুরো সরানো","ঘর, দেয়াল ও মেঝে ধুয়ে পরিষ্কার করা","জীবাণুনাশক স্প্রে করে কয়েক দিন ঘর খালি রাখা","ফিডার ও পানির পাত্র ধুয়ে শুকানো","শুকনো নতুন লিটার বিছানো","ব্রুডার, বাল্ব ও পর্দা ঠিক করা, ঘর আগে থেকে গরম করা","ফিড, ভিটামিন, ইলেক্ট্রোলাইট ও ওষুধ মজুত","টিকা (রানিক্ষেত, গামবোরো) সংগ্রহের ব্যবস্থা","দরজায় পা ধোয়ার জীবাণুনাশক পাত্র রাখা","ডাক্তারের ফোন নম্বর হাতের কাছে রাখা"]},
- {id:"e",t:"🏁 ব্যাচ শেষে",items:["সব মুরগি বিক্রি করে হিসাব মেলানো","বাকি টাকা আদায়ের তালিকা করা","লিটার সরিয়ে বিক্রি বা সার হিসেবে ব্যবহার","ঘর ও যন্ত্রপাতি ধুয়ে ফেলা","জীবাণুনাশক স্প্রে করা","ব্যাচ ক্লোজ করে রিপোর্ট (PDF বা Excel) সংরক্ষণ","ব্যাকআপ ফাইল নিয়ে রাখা","ঘর কয়েক দিন খালি রেখে শুকানো"]}
-];
-window.clToggle=function(k){state.checks=state.checks||{};if(state.checks[k])delete state.checks[k];else state.checks[k]=1;save();renderChecklist()};
-window.clReset=async function(id){
- let l=CL.find(x=>x.id===id);if(!l)return;
- if(!await askConfirm("\""+l.t+"\" এর সব টিক মুছে ফেলবেন?"))return;
- state.checks=state.checks||{};l.items.forEach((_,i)=>delete state.checks[id+i]);save();renderChecklist();
-};
-function renderChecklist(){
- let h=$a("clHost");if(!h)return;
- let ck=state.checks||{};
- h.innerHTML=CL.map(l=>{
-  let done=l.items.filter((_,i)=>ck[l.id+i]).length,pc=Math.round(done/l.items.length*100);
-  return '<div class="form cl-list"><div class="cl-head"><b>'+l.t+'</b><span class="cl-prog">'+bn(done)+'/'+bn(l.items.length)+'</span></div><div class="cl-bar"><i style="width:'+pc+'%"></i></div>'+
-   l.items.map((t,i)=>'<label class="cl-item'+(ck[l.id+i]?" done":"")+'"><input type="checkbox"'+(ck[l.id+i]?" checked":"")+' onchange="clToggle(\''+l.id+i+'\')"><span>'+t+'</span></label>').join("")+
-   '<button class="an-btn" type="button" style="margin-top:10px" onclick="clReset(\''+l.id+'\')">↩️ সব টিক মুছুন</button></div>';
- }).join("");
-}
-
 // ── ৬. ক্রেতার কল ও WhatsApp ──
 const intl=p=>{let d=String(p||"").replace(/\D/g,"");if(!d)return"";if(d.startsWith("880"))return d;if(d.startsWith("0"))return "88"+d;return "880"+d};
 window.custSavePhone=function(k,v){let n=decodeURIComponent(k);state.custPhones=state.custPhones||{};if(v.trim())state.custPhones[n]=v.trim();else delete state.custPhones[n];save();renderCustomers()};
@@ -2857,6 +2696,7 @@ window.custTools=function(n,due){
   (p?'<a class="cust-call" href="tel:+'+p+'">📞 কল</a><a class="cust-wa" target="_blank" rel="noopener" href="https://wa.me/'+p+'?text='+encodeURIComponent(msg)+'">💬 WhatsApp</a>':"")+'</div>';
 };
 
+window.intakeAt=intakeAt;window.stdAt=stdAt;window.liveOn=liveOn;
 {const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderAnalysis();renderCharts()}catch(e){console.error(e)}return r}}
 })();
 
@@ -2934,76 +2774,114 @@ function renderBackup(){
 window.backupLater=function(){store.backupSnooze=Date.now()+86400000;save();renderBackup()};
 window.backupShare=async function(){
  try{
-  let d=new Date().toISOString().slice(0,10),f=new File([JSON.stringify(store,null,2)],"poultry-backup-"+d+".json",{type:"application/json"});
+  let d=todayISO(),f=new File([JSON.stringify(store,null,2)],"poultry-backup-"+d+".json",{type:"application/json"});
   if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"ব্রাদার্স পোল্ট্রি ফার্ম ব্যাকআপ"});store.lastBackup=Date.now();delete store.backupSnooze;save();renderBackup();showToast("✅ ব্যাকআপ শেয়ার হয়েছে");return}
  }catch(e){if(e&&e.name==="AbortError")return}
  backupData();
 };
 
-// ── ঘরের অবস্থা ──
-const TGT=[[3,32,35],[7,30,33],[14,28,31],[21,26,29],[28,24,27],[99,21,26]];
-const tgtAt=a=>{for(const r of TGT){if(a<=r[0])return[r[1],r[2]]}return[21,26]};
-window.envAdd=function(){
- let t=parseFloat($b("envTemp").value);
- if(isNaN(t)){showToast("❌ তাপমাত্রা লিখুন");return}
- state.env=state.env||[];
- state.env.push({date:$b("envDate").value||todayISO(),slot:$b("envSlot").value,temp:t,hum:$b("envHum").value,litter:$b("envLitter").value,amm:$b("envAmm").value,note:$b("envNote").value.trim()});
- state.env.sort((a,b)=>(a.date+a.slot).localeCompare(b.date+b.slot));
- $b("envTemp").value="";$b("envHum").value="";$b("envNote").value="";$b("envLitter").selectedIndex=0;$b("envAmm").selectedIndex=0;
- save();render();showToast("✅ ঘরের অবস্থা যোগ হয়েছে");
-};
-function judge(r){
- let a=ageOn(r.date),msgs=[],bad=false;
- if(a!==null){let[lo,hi]=tgtAt(a);
-  if(r.temp<lo){bad=true;msgs.push("তাপমাত্রা কম (লক্ষ্য "+bn(lo)+"–"+bn(hi)+"°C): হিটার বা পর্দা বাড়ান, ঠান্ডা বাতাস আটকান।")}
-  else if(r.temp>hi){bad=true;msgs.push("তাপমাত্রা বেশি (লক্ষ্য "+bn(lo)+"–"+bn(hi)+"°C): ফ্যান ও বাতাস চলাচল বাড়ান, ঠান্ডা পানি দিন"+(a>=14?"। গরমে হিটস্ট্রোক ও অ্যাসাইটিসের ঝুঁকি বাড়ে":"")+"।")}}
- if(r.litter==="খুব ভেজা"){bad=true;msgs.push("লিটার খুব ভেজা: কক্সিডিওসিস ও অ্যামোনিয়ার ঝুঁকি। ভেজা অংশ সরিয়ে শুকনো লিটার দিন, পানির পাত্র ঠিক করুন।")}
- else if(r.litter==="হালকা ভেজা")msgs.push("লিটার হালকা ভেজা: উল্টে দিয়ে শুকাতে দিন।");
- if(r.amm==="বেশি"){bad=true;msgs.push("অ্যামোনিয়ার গন্ধ বেশি: সিআরডি ও চোখের সমস্যার ঝুঁকি। বাতাস চলাচল বাড়ান, লিটার বদলান।")}
- return{bad:bad,msgs:msgs};
-}
-window.envToday=function(){
- if(!state.startDate||state.status==="closed")return null;
- let t=todayISO(),a=(state.env||[]).filter(r=>r.date===t);
- if(!a.length)return{txt:"আজ ঘরের তাপমাত্রা লেখেননি",sub:"চাপলে তাপমাত্রা, লিটার ও গন্ধ যোগ করুন",cls:"bad"};
- let l=a[a.length-1],j=judge(l);
- return{txt:"ঘর: "+fb(l.temp,1)+"°C • লিটার "+esc(l.litter)+" • গন্ধ "+esc(l.amm),sub:j.bad?j.msgs[0]:"ঠিক আছে",cls:j.bad?"bad":"good"};
-};
-function envChart(a){
- if(!a.length)return '<div class="an-note">এখনও কোনো রিডিং নেই।</div>';
- let r=a.slice(-14),W=360,H=190,L=34,R=10,T=14,B=26,n=r.length;
- let lo=[],hi=[];r.forEach(x=>{let a=ageOn(x.date),g=a===null?[21,26]:tgtAt(a);lo.push(g[0]);hi.push(g[1])});
- let mn=Math.floor(Math.min.apply(null,r.map(x=>x.temp).concat(lo))-2),mx=Math.ceil(Math.max.apply(null,r.map(x=>x.temp).concat(hi))+2);
- const X=i=>L+(n>1?(W-L-R)*i/(n-1):(W-L-R)/2),Y=v=>T+(H-T-B)*(1-(v-mn)/(mx-mn));
- let o='<svg class="an-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="তাপমাত্রা রিডিং ও লক্ষ্য সীমা">';
- let step=Math.max(1,Math.ceil((mx-mn)/5));for(let v=mn;v<=mx;v+=step)o+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#ffffff12"/><text x="'+(L-4)+'" y="'+(Y(v)+3)+'" text-anchor="end">'+bn(v)+'</text>';
- if(n>1){let up=r.map((x,i)=>X(i)+","+Y(hi[i])).join(" "),dn=r.map((x,i)=>X(n-1-i)+","+Y(lo[n-1-i])).join(" ");o+='<polygon points="'+up+" "+dn+'" fill="#86e3cc" fill-opacity=".16"/>'}
- else o+='<rect x="'+(X(0)-18)+'" y="'+Y(hi[0])+'" width="36" height="'+(Y(lo[0])-Y(hi[0]))+'" fill="#86e3cc" fill-opacity=".16"/>';
- o+='<polyline points="'+r.map((x,i)=>X(i)+","+Y(x.temp)).join(" ")+'" fill="none" stroke="#ff8a5c" stroke-width="2"/>';
- r.forEach((x,i)=>{let out=x.temp<lo[i]||x.temp>hi[i];o+='<circle cx="'+X(i)+'" cy="'+Y(x.temp)+'" r="'+(out?5:3.5)+'" fill="'+(out?"#ff8a5c":"#86e3cc")+'" stroke="#15222c" stroke-width="2"><title>'+esc(x.date)+' '+esc(x.slot)+': '+fb(x.temp,1)+'°C</title></circle>'});
- let dl=i=>{let p=r[i].date.split("-");return bn(+p[2])+"/"+bn(+p[1])};
- o+='<text x="'+X(0)+'" y="'+(H-8)+'" text-anchor="start">'+dl(0)+'</text>'+(n>1?'<text x="'+X(n-1)+'" y="'+(H-8)+'" text-anchor="end">'+dl(n-1)+'</text>':"")+'<text x="'+L+'" y="9">°C</text></svg>';
- return '<div class="an-leg"><span><i style="background:#ff8a5c"></i>আপনার রিডিং</span><span><i style="background:#86e3cc;opacity:.5;height:9px;vertical-align:-1px"></i>লক্ষ্য সীমা</span></div>'+o;
-}
-function renderEnv(){
- let t=$b("envTable");if(!t)return;
- let d=$b("envDate");if(d&&!d.value)d.value=todayISO();
- let a=state.env||[];
- t.innerHTML=a.length?a.map((r,i)=>({r:r,i:i})).reverse().map(x=>{
-  let r=x.r,ag=ageOn(r.date),g=ag!==null?tgtAt(ag):null,out=g&&(r.temp<g[0]||r.temp>g[1]);
-  return '<tr><td>'+esc(r.date)+'</td><td>'+esc(r.slot)+'</td><td>'+(ag!==null?bn(ag)+" দিন":"—")+'</td><td style="'+(out?"color:#ff9d80;font-weight:700":"")+'">'+fb(r.temp,1)+'°C</td><td>'+(g?bn(g[0])+"–"+bn(g[1])+"°C":"—")+'</td><td>'+esc(r.litter||"")+'</td><td>'+esc(r.amm||"")+'</td><td><button class="del" onclick="del(\'env\','+x.i+')">মুছুন</button></td></tr>'}).join(""):'<tr><td colspan="8" class="empty">এখনও কোনো রিডিং নেই</td></tr>';
- $b("envChart").innerHTML=envChart(a);
- let st=$b("envStatus"),l=a.length?a[a.length-1]:null;
- if(!l){st.innerHTML='<div class="env-st info"><b>এখনও কোনো রিডিং নেই</b>দিনে ২–৩ বার ঘরের তাপমাত্রা, লিটার ও গন্ধ লিখে রাখুন। রোগের আগেই সমস্যা ধরা পড়ে।</div>';return}
- let j=judge(l),ag=ageOn(l.date);
- st.innerHTML='<div class="env-st '+(j.bad?"bad":"good")+'"><b>শেষ রিডিং: '+esc(l.date)+' '+esc(l.slot)+' — '+fb(l.temp,1)+'°C'+(ag!==null?' (বয়স '+bn(ag)+' দিন, লক্ষ্য '+bn(tgtAt(ag)[0])+'–'+bn(tgtAt(ag)[1])+'°C)':'')+'</b>'+(j.msgs.length?j.msgs.map(m=>'• '+m).join("<br>"):"সব ঠিক আছে।")+'</div>';
-}
-
 {const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderBatchCmp();renderBackup()}catch(e){console.error(e)}return r}}
 })();
+// ══════ 🩺 খামার ডাক্তার (নিয়মভিত্তিক আগাম সতর্কতা — রোগ নির্ণয় নয়) ══════
+(function(){
+const bn=n=>Number(n).toLocaleString("bn-BD");
+const fb=(n,d)=>Number(n).toLocaleString("bn-BD",{maximumFractionDigits:d===undefined?1:d});
+const dstr=off=>{const d=new Date();d.setDate(d.getDate()-off);const p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())};
+const ageOf=(b,ds)=>{if(!b.startDate)return null;const a=new Date(b.startDate+"T00:00:00"),c=new Date(ds+"T00:00:00");return Math.round((c-a)/86400000)};
+function deathsUpTo(b,age){return (b.deaths||[]).reduce((s,r)=>{const a=ageOf(b,r.date);return s+(a!==null&&a<=age?(+r.qty||0):0)},0)}
+// বয়স অনুযায়ী সম্ভাব্য কারণ ও করণীয় (সাধারণ নির্দেশনা, ডাক্তারের বিকল্প নয়)
+function hint(age){
+ if(age<=7)return{why:"ব্রুডিং/তাপমাত্রার সমস্যা, বাচ্চার মান, নাভি পচা (ওম্ফালাইটিস) বা পানির অভাব হতে পারে।",do:"ঘরের তাপমাত্রা ও পানি-খাবারের জায়গা দেখুন, বাচ্চা গুছিয়ে আছে না ছড়িয়ে আছে দেখুন।"};
+ if(age<=21)return{why:"সিআরডি/ই-কোলাই, গামবোরো বা কক্সিডিওসিস (রক্তমাখা পায়খানা) হতে পারে।",do:"শ্বাসের শব্দ, পায়খানার রং, ঘরের ধুলো-গন্ধ ও লিটারের ভেজা ভাব দেখুন। ২–৩টা মরা মুরগি ডাক্তারকে দেখান।"};
+ return{why:"ই-কোলাই/সিআরডি, কক্সিডিওসিস, গরমে হিটস্ট্রোক, বা অ্যাসাইটিস/হঠাৎ মৃত্যু (দ্রুত বাড়ার কারণে) হতে পারে।",do:"শ্বাসকষ্ট, পাখা ঝোলা, পেট ফোলা ও ঘরের গরম-বাতাস দেখুন। মরা মুরগির পোস্টমর্টেম করান।"};
+}
+function analyze(){
+ const f=[]; // {lv:2 লাল|1 হলুদ|0 তথ্য|-1 ভালো, t, d, a}
+ const age=days(),chicks=+state.chicks||0;
+ if(!state.startDate||chicks<=0||state.status==="closed"||age<1||age>42)return null;
+ const live=liveOn(dstr(0))||chicks;
+ const h=hint(age);
+ // দৈনিক মৃত্যু (শেষ ১০ দিন)
+ const dm=[];for(let o=9;o>=0;o--)dm.push({ds:dstr(o),q:0});
+ (state.deaths||[]).forEach(r=>{const x=dm.find(y=>y.ds===r.date);if(x)x.q+=(+r.qty||0)});
+ const t0=dm[9].q,t1=dm[8].q,prev=dm.slice(0,7);
+ const pavg=prev.reduce((s,x)=>s+x.q,0)/prev.length;
+ let mortBad=false;
+ const rate0=live>0?t0/live*100:0;
+ if(t0>=3&&(rate0>=1||t0>=Math.max(3,pavg*2.5))){
+  const lv=(rate0>=1||t0>=8)?2:1;mortBad=true;
+  f.push({lv:lv,t:"আজ মৃত্যু বেশি: "+bn(t0)+" টি ("+fb(rate0,2)+"%)",d:"আগের কয়েক দিনের গড় ছিল "+fb(pavg,1)+" টি। "+h.why,a:h.do});
+ }else if(t0>0&&t1>0&&t0>t1&&dm[7].q>0&&t1>dm[7].q&&t0>=2){
+  mortBad=true;
+  f.push({lv:1,t:"টানা ৩ দিন মৃত্যু বাড়ছে ("+bn(dm[7].q)+" → "+bn(t1)+" → "+bn(t0)+")",d:h.why,a:h.do});
+ }
+ // মোট মৃত্যুহার
+ const totDead=deathsUpTo(state,age),cum=totDead/chicks*100;
+ if(age<=7&&cum>1){f.push({lv:cum>2?2:1,t:"প্রথম সপ্তাহে মৃত্যু "+fb(cum,1)+"% (স্বাভাবিক ১% এর নিচে)",d:"বাচ্চার মান বা ব্রুডিং-এর সমস্যা হতে পারে।",a:"ঘরের তাপমাত্রা, পানি ও প্রথম ৩ দিনের খাবার/ট্রেতে খাবার আছে কি না দেখুন।"})}
+ else if(age>7&&cum>(age<=21?3:5)){f.push({lv:cum>(age<=21?5:7)?2:1,t:"এখন পর্যন্ত মোট মৃত্যু "+fb(cum,1)+"%",d:"এই বয়সে এটা স্বাভাবিকের চেয়ে বেশি।",a:"কারণ খুঁজতে মরা মুরগির পোস্টমর্টেম করান।"})}
+ // আগের ব্যাচের সঙ্গে তুলনা
+ const olds=(store.batches||[]).filter(b=>b.id!==state.id&&b.startDate&&(+b.chicks||0)>0&&(b.deaths||[]).length);
+ if(olds.length){
+  const avg=olds.reduce((s,b)=>s+deathsUpTo(b,age)/b.chicks*100,0)/olds.length;
+  if(cum>avg*1.5&&cum-avg>=0.5)f.push({lv:0,t:"আগের ব্যাচের তুলনায় মৃত্যু বেশি",d:"এই বয়সে আগের ব্যাচগুলোতে গড়ে "+fb(avg,1)+"% ছিল, এবার "+fb(cum,1)+"%।",a:""});
+ }
+ // ভ্যাকসিনের পর স্বাভাবিক ধাক্কা?
+ let vacRecent=false;
+ (typeof VAC!=="undefined"?VAC:[]).forEach(v=>{const r=(state.vaccines||{})[v.k];if(r&&r.date){const a=ageOf(state,r.date);if(a!==null&&age-a>=0&&age-a<=2)vacRecent=true}});
+ // খাবার (শেষ ২ দিনের মধ্যে যে দিনের এন্ট্রি আছে)
+ const fd={};(state.dailyFeed||[]).forEach(r=>{fd[r.date]=(fd[r.date]||0)+dfKg(r)});
+ let fday=null;for(let o=0;o<=1;o++){if(fd[dstr(o)]>0){fday=dstr(o);break}}
+ let feedLow=false;
+ if(fday){
+  const a=ageOf(state,fday),l=liveOn(fday)||live,g=fd[fday]*1000/l,std=intakeAt(a),ratio=g/std;
+  // আগের ২ দিনের গড়ের সঙ্গে হঠাৎ পতন
+  let pv=[];for(let o=2;o<=4;o++)if(fd[dstr(o)]>0)pv.push(fd[dstr(o)]*1000/(liveOn(dstr(o))||l));
+  const pa=pv.length?pv.reduce((s,x)=>s+x,0)/pv.length:0,drop=pa>0?(1-g/pa)*100:0;
+  if(ratio<0.8||(drop>15&&age>=5)){
+   feedLow=true;
+   let lv=ratio<0.65?2:1;if(vacRecent&&lv===1)lv=0;
+   f.push({lv:lv,t:"খাবার কম খাচ্ছে: "+fb(g,0)+" গ্রাম/মুরগি (স্ট্যান্ডার্ড "+fb(std,0)+")",d:(drop>15?"আগের কয়েক দিনের চেয়ে "+fb(drop,0)+"% কমেছে। ":"")+(vacRecent?"সম্প্রতি ভ্যাকসিন দিয়েছেন, ১–২ দিন সামান্য কমা স্বাভাবিক। ":h.why),a:vacRecent?"আগামীকালও কম থাকলে ঘর ও পানি পরীক্ষা করুন।":h.do});
+  }else if(ratio>1.25){
+   f.push({lv:0,t:"খাবার স্ট্যান্ডার্ডের চেয়ে বেশি ("+fb(g,0)+" গ্রাম/মুরগি)",d:"মুরগির সংখ্যা কম লেখা, খাবার নষ্ট বা ইঁদুর-পাখির কারণ হতে পারে।",a:"মুরগির সংখ্যা ও খাবারের হিসাব মিলিয়ে নিন।"});
+  }else f.push({lv:-1,t:"খাবার স্বাভাবিক ("+fb(g,0)+" গ্রাম/মুরগি, স্ট্যান্ডার্ড "+fb(std,0)+")",d:"",a:""});
+ }else{
+  f.push({lv:0,t:"আজ/গতকালের খাবারের এন্ট্রি নেই",d:"\"দৈনিক খাবার\" পেজে লিখলে খাবার বিশ্লেষণ হবে।",a:""});
+ }
+ // সম্মিলিত সতর্কতা
+ if(feedLow&&mortBad&&!vacRecent){f.forEach(x=>{if(/^(আজ মৃত্যু বেশি|টানা ৩ দিন|খাবার কম খাচ্ছে)/.test(x.t)){x.d=x.d.replace(h.why,"").trim();if(x.a===h.do||x.a.indexOf(h.do)===0)x.a=""}});f.unshift({lv:2,t:"খাবার কমছে আর মৃত্যু বাড়ছে — একসঙ্গে",d:h.why,a:"আজই "+h.do+" ২৪ ঘণ্টায় না কমলে ডাক্তার ডাকুন।"})}
+ // ওজন (শেষ ৭ দিনের মধ্যে)
+ const ws=(state.weights||[]).filter(r=>+r.n>0&&ageOf(state,r.date)!==null&&ageOf(state,r.date)>=age-7);
+ if(ws.length){
+  const w=ws[ws.length-1],a=ageOf(state,w.date),g=(+w.total/+w.n)*1000,std=stdAt(a),ratio=g/std;
+  if(ratio<0.9)f.push({lv:ratio<0.8?2:1,t:"ওজন কম: "+fb(g,0)+" গ্রাম (স্ট্যান্ডার্ড "+fb(std,0)+", "+bn(a)+" দিনে)",d:"স্ট্যান্ডার্ডের "+fb(ratio*100,0)+"%। ফিডের মান, পানি বা তাপমাত্রা/রোগের কারণ হতে পারে।",a:"ফিড CP-এর ঠিক ধাপ (প্রি-স্টার্টার/স্টার্টার/গ্রোয়ার) দিচ্ছেন কি না ও ঘরে ভিড় আছে কি না দেখুন।"});
+  else f.push({lv:-1,t:"ওজন ঠিক আছে: "+fb(g,0)+" গ্রাম (স্ট্যান্ডার্ড "+fb(std,0)+")",d:"",a:""});
+ }
+ // ভ্যাকসিন দেরি
+ (typeof VAC!=="undefined"?VAC:[]).forEach(v=>{
+  const s=typeof vacStatus==="function"?vacStatus(v):null;
+  if(s&&s.s==="late")f.push({lv:s.late>=2?2:1,t:v.name+" "+bn(s.late)+" দিন দেরি",d:"সময়মতো না দিলে রোগের ঝুঁকি বাড়ে।",a:"যত দ্রুত সম্ভব দিন (ডাক্তারের পরামর্শে)।"});
+ });
+ f.sort((a,b)=>b.lv-a.lv);
+ const worst=f.reduce((m,x)=>Math.max(m,x.lv),-1);
+ return{f:f,worst:worst,age:age};
+}
+window.renderFarmDoc=function(){
+ const el=document.getElementById("farmDoc");if(!el)return;
+ const r=analyze();
+ if(!r){el.innerHTML="";return}
+ const col=r.worst>=2?{c:"#ff6b6b",bg:"#ff6b6b14",tx:"🔴 সমস্যার ইশারা — আজই দেখুন"}:r.worst===1?{c:"#f5b942",bg:"#f5b94214",tx:"🟡 নজর রাখুন"}:{c:"#1aad6e",bg:"#1aad6e12",tx:"🟢 এখন পর্যন্ত সব ঠিক"};
+ const icon=lv=>lv>=2?"🔴":lv===1?"🟡":lv===0?"ℹ️":"✅";
+ el.innerHTML='<div class="fdoc" style="border-color:'+col.c+'66;background:'+col.bg+'"><div class="fdoc-head"><b>🩺 খামার ডাক্তার</b><span style="color:'+col.c+'">'+col.tx+'</span></div>'+
+  r.f.map(x=>'<div class="fdoc-row"><span class="fdoc-i">'+icon(x.lv)+'</span><div><div class="fdoc-t">'+x.t+'</div>'+(x.d?'<div class="fdoc-d">'+x.d+'</div>':'')+(x.a?'<div class="fdoc-a">👉 '+x.a+'</div>':'')+'</div></div>').join("")+
+  '<div class="fdoc-n">বয়স '+bn(r.age)+' দিন • রোস জাত, সিপি ফিডের স্ট্যান্ডার্ড ধরে হিসাব। এটা আগাম ইশারা, নিশ্চিত রোগ নির্ণয় নয়। ২৪ ঘণ্টায় না কমলে ডাক্তার দেখান।</div></div>';
+};
+{const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderFarmDoc()}catch(e){console.error(e)}return r}}
+})();
+
 ["renderMedSchedule","renderNotes","renderOtherSales"].forEach(n=>{const f=window[n];window[n]=function(){f.apply(this,arguments);renderSummaries()}});
 render();
 renderTempPallas();
+if(window.__restoredFromBak){save();setTimeout(()=>{try{showToast("⚠️ মূল ডেটা নষ্ট ছিল, গতকালের কপি থেকে ফেরত আনা হয়েছে")}catch(e){}},1200)}
 setTimeout(()=>vacCheck(),700);setInterval(()=>vacCheck(),600000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)vacCheck()});
 fitTitle();window.addEventListener("resize",fitTitle);window.addEventListener("load",fitTitle);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitTitle);
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("service-worker.js").catch(()=>{})})}
@@ -3135,7 +3013,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
   let url=ex?"https://www.googleapis.com/upload/drive/v3/files/"+ex.id+"?uploadType=multipart":"https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart";
   await api(url,{method:ex?"PATCH":"POST",headers:{Authorization:"Bearer "+tok,"Content-Type":"multipart/related; boundary="+b},body:mp});
  }
- function stamp(){store.lastBackup=Date.now();store.lastDrive=new Date().toISOString().slice(0,10);delete store.backupSnooze;save();try{renderBackup()}catch(e){}}
+ function stamp(){store.lastBackup=Date.now();store.lastDrive=todayISO();delete store.backupSnooze;save();try{renderBackup()}catch(e){}}
  function status(m,c){let e=document.getElementById("gdStatus");if(e){e.textContent=m;e.style.color=c||"#9fd8b8"}}
  window.gdBackupNow=async function(){
   if(!cid()){status("আগে Client ID বসান","#ffb070");return}
@@ -3189,7 +3067,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.s
  setTimeout(function(){
   try{
    if(LS("gdAuto")!=="1"||!cid()||!LS("gdLinked")||!navigator.onLine||!hasData())return;
-   if(store.lastDrive===new Date().toISOString().slice(0,10))return;
+   if(store.lastDrive===todayISO())return;
    getToken(false).then(upload).then(()=>{stamp();showToast("☁️ অটো ব্যাকআপ হয়েছে")}).catch(()=>{});
   }catch(e){}
  },4000);

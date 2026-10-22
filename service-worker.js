@@ -1,28 +1,31 @@
-// Brothers Poultry Farm V3 - offline service worker
-// App update dile CACHE_NAME-er number bariye dao (v3-8 -> v3-9)
-const CACHE_NAME = "brothers-poultry-v3-36";
-const FILES_TO_CACHE = [
+/* ব্রাদার্স পোল্ট্রি ফার্ম — অফলাইন সার্ভিস ওয়ার্কার
+   নতুন সংস্করণ দিলে শুধু VERSION বদলান। */
+const VERSION = "v4";
+const CORE = "bpf-core-" + VERSION;
+const RUNTIME = "bpf-runtime-" + VERSION;
+const PRECACHE = [
   "./",
   "./index.html",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
   "./icon-maskable-512.png",
-  "./logo.png"
+  "./logo.svg"
 ];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => Promise.all(FILES_TO_CACHE.map((f) => cache.add(f).catch(() => {}))))
-      .then(() => self.skipWaiting())
+    caches.open(CORE).then((c) =>
+      // একটি ফাইল না থাকলেও বাকিগুলো ক্যাশ হবে
+      Promise.all(PRECACHE.map((u) => c.add(new Request(u, { cache: "reload" })).catch(() => {})))
+    ).then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k !== CORE && k !== RUNTIME).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -32,48 +35,51 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
 
-  // Google Fonts: cache first, offline-e-o font thakbe
-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
+  // Google লগইন/ড্রাইভ API সবসময় সরাসরি নেটওয়ার্কে (ক্যাশ নয়)
+  if (url.hostname === "accounts.google.com" || (url.hostname.endsWith("googleapis.com") && url.hostname !== "fonts.googleapis.com")) return;
+  if (url.hostname === "wa.me") return;
+
+  // পেজ খোলা: নেটওয়ার্ক আগে (সর্বশেষ সংস্করণ), না পেলে ক্যাশ থেকে — অফলাইনেও চলবে
+  if (req.mode === "navigate") {
     e.respondWith(
-      caches.match(req).then((cached) => {
-        if (cached) return cached;
-        return fetch(req).then((res) => {
-          if (res && (res.ok || res.type === "opaque")) {
-            const copy = res.clone();
-            caches.open(CACHE_NAME).then((c) => c.put(req, copy));
-          }
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CORE).then((c) => c.put("./index.html", copy));
           return res;
-        });
-      })
+        })
+        .catch(() => caches.match("./index.html").then((r) => r || caches.match("./")))
     );
     return;
   }
 
-  if (url.origin !== location.origin) return;
-
-  // Nijer file: network first (notun update pete), offline-e cache theke
-  e.respondWith(
-    fetch(req)
-      .then((res) => {
-        if (res && res.ok) {
-          const copy = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(req, copy));
-        }
-        return res;
+  // ফন্ট ও নিজের ফাইল: ক্যাশ আগে, পেছনে আপডেট
+  const sameOrigin = url.origin === self.location.origin;
+  const isFont = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
+  if (sameOrigin || isFont) {
+    e.respondWith(
+      caches.match(req).then((cached) => {
+        const net = fetch(req)
+          .then((res) => {
+            if (res && (res.ok || res.type === "opaque")) {
+              const copy = res.clone();
+              caches.open(sameOrigin ? CORE : RUNTIME).then((c) => c.put(req, copy));
+            }
+            return res;
+          })
+          .catch(() => cached);
+        return cached || net;
       })
-      .catch(() =>
-        caches.match(req, { ignoreSearch: true })
-          .then((c) => c || caches.match("./index.html"))
-          .then((c) => c || caches.match("./"))
-      )
-  );
+    );
+  }
 });
 
+// নোটিফিকেশনে ট্যাপ করলে অ্যাপ খুলবে
 self.addEventListener("notificationclick", (e) => {
   e.notification.close();
   e.waitUntil(
     self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
-      if (list.length) return list[0].focus();
+      for (const c of list) if ("focus" in c) return c.focus();
       return self.clients.openWindow("./index.html");
     })
   );
