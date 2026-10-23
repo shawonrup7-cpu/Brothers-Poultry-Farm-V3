@@ -1,11 +1,12 @@
 /* ব্রাদার্স পোল্ট্রি ফার্ম — অফলাইন সার্ভিস ওয়ার্কার
    নতুন সংস্করণ দিলে শুধু VERSION বদলান। */
-const VERSION = "v4";
+const VERSION = "v5";
 const CORE = "bpf-core-" + VERSION;
 const RUNTIME = "bpf-runtime-" + VERSION;
 const PRECACHE = [
   "./",
   "./index.html",
+  "./app.js",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",

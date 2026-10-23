@@ -576,6 +576,32 @@ td:first-child{font-weight:600}
 .ms-pl:active{transform:scale(.97)}.ms-pl.done{opacity:.72;background:#3ddc8420;border-color:#3ddc8488}.ms-pl.done .ms-pt b{text-decoration:line-through}
 .ms-pi{font-size:20px}.ms-pt{min-width:0}.ms-pt b{display:block;font-size:13.5px;word-break:break-word}.ms-pt small{display:block;font-size:11.5px;color:#9fb;opacity:.85;word-break:break-word}
 .ms-none,.ms-empty{color:#7a9aaa;font-size:12.5px;text-align:center;padding:8px}.ms-empty{padding:28px;font-size:14px;line-height:2;border:1px dashed #ffffff22;border-radius:14px}
+
+/* ── হিরো: শুরুর ও আজকের তারিখ এক লাইনে ── */
+.db-dates{flex-basis:100%;display:flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;font-size:14px;font-weight:700;color:#cfe9dc;flex-wrap:nowrap}
+.db-dates b{color:#3ddc84;font-weight:800}
+.db-dates i{font-style:normal;color:#ffffff40}
+@media(max-width:400px){.db-dates{font-size:12.5px;gap:6px}}
+/* ── সব মডাল: বড় ফন্ট ও সবকিছু মাঝখানে ── */
+.modal{align-items:center!important;padding:14px}
+.mbox{border-radius:24px!important;max-width:520px;max-height:88vh;padding:24px 18px;text-align:center;font-size:17px;box-shadow:0 20px 60px #000c,0 0 0 1px #ffffff1c inset}
+.mtitle{font-size:23px;text-align:center;margin-bottom:18px;line-height:1.4}
+.mbox label{font-size:15px;text-align:center;color:#a9c3cf}
+.mbox input,.mbox select,.mbox textarea{font-size:18px;text-align:center;padding:12px}
+.mbtns{justify-content:center;flex-wrap:wrap;gap:10px;margin-top:14px}
+.mbtns .add,.mbtns .tbtn-light{font-size:17px;padding:13px 22px;margin-top:0}
+.mbox .pgsum{grid-template-columns:repeat(2,1fr);gap:12px}
+.mbox .sc{flex-direction:column;justify-content:center;text-align:center;gap:6px;padding:16px 10px}
+.mbox .sci{font-size:40px}
+.mbox .scl{font-size:15px;letter-spacing:0}
+.mbox .scv{font-size:25px}
+.mbox .sc.sc-live{grid-column:1/-1;padding:26px 12px;border-color:#3ddc8470;background:linear-gradient(150deg,#12402f,#0d261f)}
+.mbox .sc-live .sci{font-size:72px}
+.mbox .sc-live .scl{font-size:20px;color:#9fe8c0}
+.mbox .sc-live .scv{font-size:76px;line-height:1.05;font-weight:900}
+.mbox .warnbox,.mbox .okbox,.mbox .an-note{font-size:15px;text-align:center}
+.mbox table{margin-inline:auto}
+.mbox th,.mbox td{text-align:center;font-size:15px}
 </style>
 </head>
 <body>
@@ -633,17 +659,10 @@ td:first-child{font-weight:600}
       <span class="db-hero-value"><b id="batchNameText">—</b></span>
     </div>
     <div class="db-hero-item">
-      <span class="db-hero-label">📅 আজকের তারিখ</span>
-      <span class="db-hero-value" id="today">—</span>
-    </div>
-    <div class="db-hero-item">
       <span class="db-hero-label">⏱️ বয়স</span>
       <span class="db-hero-value"><b id="age">০ দিন</b></span>
     </div>
-    <div class="db-hero-item">
-      <span class="db-hero-label">📆 শুরুর তারিখ</span>
-      <span class="db-hero-value" id="startText">নেই</span>
-    </div>
+    <div class="db-dates"><span>📆 শুরু: <b id="startText">নেই</b></span><i>│</i><span>📅 আজ: <b id="today">—</b></span></div>
     <div class="db-hero-item" style="margin-left:auto">
       <span class="db-status" id="batchStatusBadge">চলমান ব্যাচ</span>
     </div>
@@ -1127,7 +1146,7 @@ function askConfirm(msg){
  return new Promise(res=>{
   let ov=document.createElement("div");
   ov.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px";
-  ov.innerHTML='<div style="background:#162430;border:1px solid #1aad6e50;border-radius:16px;padding:20px;max-width:360px;width:100%;color:#e8edf2;font-family:inherit"><div style="font-size:15px;font-weight:700;line-height:1.6;margin-bottom:16px;white-space:pre-line"></div><div style="display:flex;gap:10px"><button type="button" data-v="0" style="flex:1;padding:12px;border-radius:10px;border:1px solid #ffffff25;background:#0d1923;color:#e8edf2;font:inherit;font-weight:700;cursor:pointer">❌ না</button><button type="button" data-v="1" style="flex:1;padding:12px;border-radius:10px;border:0;background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;font:inherit;font-weight:700;cursor:pointer">✅ হ্যাঁ</button></div></div>';
+  ov.innerHTML='<div style="background:#162430;border:1px solid #1aad6e50;border-radius:20px;padding:24px 20px;max-width:400px;width:100%;color:#e8edf2;font-family:inherit;text-align:center"><div style="font-size:19px;font-weight:700;line-height:1.6;margin-bottom:20px;white-space:pre-line"></div><div style="display:flex;gap:10px"><button type="button" data-v="0" style="flex:1;padding:14px;border-radius:12px;border:1px solid #ffffff25;background:#0d1923;color:#e8edf2;font:inherit;font-size:17px;font-weight:700;cursor:pointer">❌ না</button><button type="button" data-v="1" style="flex:1;padding:14px;border-radius:12px;border:0;background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;font:inherit;font-size:17px;font-weight:700;cursor:pointer">✅ হ্যাঁ</button></div></div>';
   ov.firstChild.firstChild.textContent=msg;
   ov.addEventListener("click",e=>{let b=e.target.closest("button");if(b){ov.remove();res(b.dataset.v==="1")}else if(e.target===ov){ov.remove();res(false)}});
   document.body.appendChild(ov);
@@ -1178,7 +1197,7 @@ let c={feed:total("feed"),medicine:total("medicine"),workers:workersTotal(),othe
 c.cost=c.feed+c.medicine+c.workers+c.other+c.litter+c.power+c.rent+c.chicks;c.otherSalesTotal=otherSalesGrand();c.totalIncome=c.sales+c.otherSalesTotal;c.profit=c.totalIncome-c.cost;
 state.dead=deathTotal()||(+state.dead||0); let soldQ=soldPcs();let live=livePcs();
 document.getElementById("today").textContent=new Date().toLocaleDateString("bn-BD");document.getElementById("batchNameText").textContent=state.name+(state.status==="closed"?" (সম্পন্ন)":"");
-document.getElementById("age").textContent=days()+" দিন";document.getElementById("startText").textContent=state.startDate||"নেই";
+document.getElementById("age").textContent=days()+" দিন";document.getElementById("startText").textContent=state.startDate?new Date(state.startDate+"T00:00:00").toLocaleDateString("bn-BD"):"নেই";
 kAge.textContent=days()+" দিন";kChicks.textContent=state.chicks;kDead.textContent=state.dead;kLive.textContent=live;kSold.textContent=soldQ;{let oh=document.getElementById("outHint"),gp=giftPcs();if(oh){oh.style.display=gp?"block":"none";oh.innerHTML="🎁 গিফট / নিজের জন্য: <b>"+gp+" টি</b> (খামারের মুরগি থেকে বাদ গেছে)"}}
 kFeed.textContent=money(c.feed);kMed.textContent=money(c.medicine);kWorker.textContent=money(c.workers);kOther.textContent=money(c.other);kLitter.textContent=money(c.litter);kRent.textContent=money(c.rent);kSales.textContent=money(c.totalIncome);kProfit.textContent=money(c.profit);
 let pc=document.getElementById("kProfitCard");
@@ -1244,7 +1263,19 @@ host.insertAdjacentHTML("beforeend",`<section id="sales" class="page"><div class
 <section id="customers" class="page"><div class="section">👥 ক্রেতাভিত্তিক হিসাব</div><div id="customersList"></div></section>`);
 host.insertAdjacentHTML("beforeend",`<section id="rent" class="page"><div class="section">🚚 পরিবহন ভাড়া হিসাব</div><div class="form"><div class="fields"><label>তারিখ<input id="rentDate" type="date"></label><label>বিবরণ<input id="rentDesc" placeholder="বাচ্চা আনা"></label><label>ভাড়া কত<input id="rentAmt" type="number" min="0" step=".01"></label><label>দিলাম কত<input id="rentPaid" type="number" min="0" step=".01"></label></div><button class="add" onclick="addRent()">➕ যোগ করুন</button></div><div class="section">পরিবহন ভাড়ার টেবিল</div><div class="wrap"><table><thead><tr><th>তারিখ</th><th>বিবরণ</th><th>ভাড়া</th><th>দিলাম</th><th>অবশিষ্ট</th><th>অ্যাকশন</th></tr></thead><tbody id="rentTable"></tbody></table></div></section>`);
 }
-function addRow(k){let n=document.getElementById(k+"Name").value;if(!n)return;state[k].push({date:document.getElementById(k+"Date").value,name:n,qty:+document.getElementById(k+"Qty").value||0,rate:+document.getElementById(k+"Rate").value||0});["Name","Qty","Rate"].forEach(x=>{let e=document.getElementById(k+x);if(e)e.value=""});syncChips(k+"Name");save();render()}
+function addRow(k){
+ let g=id=>document.getElementById(k+id);
+ let n=g("Name").value.trim(),qs=g("Qty").value,rs=g("Rate").value;
+ if(!n&&!qs&&!rs){showToast("⚠️ বিবরণ, পরিমাণ বা দর লিখুন");return}
+ /* বিবরণ ফাঁকা থাকলে আগে এন্ট্রি বাদ যেত — এখন বিভাগের নামই বিবরণ হবে */
+ if(!n)n=(configs[k]&&configs[k][0]?configs[k][0].replace(/^\S+\s*/,""):"এন্ট্রি");
+ let q=+qs||0,r=+rs||0;
+ /* বিদ্যুৎ/বিভিন্ন খরচে শুধু একটা সংখ্যা (বিলের টাকা) দিলে সেটাই মোট ধরা হবে */
+ if((k==="power"||k==="other")&&((qs&&!rs)||(!qs&&rs))){let amt=q||r;q=1;r=amt}
+ state[k].push({date:g("Date").value||todayISO(),name:n,qty:q,rate:r});
+ ["Name","Qty","Rate"].forEach(x=>{let e=g(x);if(e)e.value=""});syncChips(k+"Name");save();render();
+ showToast("✅ যোগ হয়েছে: "+n+" — "+money(q*r));
+}
 let tempPallas=[];
 function addPalla(){
  let q=+pallaQty.value||0,w=+pallaWeight.value||0;
@@ -1787,7 +1818,7 @@ const sumOf=(a,f)=>(a||[]).reduce((s,r)=>s+(+f(r)||0),0);
 function lastDate(a){let d=(a||[]).map(r=>r.date).filter(Boolean).sort();return d.length?d[d.length-1]:"—"}
 window._sums={};
 function sumCards(id,items){window._sums[id]=items}
-function cardHtml(x){return `<div class="sc"><div class="sci">${x[0]}</div><div style="min-width:0"><div class="scl">${x[1]}</div><div class="scv" ${x[3]?`style="color:${x[3]}"`:""}>${x[2]}</div></div></div>`}
+function cardHtml(x){return `<div class="sc${x[1]==="বর্তমান আছে"?" sc-live":""}"><div class="sci">${x[0]}</div><div style="min-width:0"><div class="scl">${x[1]}</div><div class="scv" ${x[3]?`style="color:${x[3]}"`:""}>${x[2]}</div></div></div>`}
 function topCount(list){let c={};list.filter(Boolean).forEach(n=>{n=String(n).trim();if(n)c[n]=(c[n]||0)+1});let k=Object.keys(c).sort((a,b)=>c[b]-c[a])[0];return k?k+" ("+c[k]+" বার)":"—"}
 function renderSummaries(){
  let bs=batchSummary(state);
