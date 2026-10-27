@@ -1841,7 +1841,8 @@ function analyze(){
    f.push({lv:0,t:"খাবার স্ট্যান্ডার্ডের চেয়ে বেশি ("+fb(g,0)+" গ্রাম/মুরগি)",d:"মুরগির সংখ্যা কম লেখা, খাবার নষ্ট বা ইঁদুর-পাখির কারণ হতে পারে।",a:"মুরগির সংখ্যা ও খাবারের হিসাব মিলিয়ে নিন।"});
   }else f.push({lv:-1,t:"খাবার স্বাভাবিক ("+fb(g,0)+" গ্রাম/মুরগি, স্ট্যান্ডার্ড "+fb(std,0)+")",d:"",a:""});
  }else{
-  f.push({lv:0,t:"আজ/গতকালের খাবারের এন্ট্রি নেই",d:"\"দৈনিক খাবার\" পেজে লিখলে খাবার বিশ্লেষণ হবে।",a:""});
+  const noFeed3=age>=4&&!fd[dstr(0)]&&!fd[dstr(1)]&&!fd[dstr(2)];
+  f.push({lv:noFeed3?1:0,t:noFeed3?"৩ দিন ধরে খাবারের এন্ট্রি নেই":"আজ/গতকালের খাবারের এন্ট্রি নেই",d:noFeed3?"খাবারের হিসাব না থাকলে খাবার কমে যাওয়া (রোগের প্রথম ইশারা) ধরা যায় না।":"\"দৈনিক খাবার\" পেজে লিখলে খাবার বিশ্লেষণ হবে।",a:noFeed3?"\"দৈনিক খাবার\" পেজে এখনই লিখে ফেলুন।":""});
  }
  // সম্মিলিত সতর্কতা
  if(feedLow&&mortBad&&!vacRecent){f.forEach(x=>{if(/^(আজ মৃত্যু বেশি|টানা ৩ দিন|খাবার কম খাচ্ছে)/.test(x.t)){x.d=x.d.replace(h.why,"").trim();if(x.a===h.do||x.a.indexOf(h.do)===0)x.a=""}});f.unshift({lv:2,t:"খাবার কমছে আর মৃত্যু বাড়ছে — একসঙ্গে",d:h.why,a:"আজই "+h.do+" ২৪ ঘণ্টায় না কমলে ডাক্তার ডাকুন।"})}
@@ -1851,6 +1852,65 @@ function analyze(){
   const w=ws[ws.length-1],a=ageOf(state,w.date),g=(+w.total/+w.n)*1000,std=stdAt(a),ratio=g/std;
   if(ratio<0.9)f.push({lv:ratio<0.8?2:1,t:"ওজন কম: "+fb(g,0)+" গ্রাম (স্ট্যান্ডার্ড "+fb(std,0)+", "+bn(a)+" দিনে)",d:"স্ট্যান্ডার্ডের "+fb(ratio*100,0)+"%। ফিডের মান, পানি বা তাপমাত্রা/রোগের কারণ হতে পারে।",a:"ফিড CP-এর ঠিক ধাপ (প্রি-স্টার্টার/স্টার্টার/গ্রোয়ার) দিচ্ছেন কি না ও ঘরে ভিড় আছে কি না দেখুন।"});
   else f.push({lv:-1,t:"ওজন ঠিক আছে: "+fb(g,0)+" গ্রাম (স্ট্যান্ডার্ড "+fb(std,0)+")",d:"",a:""});
+ }
+
+ // ── ওজন বাড়ার গতি (দৈনিক গ্রাম) ও FCR ──
+ {
+  const wl=(state.weights||[]).filter(r=>+r.n>0&&+r.total>0&&ageOf(state,r.date)!==null).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+  const gOf=r=>(+r.total/+r.n)*1000;
+  if(wl.length>=2){
+   const w2=wl[wl.length-1],w1=wl[wl.length-2],a2=ageOf(state,w2.date),a1=ageOf(state,w1.date),span=a2-a1;
+   if(span>=2&&age-a2<=10){
+    const gain=(gOf(w2)-gOf(w1))/span,sg=(stdAt(a2)-stdAt(a1))/span,ratio=sg>0?gain/sg:1;
+    if(gain<=0)f.push({lv:2,t:"ওজন বাড়ছে না ("+bn(a1)+"→"+bn(a2)+" দিনে)",d:"শেষ দুই মাপে ওজন একই বা কমেছে। এই বয়সে দৈনিক প্রায় "+fb(sg,0)+" গ্রাম বাড়ার কথা।",a:"রোগ, ফিডের মান, পানি ও ঘরের তাপমাত্রা দেখুন; দরকারে ডাক্তারের সঙ্গে কথা বলুন।"});
+    else if(ratio<0.7)f.push({lv:ratio<0.5?2:1,t:"ওজন ধীরে বাড়ছে: দৈনিক "+fb(gain,0)+" গ্রাম (স্বাভাবিক ~"+fb(sg,0)+")",d:bn(a1)+" থেকে "+bn(a2)+" দিনে স্বাভাবিকের "+fb(ratio*100,0)+"% হারে বেড়েছে।",a:"ফিড ঠিকমতো খাচ্ছে কি না, পানি পরিষ্কার কি না ও ঘরের গরম-ঠান্ডা দেখুন।"});
+    else f.push({lv:-1,t:"ওজন বাড়ার গতি ভালো: দৈনিক "+fb(gain,0)+" গ্রাম (স্বাভাবিক ~"+fb(sg,0)+")",d:"",a:""});
+   }
+  }
+  // FCR (সর্বশেষ ওজন মাপার দিন পর্যন্ত জমা হিসাব)
+  if(wl.length){
+   const w=wl[wl.length-1],a=ageOf(state,w.date);
+   if(a>=10&&age-a<=10){
+    const feedDates=new Set(),upTo=(state.dailyFeed||[]).filter(r=>r.date<=w.date);
+    let feedKg=0;upTo.forEach(r=>{feedDates.add(r.date);feedKg+=dfKg(r)});
+    const complete=feedDates.size>=a*0.8;
+    if(!complete)f.push({lv:0,t:"FCR বলা যাচ্ছে না — খাবারের হিসাব সব দিনের নেই",d:bn(feedDates.size)+" দিনের খাবারের এন্ট্রি আছে, "+bn(a)+" দিনের মধ্যে।",a:"শুরু থেকে প্রতিদিন \"দৈনিক খাবার\" লিখলে FCR ধরা যাবে।"});
+    else{
+     const outW=sumOf((state.sales||[]).filter(r=>r.date<=w.date),r=>r.weight)+sumOf(((state.otherSales&&state.otherSales.chicken)||[]).filter(r=>r.date<=w.date),r=>r.qty)+sumOf((state.gifts||[]).filter(r=>r.date<=w.date),r=>r.weight);
+     const alive=liveOn(w.date)||0,totW=outW+alive*gOf(w)/1000;
+     if(totW>0&&feedKg>0){
+      const fcr=feedKg/totW,T=[[7,0.9],[14,1.05],[21,1.25],[28,1.42],[35,1.58],[42,1.72]];
+      let std=T[T.length-1][1];for(let i=0;i<T.length-1;i++){if(a<=T[i+1][0]){const lo=T[i],hi=T[i+1];std=a<=lo[0]?lo[1]:lo[1]+(hi[1]-lo[1])*(a-lo[0])/(hi[0]-lo[0]);break}}
+      if(a<7)std=T[0][1];
+      const diff=fcr-std;
+      if(diff>0.15)f.push({lv:diff>0.3?2:1,t:"FCR বেশি: "+fb(fcr,2)+" ("+bn(a)+" দিনে স্বাভাবিক ~"+fb(std,2)+")",d:"কম ওজনের জন্য বেশি ফিড লাগছে। ফিড নষ্ট, ইঁদুর-পাখি, রোগ বা ফিডের মান কারণ হতে পারে।",a:"ফিড মাপ ও পাত্র থেকে ছড়িয়ে পড়া দেখুন; ওজন নমুনা ঠিকমতো নিয়েছেন কি না মিলিয়ে নিন।"});
+      else f.push({lv:-1,t:"FCR ভালো: "+fb(fcr,2)+" ("+bn(a)+" দিনে স্বাভাবিক ~"+fb(std,2)+")",d:"",a:""});
+     }
+    }
+   }
+  }
+  // ওজন মাপার ফাঁক
+  if(age>=7){
+   const lastW=wl.length?ageOf(state,wl[wl.length-1].date):null;
+   if(lastW===null)f.push({lv:0,t:"এখনও ওজন মাপা হয়নি",d:"ওজন না মাপলে ওজন বাড়ার গতি ও FCR বলা যায় না।",a:"সপ্তাহে একবার ১০–২০টা মুরগি মেপে \"বিশ্লেষণ\" পেজে ওজন নমুনা যোগ করুন।"});
+   else if(age-lastW>7)f.push({lv:0,t:bn(age-lastW)+" দিন ওজন মাপা হয়নি",d:"শেষ ওজন নমুনা "+bn(lastW)+" দিনে নেওয়া।",a:"নতুন করে ১০–২০টা মুরগি মেপে ওজন নমুনা যোগ করুন।"});
+  }
+ }
+ // ── বিক্রির আগে ওষুধের অপেক্ষার সময় (অ্যান্টিবায়োটিক) ──
+ {
+  const AB=/অ্যান্টি\s*বায়ো|এন্টি\s*বায়ো|antibio|কোলিস্টিন|colisti|এনরো|enro|ডক্সি|doxy|অক্সি\s*টেট্রা|oxy\s*tetra|টেট্রা|tetra|টাইলো|tylo|অ্যামোক্সি|এমোক্সি|amox|সিপ্রো|cipro|নিওমাইসিন|neomy|জেন্টা|genta|ফ্লোরফেনিকল|florfen|লিনকো|linco|স্পেকটিনো|spectino|সালফা|sulfa|ট্রাইমেথো|trimetho|কো-?ট্রাই|cotrim|স্ট্রেপটো|strepto|ফসফোমাইসিন|fosfo|এরিথ্রো|eryth/i;
+  const t0=dstr(0);let last=null,lastName="";
+  (state.medSchedule||[]).forEach(r=>{if(!r.date||r.date>t0)return;["morning","noon","night"].forEach(k=>{const m=r[k];if(m&&m.name&&AB.test(m.name)){if(!last||r.date>last){last=r.date;lastName=m.name}}})});
+  if(last){
+   const since=Math.round((new Date(t0+"T00:00:00")-new Date(last+"T00:00:00"))/86400000);
+   const wd=+state.withdrawDays>0?+state.withdrawDays:7,left=wd-since;
+   if(left>0&&age>=21){
+    const safe=new Date();safe.setDate(safe.getDate()+left);const p=n=>String(n).padStart(2,"0");
+    const safeTxt=bn(safe.getDate())+"/"+bn(safe.getMonth()+1);
+    const safeAge=age+left;
+    f.push({lv:age>=28?(left>=3?2:1):0,t:"বিক্রির আগে ওষুধের অপেক্ষার সময় বাকি: "+bn(left)+" দিন",d:"শেষ অ্যান্টিবায়োটিক ("+lastName+") "+(since===0?"আজ":bn(since)+" দিন আগে")+" দিয়েছেন। সাধারণ হিসাবে অন্তত "+bn(wd)+" দিন পর বিক্রি নিরাপদ, অর্থাৎ "+safeTxt+" থেকে ("+bn(safeAge)+" দিন বয়সে)।"+(safeAge>35?" ৩৫ দিনে বিক্রি করতে চাইলে নতুন অ্যান্টিবায়োটিক দেওয়া এড়ান।":""),a:"ওষুধের লেবেলে লেখা উইথড্রয়াল দিন দেখুন; ডাক্তারের পরামর্শ নিন।"});
+   }else if(age>=28&&left<=0)f.push({lv:-1,t:"ওষুধের অপেক্ষার সময় পার ("+bn(since)+" দিন আগে শেষ অ্যান্টিবায়োটিক)",d:"",a:""});
+  }
  }
  // ভ্যাকসিন দেরি
  (typeof VAC!=="undefined"?VAC:[]).forEach(v=>{
