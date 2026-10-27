@@ -616,13 +616,6 @@ td:first-child{font-weight:600}
 .hh-right{align-items:flex-end;text-align:right}
 .hh-left .db-hero-value b{font-size:17px;word-break:break-word}
 .hh-left .db-status{margin-top:4px;font-size:11px;padding:3px 9px;align-self:flex-start;white-space:nowrap}
-.hh-name{display:flex;align-items:center;justify-content:center;gap:4px;animation:hhFloat 3.2s ease-in-out infinite}
-.hh-txt{font-size:30px;font-weight:900;line-height:1.2;letter-spacing:.5px;background:linear-gradient(100deg,#ffd166,#ff8a5c,#ff5fa2,#7fd1ff,#3ddc84,#ffd166);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:hhShine 5s linear infinite;filter:drop-shadow(0 2px 8px #0008)}
-.hh-spark{font-size:15px;animation:hhTwinkle 1.8s ease-in-out infinite}
-.hh-spark.s2{animation-delay:.9s}
-@keyframes hhShine{0%{background-position:0% 50%}100%{background-position:300% 50%}}
-@keyframes hhFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes hhTwinkle{0%,100%{transform:scale(.7) rotate(0);opacity:.5}50%{transform:scale(1.25) rotate(25deg);opacity:1}}
 .hh-right .db-hero-value #age{font-size:28px;line-height:1.1}
 .hh-dates{display:flex;justify-content:center;align-items:stretch;gap:10px;margin-top:14px;flex-wrap:nowrap}
 .hh-d{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 6px;border-radius:14px;border:1px solid #ffffff1f}
@@ -632,8 +625,33 @@ td:first-child{font-weight:600}
 .hh-start b{color:#ffc15e;text-shadow:0 0 14px #ff9f4366}
 .hh-today{background:linear-gradient(135deg,#38bdf833,#a78bfa22)}
 .hh-today b{color:#7fe3ff;text-shadow:0 0 14px #38bdf866}
-@media(max-width:380px){.hh-txt{font-size:25px}.hh-left .db-hero-value b{font-size:15px}.hh-d b{font-size:15px}.hh-d em{font-size:11px}}
-@media(prefers-reduced-motion:reduce){.hh-name,.hh-txt,.hh-spark{animation:none}}
+@media(max-width:850px){.exp-grid>.card:last-child:nth-child(odd){grid-column:1/-1}}
+/* ── শাওন: মোটা ৩ডি নাম, আভা, তারা, ঝলক, টোকা দিলে আতশবাজি ── */
+.hh-name{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 10px 2px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;animation:hhFloat 3.4s ease-in-out infinite}
+.hh-aura{position:absolute;left:50%;top:44%;width:150px;height:84px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,#ffd16688,#ff5fa255 45%,#7fd1ff22 70%,transparent 75%);filter:blur(7px);animation:hhAura 2.8s ease-in-out infinite;pointer-events:none}
+.hh-wrap{position:relative;display:inline-block;font-size:42px;font-weight:900;line-height:1.25;letter-spacing:1px}
+.hh-wrap::before{content:attr(data-t);position:absolute;left:0;top:0;z-index:0;color:#2b0d4e;-webkit-text-stroke:5px #1d0a3a;paint-order:stroke fill;
+ text-shadow:0 3px 0 #1d0a3a,0 5px 0 #7a2a0b,0 7px 9px #000c;animation:hhGlow 2.8s ease-in-out infinite}
+.hh-txt{position:relative;z-index:1;display:inline-block;font-weight:900;background:linear-gradient(100deg,#ffe27a,#ffb347 25%,#ff6b8b 50%,#c084fc 72%,#5fd0ff 88%,#ffe27a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:hhShine 5s linear infinite}
+.hh-txt::after{content:attr(data-t);position:absolute;left:0;top:0;background:linear-gradient(110deg,transparent 42%,#ffffffb0 50%,transparent 58%);background-size:260% 100%;background-position:160% 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:0;animation:hhSweep 3.2s ease-in-out infinite}
+.hh-swoosh{width:118px;height:14px;margin-top:-4px;overflow:visible;filter:drop-shadow(0 2px 5px #0008)}
+.hh-swoosh path{stroke-dasharray:130;stroke-dashoffset:130;animation:hhDraw 3.2s ease-in-out infinite}
+.hh-star{position:absolute;pointer-events:none;animation:hhTwinkle 2s ease-in-out infinite}
+.hh-star.a{left:-4px;top:2px;font-size:14px}
+.hh-star.b{right:-2px;top:-4px;font-size:16px;animation-delay:.5s}
+.hh-star.c{right:-8px;bottom:12px;font-size:14px;animation-delay:1s}
+.hh-star.d{left:-8px;bottom:14px;font-size:12px;animation-delay:1.5s}
+.hh-name.pop .hh-wrap{animation:hhPop .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes hhShine{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+@keyframes hhSweep{0%,35%{background-position:160% 0}70%,100%{background-position:-60% 0}}
+@keyframes hhFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes hhAura{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(.92)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}}
+@keyframes hhGlow{0%,100%{filter:drop-shadow(0 0 4px #ff8a5c88)}50%{filter:drop-shadow(0 0 12px #ffd166cc)}}
+@keyframes hhDraw{0%{stroke-dashoffset:130}45%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-130}}
+@keyframes hhTwinkle{0%,100%{transform:scale(.6) rotate(0);opacity:.35}50%{transform:scale(1.3) rotate(30deg);opacity:1}}
+@keyframes hhPop{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.28) rotate(-6deg)}60%{transform:scale(.94) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+@media(max-width:380px){.hh-wrap{font-size:34px}.hh-aura{width:120px}.hh-swoosh{width:96px}}
+@media(prefers-reduced-motion:reduce){.hh-name,.hh-aura,.hh-wrap::before,.hh-txt,.hh-txt::after,.hh-swoosh path,.hh-star{animation:none}.hh-swoosh path{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -692,7 +710,12 @@ td:first-child{font-weight:600}
         <span class="db-hero-value"><b id="batchNameText">—</b></span>
         <span class="db-status" id="batchStatusBadge">চলমান ব্যাচ</span>
       </div>
-      <div class="hh-name" aria-label="শাওন"><span class="hh-spark s1">✨</span><span class="hh-txt">শাওন</span><span class="hh-spark s2">✨</span></div>
+      <div class="hh-name" id="hhName" role="img" aria-label="শাওন">
+        <span class="hh-aura"></span>
+        <span class="hh-star a">⭐</span><span class="hh-star b">✨</span><span class="hh-star c">💫</span><span class="hh-star d">✨</span>
+        <span class="hh-wrap" data-t="শাওন"><span class="hh-txt" data-t="শাওন">শাওন</span></span>
+        <svg class="hh-swoosh" viewBox="0 0 120 14" aria-hidden="true"><defs><linearGradient id="hhSw" x1="0" x2="1"><stop offset="0" stop-color="#ffd166"/><stop offset=".5" stop-color="#ff5fa2"/><stop offset="1" stop-color="#7fd1ff"/></linearGradient></defs><path d="M4 9 Q32 0 62 7 T116 4" fill="none" stroke="url(#hhSw)" stroke-width="3.4" stroke-linecap="round"/></svg>
+      </div>
       <div class="hh-side hh-right">
         <span class="db-hero-label">⏱️ বয়স</span>
         <span class="db-hero-value"><b id="age">০ দিন</b></span>
@@ -723,13 +746,14 @@ td:first-child{font-weight:600}
 
 <!-- Expenses -->
 <div class="section">💸 খরচের হিসাব</div>
-<div class="grid">
+<div class="grid exp-grid">
   <div onclick="showSummary('feed')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#d97706,#b45309)"><div class="ico">🌾</div></div><div class="lab">ফিড খরচ</div><div class="val" style="color:#fbbf24" id="kFeed">৳০</div></div>
   <div onclick="showSummary('medicine')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)"><div class="ico">💊</div></div><div class="lab">মেডিসিন</div><div class="val" style="color:#c4b5fd" id="kMed">৳০</div></div>
   <div onclick="showSummary('workers')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#0284c7,#0369a1)"><div class="ico">👷</div></div><div class="lab">কর্মচারী</div><div class="val" style="color:#7dd3fc" id="kWorker">৳০</div></div>
   <div onclick="showSummary('other')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#ea580c,#c2410c)"><div class="ico">🧾</div></div><div class="lab">বিভিন্ন খরচ</div><div class="val" style="color:#fdba74" id="kOther">৳০</div></div>
   <div onclick="showSummary('litter')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#65a30d,#4d7c0f)"><div class="ico">🪵</div></div><div class="lab">কাঠের গুড়া</div><div class="val" style="color:#bef264" id="kLitter">৳০</div></div>
   <div onclick="showSummary('rent')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#0891b2,#0e7490)"><div class="ico">🚚</div></div><div class="lab">পরিবহন ভাড়া</div><div class="val" style="color:#67e8f9" id="kRent">৳০</div></div>
+  <div onclick="showSummary('power')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#eab308,#a16207)"><div class="ico">⚡</div></div><div class="lab">বিদ্যুৎ ও জ্বালানি</div><div class="val" style="color:#fde047" id="kPower">৳০</div></div>
 </div>
 
 <!-- Sales & Profit -->
@@ -1069,5 +1093,5 @@ td:first-child{font-weight:600}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js"></script>
+<script src="app.js" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
