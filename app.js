@@ -19,7 +19,22 @@ function freshBatch(name){
  startDate:SEED.startDate||"",chicks:Number(SEED.chicks||0),dead:0,chickPrice:0,deaths:[],
  feed:[],medicine:[],workers:[],workerSalary:0,other:[],litter:[],power:[],rent:[],sales:[],litterSales:[],otherSales:{litter:[],chicken:[],bag:[],feed:[]},medSchedule:[],notes:[],gifts:[],dailyFeed:[]};
 }
+/* পুরনো ব্যাচে নতুন তালিকা (যেমন power) না থাকলে এন্ট্রি চুপচাপ ব্যর্থ হতো — এখানে সব তালিকা নিশ্চিত করা হয় */
+function ensureShape(b){
+ if(!b||typeof b!=="object")return b;
+ let t=freshBatch("x");
+ for(const k in t){
+  const v=t[k];
+  if(Array.isArray(v)){if(!Array.isArray(b[k]))b[k]=[]}
+  else if(v&&typeof v==="object"){
+   if(!b[k]||typeof b[k]!=="object"||Array.isArray(b[k]))b[k]=JSON.parse(JSON.stringify(v));
+   else for(const kk in v){if(Array.isArray(v[kk])&&!Array.isArray(b[k][kk]))b[k][kk]=[]}
+  }
+ }
+ return b;
+}
 function migrateWorkers(b){
+ ensureShape(b);
  if(Array.isArray(b.workers)){
   b.workers=b.workers.map(r=>{
    if(r&&typeof r.amount==="undefined"&&(("qty" in r)||("rate" in r))){
@@ -227,6 +242,7 @@ host.insertAdjacentHTML("beforeend",`<section id="sales" class="page"><div class
 host.insertAdjacentHTML("beforeend",`<section id="rent" class="page"><div class="section">🚚 পরিবহন ভাড়া হিসাব</div><div class="form"><div class="fields"><label>তারিখ<input id="rentDate" type="date"></label><label>বিবরণ<input id="rentDesc" placeholder="বাচ্চা আনা"></label><label>ভাড়া কত<input id="rentAmt" type="number" min="0" step=".01"></label><label>দিলাম কত<input id="rentPaid" type="number" min="0" step=".01"></label></div><button class="add" onclick="addRent()">➕ যোগ করুন</button></div><div class="section">পরিবহন ভাড়ার টেবিল</div><div class="wrap"><table><thead><tr><th>তারিখ</th><th>বিবরণ</th><th>ভাড়া</th><th>দিলাম</th><th>অবশিষ্ট</th><th>অ্যাকশন</th></tr></thead><tbody id="rentTable"></tbody></table></div></section>`);
 }
 function addRow(k){
+ if(!Array.isArray(state[k]))state[k]=[];
  let g=id=>document.getElementById(k+id);
  let n=g("Name").value.trim(),qs=g("Qty").value,rs=g("Rate").value;
  if(!n&&!qs&&!rs){showToast("⚠️ বিবরণ, পরিমাণ বা দর লিখুন");return}
@@ -1932,6 +1948,8 @@ window.renderFarmDoc=function(){
   '<div class="fdoc-n">বয়স '+bn(r.age)+' দিন • রোস জাত, সিপি ফিডের স্ট্যান্ডার্ড ধরে হিসাব। এটা আগাম ইশারা, নিশ্চিত রোগ নির্ণয় নয়। ২৪ ঘণ্টায় না কমলে ডাক্তার দেখান।</div></div>';
 };
 {const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderFarmDoc()}catch(e){console.error(e)}return r}}
+window.APP_VERSION="v10";
+(function(){const d=document.getElementById("dashboard");if(d&&!document.getElementById("appVer")){const e=document.createElement("div");e.id="appVer";e.style.cssText="text-align:center;font-size:11px;color:#6f8794;margin:22px 0 8px";e.textContent="ব্রাদার্স পোল্ট্রি ফার্ম • সংস্করণ "+window.APP_VERSION;d.appendChild(e)}})();
 })();
 
 ["renderMedSchedule","renderNotes","renderOtherSales"].forEach(n=>{const f=window[n];window[n]=function(){f.apply(this,arguments);renderSummaries()}});

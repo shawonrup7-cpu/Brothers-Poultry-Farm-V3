@@ -1,6 +1,6 @@
 /* ব্রাদার্স পোল্ট্রি ফার্ম — অফলাইন সার্ভিস ওয়ার্কার
    নতুন সংস্করণ দিলে শুধু VERSION বদলান। */
-const VERSION = "v9";
+const VERSION = "v10";
 const CORE = "bpf-core-" + VERSION;
 const RUNTIME = "bpf-runtime-" + VERSION;
 const PRECACHE = [
@@ -54,9 +54,26 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
-  // ফন্ট ও নিজের ফাইল: ক্যাশ আগে, পেছনে আপডেট
   const sameOrigin = url.origin === self.location.origin;
   const isFont = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
+
+  // অ্যাপের কোড (js/html/json): নেটওয়ার্ক আগে — নতুন সংস্করণ সঙ্গে সঙ্গে আসে; নেট না থাকলে ক্যাশ থেকে
+  if (sameOrigin && /\.(js|json|html)$/.test(url.pathname)) {
+    e.respondWith(
+      fetch(req, { cache: "no-cache" })
+        .then((res) => {
+          if (res && res.ok) {
+            const copy = res.clone();
+            caches.open(CORE).then((c) => c.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // ফন্ট ও ছবি: ক্যাশ আগে, পেছনে আপডেট
   if (sameOrigin || isFont) {
     e.respondWith(
       caches.match(req).then((cached) => {
