@@ -652,6 +652,26 @@ td:first-child{font-weight:600}
 @keyframes hhPop{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.28) rotate(-6deg)}60%{transform:scale(.94) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
 @media(max-width:380px){.hh-wrap{font-size:34px}.hh-aura{width:120px}.hh-swoosh{width:96px}}
 @media(prefers-reduced-motion:reduce){.hh-name,.hh-aura,.hh-wrap::before,.hh-txt,.hh-txt::after,.hh-swoosh path,.hh-star{animation:none}.hh-swoosh path{stroke-dashoffset:0}}
+/* ── বিশ্লেষণ: ওপরের সারাংশ, ভাঁজ, তুলনা ── */
+.an-top{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:2px 0 10px}
+.an-top .tc{border-radius:16px;padding:12px 6px;text-align:center;border:1px solid #ffffff1a;background:linear-gradient(150deg,#10332a,#0d261f);min-width:0}
+.an-top .tc small{display:block;font-size:11.5px;color:#9db7b0;margin-bottom:4px;line-height:1.3}
+.an-top .tc b{display:block;font-size:19px;font-weight:800;line-height:1.2;word-break:break-word}
+.an-top .tc em{display:block;font-style:normal;font-size:10.5px;color:#8fb1a0;margin-top:3px;line-height:1.3}
+.an-tools{display:flex;gap:8px;justify-content:center;margin:0 0 10px}
+.an-tools button{border:1px solid #ffffff24;background:#ffffff0d;color:#cfe9dc;border-radius:999px;padding:6px 13px;font:inherit;font-size:12.5px;cursor:pointer}
+#analysis .an-box>.an-title,#analysis .dzc-box>.an-title{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;-webkit-tap-highlight-color:transparent;user-select:none}
+#analysis .an-box>.an-title::after,#analysis .dzc-box>.an-title::after{content:"▾";font-size:15px;color:#9db7b0;transition:transform .2s}
+#analysis .collapsed>.an-title::after{transform:rotate(-90deg)}
+#analysis .collapsed>*:not(.an-title){display:none!important}
+#analysis .collapsed>.an-title{margin-bottom:0}
+.cmp-tbl{width:100%;min-width:0;table-layout:auto;border-collapse:collapse;font-size:13px}
+.cmp-tbl th,.cmp-tbl td{padding:8px 4px}
+.cmp-tbl th{background:transparent;text-transform:none;letter-spacing:0}
+.cmp-tbl th{font-weight:600;color:#9db7b0;font-size:11.5px;padding:4px 4px;text-align:center}
+.cmp-tbl td{padding:8px 4px;text-align:center;border-top:1px dashed #ffffff18}
+.cmp-tbl td:first-child{text-align:left;color:#cfe9dc}
+.cmp-tbl .g{color:#3ddc84;font-weight:700}.cmp-tbl .r{color:#ff7070;font-weight:700}
 </style>
 </head>
 <body>
@@ -966,7 +986,12 @@ td:first-child{font-weight:600}
 <section id="analysis" class="page">
 <div class="section">📈 বিশ্লেষণ</div>
 
+<div id="anTop"></div>
+<div class="an-tools"><button type="button" onclick="anFoldAll(true)">⏫ সব ভাঁজ করুন</button><button type="button" onclick="anFoldAll(false)">⏬ সব খুলুন</button></div>
+
 <div class="form an-box"><div class="an-title">💰 লাভ-লোকসান বিশ্লেষণ</div><div id="anProfit"></div></div>
+
+<div class="form an-box"><div class="an-title">🆚 আগের ব্যাচের সঙ্গে তুলনা</div><div id="anCmp"></div></div>
 
 <div class="form an-box">
  <div class="an-title">🏁 ব্যাচের লক্ষ্য</div>
@@ -1093,5 +1118,5 @@ td:first-child{font-weight:600}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=12" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>

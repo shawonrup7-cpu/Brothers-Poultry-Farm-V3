@@ -1523,9 +1523,10 @@ function anW0(){
 }
 function renderProfit(){
  let el=$a("anProfit");if(!el)return;
+ window._anSum=null;
  if(!(+state.chicks>0)){el.innerHTML='<div class="an-alert info">আগে "🐣 বাচ্চা ও মৃত" পেজে বাচ্চার সংখ্যা দিন।</div>';return}
  let chicks=+state.chicks||0,cp=chicks*(+state.chickPrice||0);
- let parts=[["🐣 বাচ্চা",cp,"#7fd1ff"],["🌾 ফিড",total("feed"),"#fbbf24"],["💊 মেডিসিন",total("medicine"),"#e0775a"],["👷 কর্মচারী",workersTotal(),"#b69cff"],["🧾 বিভিন্ন (লিটার, ভাড়া, বিদ্যুৎসহ)",total("other")+total("litter")+total("power")+rentTotal(),"#3ddc84"]];
+ let parts=[["🐣 বাচ্চা",cp,"#7fd1ff"],["🌾 ফিড",total("feed"),"#fbbf24"],["💊 মেডিসিন",total("medicine"),"#e0775a"],["👷 কর্মচারী",workersTotal(),"#b69cff"],["🧾 বিভিন্ন খরচ",total("other"),"#3ddc84"],["🪵 কাঠের গুড়া",total("litter"),"#f0a8d0"],["⚡ বিদ্যুৎ ও জ্বালানি",total("power"),"#fde047"],["🚚 পরিবহন ভাড়া",rentTotal(),"#5eead4"]];
  let cost=parts.reduce((a,b)=>a+b[1],0),inc=salesTotal()+otherSalesGrand(),net=inc-cost;
  let live=livePcs(),dead=deathTotal()||(+state.dead||0),out=Math.max(0,chicks-dead-live);
  let harv=(state.sales||[]).reduce((a,r)=>a+(+r.weight||0),0);
@@ -1544,10 +1545,33 @@ function renderProfit(){
  }
  // প্রতি কেজি খরচ
  if(allKg>0){let pk=cost/allKg;h+='<div class="an-note" style="margin:8px 0">📦 <b>প্রতি কেজি মুরগির উৎপাদন খরচ: ৳'+fb(pk,1)+'</b> (মোট ওজন '+fb(allKg,0)+' কেজি'+(estKg?', এর মধ্যে '+fb(estKg,0)+' কেজি আনুমানিক':'')+'). বাজারদর এর চেয়ে বেশি হলে লাভ।</div>'}
- // খরচের ভাগ
+ // প্রতি কেজিতে লাভ/ক্ষতি
+ let avgRate=harv>0?salesTotal()/harv:(+state.projRate||0);
+ window._anSum={net:net,cost:cost,inc:inc,live:live,estKg:estKg,allKg:allKg,avgRate:avgRate,pp:(allKg>0&&avgRate>0)?avgRate-cost/allKg:null,pk:allKg>0?cost/allKg:null,be:(live>0&&estKg>0&&state.startDate)?(net>=0?0:Math.max(0,-net)/estKg):null,harv:harv};
+ if(allKg>0&&avgRate>0){
+  let pk2=cost/allKg,pp=avgRate-pk2;
+  h+='<div class="pa-sub">⚖️ প্রতি কেজিতে হিসাব</div><div class="pa-grid">'+
+   card(harv>0?"গড় বিক্রির দর":"আপনার দেওয়া দর","৳"+fb(avgRate,1),"#7fd1ff",harv>0?"এ পর্যন্ত বিক্রি থেকে":"\"কবে বিক্রি করলে\" অংশ থেকে")+
+   card("উৎপাদন খরচ","৳"+fb(pk2,1),"#fbbf24","প্রতি কেজি মাংসে")+
+   card(pp>=0?"কেজিতে লাভ":"কেজিতে ক্ষতি",(pp<0?"−":"")+"৳"+fb(Math.abs(pp),1),pp>=0?"#3ddc84":"#ff7070",pp>=0?"দর "+fb(pp,1)+" টাকা কমলেও শূন্য":"দর আরও "+fb(-pp,1)+" টাকা বাড়লে শূন্য")+
+   card("মোট ওজনে প্রভাব",(pp<0?"−":"")+"৳"+fb(Math.abs(pp*allKg),0),pp>=0?"#3ddc84":"#ff7070","কেজিপ্রতি ফারাক × "+fb(allKg,0)+" কেজি")+'</div>';
+ }
+ // দর কমলে-বাড়লে বাকি মুরগি বিক্রির পর শেষ লাভ
+ if(live>0&&estKg>0&&state.startDate){
+  let ref=Math.round(avgRate>0?avgRate:(Math.max(0,-net)/estKg)+10),rows=[];
+  [-20,-10,0,10,20].forEach(dv=>{let r=ref+dv;if(r>0)rows.push([r,net+estKg*r,dv===0])});
+  h+='<div class="pa-sub">🔮 বাকি '+bn(live)+' টি মুরগি এই দরে বিক্রি হলে শেষ লাভ</div><div class="pa-row" style="font-weight:700;color:#8fb1a0"><span>কেজি দর</span><span>মোট নিট লাভ/ক্ষতি</span></div>'+
+   rows.map(x=>'<div class="pa-row"'+(x[2]?' style="background:#ffffff0d;font-weight:700"':'')+'><span>৳'+bn(x[0])+(x[2]?' (ভিত্তি দর)':'')+'</span><span style="color:'+(x[1]>=0?'#3ddc84':'#ff7070')+'">'+(x[1]<0?'−':'+')+tk(Math.abs(x[1]))+'</span></div>').join("")+
+   '<div class="an-note" style="margin-top:6px">বাকি মুরগির আনুমানিক ওজন '+fb(estKg,0)+' কেজি ধরা ('+w0.src+')।</div>';
+ }
+ // খরচের ভাগ (গোল চার্ট)
  if(cost>0){
-  h+='<div class="pa-bar">'+parts.filter(x=>x[1]>0).map(x=>'<i style="width:'+(x[1]/cost*100)+'%;background:'+x[2]+'" title="'+x[0]+'"></i>').join("")+'</div>';
-  h+=parts.map(x=>'<div class="pa-row"><span><b class="pa-dot" style="background:'+x[2]+'"></b>'+x[0]+'</span><span>'+tk(x[1])+' <em>'+bn(Math.round(x[1]/cost*100))+'%</em></span></div>').join("");
+  const R=52,C=2*Math.PI*R;let off=0,arcs="";
+  parts.filter(x=>x[1]>0).forEach(x=>{const len=x[1]/cost*C,seg=Math.max(0,len-1.5);arcs+='<circle cx="70" cy="70" r="'+R+'" fill="none" stroke="'+x[2]+'" stroke-width="22" stroke-dasharray="'+seg+' '+(C-seg)+'" stroke-dashoffset="'+(-off)+'" transform="rotate(-90 70 70)"><title>'+x[0]+': '+tk(x[1])+'</title></circle>';off+=len});
+  h+='<div class="pa-sub">🥧 খরচের ভাগ</div><div style="display:flex;justify-content:center;margin:6px 0"><svg width="170" height="170" viewBox="0 0 140 140" role="img" aria-label="খরচের ভাগ"><circle cx="70" cy="70" r="'+R+'" fill="none" stroke="#ffffff10" stroke-width="22"/>'+arcs+'<text x="70" y="64" text-anchor="middle" style="fill:#8fb1a0;font-size:9px">মোট খরচ</text><text x="70" y="82" text-anchor="middle" style="fill:#fff;font-size:14px;font-weight:800">'+tk(cost)+'</text></svg></div>';
+  h+=parts.filter(x=>x[1]>0).map(x=>'<div class="pa-row"><span><b class="pa-dot" style="background:'+x[2]+'"></b>'+x[0]+'</span><span>'+tk(x[1])+' <em>'+bn(Math.round(x[1]/cost*100))+'%</em>'+(allKg>0?' <em>• ৳'+fb(x[1]/allKg,1)+'/কেজি</em>':'')+'</span></div>').join("");
+  let fs=total("feed")/cost*100;
+  if(fs>70)h+='<div class="an-alert info" style="margin-top:8px"><b>🌾 ফিডের অংশ '+bn(Math.round(fs))+'%</b> (সাধারণত ৬০–৭০%)। ফিড নষ্ট, ইঁদুর-পাখি বা FCR বেশি কি না দেখুন।</div>';
  }
  // কার্যকারিতা
  let md=chicks?dead/chicks*100:0,pb=ag>0&&f.birds>0?f.feed/f.birds/ag*1000:0;
@@ -1653,9 +1677,81 @@ function renderFcrProj(){
  h+='</tbody></table></div><div class="an-note">ধরা হয়েছে: ফিড শেষ ৩ দিনের গড় থেকে স্ট্যান্ডার্ড হারে বাড়বে, ওজন '+w0.src+' স্ট্যান্ডার্ড হারে বাড়বে। লাল সারি = টার্গেটের চেয়ে বেশি FCR।</div>';
  el.innerHTML=h;
 }
+// ── বিশ্লেষণ: ওপরের এক ঝলক সারাংশ ──
+function renderAnTop(){
+ let el=$a("anTop");if(!el)return;
+ let s=window._anSum;
+ if(!s){el.innerHTML="";return}
+ const tk2=n=>(n<0?"−":"")+"৳"+fb(Math.abs(n),0);
+ let c1='<div class="tc"><small>'+(s.net>=0?"এখন পর্যন্ত নিট লাভ":"এখনও ক্ষতিতে")+'</small><b style="color:'+(s.net>=0?"#3ddc84":"#ff7070")+'">'+tk2(s.net)+'</b><em>আয় '+tk2(s.inc)+' − খরচ '+tk2(s.cost)+'</em></div>';
+ let c2=s.pp!==null?'<div class="tc"><small>'+(s.pp>=0?"কেজিতে লাভ":"কেজিতে ক্ষতি")+'</small><b style="color:'+(s.pp>=0?"#3ddc84":"#ff7070")+'">'+tk2(s.pp)+'</b><em>দর ৳'+fb(s.avgRate,0)+' − খরচ ৳'+fb(s.pk,0)+'</em></div>':'<div class="tc"><small>কেজিতে লাভ</small><b>—</b><em>বিক্রি বা দর দিলে আসবে</em></div>';
+ let c3=s.be===null?'<div class="tc"><small>ব্রেক-ইভেন দর</small><b>—</b><em>বাকি মুরগি নেই</em></div>':(s.be<=0?'<div class="tc"><small>ব্রেক-ইভেন দর</small><b style="color:#3ddc84">✅ উঠে গেছে</b><em>খরচ উঠে গেছে</em></div>':'<div class="tc"><small>ব্রেক-ইভেন দর</small><b style="color:#ffd070">৳'+fb(s.be,0)+'/কেজি</b><em>এর বেশিতে বেচলে লাভ</em></div>');
+ el.innerHTML='<div class="an-top">'+c1+c2+c3+'</div>';
+}
+// ── বিশ্লেষণ: সেকশন ভাঁজ করা (পছন্দ ফোনে মনে থাকে) ──
+function anFoldGet(){try{return JSON.parse(localStorage.getItem("anFolded")||"[]")}catch(e){return []}}
+function anFoldSet(a){try{localStorage.setItem("anFolded",JSON.stringify(a))}catch(e){}}
+function anTitleKey(t){return String(t.textContent||"").trim()}
+function anFoldApply(){
+ let f=anFoldGet();
+ document.querySelectorAll("#analysis .an-box,#analysis .dzc-box").forEach(b=>{let t=b.querySelector(":scope>.an-title");if(!t)return;b.classList.toggle("collapsed",f.indexOf(anTitleKey(t))>=0)});
+}
+window.anFoldAll=function(fold){
+ let keys=[];
+ document.querySelectorAll("#analysis .an-box,#analysis .dzc-box").forEach(b=>{let t=b.querySelector(":scope>.an-title");if(t)keys.push(anTitleKey(t))});
+ anFoldSet(fold?keys:[]);anFoldApply();
+};
+(function(){
+ const root=document.getElementById("analysis");if(!root)return;
+ root.addEventListener("click",function(ev){
+  let t=ev.target.closest&&ev.target.closest(".an-title");if(!t)return;
+  let b=t.parentElement;if(!b||!(b.classList.contains("an-box")||b.classList.contains("dzc-box")))return;
+  let k=anTitleKey(t),f=anFoldGet(),i=f.indexOf(k);
+  if(i>=0)f.splice(i,1);else f.push(k);
+  anFoldSet(f);anFoldApply();
+ });
+})();
+// ── বিশ্লেষণ: আগের ব্যাচের সঙ্গে তুলনা ──
+function cmpStats(b,cur){
+ let chicks=+b.chicks||0;if(!(chicks>0))return null;
+ let dead=(b.deaths&&b.deaths.length)?sumOf(b.deaths,r=>r.qty):(+b.dead||0);
+ let sl=b.sales||[],rt=(b.otherSales&&b.otherSales.chicken)||[],gf=b.gifts||[];
+ let wOut=sumOf(sl,r=>r.weight)+sumOf(rt,r=>r.qty)+sumOf(gf,r=>r.weight);
+ let pOut=sumOf(sl,r=>r.qty)+sumOf(rt,r=>r.pcs)+sumOf(gf,r=>r.qty);
+ let sm=batchSummary(b),feedKg=sumOf(b.dailyFeed,dfKg);
+ let o={mort:dead/chicks*100,avgW:pOut>0?wOut/pOut:null,cost:sm.cost,inc:sm.sales,wOut:wOut};
+ o.costKg=wOut>0?sm.cost/wOut:null;
+ o.profKg=wOut>0?(sm.sales-sm.cost)/wOut:null;
+ o.fcr=(feedKg>0&&wOut>0)?feedKg/wOut:null;
+ return o;
+}
+function renderAnCmp(){
+ let el=$a("anCmp");if(!el)return;
+ let me=cmpStats(state);
+ if(!me){el.innerHTML='<div class="an-note">আগে বাচ্চার সংখ্যা দিন।</div>';return}
+ let s=window._anSum;
+ // এই ব্যাচ: চলমান হলে বিশ্লেষণের আনুমানিক হিসাব নেওয়া হয়
+ if(s&&s.allKg>0){me.costKg=s.pk;if(s.pp!==null)me.profKg=s.pp}
+ let f=fcrStats();if(f.fcr)me.fcr=f.fcr;
+ let others=(store.batches||[]).filter(b=>b.id!==state.id).map(b=>cmpStats(b)).filter(x=>x&&x.wOut>0);
+ if(!others.length){el.innerHTML='<div class="an-note">তুলনার মতো আগের ব্যাচ এখনও নেই। অন্য ব্যাচে বিক্রির হিসাব থাকলে এখানে এই ব্যাচের পাশে দেখা যাবে।</div>';return}
+ const avg=k=>{let v=others.map(x=>x[k]).filter(x=>x!==null&&isFinite(x));return v.length?v.reduce((a,b)=>a+b,0)/v.length:null};
+ const rows=[["প্রতি কেজিতে লাভ","profKg",1,v=>"৳"+fb(v,0)],["প্রতি কেজি উৎপাদন খরচ","costKg",-1,v=>"৳"+fb(v,0)],["FCR","fcr",-1,v=>fb(v,2)],["মৃত্যুহার","mort",-1,v=>fb(v,1)+"%"],["গড় ওজন/মুরগি","avgW",1,v=>fb(v,2)+" কেজি"]];
+ let h='<table class="cmp-tbl"><thead><tr><th></th><th>এই ব্যাচ</th><th>আগের '+bn(others.length)+' ব্যাচের গড়</th><th></th></tr></thead><tbody>';
+ rows.forEach(r=>{
+  let a=me[r[1]],b=avg(r[1]);
+  if((a===null||!isFinite(a))&&(b===null))return;
+  let mark="",cls="";
+  if(a!==null&&isFinite(a)&&b!==null){let d=(a-b)*r[2],tol=Math.abs(b)*0.03+0.0001;if(d>tol){mark="👍";cls="g"}else if(d<-tol){mark="⚠️";cls="r"}else mark="＝"}
+  h+='<tr><td>'+r[0]+'</td><td class="'+cls+'">'+((a!==null&&isFinite(a))?r[3](a):"—")+'</td><td>'+(b!==null?r[3](b):"—")+'</td><td>'+mark+'</td></tr>';
+ });
+ h+='</tbody></table><div class="an-note">👍 আগের গড়ের চেয়ে ভালো, ⚠️ খারাপ। চলমান ব্যাচে কেজি-হিসাব আনুমানিক ওজনসহ। আগের ব্যাচে যে তথ্য নেই (যেমন FCR-এর জন্য দৈনিক খাবার) তা বাদ গেছে।</div>';
+ el.innerHTML=h;
+}
 function renderAnalysis(){
  if(!$a("anStock"))return;
  try{renderProfit();renderGoals();renderFeedCmp();renderMort();renderFcrProj()}catch(e){console.error(e)}
+ try{renderAnTop();renderAnCmp();anFoldApply()}catch(e){console.error(e)}
  let b=$a("anBagKg");if(b&&document.activeElement!==b)b.value=bagKg();
  let d=$a("anWDate");if(d&&!d.value)d.value=todayISO();
  renderStock();renderWeights();renderProj();
@@ -1948,8 +2044,12 @@ window.renderFarmDoc=function(){
   '<div class="fdoc-n">বয়স '+bn(r.age)+' দিন • রোস জাত, সিপি ফিডের স্ট্যান্ডার্ড ধরে হিসাব। এটা আগাম ইশারা, নিশ্চিত রোগ নির্ণয় নয়। ২৪ ঘণ্টায় না কমলে ডাক্তার দেখান।</div></div>';
 };
 {const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderFarmDoc()}catch(e){console.error(e)}return r}}
-window.APP_VERSION="v10";
-(function(){const d=document.getElementById("dashboard");if(d&&!document.getElementById("appVer")){const e=document.createElement("div");e.id="appVer";e.style.cssText="text-align:center;font-size:11px;color:#6f8794;margin:22px 0 8px";e.textContent="ব্রাদার্স পোল্ট্রি ফার্ম • সংস্করণ "+window.APP_VERSION;d.appendChild(e)}})();
+window.APP_VERSION="v12";
+(function(){const d=document.getElementById("dashboard");if(d&&!document.getElementById("appVer")){const e=document.createElement("div");e.id="appVer";e.style.cssText="text-align:center;font-size:11px;color:#6f8794;margin:22px 0 8px";e.innerHTML='ব্রাদার্স পোল্ট্রি ফার্ম • সংস্করণ '+window.APP_VERSION+'<br><button type="button" id="appUpd" style="margin-top:8px;border:1px solid #ffffff30;background:#ffffff10;color:#cfe9dc;border-radius:10px;padding:7px 14px;font:inherit;font-size:12px;cursor:pointer">🔄 নতুন সংস্করণ লোড করুন (ডেটা মুছবে না)</button>';d.appendChild(e);
+ document.getElementById("appUpd").onclick=async function(){try{this.textContent="⏳ আপডেট হচ্ছে...";if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()))}if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(_){}location.reload()}}})();
+/* কোনো কোড-ত্রুটি হলে আর চুপচাপ ব্যর্থ নয় — পর্দায় দেখাবে */
+window.addEventListener("error",ev=>{try{showToast("⚠️ সমস্যা হয়েছে: "+String(ev.message||"অজানা ত্রুটি").slice(0,80))}catch(_){}});
+window.addEventListener("unhandledrejection",ev=>{try{showToast("⚠️ সমস্যা হয়েছে: "+String((ev.reason&&ev.reason.message)||ev.reason||"অজানা").slice(0,80))}catch(_){}});
 })();
 
 ["renderMedSchedule","renderNotes","renderOtherSales"].forEach(n=>{const f=window[n];window[n]=function(){f.apply(this,arguments);renderSummaries()}});
