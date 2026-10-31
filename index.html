@@ -672,6 +672,35 @@ td:first-child{font-weight:600}
 .cmp-tbl td{padding:8px 4px;text-align:center;border-top:1px dashed #ffffff18}
 .cmp-tbl td:first-child{text-align:left;color:#cfe9dc}
 .cmp-tbl .g{color:#3ddc84;font-weight:700}.cmp-tbl .r{color:#ff7070;font-weight:700}
+
+/* ═══ ✨ গর্জিয়াস পালিশ (v17) ═══ */
+body{background-image:radial-gradient(900px 500px at 10% -5%,#1aad6e22,transparent 60%),radial-gradient(800px 500px at 100% 20%,#3d8bff1a,transparent 60%),radial-gradient(700px 500px at 0% 100%,#e8a83a14,transparent 60%);background-attachment:fixed}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes shineMove{0%{transform:translateX(-120%) skewX(-18deg)}60%,100%{transform:translateX(260%) skewX(-18deg)}}
+@keyframes softPulse{0%,100%{box-shadow:0 0 0 0 #3ddc8433}50%{box-shadow:0 0 0 8px #3ddc8400}}
+.page.active>*{animation:pgIn .45s cubic-bezier(.2,.8,.2,1) both}
+.page.active>*:nth-child(2){animation-delay:.05s}.page.active>*:nth-child(3){animation-delay:.1s}.page.active>*:nth-child(4){animation-delay:.15s}.page.active>*:nth-child(n+5){animation-delay:.2s}
+.form,.card,.wrap,.an-box{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-color:#ffffff1a!important;box-shadow:0 8px 28px #00000040,inset 0 1px 0 #ffffff12!important}
+.card.metric{transition:transform .2s,box-shadow .25s;position:relative;overflow:hidden}
+.card.metric:active{transform:scale(.97)}
+.card.metric::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:0;background:linear-gradient(90deg,transparent,#ffffff14,transparent);transform:translateX(-120%) skewX(-18deg);animation:shineMove 7s ease-in-out infinite;pointer-events:none}
+.card.metric:nth-child(2n)::after{animation-delay:1.2s}.card.metric:nth-child(3n)::after{animation-delay:2.4s}
+.add{position:relative;overflow:hidden;letter-spacing:.2px;box-shadow:0 6px 18px #1aad6e45,inset 0 1px 0 #ffffff40}
+.add::after{content:"";position:absolute;top:0;bottom:0;width:36%;left:0;background:linear-gradient(90deg,transparent,#ffffff40,transparent);transform:translateX(-130%) skewX(-18deg);animation:shineMove 5.5s ease-in-out infinite;pointer-events:none}
+.nav{transition:transform .15s,box-shadow .2s,background .25s}
+.nav.active{transform:translateY(-1px);animation:softPulse 2.8s ease-out infinite}
+.nav:active{transform:scale(.95)}
+.section{letter-spacing:.2px;text-shadow:0 2px 10px #00000050}
+.pg-banner{box-shadow:0 14px 34px #00000055,inset 0 1px 0 #ffffff55}
+input,select,textarea{transition:border-color .2s,box-shadow .2s,background .2s}
+input:focus,select:focus,textarea:focus{border-color:#3ddc84!important;box-shadow:0 0 0 3px #3ddc8433,0 0 18px #3ddc8422!important;outline:none}
+.an-top .tc{box-shadow:0 8px 22px #00000040,inset 0 1px 0 #ffffff1a}
+.an-svg polyline{filter:drop-shadow(0 0 4px currentColor)}
+.gl-bar i{box-shadow:0 0 10px #ffffff22;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
+.del,.edt{transition:transform .15s}.del:active,.edt:active{transform:scale(.92)}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:#3ddc8455;border-radius:6px}::-webkit-scrollbar-track{background:transparent}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -991,6 +1020,33 @@ td:first-child{font-weight:600}
 
 <div class="form an-box"><div class="an-title">💰 লাভ-লোকসান বিশ্লেষণ</div><div id="anProfit"></div></div>
 
+<div class="form an-box"><div class="an-title">📊 গ্রাফে দেখুন</div><div id="anGraphs"></div></div>
+
+<div class="form an-box" id="anFcrBox"><div class="an-title">🎯 FCR হিসাব</div>
+<div class="pa-sub" style="margin:14px 0 6px">🤖 অ্যাপের তথ্য থেকে স্বয়ংক্রিয় FCR</div>
+<div>
+<div class="an-note" style="margin:0 0 8px">FCR = মোট খাওয়ানো ফিড (কেজি) ÷ মোট মুরগির ওজন (কেজি)। যত কম, তত ভালো।</div>
+<div class="fields">
+<label>টার্গেট FCR<input id="fcTarget" type="number" min="0" step=".01" inputmode="decimal" oninput="fcAutoIn()"></label>
+<label>খামারে থাকা মুরগির আনুমানিক গড় ওজন (কেজি)<input id="fcLive" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 1.2" oninput="fcAutoIn()"></label>
+</div>
+<div id="fcAutoOut" style="margin-top:12px"></div>
+</div>
+<div class="pa-sub" style="margin:14px 0 6px">✍️ নিজের মতো করে হিসাব (আপনি বসান)</div>
+<div>
+<div class="an-note" style="margin:0 0 8px">নিচের ঘরে নিজের সংখ্যা বসান, সাথে সাথে FCR দেখাবে। এই হিসাব অ্যাপের ডেটায় জমা হয় না।</div>
+<div class="fields">
+<label>মোট ফিড (কেজি)<input id="fmFeed" type="number" min="0" step=".01" inputmode="decimal" oninput="fcManual()"></label>
+<label>মোট মুরগির ওজন (কেজি)<input id="fmWeight" type="number" min="0" step=".01" inputmode="decimal" placeholder="জানা থাকলে" oninput="fcManual()"></label>
+<label>অথবা: মুরগির সংখ্যা<input id="fmBirds" type="number" min="0" inputmode="numeric" oninput="fcManual()"></label>
+<label>প্রতি মুরগির গড় ওজন (কেজি)<input id="fmAvg" type="number" min="0" step=".001" inputmode="decimal" oninput="fcManual()"></label>
+<label>টার্গেট FCR<input id="fmTarget" type="number" min="0" step=".01" inputmode="decimal" value="1.6" oninput="fcManual()"></label>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="add" type="button" onclick="fcFill()">📥 অ্যাপের তথ্য বসান</button><button class="add" type="button" style="background:linear-gradient(135deg,#475569,#334155);box-shadow:none" onclick="fcClear()">🧹 ঘর মুছুন</button></div>
+<div id="fmOut" style="margin-top:12px"></div>
+</div>
+</div>
+
 <div class="form an-box"><div class="an-title">🆚 আগের ব্যাচের সঙ্গে তুলনা</div><div id="anCmp"></div></div>
 
 <div class="form an-box">
@@ -1045,30 +1101,7 @@ td:first-child{font-weight:600}
 </section>
 
 
-<section id="fcr" class="page">
-<div class="section">🤖 অ্যাপের তথ্য থেকে স্বয়ংক্রিয় FCR</div>
-<div class="form">
-<div class="an-note" style="margin:0 0 8px">FCR = মোট খাওয়ানো ফিড (কেজি) ÷ মোট মুরগির ওজন (কেজি)। যত কম, তত ভালো।</div>
-<div class="fields">
-<label>টার্গেট FCR<input id="fcTarget" type="number" min="0" step=".01" inputmode="decimal" oninput="fcAutoIn()"></label>
-<label>খামারে থাকা মুরগির আনুমানিক গড় ওজন (কেজি)<input id="fcLive" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 1.2" oninput="fcAutoIn()"></label>
-</div>
-<div id="fcAutoOut" style="margin-top:12px"></div>
-</div>
-<div class="section">✍️ নিজের মতো করে হিসাব (আপনি বসান)</div>
-<div class="form">
-<div class="an-note" style="margin:0 0 8px">নিচের ঘরে নিজের সংখ্যা বসান, সাথে সাথে FCR দেখাবে। এই হিসাব অ্যাপের ডেটায় জমা হয় না।</div>
-<div class="fields">
-<label>মোট ফিড (কেজি)<input id="fmFeed" type="number" min="0" step=".01" inputmode="decimal" oninput="fcManual()"></label>
-<label>মোট মুরগির ওজন (কেজি)<input id="fmWeight" type="number" min="0" step=".01" inputmode="decimal" placeholder="জানা থাকলে" oninput="fcManual()"></label>
-<label>অথবা: মুরগির সংখ্যা<input id="fmBirds" type="number" min="0" inputmode="numeric" oninput="fcManual()"></label>
-<label>প্রতি মুরগির গড় ওজন (কেজি)<input id="fmAvg" type="number" min="0" step=".001" inputmode="decimal" oninput="fcManual()"></label>
-<label>টার্গেট FCR<input id="fmTarget" type="number" min="0" step=".01" inputmode="decimal" value="1.6" oninput="fcManual()"></label>
-</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="add" type="button" onclick="fcFill()">📥 অ্যাপের তথ্য বসান</button><button class="add" type="button" style="background:linear-gradient(135deg,#475569,#334155);box-shadow:none" onclick="fcClear()">🧹 ঘর মুছুন</button></div>
-<div id="fmOut" style="margin-top:12px"></div>
-</div>
-</section>
+
 
 <section id="batchcmp" class="page">
 <div class="section">📊 ব্যাচ তুলনা</div>
@@ -1118,5 +1151,5 @@ td:first-child{font-weight:600}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=12" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=17" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
