@@ -153,7 +153,7 @@ tr:hover td{background:#ffffff04}
 .card[onclick]::after{content:"👆";position:absolute;top:8px;right:10px;font-size:12px;opacity:.35}
 .mbox .pgsum{grid-template-columns:repeat(2,1fr);margin-bottom:0}
 .grid5{grid-template-columns:repeat(5,1fr)}
-@media(max-width:850px){.grid5{grid-template-columns:repeat(2,1fr)}.grid5>.card:last-child{grid-column:span 2}}
+@media(max-width:850px){.grid5{grid-template-columns:repeat(2,1fr)}.grid5>.card:last-child:nth-child(odd){grid-column:span 2}}
 .closebar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:linear-gradient(135deg,#2b1e0d,#2e2212);border:1px solid #ffb83d50;border-radius:14px;padding:12px 14px;margin-bottom:12px;color:#ffd070;font-size:14px}
 .closebar.closed{background:linear-gradient(135deg,#0d2b1e,#122e22);border-color:#1aad6e60;color:#6ee8aa}
 .closebar .add{margin-top:0}
@@ -731,6 +731,15 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .rg-wide{display:flex;align-items:center;gap:14px;margin-top:12px;padding:12px 14px;text-align:left}
 .rg-wide .rg-svg{margin:0;flex:none}
 .rg-leg{display:flex;align-items:center;gap:8px;font-size:12.5px;margin-top:6px}.rg-leg i{width:11px;height:11px;border-radius:50%;flex:none}.rg-leg span{flex:1}.rg-leg b{color:#e8f5ee}
+
+.pb-top{display:flex;align-items:center;gap:14px;padding:6px 4px 12px;border-bottom:1px dashed #ffffff22}
+.pb-ico{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:32px;background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 8px 20px #f59e0b44,inset 0 1px 0 #ffffff55}
+.pb-l{font-size:13px;color:#9db7b0}
+.pb-v{font-size:34px;font-weight:800;line-height:1.15;background:linear-gradient(90deg,#ffe08a,#3ddc84);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pb-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid #ffffff0d;font-size:13.5px}
+.pb-row small{display:block;color:#7f9a93;font-size:11px;margin-top:2px;font-weight:400}
+.pb-row b{white-space:nowrap;font-size:15px}
+.pb-row:nth-last-child(2){border-top:1px solid #ffffff25;font-weight:700}
 </style>
 </head>
 <body>
@@ -772,6 +781,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div id="toast" class="toast"></div>
 <div id="summaryModal" class="modal" onclick="if(event.target===this)closeSummary()"><div class="mbox"><div id="sumTitle" class="mtitle"></div><div id="sumBody"></div><div class="mbtns"><button class="add" id="sumOpen">📂 পুরো হিসাব দেখুন</button><button class="tbtn-light" onclick="closeSummary()">বন্ধ করুন</button></div></div></div>
 <div id="closeModal" class="modal" onclick="if(event.target===this)hideClose()"><div class="mbox"><div class="mtitle">🔒 ব্যাচ ক্লোজ করুন</div><div id="closeBody"></div><div class="mbtns"><button class="add" id="closeConfirmBtn" onclick="confirmClose()">🔒 ক্লোজ নিশ্চিত করুন</button><button class="tbtn-light" onclick="hideClose()">বাতিল</button></div></div></div>
+<div id="fpModal" class="modal" onclick="if(event.target===this)closeFeedPrice()"><div class="mbox"><div class="mtitle">🌾 ফিডের দাম</div><label style="display:block;text-align:left;font-size:14px;color:#9db7b0;margin:6px 0">প্রতি কেজি (৳)<input id="fpInput" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 62" onkeydown="if(event.key==='Enter')saveFeedPrice()" style="font-size:22px;text-align:center"></label><div class="mbtns"><button class="add" onclick="saveFeedPrice()">💾 সেভ</button><button class="add" style="background:#2a3a46" onclick="closeFeedPrice()">বাতিল</button></div></div></div>
 <div id="vacModal" class="modal" onclick="if(event.target===this)hideVacPopup()"><div class="mbox"><div class="mtitle">🚨 ভ্যাকসিনের ওয়ার্নিং</div><div id="vacModalBody"></div><div class="mbtns"><button class="add" onclick="hideVacPopup();openPage('vaccine')">💉 ভ্যাকসিন পেজে যান</button><button class="tbtn-light" onclick="hideVacPopup()">পরে</button></div></div></div>
 <datalist id="feedNames"><option value="প্রি-স্টাটার"><option value="স্টাটার"><option value="গ্রোয়ার"><option value="ফিনিশার"></datalist>
 <div id="infoModal" class="modal" onclick="if(event.target===this)closeInfo()"><div class="mbox"><div id="infoTitle" class="mtitle"></div><div id="infoBody"></div><div class="mbtns"><button class="tbtn-light" onclick="closeInfo()">বন্ধ করুন</button></div></div></div>
@@ -820,6 +830,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
   <div onclick="showSummary('deaths')" class="card metric m-red" style="--accent:#ff4d4d20"><div class="ico-wrap" style="background:linear-gradient(135deg,#ff4d4d,#cc2222)"><div class="ico">☠️</div></div><div class="lab">মৃত</div><div class="val" id="kDead">০</div></div>
   <div onclick="showSummary('sales')" class="card metric m-amber"><div class="ico-wrap" style="background:linear-gradient(135deg,#d97706,#92400e)"><div class="ico">🛒</div></div><div class="lab">বিক্রিত মুরগি</div><div class="val" id="kSold">০</div></div>
   <div onclick="showSummary('farm')" class="card metric m-green" style="--accent:#1aad6e20"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🐔</div></div><div class="lab">বর্তমান আছে</div><div class="val" id="kLive">০</div></div>
+  <div onclick="openFeedPrice()" class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগির খরচ</div><div class="val" id="kPerBird">—</div><div class="lab" id="kPerBirdS" style="font-size:10.5px;opacity:.75;margin-top:2px">ফিডের দাম দিতে চাপুন</div></div>
 </div>
 <div class="hint" id="outHint" style="display:none"></div>
 
@@ -1102,6 +1113,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div class="form an-box">
  <div class="an-title">🌾 ফিড মজুত ও কত দিন চলবে</div>
  <label class="an-inl">প্রতি বস্তায় কত কেজি (ফিড কেনার হিসাবের জন্য)<input id="anBagKg" type="number" min="1" step=".5" oninput="anSaveSet()"></label>
+ <label class="an-inl">ফিডের দাম প্রতি কেজি (৳) — প্রতি মুরগির খরচ হিসাবের জন্য<input id="anFeedKg" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 62" oninput="anSaveSet()"></label>
  <div id="anStock"></div>
 </div>
 
@@ -1184,5 +1196,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=20" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=23" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
