@@ -759,6 +759,15 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 @keyframes goldGlow{0%,100%{filter:drop-shadow(0 0 4px #fbbf24aa)}50%{filter:drop-shadow(0 0 12px #fde68a)}}
 .rg-gold .rg-svg{animation:goldGlow 2s ease-in-out infinite}
 .rg-gold{border-color:#fbbf2466!important}
+
+.nav-top2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.nav-top2 .nav-dash{width:auto;font-size:15.5px;padding:11px 8px}
+.nav-g{font-family:inherit;font-size:15.5px;font-weight:800;padding:11px 8px;border-radius:13px;border:1.5px solid #ffffff30;color:#fff;background:linear-gradient(135deg,#f59e0b,#d97706);cursor:pointer;text-align:center;box-shadow:0 4px 14px #f59e0b44}
+.nav-g:active{transform:scale(.96)}
+.mbox.gr-box{max-width:560px!important;padding:12px 12px!important;text-align:left!important;display:flex;flex-direction:column;max-height:92vh!important;overflow:hidden!important;font-size:14px!important}
+.gr-head{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 10px}
+.gr-x{background:#ffffff14;border:1px solid #ffffff22;color:#fff;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer}
+.gr-body{overflow-y:auto;overflow-x:hidden;flex:1;padding-bottom:10px;-webkit-overflow-scrolling:touch}
 </style>
 </head>
 <body>
@@ -801,6 +810,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div id="summaryModal" class="modal" onclick="if(event.target===this)closeSummary()"><div class="mbox"><div id="sumTitle" class="mtitle"></div><div id="sumBody"></div><div class="mbtns"><button class="add" id="sumOpen">📂 পুরো হিসাব দেখুন</button><button class="tbtn-light" onclick="closeSummary()">বন্ধ করুন</button></div></div></div>
 <div id="closeModal" class="modal" onclick="if(event.target===this)hideClose()"><div class="mbox"><div class="mtitle">🔒 ব্যাচ ক্লোজ করুন</div><div id="closeBody"></div><div class="mbtns"><button class="add" id="closeConfirmBtn" onclick="confirmClose()">🔒 ক্লোজ নিশ্চিত করুন</button><button class="tbtn-light" onclick="hideClose()">বাতিল</button></div></div></div>
 <div id="fpModal" class="modal" onclick="if(event.target===this)closeFeedPrice()"><div class="mbox"><div class="mtitle">🌾 ফিডের দাম</div><label style="display:block;text-align:left;font-size:14px;color:#9db7b0;margin:6px 0">প্রতি কেজি (৳)<input id="fpInput" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 62" onkeydown="if(event.key==='Enter')saveFeedPrice()" style="font-size:22px;text-align:center"></label><div class="mbtns"><button class="add" onclick="saveFeedPrice()">💾 সেভ</button><button class="add" style="background:#2a3a46" onclick="closeFeedPrice()">বাতিল</button></div></div></div>
+<div id="grModal" class="modal" onclick="if(event.target===this)closeGraphs()"><div class="mbox gr-box"><div class="gr-head"><div class="mtitle" style="margin:0">📊 গ্রাফ</div><button class="gr-x" type="button" onclick="closeGraphs()">✕</button></div><div id="grBody" class="gr-body"><div id="dbGraphs"></div></div></div></div>
 <div id="vacModal" class="modal" onclick="if(event.target===this)hideVacPopup()"><div class="mbox"><div class="mtitle">🚨 ভ্যাকসিনের ওয়ার্নিং</div><div id="vacModalBody"></div><div class="mbtns"><button class="add" onclick="hideVacPopup();openPage('vaccine')">💉 ভ্যাকসিন পেজে যান</button><button class="tbtn-light" onclick="hideVacPopup()">পরে</button></div></div></div>
 <datalist id="feedNames"><option value="প্রি-স্টাটার"><option value="স্টাটার"><option value="গ্রোয়ার"><option value="ফিনিশার"></datalist>
 <div id="infoModal" class="modal" onclick="if(event.target===this)closeInfo()"><div class="mbox"><div id="infoTitle" class="mtitle"></div><div id="infoBody"></div><div class="mbtns"><button class="tbtn-light" onclick="closeInfo()">বন্ধ করুন</button></div></div></div>
@@ -890,8 +900,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 </div>
 <div class="fin-box fin-net profit" id="finNetBox"><div class="fin-l" id="finNetL">📈 লাভ / ক্ষতি (সর্বমোট)</div><div class="fin-v" id="finNet">৳০</div></div>
 
-<div class="section">📊 এক নজরে গ্রাফ</div>
-<div id="dbGraphs"></div>
+
 
 <div id="closeBar" style="margin-top:18px"></div>
 </section>
@@ -1215,5 +1224,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=24" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=26" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
