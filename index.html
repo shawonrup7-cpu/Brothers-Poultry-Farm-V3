@@ -907,19 +907,14 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 </div>
 
 <!-- Sales & Profit -->
-<div class="section">📈 বিক্রি ও লাভ-ক্ষতি</div>
-<div class="grid" style="grid-template-columns:repeat(2,1fr)">
-  <div onclick="showSummary('income')" class="card metric m-amber"><div class="ico-wrap" style="background:linear-gradient(135deg,#d97706,#92400e)"><div class="ico">💰</div></div><div class="lab">মোট আয় (সব বিক্রি)</div><div class="val" id="kSales">৳০</div></div>
-  <div onclick="showSummary('report')" class="card metric" id="kProfitCard"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)" id="kProfitIco"><div class="ico">📊</div></div><div class="lab">নিট লাভ / ক্ষতি</div><div class="val" id="kProfit">৳০</div></div>
-</div>
+<div class="section">⚖️ লাভ ক্ষতি</div>
+<div style="display:none"><span id="kSales"></span><span id="kProfit"></span><span id="kProfitCard"></span><span id="kProfitIco"></span></div>
 <div class="grid" style="grid-template-columns:repeat(2,1fr);margin-top:10px">
   <div onclick="showSummary('deaths')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#dc2626,#991b1b)"><div class="ico">⚖️</div></div><div class="lab">মৃত্যুর হার</div><div class="val" id="kDeathRate" style="color:#f87171">০%</div></div>
   <div onclick="showSummary('report')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">প্রতি মুরগি মোট খরচ</div><div class="val" id="kCostPerKg" style="color:#34d399;font-size:15px">৳০</div></div>
 </div>
 
-<!-- লাভ ক্ষতি সারাংশ -->
-<div class="section">⚖️ লাভ ক্ষতি সারাংশ</div>
-<div class="grid lc-grid" style="grid-template-columns:repeat(2,1fr)">
+<div class="grid lc-grid" style="grid-template-columns:repeat(2,1fr);margin-top:10px">
   <div onclick="openLc(1)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🎯</div></div><div class="lab">খরচ তুলতে মোট কেজি</div><div class="val" id="lcV1">—</div><div class="lab" id="lcS1" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
   <div onclick="openLc(2)" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">⚖️</div></div><div class="lab">জীবিত মুরগির মোট ওজন</div><div class="val" id="lcV2">—</div><div class="lab" id="lcS2" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
   <div onclick="openLc(3)" class="card metric m-amber"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">🐔</div></div><div class="lab">প্রতি মুরগি কত কেজি হলে আসল</div><div class="val" id="lcV3">—</div><div class="lab" id="lcS3" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
@@ -1133,7 +1128,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 
 <div class="form an-box"><div class="an-title">💰 লাভ-লোকসান বিশ্লেষণ</div><div id="anProfit"></div></div>
 
-<div class="form an-box"><div class="an-title">📊 গ্রাফে দেখুন</div><div id="anGraphs"></div></div>
+
 
 <div class="form an-box" id="anFcrBox"><div class="an-title">🎯 FCR হিসাব</div>
 <div class="pa-sub" style="margin:14px 0 6px">🤖 অ্যাপের তথ্য থেকে স্বয়ংক্রিয় FCR</div>
@@ -1144,19 +1139,6 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <label>খামারে থাকা মুরগির আনুমানিক গড় ওজন (কেজি)<input id="fcLive" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 1.2" oninput="fcAutoIn()"></label>
 </div>
 <div id="fcAutoOut" style="margin-top:12px"></div>
-</div>
-<div class="pa-sub" style="margin:14px 0 6px">✍️ নিজের মতো করে হিসাব (আপনি বসান)</div>
-<div>
-<div class="an-note" style="margin:0 0 8px">নিচের ঘরে নিজের সংখ্যা বসান, সাথে সাথে FCR দেখাবে। এই হিসাব অ্যাপের ডেটায় জমা হয় না।</div>
-<div class="fields">
-<label>মোট ফিড (কেজি)<input id="fmFeed" type="number" min="0" step=".01" inputmode="decimal" oninput="fcManual()"></label>
-<label>মোট মুরগির ওজন (কেজি)<input id="fmWeight" type="number" min="0" step=".01" inputmode="decimal" placeholder="জানা থাকলে" oninput="fcManual()"></label>
-<label>অথবা: মুরগির সংখ্যা<input id="fmBirds" type="number" min="0" inputmode="numeric" oninput="fcManual()"></label>
-<label>প্রতি মুরগির গড় ওজন (কেজি)<input id="fmAvg" type="number" min="0" step=".001" inputmode="decimal" oninput="fcManual()"></label>
-<label>টার্গেট FCR<input id="fmTarget" type="number" min="0" step=".01" inputmode="decimal" value="1.6" oninput="fcManual()"></label>
-</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="add" type="button" onclick="fcFill()">📥 অ্যাপের তথ্য বসান</button><button class="add" type="button" style="background:linear-gradient(135deg,#475569,#334155);box-shadow:none" onclick="fcClear()">🧹 ঘর মুছুন</button></div>
-<div id="fmOut" style="margin-top:12px"></div>
 </div>
 </div>
 
@@ -1265,5 +1247,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=31" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=34" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
