@@ -892,15 +892,21 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div id="dzTodayCard"></div>
 <div id="farmDoc"></div>
 <div class="section">🐔 মুরগির অবস্থা</div>
+<div style="display:none"><span id="kAge"></span></div>
 <div class="grid grid5">
-  <div onclick="showSummary('farm')" class="card metric m-blue" style="--accent:#3d8bff20"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">📅</div></div><div class="lab">বয়স</div><div class="val" id="kAge">০ দিন</div></div>
   <div onclick="showSummary('farm')" class="card metric m-blue" style="--accent:#3d8bff20"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">🐣</div></div><div class="lab">মোট বাচ্চা</div><div class="val" id="kChicks">০</div></div>
-  <div onclick="showSummary('deaths')" class="card metric m-red" style="--accent:#ff4d4d20"><div class="ico-wrap" style="background:linear-gradient(135deg,#ff4d4d,#cc2222)"><div class="ico">☠️</div></div><div class="lab">মৃত</div><div class="val" id="kDead">০</div></div>
-  <div onclick="showSummary('sales')" class="card metric m-amber"><div class="ico-wrap" style="background:linear-gradient(135deg,#d97706,#92400e)"><div class="ico">🛒</div></div><div class="lab">বিক্রিত মুরগি</div><div class="val" id="kSold">০</div></div>
-  <div onclick="showSummary('farm')" class="card metric m-green" style="--accent:#1aad6e20"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🐔</div></div><div class="lab">বর্তমান আছে</div><div class="val" id="kLive">০</div></div>
-  <div onclick="openFeedPrice()" class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগির খরচ (খাওয়ানো ফিডে)</div><div class="val" id="kPerBird">—</div><div class="lab" id="kPerBirdS" style="font-size:10.5px;opacity:.75;margin-top:2px">ফিডের দাম দিতে চাপুন</div></div>
+  <div onclick="showSummary('deaths')" class="card metric m-red" style="--accent:#ff4d4d20"><div class="ico-wrap" style="background:linear-gradient(135deg,#ff4d4d,#cc2222)"><div class="ico">☠️</div></div><div class="lab">মোট মৃত</div><div class="val" id="kDead">০</div></div>
+  <div onclick="showSummary('deaths')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#dc2626,#991b1b)"><div class="ico">⚖️</div></div><div class="lab">মৃত্যুর হার (%)</div><div class="val" id="kDeathRate" style="color:#f87171">০%</div></div>
+  <div onclick="showSummary('sales')" class="card metric m-amber"><div class="ico-wrap" style="background:linear-gradient(135deg,#d97706,#92400e)"><div class="ico">🛒</div></div><div class="lab">বিক্রি হয়েছে</div><div class="val" id="kSold">০</div></div>
+  <div onclick="showSummary('farm')" class="card metric m-green" style="--accent:#1aad6e20"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🐔</div></div><div class="lab">এখন খামারে আছে</div><div class="val" id="kLive">০</div></div>
 </div>
 <div class="hint" id="outHint" style="display:none"></div>
+
+<div class="section">🎯 ওজন ও FCR</div>
+<div class="grid">
+  <div onclick="openAvgWeight()" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">⚖️</div></div><div class="lab">মুরগির গড় ওজন</div><div class="val" id="kAvgW">—</div></div>
+  <div onclick="openPage('fcr')" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">🎯</div></div><div class="lab">FCR (ফিড ÷ ওজন)</div><div class="val" id="kFcr">—</div></div>
+</div>
 
 <!-- Expenses -->
 <div class="section">💸 খরচের হিসাব</div>
@@ -914,28 +920,20 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
   <div onclick="showSummary('power')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#eab308,#a16207)"><div class="ico">⚡</div></div><div class="lab">বিদ্যুৎ ও জ্বালানি</div><div class="val" style="color:#fde047" id="kPower">৳০</div></div>
 </div>
 
+<div class="section">🐔 প্রতি মুরগির খরচ</div>
+<div class="grid">
+  <div onclick="openFeedPrice()" class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগির খরচ — খাওয়ানো ফিডে</div><div class="val" id="kPerBird">—</div><div class="lab" id="kPerBirdS" style="font-size:10.5px;opacity:.75;margin-top:2px">ফিডের দাম দিতে চাপুন</div></div>
+  <div onclick="showSummary('report')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">প্রতি মুরগির খরচ — কেনা ফিডে</div><div class="val" id="kCostPerKg" style="color:#34d399">৳০</div><div class="lab" style="font-size:10.5px;opacity:.75;margin-top:2px">মোট খরচ ÷ জীবিত মুরগি</div></div>
+</div>
+
 <!-- Sales & Profit -->
 <div class="section">⚖️ লাভ ক্ষতি</div>
 <div style="display:none"><span id="kSales"></span><span id="kProfit"></span><span id="kProfitCard"></span><span id="kProfitIco"></span></div>
-<div class="grid" style="grid-template-columns:repeat(2,1fr);margin-top:10px">
-  <div onclick="showSummary('deaths')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#dc2626,#991b1b)"><div class="ico">⚖️</div></div><div class="lab">মৃত্যুর হার</div><div class="val" id="kDeathRate" style="color:#f87171">০%</div></div>
-  <div onclick="showSummary('report')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">প্রতি মুরগির মোট খরচ</div><div class="val" id="kCostPerKg" style="color:#34d399">৳০</div><div class="lab" style="font-size:10.5px;opacity:.75;margin-top:2px">কেনা ফিডসহ</div></div>
-</div>
-
-<div class="grid lc-grid" style="grid-template-columns:repeat(2,1fr);margin-top:10px">
-  <div onclick="openLc(1)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🎯</div></div><div class="lab">খরচ ফেরত পেতে (কেনা ফিডসহ)</div><div class="val" id="lcV1">—</div><div class="lab" id="lcS1" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div onclick="openLc(6)" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)"><div class="ico">🌾</div></div><div class="lab">খরচ ফেরত পেতে (খাওয়ানো ফিডে)</div><div class="val" id="lcV6">—</div><div class="lab" id="lcS6" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div onclick="openLc(2)" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">⚖️</div></div><div class="lab">জীবিত মুরগির মোট ওজন</div><div class="val" id="lcV2">—</div><div class="lab" id="lcS2" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div onclick="openLc(3)" class="card metric m-amber"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">🐔</div></div><div class="lab">প্রতি মুরগি কত কেজি হলে খরচ উঠবে</div><div class="val" id="lcV3">—</div><div class="lab" id="lcS3" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+<div class="grid lc-grid" style="grid-template-columns:repeat(2,1fr)">
+  <div onclick="openLc(6)" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)"><div class="ico">🌾</div></div><div class="lab">কত কেজি দরকার (খাওয়ানো ফিডে)</div><div class="val" id="lcV6">—</div><div class="lab" id="lcS6" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div onclick="openLc(1)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🎯</div></div><div class="lab">কত কেজি দরকার (কেনা ফিডে)</div><div class="val" id="lcV1">—</div><div class="lab" id="lcS1" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
   <div onclick="openLc(4)" class="card metric m-red"><div class="ico-wrap" style="background:linear-gradient(135deg,#ef4444,#b91c1c)"><div class="ico">🏷️</div></div><div class="lab">ক্ষতি ঠেকাতে ন্যূনতম দর</div><div class="val" id="lcV4">—</div><div class="lab" id="lcS4" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
   <div id="lcT5" onclick="openLc(5)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">📊</div></div><div class="lab">এই দরে বেচলে লাভ/ক্ষতি</div><div class="val" id="lcV5">—</div><div class="lab" id="lcS5" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-</div>
-
-<!-- Summary -->
-<div class="section">🎯 FCR ও গড় ওজন</div>
-<div class="grid" style="grid-template-columns:repeat(2,1fr)">
-  <div onclick="openPage('fcr')" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#3d8bff,#1a5fff)"><div class="ico">🎯</div></div><div class="lab">FCR (ফিড অনুযায়ী ওজন)</div><div class="val" id="kFcr">—</div></div>
-  <div onclick="openAvgWeight()" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">⚖️</div></div><div class="lab">পুরো মুরগীর গড় ওজন</div><div class="val" id="kAvgW">—</div></div>
 </div>
 
 <div class="section">📑 আর্থিক সারাংশ</div>
@@ -1256,5 +1254,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=37" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=39" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
