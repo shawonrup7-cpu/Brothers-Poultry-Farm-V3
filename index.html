@@ -807,6 +807,12 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .nav-top2 .nav-g{grid-column:2;grid-row:1}
 .nav-top2 .nav:not(.nav-dash){grid-column:2;grid-row:2;display:block;width:100%;text-align:center;font-size:14px;font-weight:800;padding:6px;border-radius:11px;border:1.5px solid #ffffff30;color:#fff}</style>
 <style>.nav-top2 .nav-dash{font-size:20px!important;font-weight:900;line-height:1.3}</style>
+<style>.dis-warn{background:#f59e0b1c;border:1px solid #f59e0b55;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.7}
+.dchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.dchip{background:#ffffff10;border:1px solid #ffffff22;color:#cfe3dc;border-radius:999px;padding:6px 13px;font-size:13px}.dchip.on{background:linear-gradient(135deg,#e11d48,#9f1239);border-color:transparent;color:#fff}
+.dis-card{background:#0f1d27;border:1px solid #ffffff1a;border-radius:14px;margin-bottom:8px;overflow:hidden}.dis-card.urgent{border-color:#ef4444aa;background:#2a1216}
+.dis-card summary{list-style:none;padding:12px;display:flex;gap:10px;align-items:center;font-weight:700;font-size:15px;cursor:pointer}.dis-card summary::-webkit-details-marker{display:none}.dis-card summary::after{content:"▾";margin-left:auto;opacity:.6}.dis-card[open] summary::after{content:"▴"}
+.dis-e{font-size:22px}.dis-b{padding:0 14px 12px}.dis-k{font-weight:800;margin-top:8px;color:#7be0b0;font-size:13.5px}.dis-b p{margin:3px 0 0;line-height:1.75;font-size:14px;opacity:.92}</style>
+<style>.dis-n2{margin-top:10px;font-size:12px;line-height:1.7;color:#f5c26b;background:#f59e0b14;border-radius:9px;padding:7px 9px}</style>
 </head>
 <body>
 <div id="splash" aria-hidden="true">
@@ -921,9 +927,11 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 </div>
 
 <div class="section">🐔 প্রতি মুরগির খরচ</div>
-<div class="grid">
+<div class="grid lc-grid">
   <div onclick="openFeedPrice()" class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগির খরচ — খাওয়ানো ফিডে</div><div class="val" id="kPerBird">—</div><div class="lab" id="kPerBirdS" style="font-size:10.5px;opacity:.75;margin-top:2px">ফিডের দাম দিতে চাপুন</div></div>
   <div onclick="showSummary('report')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">প্রতি মুরগির খরচ — কেনা ফিডে</div><div class="val" id="kCostPerKg" style="color:#34d399">৳০</div><div class="lab" style="font-size:10.5px;opacity:.75;margin-top:2px">মোট খরচ ÷ জীবিত মুরগি</div></div>
+  <div id="lcT7" onclick="openLc(7)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#10b981,#047857)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — খাওয়ানো ফিডে</div><div class="val" id="lcV7">—</div><div class="lab" id="lcS7" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div id="lcT8" onclick="openLc(8)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#6366f1,#4338ca)"><div class="ico">🧮</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — কেনা ফিডে</div><div class="val" id="lcV8">—</div><div class="lab" id="lcS8" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
 </div>
 
 <!-- Sales & Profit -->
@@ -1221,6 +1229,16 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div class="hint">🔔 সময় হলে অ্যাপ খোলার সাথে সাথে ওয়ার্নিং আসবে, ড্যাশবোর্ডে লাল/হলুদ সতর্কতা দেখাবে এবং ভ্যাকসিন বাটনে লাল সংখ্যা জ্বলবে। ভ্যাকসিন দিলে "✅ দেওয়া হয়েছে" চাপুন — কার্ড সবুজ হয়ে টিক পড়বে।</div>
 </section>
 
+<section id="disease" class="page">
+<div class="section">🩺 রোগ ও প্রতিকার</div>
+<div class="dis-warn">⚠️ এখানকার তথ্য সাধারণ ধারণার জন্য। ওষুধ ও মাত্রা ঠিক করবেন <b>প্রাণিসম্পদ ডাক্তার</b>। বেশি মৃত্যু হলে বা বার্ড ফ্লুর সন্দেহ হলে সাথে সাথে ডাক্তার বা প্রাণিসম্পদ অফিসে জানান।</div>
+<input id="disSearch" type="search" placeholder="🔎 রোগ বা লক্ষণ খুঁজুন (যেমন: সাদা পায়খানা)" oninput="disSearch(this.value)" style="margin:8px 0">
+<div id="disChips" class="dchips"></div>
+<div id="disList"></div>
+<div class="dis-warn" style="margin-top:14px"><b>ওষুধ দেওয়ার আগে মনে রাখুন</b><br>• এখানে শুধু ওষুধের <b>জেনেরিক নাম</b> দেওয়া, কোম্পানির নাম আলাদা হবে। • মাত্রা ও কত দিন দেবেন তা প্যাকেটের লেবেল ও ডাক্তারের কথামতো নিন, আন্দাজে নয়। • অ্যান্টিবায়োটিকের কোর্স শেষ করুন, মাঝপথে বন্ধ করবেন না। • <b>উইথড্রয়াল সময়:</b> ওষুধ দেওয়ার পর কত দিন মুরগি বেচা যাবে না তা লেবেলে দেখে নিন। • একসাথে অনেক ওষুধ মেশাবেন না।</div>
+<div class="dis-warn" style="margin-top:10px"><b>প্রতিরোধের ৫টা নিয়ম</b><br>১) সময়মতো টিকা (ভ্যাকসিন পাতা দেখুন) ২) ঘর, পানি ও লিটার পরিষ্কার-শুকনো ৩) বাইরের লোক ও গাড়ি ঢুকতে না দেওয়া ৪) ভালো মানের বাচ্চা ও ফিড ৫) প্রতিদিন মুরগির আচরণ, পায়খানা ও মৃত্যু লিখে রাখা</div>
+</section>
+
 <section id="notes" class="page">
 <div class="section">📝 নোট / গুরুত্বপূর্ণ তথ্য</div>
 <div class="form">
@@ -1254,5 +1272,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=39" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=44" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
