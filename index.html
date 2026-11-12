@@ -822,6 +822,19 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .dis-pm,.dis-pm *{white-space:normal!important;min-width:0!important;box-sizing:border-box}.dis-pm{max-width:100%}.dis-pm td,.dis-pm th{overflow-wrap:anywhere}
 .jump-row{position:sticky;top:118px;z-index:20;display:flex;gap:6px;overflow-x:auto;padding:6px 2px 8px;margin:-4px 0 6px;background:linear-gradient(#0b1a24f2,#0b1a24f2);scrollbar-width:none}
 .jump-row::-webkit-scrollbar{display:none}.jump-row .dchip{white-space:nowrap;flex:0 0 auto;font-size:13px;padding:7px 12px}
+
+/* ── বিশ্লেষণ: আজকের অবস্থা ও নতুন অংশ ── */
+.an-today{background:linear-gradient(160deg,#142632,#0f1d27);border:1px solid #ffffff14;border-radius:18px;padding:12px;margin:0 0 12px}
+.an-today-h{font-weight:800;font-size:16px;margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}.an-today-h span{font-size:12px;color:#8fa7b6;font-weight:600}
+.lt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.lt{display:flex;gap:7px;align-items:flex-start;background:#0e1c26;border:1px solid #ffffff12;border-radius:12px;padding:8px 7px}
+.lt i{width:11px;height:11px;border-radius:50%;margin-top:4px;flex:0 0 11px;background:#667}.lt.g i{background:#3ddc84;box-shadow:0 0 8px #3ddc8488}.lt.y i{background:#fbbf24;box-shadow:0 0 8px #fbbf2488}.lt.r i{background:#ff6b6b;box-shadow:0 0 8px #ff6b6b88}
+.lt small{display:block;font-size:11px;color:#8fa7b6}.lt b{display:block;font-size:14.5px;color:#e8edf2;line-height:1.25}.lt em{display:block;font-style:normal;font-size:10.5px;color:#7f98a8;margin-top:1px}
+.an-spike{margin-top:8px;padding:9px 11px;border-radius:12px;background:#3a1212;border:1px solid #ff6b6b66;color:#ffb3b3;font-size:13.5px;line-height:1.5;font-weight:700}
+.an-adv{margin-top:8px;padding:9px 11px;border-radius:12px;font-size:13.5px;line-height:1.6}.an-adv.bad{background:#2a2410;border:1px solid #fbbf2455;color:#ffe08a}.an-adv.ok{background:#0f2a1c;border:1px solid #3ddc8455;color:#8ff0b8}
+.epef-big{text-align:center;margin:4px 0}.epef-big b{font-size:44px;line-height:1.1}.epef-big span{display:block;font-size:15px;font-weight:800}
+.epef-scale{position:relative;height:9px;border-radius:9px;background:linear-gradient(90deg,#ff6b6b 0 40%,#fbbf24 40% 60%,#7fe0b0 60% 80%,#3ddc84 80%);margin:10px 4px 2px}.epef-scale i{position:absolute;top:-4px;width:4px;height:17px;border-radius:3px;background:#fff;box-shadow:0 0 6px #000;transform:translateX(-50%)}
+.epef-lab{display:flex;justify-content:space-between;font-size:10.5px;color:#7f98a8;margin:0 4px 8px}
 </style>
 <style>
 .lc-grid>.card:last-child:nth-child(odd){grid-column:span 2}
@@ -962,10 +975,10 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 
 <div class="section">🐔 প্রতি মুরগির খরচ</div>
 <div class="grid lc-grid">
-  <div onclick="openFeedPrice()" class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগির খরচ — খাওয়ানো ফিডে</div><div class="val" id="kPerBird">—</div><div class="lab" id="kPerBirdS" style="font-size:10.5px;opacity:.75;margin-top:2px">ফিডের দাম দিতে চাপুন</div></div>
-  <div onclick="showSummary('report')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">প্রতি মুরগির খরচ — কেনা ফিডে</div><div class="val" id="kCostPerKg" style="color:#34d399">৳০</div><div class="lab" style="font-size:10.5px;opacity:.75;margin-top:2px">মোট খরচ ÷ জীবিত মুরগি</div></div>
-  <div id="lcT7" onclick="openLc(7)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#10b981,#047857)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — খাওয়ানো ফিডে</div><div class="val" id="lcV7">—</div><div class="lab" id="lcS7" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div id="lcT8" onclick="openLc(8)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#6366f1,#4338ca)"><div class="ico">🧮</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — কেনা ফিডে</div><div class="val" id="lcV8">—</div><div class="lab" id="lcS8" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div onclick="openFeedPrice()" class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">খাওয়ানো ফিডে খরচ</div><div class="val" id="kPerBird">—</div><div class="lab" id="kPerBirdS" style="font-size:10.5px;opacity:.75;margin-top:2px">ফিডের দাম দিতে চাপুন</div></div>
+  <div onclick="showSummary('report')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">সব ফিড + সব খরচ</div><div class="val" id="kCostPerKg" style="color:#34d399">৳০</div><div class="lab" style="font-size:10.5px;opacity:.75;margin-top:2px">কেনা ফিড ধরে • ÷ মুরগি</div></div>
+  <div id="lcT7" onclick="openLc(7)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#10b981,#047857)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — খাওয়ানো ফিডে খরচ</div><div class="val" id="lcV7">—</div><div class="lab" id="lcS7" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div id="lcT8" onclick="openLc(8)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#6366f1,#4338ca)"><div class="ico">🧮</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — সব ফিড + সব খরচ</div><div class="val" id="lcV8">—</div><div class="lab" id="lcS8" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
 </div>
 
 <!-- Sales & Profit -->
@@ -974,8 +987,8 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div class="grid lc-grid" style="grid-template-columns:repeat(2,1fr)">
   <div onclick="openLc(6)" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)"><div class="ico">🌾</div></div><div class="lab">কত কেজি দরকার (খাওয়ানো ফিডে)</div><div class="val" id="lcV6">—</div><div class="lab" id="lcS6" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
   <div onclick="openLc(1)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🎯</div></div><div class="lab">কত কেজি দরকার (কেনা ফিডে)</div><div class="val" id="lcV1">—</div><div class="lab" id="lcS1" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div onclick="openLc(4)" class="card metric m-red"><div class="ico-wrap" style="background:linear-gradient(135deg,#ef4444,#b91c1c)"><div class="ico">🏷️</div></div><div class="lab">ক্ষতি ঠেকাতে ন্যূনতম দর</div><div class="val" id="lcV4">—</div><div class="lab" id="lcS4" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div id="lcT5" onclick="openLc(5)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">📊</div></div><div class="lab">এই দরে বেচলে লাভ/ক্ষতি</div><div class="val" id="lcV5">—</div><div class="lab" id="lcS5" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div onclick="openLc(4)" class="card metric m-red"><div class="ico-wrap" style="background:linear-gradient(135deg,#ef4444,#b91c1c)"><div class="ico">🏷️</div></div><div class="lab">ন্যূনতম গড় দর (সব মুরগি)</div><div class="val" id="lcV4">—</div><div class="lab" id="lcS4" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div id="lcT5" onclick="openLc(5)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">📊</div></div><div class="lab">এই দরে বিক্রি করলে লাভ/ক্ষতি</div><div class="val" id="lcV5">—</div><div class="lab" id="lcS5" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
 </div>
 
 <div class="section">📑 আর্থিক সারাংশ</div>
@@ -1177,7 +1190,14 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 
 <div class="form an-box"><div class="an-title">💰 লাভ-লোকসান বিশ্লেষণ</div><div id="anProfit"></div></div>
 
-
+<div class="form an-box">
+ <div class="an-title">💰 কবে বিক্রি করলে বেশি লাভ</div>
+ <div class="fields">
+  <label>বিক্রির দর (টাকা/কেজি)<input id="anRate" type="number" min="0" step=".01" inputmode="decimal" oninput="anSaveSet()"></label>
+  <label>ফিডের দাম (টাকা/কেজি)<input id="anFeedRate" type="number" min="0" step=".01" inputmode="decimal" oninput="anSaveSet()"></label>
+ </div>
+ <div id="anProj"></div>
+</div>
 
 <div class="form an-box" id="anFcrBox"><div class="an-title">🎯 FCR হিসাব</div>
 <div class="pa-sub" style="margin:14px 0 6px">🤖 অ্যাপের তথ্য থেকে স্বয়ংক্রিয় FCR</div>
@@ -1191,27 +1211,10 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 </div>
 </div>
 
-<div class="form an-box"><div class="an-title">🆚 আগের ব্যাচের সঙ্গে তুলনা</div><div id="anCmp"></div></div>
-
-<div class="form an-box">
- <div class="an-title">🏁 ব্যাচের লক্ষ্য</div>
- <div class="fields">
-  <label>লক্ষ্য FCR<input id="gFcr" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন ১.৬" oninput="anGoalSave()"></label>
-  <label>সর্বোচ্চ মৃত্যুহার (%)<input id="gMort" type="number" min="0" step=".1" inputmode="decimal" placeholder="যেমন ৪" oninput="anGoalSave()"></label>
-  <label>বিক্রির সময় গড় ওজন (গ্রাম)<input id="gWt" type="number" min="0" step="10" inputmode="decimal" placeholder="যেমন ২০০০" oninput="anGoalSave()"></label>
-  <label>নিট লাভ লক্ষ্য (টাকা)<input id="gProfit" type="number" min="0" step="1000" inputmode="decimal" placeholder="যেমন ৫০০০০০" oninput="anGoalSave()"></label>
- </div>
- <div id="anGoals" style="margin-top:10px"></div>
-</div>
-
-<div class="form an-box"><div class="an-title">🍽️ দৈনিক ফিড বনাম স্ট্যান্ডার্ড</div><div id="anFeedCmp"></div></div>
-
 <div class="form an-box"><div class="an-title">☠️ মৃত্যুর বিশ্লেষণ</div><div id="anMort"></div></div>
 
-<div class="form an-box"><div class="an-title">🎯 FCR পূর্বাভাস (আরও কয়দিন রাখলে)</div><div id="anFcrProj"></div></div>
-
 <div class="form an-box">
- <div class="an-title">🌾 ফিড মজুত ও কত দিন চলবে</div>
+ <div class="an-title">🌾 ফিড কতদিন চলবে</div>
  <label class="an-inl">প্রতি বস্তায় কত কেজি (ফিড কেনার হিসাবের জন্য)<input id="anBagKg" type="number" min="1" step=".5" oninput="anSaveSet()"></label>
  <label class="an-inl">ফিডের দাম প্রতি কেজি (৳) — প্রতি মুরগির খরচ হিসাবের জন্য<input id="anFeedKg" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 62" oninput="anSaveSet()"></label>
  <div id="anStock"></div>
@@ -1234,15 +1237,30 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
  </details>
 </div>
 
-<div class="form an-box">
- <div class="an-title">💰 কবে বিক্রি করলে বেশি লাভ</div>
+<div class="form an-box"><div class="an-title">🏆 ব্যাচের মান (EPEF)</div><div id="anEpef"></div></div>
+
+<div class="form an-box"><div class="an-title">👥 ক্রেতা অনুযায়ী বিশ্লেষণ</div><div id="anBuyers"></div></div>
+
+<div class="form an-box"><div class="an-title">📈 প্রতি মুরগির জমা খরচ</div><div id="anCostWk"></div></div>
+
+<div class="form an-box"><div class="an-title">🍽️ দৈনিক ফিড বনাম স্ট্যান্ডার্ড</div><div id="anFeedCmp"></div></div>
+
+<div class="form an-box" id="anCmpBox"><div class="an-title">🆚 আগের ব্যাচের সঙ্গে তুলনা</div><div id="anCmp"></div></div>
+
+<div class="form an-box" data-hide="1" style="display:none">
+ <div class="an-title">🏁 ব্যাচের লক্ষ্য</div>
  <div class="fields">
-  <label>বিক্রির দর (টাকা/কেজি)<input id="anRate" type="number" min="0" step=".01" inputmode="decimal" oninput="anSaveSet()"></label>
-  <label>ফিডের দাম (টাকা/কেজি)<input id="anFeedRate" type="number" min="0" step=".01" inputmode="decimal" oninput="anSaveSet()"></label>
+  <label>লক্ষ্য FCR<input id="gFcr" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন ১.৬" oninput="anGoalSave()"></label>
+  <label>সর্বোচ্চ মৃত্যুহার (%)<input id="gMort" type="number" min="0" step=".1" inputmode="decimal" placeholder="যেমন ৪" oninput="anGoalSave()"></label>
+  <label>বিক্রির সময় গড় ওজন (গ্রাম)<input id="gWt" type="number" min="0" step="10" inputmode="decimal" placeholder="যেমন ২০০০" oninput="anGoalSave()"></label>
+  <label>নিট লাভ লক্ষ্য (টাকা)<input id="gProfit" type="number" min="0" step="1000" inputmode="decimal" placeholder="যেমন ৫০০০০০" oninput="anGoalSave()"></label>
  </div>
- <div id="anProj"></div>
+ <div id="anGoals" style="margin-top:10px"></div>
 </div>
-<div id="dzCharts"></div>
+
+<div class="form an-box" data-hide="1" style="display:none"><div class="an-title">🎯 FCR পূর্বাভাস (আরও কয়দিন রাখলে)</div><div id="anFcrProj"></div></div>
+
+<div id="dzCharts" style="display:none"></div>
 </section>
 
 
@@ -1306,5 +1324,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=46" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=48" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
