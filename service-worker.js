@@ -1,6 +1,6 @@
 /* ব্রাদার্স পোল্ট্রি ফার্ম — অফলাইন সার্ভিস ওয়ার্কার
    নতুন সংস্করণ দিলে শুধু VERSION বদলান। */
-const VERSION = "v48";
+const VERSION = "v49";
 const CORE = "bpf-core-" + VERSION;
 const RUNTIME = "bpf-runtime-" + VERSION;
 const PRECACHE = [

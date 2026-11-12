@@ -2423,7 +2423,7 @@ window.renderFarmDoc=function(){
   '<div class="fdoc-n">বয়স '+bn(r.age)+' দিন • রোস জাত, সিপি ফিডের স্ট্যান্ডার্ড ধরে হিসাব। এটা আগাম ইশারা, নিশ্চিত রোগ নির্ণয় নয়। ২৪ ঘণ্টায় না কমলে ডাক্তার দেখান।</div></div>';
 };
 {const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderFarmDoc()}catch(e){console.error(e)}return r}}
-window.APP_VERSION="v48";
+window.APP_VERSION="v49";
 (function(){const d=document.getElementById("dashboard");if(d&&!document.getElementById("appVer")){const e=document.createElement("div");e.id="appVer";e.style.cssText="text-align:center;font-size:11px;color:#6f8794;margin:22px 0 8px";e.innerHTML='ব্রাদার্স পোল্ট্রি ফার্ম • সংস্করণ '+window.APP_VERSION+'<br><button type="button" id="appUpd" style="margin-top:8px;border:1px solid #ffffff30;background:#ffffff10;color:#cfe9dc;border-radius:10px;padding:7px 14px;font:inherit;font-size:12px;cursor:pointer">🔄 নতুন সংস্করণ লোড করুন (ডেটা মুছবে না)</button>';d.appendChild(e);
  document.getElementById("appUpd").onclick=async function(){try{this.textContent="⏳ আপডেট হচ্ছে...";if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()))}if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(_){}location.reload()}}})();
 /* কোনো কোড-ত্রুটি হলে আর চুপচাপ ব্যর্থ নয় — পর্দায় দেখাবে */
@@ -2905,6 +2905,20 @@ function renderAnExtra(){
 }
 (function(){let an=document.getElementById("analysis");if(!an||typeof MutationObserver==="undefined")return;let busy=false;
  new MutationObserver(()=>{if(busy)return;busy=true;try{anEnDigits()}catch(e){}busy=false}).observe(an,{childList:true,subtree:true,characterData:true})})();
+/* ── ড্যাশবোর্ডে বয়সের নিচে ওজন ── */
+function heroW(){
+ let el=$a("hhW");if(!el)return;
+ try{
+  if(!(+state.chicks>0)||!state.startDate){el.innerHTML="";el.style.display="none";return}
+  let age=days(),w=anW0(),std=stdAt(age)/1000;
+  if(!(w&&w.w>0)||!(std>0)||age<1){el.innerHTML="";el.style.display="none";return}
+  let r=w.w/std,c=r>=0.97?"g":r>=0.9?"y":"r",g=Math.round(w.w*1000);
+  el.style.display="";el.innerHTML='<em>⚖️ ওজন</em><b class="hw-'+c+'">'+en(bn(g))+' গ্রাম</b><small>স্ট্যান্ডার্ড '+en(bn(Math.round(std*1000)))+'</small>';
+ }catch(e){el.innerHTML="";el.style.display="none"}
+}
+const _rHW=window.render;
+window.render=function(){const r=_rHW.apply(this,arguments);try{heroW()}catch(e){}return r};
+try{heroW()}catch(e){}
 window.renderAnExtra=renderAnExtra;
 try{renderAnExtra()}catch(e){console.error(e)}
 })();

@@ -859,7 +859,19 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .dis-card{background:#0f1d27;border:1px solid #ffffff1a;border-radius:14px;margin-bottom:8px;overflow:hidden}.dis-card.urgent{border-color:#ef4444aa;background:#2a1216}
 .dis-card summary{list-style:none;padding:12px;display:flex;gap:10px;align-items:center;font-weight:700;font-size:15px;cursor:pointer}.dis-card summary::-webkit-details-marker{display:none}.dis-card summary::after{content:"▾";margin-left:auto;opacity:.6}.dis-card[open] summary::after{content:"▴"}
 .dis-e{font-size:22px}.dis-b{padding:0 14px 12px}.dis-k{font-weight:800;margin-top:8px;color:#7be0b0;font-size:13.5px}.dis-b p{margin:3px 0 0;line-height:1.75;font-size:14px;opacity:.92}</style>
-<style>.dis-n2{margin-top:10px;font-size:12px;line-height:1.7;color:#f5c26b;background:#f59e0b14;border-radius:9px;padding:7px 9px}</style>
+<style>.dis-n2{margin-top:10px;font-size:12px;line-height:1.7;color:#f5c26b;background:#f59e0b14;border-radius:9px;padding:7px 9px}
+.hh-w{display:flex;flex-direction:column;align-items:flex-end;margin-top:5px;padding-top:5px;border-top:1px solid #ffffff1f}
+.hh-w:empty{display:none}
+.hh-w .db-hero-value b{font-size:17px;font-weight:800}
+.hh-w .hw-g{color:#3ddc84}.hh-w .hw-y{color:#fbbf24}.hh-w .hw-r{color:#ff6b6b}
+.hh-w .hw-sub{font-size:10.5px;color:#9fb3c8;margin-top:1px}
+
+.hh-dates{align-self:stretch;width:100%;box-sizing:border-box}
+.hh-dates .hh-d b{font-size:15px}
+.hh-wt b{font-size:15px}
+.hh-wt .hw-g{color:#3ddc84}.hh-wt .hw-y{color:#fbbf24}.hh-wt .hw-r{color:#ff6b6b}
+.hh-wt small{font-size:10px;color:#9fb3c8;white-space:nowrap}
+</style>
 </head>
 <body>
 <div id="splash" aria-hidden="true">
@@ -934,6 +946,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
     <div class="hh-dates">
       <span class="hh-d hh-start"><em>📆 ব্যাচ শুরু</em><b id="startText">নেই</b></span>
       <span class="hh-d hh-today"><em>📅 আজকের তারিখ</em><b id="today">—</b></span>
+      <span class="hh-d hh-wt" id="hhW" style="display:none"></span>
     </div>
   </div>
 </div>
@@ -1324,5 +1337,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=48" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=49" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
