@@ -871,6 +871,27 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .hh-wt b{font-size:15px}
 .hh-wt .hw-g{color:#3ddc84}.hh-wt .hw-y{color:#fbbf24}.hh-wt .hw-r{color:#ff6b6b}
 .hh-wt small{font-size:10px;color:#9fb3c8;white-space:nowrap}
+
+/* বাচ্চা ও মৃত: ছোট ফর্ম */
+#farm .form{padding:10px 12px;margin-bottom:10px}
+#farm .form .fields{gap:6px 8px}
+#farm .form label{font-size:11.5px}
+#farm .form input,#farm .form select{padding:7px 9px;font-size:14px;min-height:36px;height:36px;margin-top:2px;box-sizing:border-box}
+#farm .form select{width:100%;background:#0d1b2a;color:#e8edf2;border:1px solid #ffffff22;border-radius:10px}
+#farm .form .dc-wide{grid-column:1/-1}
+#farm .form button.add{padding:8px 14px;font-size:14px;margin-top:8px}
+#farm .section{margin:12px 0 8px}
+
+#farm .form{padding:8px 10px!important;border-radius:14px}
+#farm .form .fields{gap:4px 8px!important}
+#farm .form label{font-size:11px!important;gap:0!important}
+#farm .form input,#farm .form select{padding:4px 8px!important;font-size:13px!important;min-height:30px!important;height:30px!important;border-radius:9px!important}
+#farm .form button.add{padding:6px 12px!important;font-size:13px!important;margin-top:6px!important;min-height:0!important}
+
+.kg-tot{grid-column:1/-1}
+.kg-tot input{border-color:#1aad6e88!important}
+.kg-hint{display:block;font-size:12px;color:#3ddc84;margin-top:3px;min-height:0}
+.kg-hint:empty{display:none}
 </style>
 </head>
 <body>
@@ -1029,8 +1050,38 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div class="form"><div class="fields">
 <label>তারিখ<input id="deathDate" type="date"></label>
 <label>মৃত পরিমাণ<input id="deathQty" type="number" min="1"></label>
-<label>কারণ<input id="deathReason"></label>
-<label>কী ব্যবস্থা নেওয়া হয়েছে<input id="deathAction" placeholder="যেমন: ওষুধ দিয়েছি, ঘর পরিষ্কার"></label>
+<label>কারণ
+<select id="deathReason" onchange="deathReasonCh()">
+<option value="">— কারণ বেছে নিন —</option>
+<optgroup label="প্রথম ৭ দিন">
+<option>নাভির ইনফেকশন</option>
+<option>কুসুমথলি ইনফেকশন</option>
+<option>ঠান্ডা লেগে (ব্রুডিং কম)</option>
+<option>অতিরিক্ত গরমে (ব্রুডিং বেশি)</option>
+<option>পানি/খাবার খায়নি (দুর্বল বাচ্চা)</option>
+</optgroup>
+<optgroup label="রোগ">
+<option>সাদা ডায়রিয়া (পুলোরাম)</option>
+<option>রক্ত আমাশয় (কক্সিডিওসিস)</option>
+<option>গামবোরো (আইবিডি)</option>
+<option>রানীক্ষেত</option>
+<option>শ্বাসকষ্ট / সিআরডি / ই-কোলাই</option>
+<option>ইনফেকশাস ব্রংকাইটিস (আইবি)</option>
+<option>পেটে পানি জমা (অ্যাসাইটিস)</option>
+</optgroup>
+<optgroup label="অন্যান্য">
+<option>হিটস্ট্রোক (গরমে)</option>
+<option>হঠাৎ মৃত্যু (হার্ট অ্যাটাক)</option>
+<option>পা ভাঙা / চলতে না পারা</option>
+<option>বিষক্রিয়া / ফিডে ছত্রাক</option>
+<option>ইঁদুর / কুকুর / দুর্ঘটনা</option>
+<option>কারণ জানা নেই</option>
+<option value="__other">অন্য কারণ (লিখুন)…</option>
+</optgroup>
+</select></label>
+<label class="dc-wide" id="deathReasonOtherL" style="display:none">অন্য কারণ<input id="deathReasonOther" placeholder="কারণ লিখুন"></label>
+<label>কী ব্যবস্থা নেওয়া হয়েছে<input id="deathAction" list="deathActList" placeholder="বেছে নিন বা লিখুন"></label>
+<datalist id="deathActList"><option value="ওষুধ দিয়েছি"><option value="ভিটামিন/ইলেক্ট্রোলাইট দিয়েছি"><option value="ঘর পরিষ্কার করেছি"><option value="ব্রুডিং তাপ ঠিক করেছি"><option value="ভ্যাকসিন দিয়েছি"><option value="ডাক্তার ডেকেছি"><option value="মৃত মুরগি মাটিতে পুঁতেছি"><option value="কিছু করিনি"></datalist>
 </div><button class="add" onclick="addDeath()">➕ মৃত বাচ্চা যোগ করুন</button></div>
 <div class="wrap"><table><thead><tr><th>তারিখ</th><th>পরিমাণ</th><th>কারণ</th><th>ব্যবস্থা</th><th>অ্যাকশন</th></tr></thead><tbody id="deathTable"></tbody></table></div>
 
@@ -1129,9 +1180,10 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div class="form">
   <div class="fields">
     <label>তারিখ<input id="os_fDate" type="date"></label>
-    <label>বস্তা (সংখ্যা)<input id="os_fBags" type="number" min="0" step="1" placeholder="কত বস্তা" oninput="osLive('feed')"></label>
-    <label>আলাদা কেজি<input id="os_fLoose" type="number" min="0" step=".01" placeholder="বস্তার বাইরে কত কেজি" oninput="osLive('feed')"></label>
-    <label>প্রতি বস্তায় কত কেজি<input id="os_fBagKg" type="number" min="0" step=".01" value="50" oninput="osLive('feed')"></label>
+    <label class="kg-tot">⚖️ মোট ওজন (কেজি) — লিখলেই বস্তা নিজে আসবে<input id="os_fKg" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 175" oninput="kgSplit('osf')"><small class="kg-hint" id="os_fKgH"></small></label>
+    <label>বস্তা (সংখ্যা)<input id="os_fBags" type="number" min="0" step="1" placeholder="কত বস্তা" oninput="kgParts('osf')"></label>
+    <label>আলাদা কেজি<input id="os_fLoose" type="number" min="0" step=".01" placeholder="বস্তার বাইরে কত কেজি" oninput="kgParts('osf')"></label>
+    <label>প্রতি বস্তায় কত কেজি<input id="os_fBagKg" type="number" min="0" step=".01" value="50" oninput="kgBagKg('osf')"></label>
     <label>দর/কেজি (৳)<input id="os_fRate" type="number" min="0" step=".01" placeholder="প্রতি কেজির দাম" oninput="osLive('feed')"></label>
     <label>ক্রেতার নাম<input id="os_fBuyer" type="text" placeholder="ঐচ্ছিক"></label>
   </div>
@@ -1179,9 +1231,10 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
   <div class="fields">
     <label>তারিখ<input id="dfDate" type="date" oninput="dfLive()"></label>
     <label>ফিডের নাম<input id="dfName" list="feedNames" placeholder="নাম লিখুন বা নিচে চাপ দিন" oninput="syncChips('dfName')"></label>
-    <label>বস্তা (সংখ্যা)<input id="dfBags" type="number" min="0" step="1" placeholder="কত বস্তা" oninput="dfLive()"></label>
-    <label>আলাদা কেজি<input id="dfLoose" type="number" min="0" step=".01" placeholder="বস্তার বাইরে কত কেজি" oninput="dfLive()"></label>
-    <label>প্রতি বস্তায় কত কেজি<input id="dfBagKg" type="number" min="0" step=".01" value="50" oninput="dfLive()"></label>
+    <label class="kg-tot">⚖️ মোট ওজন (কেজি) — লিখলেই বস্তা নিজে আসবে<input id="dfKg" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 175" oninput="kgSplit('df')"><small class="kg-hint" id="dfKgH"></small></label>
+    <label>বস্তা (সংখ্যা)<input id="dfBags" type="number" min="0" step="1" placeholder="কত বস্তা" oninput="kgParts('df')"></label>
+    <label>আলাদা কেজি<input id="dfLoose" type="number" min="0" step=".01" placeholder="বস্তার বাইরে কত কেজি" oninput="kgParts('df')"></label>
+    <label>প্রতি বস্তায় কত কেজি<input id="dfBagKg" type="number" min="0" step=".01" value="50" oninput="kgBagKg('df')"></label>
     <label>নোট<input id="dfNote" placeholder="ঐচ্ছিক"></label>
   </div>
   <div class="chips" id="dfChips"></div>
@@ -1337,5 +1390,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=49" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=50" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
