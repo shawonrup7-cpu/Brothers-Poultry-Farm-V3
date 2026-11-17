@@ -868,7 +868,9 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 
 .hh-dates{align-self:stretch;width:100%;box-sizing:border-box}
 .hh-dates .hh-d b{font-size:15px}
-.hh-wt b{font-size:15px}
+.hh-wt b,.hh-sold b{font-size:15px}
+.hh-sold small{font-size:10px;color:#9fb3c8;white-space:nowrap}
+.hh-sold .hw-g{color:#3ddc84}
 .hh-wt .hw-g{color:#3ddc84}.hh-wt .hw-y{color:#fbbf24}.hh-wt .hw-r{color:#ff6b6b}
 .hh-wt small{font-size:10px;color:#9fb3c8;white-space:nowrap}
 
@@ -966,7 +968,8 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
     </div>
     <div class="hh-dates">
       <span class="hh-d hh-start"><em>📆 ব্যাচ শুরু</em><b id="startText">নেই</b></span>
-      <span class="hh-d hh-today"><em>📅 আজকের তারিখ</em><b id="today">—</b></span>
+      <span class="hh-d hh-today" style="display:none"><b id="today">—</b></span>
+      <span class="hh-d hh-sold" id="hhS" style="display:none"></span>
       <span class="hh-d hh-wt" id="hhW" style="display:none"></span>
     </div>
   </div>
@@ -1390,5 +1393,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=51" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=52" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
