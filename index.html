@@ -894,6 +894,33 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .kg-tot input{border-color:#1aad6e88!important}
 .kg-hint{display:block;font-size:12px;color:#3ddc84;margin-top:3px;min-height:0}
 .kg-hint:empty{display:none}
+
+.fd-sum{margin:8px 0 12px;padding:10px 12px;border-radius:16px;background:linear-gradient(145deg,#0f2a3d,#0b1d2b);border:1px solid #2f9e6f55}
+.fd-h{font-weight:800;font-size:14px;margin-bottom:8px}
+.fd-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.fd-t{background:#ffffff0d;border:1px solid #ffffff1a;border-radius:12px;padding:7px 10px;display:flex;flex-direction:column}
+.fd-t span{font-size:11px;opacity:.75}
+.fd-t b{font-size:18px;margin-top:1px}
+.fd-t.fd-g b{color:#3ddc84}.fd-t.fd-y b{color:#fbbf24}
+.fd-by{margin-top:8px;border-top:1px dashed #ffffff22;padding-top:6px;font-size:12.5px}
+.fd-by>div{display:flex;justify-content:space-between;padding:2px 0}
+.fd-by span:first-child{opacity:.85}
+.fd-n{margin-top:6px;font-size:11px;opacity:.6}
+
+/* প্রতি মুরগির খরচ: শুধু দাম/ওজন */
+.lc-grid .pb-w{font-size:19px!important;margin-top:1px;font-weight:800}
+.lc-grid #kPerBirdS,.lc-grid #lcS7,.lc-grid #lcS8,.lc-grid .pb-sub{display:none!important}
+
+.fd-r{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 6px;padding:7px 0;border-top:1px solid #ffffff14}
+.fd-rn{grid-column:1/-1;font-weight:800;font-size:14px}
+.fd-c span{display:block;font-size:10.5px;opacity:.65}
+.fd-c b{font-size:13px;display:block}
+.fd-c small{font-size:10.5px;opacity:.7}
+.fd-c.fd-pos b{color:#3ddc84}.fd-c.fd-neg b,.fd-c.fd-neg small{color:#ff6b6b;opacity:1}
+.fd-r.fd-tot{border-top:2px solid #ffffff2a}
+
+.fsel{width:100%;box-sizing:border-box;padding:10px 12px;font-size:16px;border-radius:12px;background:#0d1b2a;color:#e8edf2;border:1px solid #ffffff22;min-height:44px}
+#dfChips,#feed .chips{display:none!important}
 </style>
 </head>
 <body>
@@ -936,6 +963,10 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div id="summaryModal" class="modal" onclick="if(event.target===this)closeSummary()"><div class="mbox"><div id="sumTitle" class="mtitle"></div><div id="sumBody"></div><div class="mbtns"><button class="add" id="sumOpen">📂 পুরো হিসাব দেখুন</button><button class="tbtn-light" onclick="closeSummary()">বন্ধ করুন</button></div></div></div>
 <div id="closeModal" class="modal" onclick="if(event.target===this)hideClose()"><div class="mbox"><div class="mtitle">🔒 ব্যাচ ক্লোজ করুন</div><div id="closeBody"></div><div class="mbtns"><button class="add" id="closeConfirmBtn" onclick="confirmClose()">🔒 ক্লোজ নিশ্চিত করুন</button><button class="tbtn-light" onclick="hideClose()">বাতিল</button></div></div></div>
 <div id="lcModal" class="modal" onclick="if(event.target===this)closeLc()"><div class="mbox"><div class="mtitle" id="lcTitle">⚖️</div><div id="lcBody" style="text-align:left"></div><div class="mbtns"><button class="add" style="background:#2a3a46" onclick="closeLc()">বন্ধ করুন</button></div></div></div>
+<div id="pbModal" class="modal" onclick="if(event.target===this)closePbPrice()"><div class="mbox"><div class="mtitle">✏️ দাম বদলান</div>
+<label style="display:block;text-align:left;font-size:14px;color:#9db7b0;margin:6px 0">🌾 ফিডের দাম — প্রতি কেজি (৳)<input id="pbFeed" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 62" style="font-size:22px;text-align:center"></label>
+<label style="display:block;text-align:left;font-size:14px;color:#9db7b0;margin:6px 0">🐔 বিক্রির দর — প্রতি কেজি (৳)<input id="pbRate" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 150" onkeydown="if(event.key==='Enter')savePbPrice()" style="font-size:22px;text-align:center"></label>
+<div class="mbtns"><button class="add" onclick="savePbPrice()">💾 সেভ</button><button class="add" style="background:#334155" onclick="closePbPrice()">বন্ধ</button></div></div></div>
 <div id="fpModal" class="modal" onclick="if(event.target===this)closeFeedPrice()"><div class="mbox"><div class="mtitle">🌾 ফিডের দাম</div><label style="display:block;text-align:left;font-size:14px;color:#9db7b0;margin:6px 0">প্রতি কেজি (৳)<input id="fpInput" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 62" onkeydown="if(event.key==='Enter')saveFeedPrice()" style="font-size:22px;text-align:center"></label><div class="mbtns"><button class="add" onclick="saveFeedPrice()">💾 সেভ</button><button class="add" style="background:#2a3a46" onclick="closeFeedPrice()">বাতিল</button></div></div></div>
 <div id="grModal" class="modal" onclick="if(event.target===this)closeGraphs()"><div class="mbox gr-box"><div class="gr-head"><div class="mtitle" style="margin:0">📊 গ্রাফ</div><button class="gr-x" type="button" onclick="closeGraphs()">✕</button></div><div id="grBody" class="gr-body"><div id="dbGraphs"></div></div></div></div>
 <div id="vacModal" class="modal" onclick="if(event.target===this)hideVacPopup()"><div class="mbox"><div class="mtitle">🚨 ভ্যাকসিনের ওয়ার্নিং</div><div id="vacModalBody"></div><div class="mbtns"><button class="add" onclick="hideVacPopup();openPage('vaccine')">💉 ভ্যাকসিন পেজে যান</button><button class="tbtn-light" onclick="hideVacPopup()">পরে</button></div></div></div>
@@ -1012,10 +1043,8 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 
 <div class="section">🐔 প্রতি মুরগির খরচ</div>
 <div class="grid lc-grid">
-  <div onclick="openFeedPrice()" class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">খাওয়ানো ফিডে খরচ</div><div class="val" id="kPerBird">—</div><div class="lab" id="kPerBirdS" style="font-size:10.5px;opacity:.75;margin-top:2px">ফিডের দাম দিতে চাপুন</div></div>
-  <div onclick="showSummary('report')" class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">সব ফিড + সব খরচ</div><div class="val" id="kCostPerKg" style="color:#34d399">৳০</div><div class="lab" style="font-size:10.5px;opacity:.75;margin-top:2px">কেনা ফিড ধরে • ÷ মুরগি</div></div>
-  <div id="lcT7" onclick="openLc(7)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#10b981,#047857)"><div class="ico">💰</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — খাওয়ানো ফিডে খরচ</div><div class="val" id="lcV7">—</div><div class="lab" id="lcS7" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div id="lcT8" onclick="openLc(8)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#6366f1,#4338ca)"><div class="ico">🧮</div></div><div class="lab">প্রতি মুরগি কত কেজি লাগবে — সব ফিড + সব খরচ</div><div class="val" id="lcV8">—</div><div class="lab" id="lcS8" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div class="card metric m-amber" style="--accent:#f59e0b20"><div class="ico-wrap" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><div class="ico">💰</div></div><div class="lab">খাওয়ানো ফিডে খরচ</div><div class="val" id="kPerBird">—</div><div class="val pb-w" id="lcV7" style="color:#fbbf24">—</div><span id="lcS7" style="display:none"></span><span id="kPerBirdS" style="display:none"></span></div>
+  <div class="card metric"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">🏷️</div></div><div class="lab">সব ফিড + সব খরচ</div><div class="val" id="kCostPerKg" style="color:#34d399">৳০</div><div class="val pb-w" id="lcV8" style="color:#34d399">—</div><span id="lcS8" style="display:none"></span></div>
 </div>
 
 <!-- Sales & Profit -->
@@ -1056,31 +1085,13 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <label>কারণ
 <select id="deathReason" onchange="deathReasonCh()">
 <option value="">— কারণ বেছে নিন —</option>
-<optgroup label="প্রথম ৭ দিন">
-<option>নাভির ইনফেকশন</option>
-<option>কুসুমথলি ইনফেকশন</option>
-<option>ঠান্ডা লেগে (ব্রুডিং কম)</option>
-<option>অতিরিক্ত গরমে (ব্রুডিং বেশি)</option>
-<option>পানি/খাবার খায়নি (দুর্বল বাচ্চা)</option>
-</optgroup>
-<optgroup label="রোগ">
-<option>সাদা ডায়রিয়া (পুলোরাম)</option>
-<option>রক্ত আমাশয় (কক্সিডিওসিস)</option>
-<option>গামবোরো (আইবিডি)</option>
-<option>রানীক্ষেত</option>
-<option>শ্বাসকষ্ট / সিআরডি / ই-কোলাই</option>
-<option>ইনফেকশাস ব্রংকাইটিস (আইবি)</option>
-<option>পেটে পানি জমা (অ্যাসাইটিস)</option>
-</optgroup>
-<optgroup label="অন্যান্য">
-<option>হিটস্ট্রোক (গরমে)</option>
-<option>হঠাৎ মৃত্যু (হার্ট অ্যাটাক)</option>
-<option>পা ভাঙা / চলতে না পারা</option>
-<option>বিষক্রিয়া / ফিডে ছত্রাক</option>
-<option>ইঁদুর / কুকুর / দুর্ঘটনা</option>
+<option>হিটস্ট্রোক</option>
+<option>চুনা পায়খানা</option>
+<option>রক্ত আমাশয়</option>
+<option>পানি লাগা</option>
+<option>সর্দি</option>
 <option>কারণ জানা নেই</option>
 <option value="__other">অন্য কারণ (লিখুন)…</option>
-</optgroup>
 </select></label>
 <label class="dc-wide" id="deathReasonOtherL" style="display:none">অন্য কারণ<input id="deathReasonOther" placeholder="কারণ লিখুন"></label>
 <label>কী ব্যবস্থা নেওয়া হয়েছে<input id="deathAction" list="deathActList" placeholder="বেছে নিন বা লিখুন"></label>
@@ -1233,7 +1244,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div class="form">
   <div class="fields">
     <label>তারিখ<input id="dfDate" type="date" oninput="dfLive()"></label>
-    <label>ফিডের নাম<input id="dfName" list="feedNames" placeholder="নাম লিখুন বা নিচে চাপ দিন" oninput="syncChips('dfName')"></label>
+    <label>ফিডের নাম<select id="dfName" class="fsel"><option value="">— ফিড বেছে নিন —</option><option>প্রি-স্টাটার</option><option>স্টাটার</option><option>গ্রোয়ার</option><option>ফিনিশার</option></select></label>
     <label class="kg-tot">⚖️ মোট ওজন (কেজি) — লিখলেই বস্তা নিজে আসবে<input id="dfKg" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 175" oninput="kgSplit('df')"><small class="kg-hint" id="dfKgH"></small></label>
     <label>বস্তা (সংখ্যা)<input id="dfBags" type="number" min="0" step="1" placeholder="কত বস্তা" oninput="kgParts('df')"></label>
     <label>আলাদা কেজি<input id="dfLoose" type="number" min="0" step=".01" placeholder="বস্তার বাইরে কত কেজি" oninput="kgParts('df')"></label>
@@ -1393,5 +1404,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=52" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=58" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
