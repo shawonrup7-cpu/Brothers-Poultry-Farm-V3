@@ -959,6 +959,35 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .nc-tot{display:flex;justify-content:space-between;margin-top:6px;padding-top:7px;border-top:1px solid #3ddc8466;font-weight:800;font-size:14px}
 .nc-tot b{color:#ffd166}
 .nc-eq{color:#3ddc84;font-weight:800;margin-left:6px;white-space:nowrap}
+
+.hh-line{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px 14px;margin:2px 0 4px;font-size:13.5px;font-weight:700;color:#e8f3ec;text-align:center;line-height:1.4}
+.hh-line b{color:#ffd166;font-weight:800}
+.hh-line i{font-style:normal;color:#ffffff55}
+
+#infoModal.full{padding:0!important;align-items:stretch!important;background:#0b1620}
+#infoModal.full .mbox{width:100vw;max-width:none!important;height:100vh;height:100dvh;max-height:none!important;border-radius:0!important;border:0;padding:18px 16px 14px!important;display:flex;flex-direction:column;text-align:center;box-shadow:none!important}
+#infoModal.full #infoBody{flex:1;display:flex;flex-direction:column;min-height:0}
+#infoModal.full #infoBody>div[style*="max-height"]{max-height:none!important;flex:1;overflow:auto;font-size:17px!important;text-align:left}
+#infoModal.full .mbtns{margin-top:10px}
+.ms-sum{border:1px solid #7c3aed55;background:#7c3aed12;border-radius:14px;padding:9px 11px;margin:0 0 10px}
+.ms-sh2{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-size:14px}
+.ms-sh2 span{font-size:11.5px;color:#c4b5fd}
+.ms-sg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px}
+.ms-sg div{background:#ffffff0c;border-radius:10px;padding:6px 2px;text-align:center}
+.ms-sg b{display:block;font-size:17px;color:#ffd166}
+.ms-sg small{font-size:10.5px;color:#9fb3c8}
+.ms-sr{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 0;border-top:1px dashed #ffffff18;font-size:12.5px}
+.ms-sn{min-width:0;word-break:break-word}.ms-sn i{font-style:normal;color:#9fb3c8;font-size:11px}
+.ms-sv{white-space:nowrap;color:#cfe3dc;font-size:11.5px}.ms-sv b{color:#3ddc84}
+
+.mg-hint{margin-top:5px;font-size:12px;display:none;line-height:1.9}
+.mg-chip{background:#7c3aed33;border:1px solid #7c3aed88;color:#e9ddff;border-radius:999px;padding:2px 9px;font-weight:700;white-space:nowrap}
+.mg-gen{color:#cfe3dc}.mg-gen b{color:#3ddc84}
+.mg-q{color:#fbbf24}
+.mg-sel{display:block;margin-top:4px;width:100%;padding:5px 8px;font-size:12px;border-radius:9px;background:#0d1822;color:#e8f3ec;border:1px solid #ffffff22}
+.mg-gh{margin:8px 0 2px;font-size:11.5px;color:#c4b5fd;font-weight:700}
+.mg-hint{grid-column:1/-1}
+.mg-sel{max-width:100%}
 </style>
 </head>
 <body>
@@ -1030,6 +1059,7 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
         <span class="db-hero-value"><b id="age">০ দিন</b></span>
       </div>
     </div>
+    <div class="hh-line" id="hhLine"></div>
     <div class="hh-dates">
       <span class="hh-d hh-start"><em>📆 ব্যাচ শুরু</em><b id="startText">নেই</b></span>
       <span class="hh-d hh-today" style="display:none"><b id="today">—</b></span>
@@ -1438,5 +1468,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=65" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=71" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
