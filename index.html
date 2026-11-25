@@ -989,6 +989,92 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .mg-hint{grid-column:1/-1}
 .mg-sel{max-width:100%}
 </style>
+<style>
+.pg-sum{margin:2px 0 12px;border-radius:16px;padding:10px 10px 9px;background:linear-gradient(160deg,#1b2447 0%,#121a33 60%,#0f1630 100%);border:1px solid rgba(255,255,255,.1);box-shadow:0 10px 28px rgba(0,0,0,.35)}
+.pg-os{background:linear-gradient(160deg,#143a2b 0%,#10281f 60%,#0d2019 100%)}
+.pg-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.pg-hl small{display:block;font-size:12px;opacity:.75;margin-bottom:2px}
+.pg-hl b{display:block;font-size:26px;line-height:1.15;color:#fff;letter-spacing:-.5px}
+.pg-exp .pg-hl b{color:#ffb454}.pg-os .pg-hl b{color:#4ade80}
+.pg-hl span{font-size:11.5px;opacity:.7}
+.pg-hr{text-align:right;font-size:12px;font-weight:700;background:rgba(255,255,255,.08);border-radius:10px;padding:4px 8px;white-space:nowrap}
+.pg-hr small{display:block;font-weight:400;opacity:.65;font-size:11px}
+.pg-bar{display:flex;height:6px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.1);margin:8px 0 8px}
+.pg-bar i{display:block;height:100%}
+.pg-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pg-t{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-left:3px solid var(--c);border-radius:11px;padding:6px 8px}
+.pg-th{display:flex;justify-content:space-between;align-items:center}
+.pg-ic{font-size:16px}
+.pg-p{font-size:11px;font-weight:800;color:var(--c);background:rgba(255,255,255,.08);border-radius:99px;padding:1px 6px}
+.pg-tn{font-size:12px;opacity:.8;margin-top:1px}
+.pg-tv{font-size:16px;font-weight:800;color:var(--c);line-height:1.25}
+.pg-ts{font-size:10.5px;opacity:.6;min-height:13px}
+.pg-tb{height:4px;border-radius:9px;background:rgba(255,255,255,.1);margin-top:4px;overflow:hidden}
+.pg-tb i{display:block;height:100%;background:var(--c);border-radius:9px}
+.pg-chips{display:flex;gap:6px;margin-top:6px}
+.pg-chip{flex:1;text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:4px 6px}
+.pg-chip b{display:block;font-size:14px}
+.pg-chip small{font-size:11px;opacity:.65}
+</style>
+<style>
+#medicineTable tr.mg-hrow td{padding:0;border:0;background:transparent;cursor:pointer}
+.mg-hd{position:sticky;left:0;width:calc(100vw - 64px);max-width:100%;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:8px;margin:10px 0 2px;padding:9px 11px;border-radius:13px;background:linear-gradient(135deg,rgba(34,197,94,.22),rgba(14,165,233,.14));border:1px solid rgba(255,255,255,.12);border-left:4px solid #22c55e}
+.mg-hd b{font-size:14.5px;display:block}
+.mg-use{display:block;font-size:11.5px;opacity:.72;line-height:1.35;margin-top:2px;white-space:normal}
+.mg-hr{text-align:right;white-space:nowrap}.mg-hr b{color:#fbbf24;font-size:15px}.mg-hr small{display:block;font-size:11px;opacity:.7}
+.mg-arr{font-style:normal}
+.mg-gsub{font-size:10.5px;opacity:.6;font-weight:400}
+</style>
+<style>
+.mp-box{grid-column:1/-1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:9px}
+.mp-h{font-size:13px;font-weight:800;margin-bottom:7px;color:#bdf5d2}
+.mp-cs{display:flex;flex-wrap:wrap;gap:6px}
+.mp-c{font-family:inherit;font-size:12px;color:#e8f3ec;background:#1a2f23;border:1px solid #2f4d3b;border-radius:99px;padding:6px 10px;cursor:pointer}
+.mp-c.on{background:linear-gradient(135deg,#22c55e,#15803d);border-color:#4ade80;color:#fff;font-weight:700}
+.mp-p{margin-top:9px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.15)}
+.mp-u{font-size:12px;color:#ffd166;margin-bottom:7px;line-height:1.4}
+.mp-l{display:flex;flex-wrap:wrap;gap:6px}
+.mp-i{font-family:inherit;font-size:12.5px;color:#fff;background:#243b6b;border:1px solid #3b5aa0;border-radius:10px;padding:7px 10px;cursor:pointer}
+.mp-i:active{transform:scale(.95)}
+.mp-t{font-size:11px;opacity:.6;margin-top:7px}
+</style>
+<style>
+#medFrz{margin-top:6px;position:sticky;top:var(--navh,170px);z-index:30}
+.ms-frz .gn{font-size:12.5px!important;line-height:1.25}
+.ms-frz small{line-height:1.25}
+.ms-frz{background:linear-gradient(#10172b,#0e1427);padding:6px 0 8px;margin:0!important;box-shadow:0 6px 10px -6px rgba(0,0,0,.6);border-radius:0 0 12px 12px}
+</style>
+<style>
+#medschedule .pg-banner.has-mini{flex-wrap:wrap;height:auto;padding-bottom:22px}
+.pg-mini{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;margin-top:8px;position:relative;z-index:2}
+.pg-mini div{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:5px 8px;min-width:0}
+.pg-mini span{display:block;font-size:10.5px;opacity:.85}
+.pg-mini b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<style>
+#farm .pg-banner.has-mini{flex-wrap:wrap;height:auto;padding-bottom:20px}
+.pg-mini.m4{grid-template-columns:1.25fr 1.25fr 1fr .9fr;gap:5px}
+.pg-mini.m4 div{padding:4px 6px}
+.pg-mini.m4 span{font-size:9.5px;line-height:1.25}
+.pg-mini.m4 b{font-size:12.5px}
+.pg-mini.m4 .hi{background:rgba(0,0,0,.34);border-color:rgba(255,255,255,.35)}
+.pg-mini.m4 .hi b{font-size:14px}
+</style>
+<style>
+#expTopSum{display:none!important}
+#other .pg-banner.has-mini{flex-wrap:wrap;height:auto;padding-bottom:20px}
+#other .pg-mini.m4{grid-template-columns:1.2fr 1.3fr .8fr 1fr}
+.exp-jump{flex-wrap:nowrap!important;gap:4px!important;margin:0 0 10px!important}
+.exp-jump button{flex:1 1 0;min-width:0;padding:6px 2px!important;font-size:10.5px!important;white-space:nowrap;border-radius:14px!important;text-align:center}
+</style>
+<style>
+#workers .pg-banner.has-mini{flex-wrap:wrap;height:auto;padding-bottom:20px}
+.pg-mini.m5{grid-template-columns:repeat(5,1fr);gap:4px}
+.pg-mini.m5 div{padding:4px 4px;text-align:center}
+.pg-mini.m5 span{font-size:9.5px;line-height:1.25;white-space:nowrap}
+.pg-mini.m5 b{font-size:11.5px}
+.pg-mini.m5 .hi{background:rgba(0,0,0,.34);border-color:rgba(255,255,255,.35)}
+</style>
 </head>
 <body>
 <div id="splash" aria-hidden="true">
@@ -1114,10 +1200,8 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div class="section">⚖️ লাভ ক্ষতি</div>
 <div style="display:none"><span id="kSales"></span><span id="kProfit"></span><span id="kProfitCard"></span><span id="kProfitIco"></span></div>
 <div class="grid lc-grid" style="grid-template-columns:repeat(2,1fr)">
-  <div onclick="openLc(6)" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)"><div class="ico">🌾</div></div><div class="lab">কত কেজি দরকার (খাওয়ানো ফিডে)</div><div class="val" id="lcV6">—</div><div class="lab" id="lcS6" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div onclick="openLc(1)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🎯</div></div><div class="lab">কত কেজি দরকার (কেনা ফিডে)</div><div class="val" id="lcV1">—</div><div class="lab" id="lcS1" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div onclick="openLc(4)" class="card metric m-red"><div class="ico-wrap" style="background:linear-gradient(135deg,#ef4444,#b91c1c)"><div class="ico">🏷️</div></div><div class="lab">ন্যূনতম গড় দর (সব মুরগি)</div><div class="val" id="lcV4">—</div><div class="lab" id="lcS4" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
-  <div id="lcT5" onclick="openLc(5)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#059669,#047857)"><div class="ico">📊</div></div><div class="lab">এই দরে বিক্রি করলে লাভ/ক্ষতি</div><div class="val" id="lcV5">—</div><div class="lab" id="lcS5" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div onclick="openLc(6)" class="card metric m-blue"><div class="ico-wrap" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)"><div class="ico">🌾</div></div><div class="lab">প্রতি কেজিতে খরচ (খাওয়ানো ফিড + সব খরচ)</div><div class="val" id="lcV6">—</div><div class="lab" id="lcS6" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
+  <div onclick="openLc(1)" class="card metric m-green"><div class="ico-wrap" style="background:linear-gradient(135deg,#1aad6e,#0d8050)"><div class="ico">🎯</div></div><div class="lab">প্রতি কেজিতে খরচ (কেনা সব ফিড + সব খরচ)</div><div class="val" id="lcV1">—</div><div class="lab" id="lcS1" style="font-size:10.5px;opacity:.75;margin-top:2px">চাপুন</div></div>
 </div>
 
 <div class="section">📑 আর্থিক সারাংশ</div>
@@ -1468,5 +1552,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=72" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=88" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
