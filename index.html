@@ -1062,6 +1062,9 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 </style>
 <style>
 #expTopSum{display:none!important}
+#expOther,#expLitter,#expRent,#expPower{scroll-margin-top:calc(var(--navh,170px) + 6px)}
+#other .pg-mini .go{background:rgba(255,255,255,.22)!important;border-color:#fff!important}
+#other .pg-mini .go:active{transform:scale(.96)}
 #other .pg-banner.has-mini{flex-wrap:wrap;height:auto;padding-bottom:20px}
 #other .pg-mini.m4{grid-template-columns:1.2fr 1.3fr .8fr 1fr}
 .exp-jump{flex-wrap:nowrap!important;gap:4px!important;margin:0 0 10px!important}
@@ -1074,6 +1077,26 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 .pg-mini.m5 span{font-size:9.5px;line-height:1.25;white-space:nowrap}
 .pg-mini.m5 b{font-size:11.5px}
 .pg-mini.m5 .hi{background:rgba(0,0,0,.34);border-color:rgba(255,255,255,.35)}
+</style>
+<style>
+#anDecide .ad-wrap{display:flex;flex-direction:column;gap:9px}
+#anDecide.collapsed .ad-wrap{display:none}
+.ad-c{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:10px 12px}
+.ad-h{font-size:13.5px;font-weight:800;color:#bdf5d2;display:flex;justify-content:space-between;gap:8px;margin-bottom:6px}
+.ad-h b{color:#fbbf24}
+.ad-big{font-size:26px;font-weight:800;color:#4ade80;line-height:1.2}
+.ad-big small{font-size:13px;opacity:.7;font-weight:600}
+.ad-t{font-size:12.5px;opacity:.88;margin-top:2px;line-height:1.4}
+.ad-s{font-size:12px;opacity:.8;margin-top:6px;padding-top:6px;border-top:1px dashed rgba(255,255,255,.14)}
+.ad-s.ok{color:#4ade80;opacity:1}.ad-s.bad{color:#ff8a8a;opacity:1}
+.ad-bar{display:flex;height:9px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.1);margin:2px 0 8px}
+.ad-bar i{display:block;height:100%}
+.ad-r{display:flex;justify-content:space-between;gap:6px;font-size:12px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.ad-r:last-child{border:0}
+.ad-r u{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;text-decoration:none}
+.ad-r span:last-child{text-align:right;opacity:.92}.ad-r b{color:#fbbf24}
+.ad-w{font-size:12.5px;background:rgba(251,191,36,.1);border-left:3px solid #fbbf24;border-radius:8px;padding:6px 9px;margin-top:5px;line-height:1.4}
+.ad-ok{font-size:13px;color:#4ade80;padding:4px 0}
 </style>
 </head>
 <body>
@@ -1415,6 +1438,23 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <div id="anTop"></div>
 <div class="an-tools"><button type="button" onclick="anFoldAll(true)">⏫ সব ভাঁজ করুন</button><button type="button" onclick="anFoldAll(false)">⏬ সব খুলুন</button></div>
 
+<div class="form an-box">
+ <div class="an-title">⚖️ ওজন নমুনা — Rose (সপ্তাহে একবার ১০টা মুরগি মাপুন)</div>
+ <div class="fields">
+  <label>তারিখ<input id="anWDate" type="date"></label>
+  <label>কয়টা মুরগি মাপলেন<input id="anWN" type="number" min="1" step="1" inputmode="numeric" placeholder="যেমন ১০"></label>
+  <label>মোট ওজন (গ্রাম)<input id="anWTotal" type="number" min="0" step="1" inputmode="decimal" placeholder="যেমন ৭৫০০"></label>
+ </div>
+ <button class="add" type="button" onclick="anAddWeight()">➕ ওজন নমুনা যোগ করুন</button>
+ <div id="anGrowth" style="margin-top:12px"></div>
+ <div class="wrap" style="margin-top:10px"><table><thead><tr><th>তারিখ</th><th>বয়স</th><th>মুরগি</th><th>গড় ওজন</th><th>স্ট্যান্ডার্ডের তুলনায়</th><th></th></tr></thead><tbody id="anWTable"></tbody></table></div>
+ <details class="an-det"><summary>স্ট্যান্ডার্ড ওজন বদলান (গ্রামে)</summary>
+  <div class="an-note">এগুলো Rose মুরগির স্ট্যান্ডার্ড ওজন (গ্রামে)। আপনার Rose-এর নিজস্ব চার্ট থাকলে নিচের ঘরগুলোতে সেই মান বসিয়ে নিন।</div>
+  <div class="an-std" id="anStd"></div>
+  <button class="an-btn" type="button" onclick="anResetStd()">↩️ আগের মানে ফিরুন</button>
+ </details>
+</div>
+
 <div class="form an-box"><div class="an-title">💰 লাভ-লোকসান বিশ্লেষণ</div><div id="anProfit"></div></div>
 
 <div class="form an-box">
@@ -1445,23 +1485,6 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
  <label class="an-inl">প্রতি বস্তায় কত কেজি (ফিড কেনার হিসাবের জন্য)<input id="anBagKg" type="number" min="1" step=".5" oninput="anSaveSet()"></label>
  <label class="an-inl">ফিডের দাম প্রতি কেজি (৳) — প্রতি মুরগির খরচ হিসাবের জন্য<input id="anFeedKg" type="number" min="0" step=".01" inputmode="decimal" placeholder="যেমন: 62" oninput="anSaveSet()"></label>
  <div id="anStock"></div>
-</div>
-
-<div class="form an-box">
- <div class="an-title">⚖️ ওজন নমুনা — Rose (সপ্তাহে একবার ১০টা মুরগি মাপুন)</div>
- <div class="fields">
-  <label>তারিখ<input id="anWDate" type="date"></label>
-  <label>কয়টা মুরগি মাপলেন<input id="anWN" type="number" min="1" step="1" inputmode="numeric" placeholder="যেমন ১০"></label>
-  <label>মোট ওজন (গ্রাম)<input id="anWTotal" type="number" min="0" step="1" inputmode="decimal" placeholder="যেমন ৭৫০০"></label>
- </div>
- <button class="add" type="button" onclick="anAddWeight()">➕ ওজন নমুনা যোগ করুন</button>
- <div id="anGrowth" style="margin-top:12px"></div>
- <div class="wrap" style="margin-top:10px"><table><thead><tr><th>তারিখ</th><th>বয়স</th><th>মুরগি</th><th>গড় ওজন</th><th>স্ট্যান্ডার্ডের তুলনায়</th><th></th></tr></thead><tbody id="anWTable"></tbody></table></div>
- <details class="an-det"><summary>স্ট্যান্ডার্ড ওজন বদলান (গ্রামে)</summary>
-  <div class="an-note">এগুলো Rose মুরগির স্ট্যান্ডার্ড ওজন (গ্রামে)। আপনার Rose-এর নিজস্ব চার্ট থাকলে নিচের ঘরগুলোতে সেই মান বসিয়ে নিন।</div>
-  <div class="an-std" id="anStd"></div>
-  <button class="an-btn" type="button" onclick="anResetStd()">↩️ আগের মানে ফিরুন</button>
- </details>
 </div>
 
 <div class="form an-box"><div class="an-title">🏆 ব্যাচের মান (EPEF)</div><div id="anEpef"></div></div>
@@ -1552,5 +1575,5 @@ tbody tr{transition:background .2s}tbody tr:hover td{background:#3ddc8410}
 <section id="batches" class="page"><div class="section">🗂️ সব ব্যাচের হিসাব</div><div id="batchesList"></div></section>
 
 </main>
-<script src="app.js?v=89" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
+<script src="app.js?v=92" onerror="(function(){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#1a0b0b;color:#ffd9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 18px/1.7 sans-serif';d.innerHTML='<div style=&quot;font-size:42px&quot;>⚠️</div>app.js ফাইল পাওয়া যাচ্ছে না।<br>GitHub-এ index.html-এর পাশেই <b>app.js</b> নামে ফাইলটি আপলোড করুন (নাম ঠিক এই বানানে), তারপর পেজ রিলোড করুন।';document.body.appendChild(d);var s=document.getElementById('splash');if(s)s.remove()})()"></script>
 </body></html>
