@@ -1431,7 +1431,7 @@ function renderDailyFeed(){
  let dates=[...new Set(a.map(r=>r.date).filter(Boolean))];
  let perBird=a.reduce((s,r)=>{let al=aliveOn(r.date);return s+(al?dfKg(r)*1000/al:0)},0);
  let byName={};a.forEach(r=>{let n=(r.name||"").trim()||"নাম নেই";byName[n]=(byName[n]||0)+dfKg(r)});
- let cards=[["🍽️","মোট খাওয়ানো",fmt(tot)+" কেজি • "+fmt(tot/dfBk(),1)+" বস্তা","#3ddc84"],["📅","আজকের খাবার",fmt(todayKg)+" কেজি"],["📊","গড় প্রতিদিন",dates.length?fmt(tot/dates.length)+" কেজি":"—"],["🐔","প্রতি মুরগি মোট",perBird>=1000?fmt(perBird/1000)+" কেজি":fmt(perBird,1)+" গ্রাম"],["🗓️","হিসাবের দিন",dates.length+" দিন"],["🕒","শেষ এন্ট্রি",lastDate(a)]];
+ let cards=[["🍽️","মোট খাওয়ানো",fmt(tot)+" কেজি • "+fmt(tot/dfBk(),1)+" বস্তা","#3ddc84"],["📅","আজকের খাবার",fmt(todayKg)+" কেজি"],["📊","গড় প্রতিদিন",dates.length?fmt(tot/dates.length)+" কেজি":"—"],["🐔","প্রতি মুরগি মোট",perBird>=1000?fmt(perBird/1000)+" কেজি":fmt(perBird,1)+" গ্রাম"]];
  Object.keys(byName).forEach(n=>cards.push(["🌾",esc(n),fmt(byName[n])+" কেজি • "+fmt(byName[n]/dfBk(),1)+" বস্তা","#fbbf24"]));
  document.getElementById("dfCards").innerHTML=cards.map(cardHtml).join("");
  try{dfStock(byName)}catch(e){console.error(e)}
@@ -2559,7 +2559,7 @@ window.renderFarmDoc=function(){
   '<div class="fdoc-n">বয়স '+bn(r.age)+' দিন • রোস জাত, সিপি ফিডের স্ট্যান্ডার্ড ধরে হিসাব। এটা আগাম ইশারা, নিশ্চিত রোগ নির্ণয় নয়। ২৪ ঘণ্টায় না কমলে ডাক্তার দেখান।</div></div>';
 };
 {const _r=window.render;window.render=function(){let r=_r.apply(this,arguments);try{renderFarmDoc()}catch(e){console.error(e)}return r}}
-window.APP_VERSION="v92";
+window.APP_VERSION="v97";
 (function(){const d=document.getElementById("dashboard");if(d&&!document.getElementById("appVer")){const e=document.createElement("div");e.id="appVer";e.style.cssText="text-align:center;font-size:11px;color:#6f8794;margin:22px 0 8px";e.innerHTML='ব্রাদার্স পোল্ট্রি ফার্ম • সংস্করণ '+window.APP_VERSION+'<br><button type="button" id="appUpd" style="margin-top:8px;border:1px solid #ffffff30;background:#ffffff10;color:#cfe9dc;border-radius:10px;padding:7px 14px;font:inherit;font-size:12px;cursor:pointer">🔄 নতুন সংস্করণ লোড করুন (ডেটা মুছবে না)</button>';d.appendChild(e);
  document.getElementById("appUpd").onclick=async function(){try{this.textContent="⏳ আপডেট হচ্ছে...";if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()))}if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(_){}location.reload()}}})();
 /* কোনো কোড-ত্রুটি হলে আর চুপচাপ ব্যর্থ নয় — পর্দায় দেখাবে */
@@ -3330,11 +3330,22 @@ window.addEventListener("load",()=>{try{medPickDraw()}catch(e){}})})();
 })();
 
 /* ── বাচ্চা ও মৃত পেজের হলুদ বক্সে ছোট সামারি ── */
+window.farmEditToggle=function(){const pg=document.getElementById("farm");pg.classList.toggle("f-edit");try{render()}catch(e){}if(pg.classList.contains("f-edit")){const f=document.getElementById("fPrice");if(f){f.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>f.focus(),300)}}};
+(function(){const s0=window.saveFarm;window.saveFarm=function(){const r=s0.apply(this,arguments);document.getElementById("farm").classList.remove("f-edit");try{render()}catch(e){}return r}})();
 (function(){
  function upd(){
   let ban=document.querySelector("#farm .pg-banner");if(!ban)return;
   let mini=ban.querySelector(".pg-mini");
   let n=+state.chicks||0;
+  const pg=document.getElementById("farm"),done=!!(n&&state.startDate);
+  pg.classList.toggle("f-done",done);if(!done)pg.classList.remove("f-edit");
+  if(!pg.querySelector(".f-form")){const s=pg.querySelector(":scope>.section"),f=s&&s.nextElementSibling;if(s&&f&&f.classList.contains("form")){s.classList.add("f-form");f.classList.add("f-form")}}
+  let ed=ban.querySelector(".pg-fed");
+  if(done){
+   if(!ed){ed=document.createElement("div");ed.className="pg-fed";ban.appendChild(ed)}
+   const pr=+state.chickPrice||0;
+   ed.innerHTML='<span>📅 '+esc(state.startDate.split("-").reverse().join("/"))+' • 🐣 '+fmt(n,0)+' টি • প্রতিটা '+(pr>0?money(pr):"দর নেই")+'</span><button type="button" onclick="farmEditToggle()">'+(pg.classList.contains("f-edit")?"✖ বন্ধ":"✏️ বদলান")+'</button>';
+  }else if(ed)ed.remove();
   if(!n){if(mini)mini.remove();ban.classList.remove("has-mini");return}
   let dead=deathTotal()||(+state.dead||0),price=+state.chickPrice||0,live=livePcs();
   let chips=[["💰","বাচ্চার মোট দাম",price>0?money(n*price):"—","hi"],["🐔","মোট অবশিষ্ট মুরগি",fmt(live,0)+" টি","hi"],["☠️","মোট মৃত",fmt(dead,0)+" টি",""],["📉","মৃত্যুর হার",(n?Math.round(dead/n*1000)/10:0)+"%",""]];
@@ -3356,7 +3367,7 @@ window.addEventListener("load",()=>{try{medPickDraw()}catch(e){}})})();
   let P=[["🧾","বিভিন্ন খরচ",total("other")],["🪵","কাঠের গুড়া",total("litter")],["🚚","পরিবহন ভাড়া",rentTotal()],["⚡","বিদ্যুৎ/জ্বালানি",total("power")]];
   let all=P.reduce((s,x)=>s+x[2],0),top=P.slice().sort((x,y)=>y[2]-x[2])[0];
   let due=Math.max(0,rentTotal()-sumOf(state.rent||[],r=>r.paid));
-  let chips=[["💰","মোট খরচ (৪ খাত)",money(all),"hi"],["🏆","সবচেয়ে বড় খাত",top[0]+" "+top[1],"hi"],["🧮","মোট এন্ট্রি",n+"টি",""],["🚚","ভাড়া বাকি 👆",money(due),"go"]];
+  let chips=[["💰","মোট খরচ (৪ খাত)",money(all),"hi"],["🏆","সবচেয়ে বড় খাত",top[0]+" "+top[1],"hi"],["🚚","মোট ভাড়া",money(rentTotal()),""],["💸","মোট বাকি 👆",money(due),"go"]];
   if(!mini){mini=document.createElement("div");mini.className="pg-mini m4";ban.appendChild(mini)}
   ban.classList.add("has-mini");
   mini.innerHTML=chips.map(c=>'<div class="'+c[3]+'"'+(c[3]==="go"?' onclick="expJump(\'expRent\')" style="cursor:pointer"':'')+'><span>'+c[0]+' '+c[1]+'</span><b>'+esc(c[2])+'</b></div>').join("");
@@ -3450,4 +3461,105 @@ window.addEventListener("load",()=>{try{medPickDraw()}catch(e){}})})();
  const r0=window.render;window.render=function(){const x=r0.apply(this,arguments);try{build()}catch(e){console.error(e)}return x};
  window.addEventListener("load",()=>{try{build()}catch(e){}});
  window.renderAnDecide=build;
+})();
+
+
+/* ── পরিবহন ভাড়া: মোট বাকি বক্স (টাকা দিলে বাকি থেকে বিয়োগ) ── */
+(function(){
+ function box(){
+  const w=document.getElementById("expRent");if(!w)return;
+  let b=document.getElementById("rentDueBox");
+  if(!b){b=document.createElement("div");b.id="rentDueBox";const sep=w.querySelector(".exp-sep");sep?sep.after(b):w.insertBefore(b,w.firstChild)}
+  const R=state.rent||[],tot=rentTotal(),paid=R.reduce((s,r)=>s+(+r.paid||0),0),due=Math.max(0,tot-paid);
+  const keep=document.getElementById("rdPay")?document.getElementById("rdPay").value:"";
+  b.innerHTML='<div class="rd-g"><div><span>🚚 মোট ভাড়া</span><b>'+money(tot)+'</b></div><div><span>✅ মোট শোধ</span><b>'+money(paid)+'</b></div><div class="'+(due>0?"rd-due":"rd-ok")+'"><span>💸 মোট বাকি</span><b>'+money(due)+'</b></div></div>'+
+  (due>0?'<div class="rd-f"><input id="rdPay" type="number" min="0" inputmode="decimal" placeholder="কত টাকা দিলেন?" value="'+esc(keep)+'"><button type="button" onclick="rentPayDue()">➖ বাকি থেকে বিয়োগ</button></div><div class="rd-n">টাকা দিলে সবচেয়ে পুরনো বাকি থেকে আগে কাটবে</div>':'<div class="rd-n">🎉 কোনো ভাড়া বাকি নেই</div>');
+ }
+ window.rentPayDue=function(){
+  let amt=+document.getElementById("rdPay").value||0;if(amt<=0){showToast("❌ কত টাকা দিলেন লিখুন");return}
+  const R=state.rent||[],due=Math.max(0,rentTotal()-R.reduce((s,r)=>s+(+r.paid||0),0));
+  if(amt>due+0.001){showToast("❌ বাকি মাত্র "+money(due)+", এর বেশি দেওয়া যাবে না");return}
+  let left=amt;
+  R.map((r,i)=>[r,i]).sort((x,y)=>String(x[0].date||"").localeCompare(String(y[0].date||""))||x[1]-y[1]).forEach(([r])=>{
+   if(left<=0)return;const d=(+r.amt||0)-(+r.paid||0);if(d<=0)return;const t=Math.min(d,left);r.paid=(+r.paid||0)+t;left-=t});
+  save();render();showToast("✅ "+money(amt)+" বিয়োগ হয়েছে, বাকি "+money(due-amt));
+ };
+ const r0=window.render;window.render=function(){const x=r0.apply(this,arguments);try{box()}catch(e){console.error(e)}return x};
+ window.addEventListener("load",()=>{try{box()}catch(e){}});
+})();
+
+/* ══════ মেডিসিন পেজ: নতুন সাজানো (গ্রুপ অনুযায়ী কার্ড) ══════ */
+(function(){
+ const BN="০১২৩৪৫৬৭৮৯",bn=s=>String(s).replace(/\d/g,d=>BN[d]);
+ const fd=iso=>{if(!iso)return"";const p=String(iso).split("-");return p.length===3?bn(p[2]+"/"+p[1]+"/"+p[0]):iso};
+ window._mdOpen=window._mdOpen||null;
+ window.mdToggle=function(g){
+  const L=build(true);if(!window._mdOpen){window._mdOpen={};L.forEach((x,i)=>{window._mdOpen[x.g]=(i===0)})}
+  window._mdOpen[g]=!window._mdOpen[g];draw()};
+ window.mdAll=function(v){const L=build(true);window._mdOpen={};L.forEach(x=>{window._mdOpen[x.g]=v});draw()};
+ function build(){
+  const a=state.medicine||[],G={};let tot=0;
+  a.forEach((r,i)=>{const nm=String(r.name||"").trim()||"নাম নেই",info=medInfo(nm)||{g:"oth",gen:""},g=info.g,c=(+r.qty||0)*(+r.rate||0);
+   const o=G[g]=G[g]||{g:g,c:0,rows:[]};o.c+=c;tot+=c;o.rows.push({r:r,i:i,nm:nm,gen:info.gen||"",c:c})});
+  const L=Object.values(G).sort((x,y)=>y.c-x.c);L.tot=tot;
+  L.forEach(x=>x.rows.sort((p,q)=>String(q.r.date||"").localeCompare(String(p.r.date||""))||q.i-p.i));
+  return L;
+ }
+ function draw(){
+  const pg=document.getElementById("medicine");if(!pg)return;
+  pg.querySelectorAll(":scope>.section,:scope>.wrap").forEach((e,k,arr)=>{if(!e.classList.contains("md-keep")&&(e.classList.contains("wrap")||e.textContent.indexOf("টেবিল")>=0))e.classList.add("md-old")});
+  let box=document.getElementById("medList");
+  if(!box){box=document.createElement("div");box.id="medList";const w=pg.querySelector(":scope>.wrap");if(w)w.parentNode.insertBefore(box,w);else pg.appendChild(box)}
+  const L=build();
+  if(!L.length){box.innerHTML='<div class="md-h">📋 কেনা মেডিসিন</div><div class="md-em">এখনও কোনো মেডিসিন যোগ করা হয়নি<br><small>উপরে গ্রুপ বেছে নাম, পরিমাণ ও দর দিন</small></div>';return}
+  if(!window._mdOpen){window._mdOpen={};L.forEach((x,i)=>{window._mdOpen[x.g]=(i===0)})}
+  const allOpen=L.every(x=>window._mdOpen[x.g]);
+  box.innerHTML='<div class="md-h"><span>📋 কেনা মেডিসিন <i>'+bn((state.medicine||[]).length)+'টি</i></span><button type="button" onclick="mdAll('+(!allOpen)+')">'+(allOpen?"সব বন্ধ":"সব খুলুন")+'</button></div>'+
+  L.map(x=>{const op=!!window._mdOpen[x.g],pc=L.tot?Math.round(x.c/L.tot*100):0;
+   return '<div class="md-g md-'+x.g+(op?" open":"")+'"><div class="md-gh" onclick="mdToggle(\''+x.g+'\')"><div class="md-gt"><b>'+MED_GROUPS[x.g]+'</b><span>'+bn(x.rows.length)+'টি • '+bn(pc)+'%</span></div><div class="md-gv"><b>'+money(x.c)+'</b><i>'+(op?"▲":"▼")+'</i></div></div><div class="md-gbar"><u style="width:'+pc+'%"></u></div>'+
+   (op?'<div class="md-gb">'+x.rows.map(e=>'<div class="md-r"><div class="md-rl"><b>'+esc(e.nm)+'</b>'+(e.gen&&e.gen.toLowerCase()!==e.nm.toLowerCase()?'<small>'+esc(e.gen)+'</small>':'')+'<span>'+fd(e.r.date)+' • '+fmt(+e.r.qty||0)+' × '+money(e.r.rate)+'</span></div><div class="md-rv"><b>'+money(e.c)+'</b><div><button type="button" class="md-e" onclick="openEdit(\'medicine\','+e.i+')">✏️</button><button type="button" class="md-d" onclick="del(\'medicine\','+e.i+')">🗑️</button></div></div></div>').join("")+'</div>':'')+'</div>'}).join("");
+ }
+ function totalLine(){
+  const q=document.getElementById("medicineQty"),r=document.getElementById("medicineRate");if(!q||!r)return;
+  const f=q.closest(".form");if(!f)return;let t=document.getElementById("mdTot");
+  if(!t){t=document.createElement("div");t.id="mdTot";const b=f.querySelector("button.add");b?f.insertBefore(t,b):f.appendChild(t);
+   [q,r].forEach(i=>i.addEventListener("input",totalLine))}
+  const v=(+q.value||0)*(+r.value||0);t.innerHTML=v>0?'এই কেনার মোট: <b>'+money(v)+'</b>':'';
+ }
+ const r0=window.render;window.render=function(){const x=r0.apply(this,arguments);try{draw();totalLine()}catch(e){console.error(e)}return x};
+ window.addEventListener("load",()=>{try{draw();totalLine()}catch(e){}});
+})();
+
+
+/* ── দৈনিক খাবার: সারাংশ উপরে ── */
+(function(){
+ function mv(){
+  const pg=document.getElementById("dailyfeed"),c=document.getElementById("dfCards");if(!pg||!c||pg.dataset.topDone)return;
+  const h=c.previousElementSibling;if(!h||!h.classList.contains("section"))return;
+  const ban=pg.querySelector(":scope>.pg-banner");
+  const anchor=ban?ban.nextSibling:pg.firstChild;
+  pg.insertBefore(h,anchor);pg.insertBefore(c,anchor);
+  const sb=document.getElementById("dfStockBox");if(sb)pg.insertBefore(sb,anchor);
+  pg.dataset.topDone="1";
+ }
+ const r0=window.render;window.render=function(){const x=r0.apply(this,arguments);try{mv()}catch(e){console.error(e)}return x};
+ window.addEventListener("load",()=>{try{mv()}catch(e){}});
+})();
+
+
+/* ── অন্যান্য বিক্রি: সারাংশ ছোট করে উপরে ── */
+(function(){
+ function mv(){
+  const pg=document.getElementById("othersales");if(!pg||pg.dataset.sumTop)return;
+  const g=document.getElementById("os_lSum");if(!g)return;
+  const grid=g.closest(".grid"),h=grid&&grid.previousElementSibling,tot=grid&&grid.nextElementSibling;
+  if(!grid||!h||!tot||!h.classList.contains("section"))return;
+  const w=document.createElement("div");w.id="osMini";
+  w.appendChild(h);w.appendChild(grid);w.appendChild(tot);
+  const ban=pg.querySelector(":scope>.pg-banner");
+  pg.insertBefore(w,ban?ban.nextSibling:pg.firstChild);
+  pg.dataset.sumTop="1";
+ }
+ const r0=window.render;window.render=function(){const x=r0.apply(this,arguments);try{mv()}catch(e){console.error(e)}return x};
+ window.addEventListener("load",()=>{try{mv()}catch(e){}});
 })();
